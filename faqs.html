@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICHRA FAQs - Common Questions Answered</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get honest answers to common questions about ICHRA (Individual Coverage Health Reimbursement Arrangement) - costs, compliance, administration, and more.">
+    <meta name="keywords" content="ICHRA FAQ, ICHRA questions, health reimbursement arrangement, ICHRA compliance">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            background: #F5F5F5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, #0088B8 0%, #00A7E1 50%, #00C4FF 100%);
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 24px rgba(0, 167, 225, 0.3);
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background: #F89728;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(248, 151, 40, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #E07818;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 151, 40, 0.6);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #00A7E1;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 8px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2C2C2C;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #F8F9FA;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .faq-item:hover {
+            border-color: #00A7E1;
+        }
+
+        .faq-question {
+            padding: 22px 28px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2C2C2C;
+            user-select: none;
+            background: white;
+        }
+
+        .faq-question:hover {
+            background: #F8F9FA;
+        }
+
+        .faq-icon {
+            font-size: 28px;
+            color: #00A7E1;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: white;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+            padding: 0 28px 25px 28px;
+        }
+
+        .faq-answer p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .faq-answer strong {
+            color: #00A7E1;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0088B8 0%, #00A7E1 50%, #00C4FF 100%);
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(0, 167, 225, 0.3);
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .page-header {
+                padding: 40px 25px;
+            }
+
+            .page-title {
+                font-size: 32px;
+            }
+
+            .page-subtitle {
+                font-size: 18px;
+            }
+
+            .faq-section {
+                padding: 40px 25px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 20px 22px;
+            }
+
+            .faq-answer p {
+                font-size: 15px;
+            }
+
+            .cta-section {
+                padding: 40px 25px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 16px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="learn-more.html">Learn More</a>
+            <span>›</span>
+            FAQs
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">ICHRA Questions, Answered</h1>
+            <p class="page-subtitle">Honest, detailed answers to the questions we hear most</p>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <div class="faq-container">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What exactly is ICHRA and how is it different from a group plan?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>ICHRA (Individual Coverage Health Reimbursement Arrangement) lets you reimburse employees tax-free for individual health insurance they purchase themselves. Unlike traditional group plans where you're stuck with one carrier's options, ICHRA gives employees 30-100+ plan choices on the marketplace. You set a fixed monthly allowance per employee class, they pick the plan that fits their needs, and you reimburse them — simple as that.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Is ICHRA really cheaper than a group plan?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>For most employers, yes. Average savings range from 3-20% vs. traditional group plans. Here's why: (1) You lock in predictable costs — no surprise claims driving your premiums up 15-25% at renewal, (2) You're not subsidizing non-participants — only reimburse employees who actually buy coverage, (3) Employees shop for efficiency — they're not spending your money carelessly. That said, ICHRA isn't always cheaper for everyone. If you have very stable group rates and high participation, you might not save much. That's why this assessment exists.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if my employees can't find affordable plans on the marketplace?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This is a legitimate concern, especially in rural areas or states with limited marketplace competition. Reality check: 95% of zip codes have at least 3 carriers offering plans. If your employees are in that 5% with limited options, ICHRA might not work well. That's why we qualify you first. During your consultation, we'll look at actual plan availability in your employees' zip codes before recommending ICHRA. We're not trying to force a square peg into a round hole.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Does ICHRA satisfy the ACA employer mandate?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, if you're an Applicable Large Employer (50+ FTE), properly designed ICHRA satisfies your ACA mandate. You must offer affordable coverage (employee premium for self-only coverage can't exceed 9.12% of their household income for 2023), and it must meet minimum value standards. We help you structure your ICHRA to be mandate-compliant. If you mess this up, you face $2,000-$3,000 per FTE in penalties — so proper setup matters.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What happens to employees who qualify for marketplace subsidies?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>This is the ICHRA gotcha nobody talks about. If you offer ICHRA, employees lose marketplace subsidies (premium tax credits). For lower-income employees who would have qualified for big subsidies, your ICHRA allowance needs to be generous enough to offset that loss — or they're actually worse off. This is why ICHRA isn't ideal for every workforce. If many of your employees earn less than 400% of federal poverty level (~$60,000 for a family of 4), we need to math this out carefully during your consultation.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How much administrative work is ICHRA for our team?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Less than group plans, but it's not zero. You'll use an ICHRA administration platform (we'll recommend one) that handles: employee eligibility tracking, reimbursement processing, and compliance documentation. Your monthly work: approve reimbursements (15-30 minutes for most small businesses). Initial setup takes 2-4 weeks. Compare that to group plans where you're negotiating renewals, managing carrier relationships, and fielding constant employee complaints about limited networks. Most employers find ICHRA simpler once it's running.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 7 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I offer different allowances to different employee groups?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! This is one of ICHRA's superpowers. You can create "employee classes" based on: full-time vs part-time, salaried vs hourly, job category, location, and more. Example: $600/month for full-time, $300/month for part-time. You can't discriminate within a class (can't give Bob more than Sarah if they're both full-time), but class-based variation is legal and common. This flexibility lets you target your benefits budget strategically.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 8 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if employees don't want to shop for their own insurance?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Honest answer: some employees hate shopping for insurance. If simplicity is your workforce's top priority (think: older workforce, low tech literacy, or employees who explicitly tell you "just give us a plan"), ICHRA might frustrate them. That said, most employees appreciate choice once they understand it. And modern ICHRA platforms include plan selection tools, decision support, and concierge services to help. It's not 2015 healthcare.gov confusion anymore. But yes, this is a legitimate concern — which is why we ask about your priorities in the assessment.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 9 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I switch back to a group plan if ICHRA doesn't work?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, but timing matters. You can switch back at your plan year renewal. You can't flip-flop mid-year without triggering major compliance issues. So if you go ICHRA starting January 1st and realize it's not working, you're committed through December 31st. That's why proper due diligence up front matters. The good news: 92% of employers who adopt ICHRA renew it year over year. It usually works when it's the right fit from the start.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 10 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's the catch? This sounds too good to be true.</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Fair question. Here are the real catches: (1) <strong>Subsidy loss</strong> — lower-income employees lose marketplace subsidies, (2) <strong>Learning curve</strong> — employees need to understand how to shop (though platforms help), (3) <strong>Not universal</strong> — some markets have limited plan options, (4) <strong>Compliance complexity</strong> — you must structure it correctly or face penalties, (5) <strong>No group negotiation</strong> — you lose the "we're a big group" leverage some employers have. ICHRA works great for the right employer but it's not magic. If your current group plan is fantastic and stable, you might not need to switch. That's the honest truth.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Find Out If ICHRA is Right for You?</h2>
+            <p>Take our free 2-minute assessment and get your personalized fit score</p>
+            <a href="index.html#start-quiz" class="cta-button">Start Your Assessment →</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+            <p><a href="index.html" style="color: #00A7E1; text-decoration: none;">Home</a> • <a href="learn-more.html" style="color: #00A7E1; text-decoration: none;">Learn More</a> • <a href="faqs.html" style="color: #00A7E1; text-decoration: none;">FAQs</a></p>
+            <p style="margin-top: 10px;">© 2026 ICHRA Qualification Tool. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
