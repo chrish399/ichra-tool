@@ -1488,6 +1488,185 @@
             pointer-events: none;
             z-index: 9999;
         }
+    
+        /* Intro Section Styles */
+        .intro-section {
+            background: white;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .intro-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .intro-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2C2C2C;
+            margin-bottom: 12px;
+        }
+
+        .intro-subtitle {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Value Props */
+        .value-props {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+        }
+
+        .value-prop-item {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #F8F9FA;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .value-prop-item:hover {
+            border-left-color: #00A7E1;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 167, 225, 0.1);
+        }
+
+        .prop-icon {
+            font-size: 48px;
+            flex-shrink: 0;
+        }
+
+        .prop-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2C2C2C;
+            margin-bottom: 10px;
+        }
+
+        .prop-content p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Trust Badges */
+        .trust-badges-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 0;
+            border-top: 2px solid #E0E0E0;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #F8F9FA;
+            padding: 18px 30px;
+            border-radius: 50px;
+            border: 2px solid #E0E0E0;
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            border-color: #00A7E1;
+            background: white;
+        }
+
+        .badge-icon {
+            width: 32px;
+            height: 32px;
+            background: #27AE60;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .badge-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2C2C2C;
+        }
+
+        /* Start Quiz CTA */
+        .start-quiz-cta {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .start-quiz-button {
+            background: #00A7E1;
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 167, 225, 0.3);
+        }
+
+        .start-quiz-button:hover {
+            background: #0088B8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 167, 225, 0.4);
+        }
+
+        /* Mobile responsive for intro */
+        @media (max-width: 768px) {
+            .intro-section {
+                padding: 40px 25px;
+            }
+
+            .intro-title {
+                font-size: 28px;
+            }
+
+            .value-prop-item {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .prop-icon {
+                font-size: 40px;
+            }
+
+            .prop-content h3 {
+                font-size: 18px;
+            }
+
+            .trust-badges-section {
+                gap: 15px;
+            }
+
+            .trust-badge {
+                padding: 15px 20px;
+            }
+
+            .start-quiz-button {
+                width: 100%;
+                padding: 16px 40px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -1562,6 +1741,91 @@
               </g>
             </svg>
         </div>
+
+        <!-- Top CTA Button -->
+        <div class="start-quiz-cta" style="margin-top: 30px; margin-bottom: 50px;">
+            <button class="start-quiz-button" onclick="document.getElementById('start-quiz').scrollIntoView({behavior: 'smooth'})">
+                Start Your Free Assessment →
+            </button>
+        </div>
+
+        <!-- Intro Section: Why Consider ICHRA -->
+        <div class="intro-section">
+            <div class="intro-header">
+                <h2 class="intro-title">Why Consider ICHRA?</h2>
+                <p class="intro-subtitle">Five key benefits that make ICHRA worth exploring</p>
+            </div>
+            
+            <div class="value-props">
+                <div class="value-prop-item">
+                    <div class="prop-icon">💰</div>
+                    <div class="prop-content">
+                        <h3>Predictable, Fixed Costs</h3>
+                        <p>You set a fixed monthly allowance per employee. No more surprise premium increases at renewal based on claims experience.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">🎯</div>
+                    <div class="prop-content">
+                        <h3>Employee Choice & Flexibility</h3>
+                        <p>Employees choose from dozens of marketplace plans that fit their needs, doctors, and budget — not limited to one carrier's network.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">⚖️</div>
+                    <div class="prop-content">
+                        <h3>Fully ACA Compliant</h3>
+                        <p>ICHRA is an official IRS regulation (established 2020) that satisfies ACA employer mandate requirements when properly structured.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">🔧</div>
+                    <div class="prop-content">
+                        <h3>Customizable by Employee Class</h3>
+                        <p>Offer different allowances for full-time vs part-time, salaried vs hourly, or by location — flexibility traditional plans don't allow.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">📉</div>
+                    <div class="prop-content">
+                        <h3>Simplified Administration</h3>
+                        <p>No carrier negotiations, participation requirements, or network management. Just approve monthly reimbursements through an admin platform.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges-section">
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">IRS Approved</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">ACA Compliant</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">Tax-Free Benefit</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">Established 2020</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Quiz CTA -->
+        <div class="start-quiz-cta">
+            <button class="start-quiz-button" onclick="document.getElementById('start-quiz').scrollIntoView({behavior: 'smooth'})">
+                Start Your Free Assessment →
+            </button>
+        </div>
+
 
         <!-- Progress Bar -->
         <div class="progress-bar" id="start-quiz">
