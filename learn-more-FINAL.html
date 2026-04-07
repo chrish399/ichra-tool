@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn About ICHRA - Complete Guide</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Everything you need to know about ICHRA (Individual Coverage Health Reimbursement Arrangement) - benefits, costs, and how it works.">
+    <meta name="keywords" content="ICHRA, health reimbursement, small business benefits, employee benefits, health insurance">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            background: #F5F5F5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .page-header {
+            background: linear-gradient(135deg, #0088B8 0%, #00A7E1 50%, #00C4FF 100%);
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 24px rgba(0, 167, 225, 0.3);
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background: #F89728;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(248, 151, 40, 0.4);
+        }
+
+        .cta-button:hover {
+            background: #E07818;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(248, 151, 40, 0.6);
+        }
+
+        /* Why ICHRA Section */
+        .why-ichra-section {
+            background: white;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #2C2C2C;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #666;
+        }
+
+        /* Value Props */
+        .value-props {
+            max-width: 900px;
+            margin: 0 auto 50px auto;
+        }
+
+        .value-prop-item {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            padding: 25px;
+            background: #F8F9FA;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .value-prop-item:hover {
+            border-left-color: #00A7E1;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 167, 225, 0.1);
+        }
+
+        .prop-icon {
+            font-size: 48px;
+            flex-shrink: 0;
+        }
+
+        .prop-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2C2C2C;
+            margin-bottom: 10px;
+        }
+
+        .prop-content p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Trust Badges */
+        .trust-badges-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 40px 0;
+            border-top: 2px solid #E0E0E0;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #F8F9FA;
+            padding: 18px 30px;
+            border-radius: 50px;
+            border: 2px solid #E0E0E0;
+            transition: all 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            border-color: #00A7E1;
+            background: white;
+        }
+
+        .badge-icon {
+            width: 32px;
+            height: 32px;
+            background: #27AE60;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .badge-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2C2C2C;
+        }
+
+        /* FAQ CTA Section */
+        .faq-cta-section {
+            background: #F8F9FA;
+            padding: 50px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px solid #E0E0E0;
+        }
+
+        .faq-cta-section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2C2C2C;
+            margin-bottom: 15px;
+        }
+
+        .faq-cta-section p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .secondary-button {
+            display: inline-block;
+            background: white;
+            color: #00A7E1;
+            border: 2px solid #00A7E1;
+            padding: 14px 35px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: #00A7E1;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 167, 225, 0.3);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #0088B8 0%, #00A7E1 50%, #00C4FF 100%);
+            padding: 60px 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(0, 167, 225, 0.3);
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+        }
+
+        /* Footer */
+        .page-footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 15px;
+            }
+
+            .page-header {
+                padding: 40px 25px;
+            }
+
+            .page-title {
+                font-size: 32px;
+            }
+
+            .page-subtitle {
+                font-size: 18px;
+            }
+
+            .why-ichra-section {
+                padding: 40px 25px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .value-prop-item {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .prop-icon {
+                font-size: 40px;
+            }
+
+            .prop-content h3 {
+                font-size: 18px;
+            }
+
+            .trust-badges-section {
+                gap: 15px;
+            }
+
+            .trust-badge {
+                padding: 15px 20px;
+            }
+
+            .faq-cta-section {
+                padding: 35px 25px;
+            }
+
+            .faq-cta-section h2 {
+                font-size: 26px;
+            }
+
+            .secondary-button {
+                width: 100%;
+                padding: 14px 30px;
+            }
+
+            .cta-section {
+                padding: 40px 25px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 16px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Everything You Need to Know About ICHRA</h1>
+            <p class="page-subtitle">A legitimate, IRS-approved alternative to traditional group health plans</p>
+            <a href="index.html#start-quiz" class="cta-button">Take the Free Assessment →</a>
+        </div>
+
+        <!-- Why ICHRA Section -->
+        <div class="why-ichra-section">
+            <div class="section-header">
+                <h2 class="section-title">Why Consider ICHRA?</h2>
+                <p class="section-subtitle">Five key benefits that make ICHRA worth exploring</p>
+            </div>
+            
+            <div class="value-props">
+                <div class="value-prop-item">
+                    <div class="prop-icon">💰</div>
+                    <div class="prop-content">
+                        <h3>Predictable, Fixed Costs</h3>
+                        <p>You set a fixed monthly allowance per employee. No more surprise premium increases at renewal based on claims experience.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">🎯</div>
+                    <div class="prop-content">
+                        <h3>Employee Choice & Flexibility</h3>
+                        <p>Employees choose from dozens of marketplace plans that fit their needs, doctors, and budget — not limited to one carrier's network.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">⚖️</div>
+                    <div class="prop-content">
+                        <h3>Fully ACA Compliant</h3>
+                        <p>ICHRA is an official IRS regulation (established 2020) that satisfies ACA employer mandate requirements when properly structured.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">🔧</div>
+                    <div class="prop-content">
+                        <h3>Customizable by Employee Class</h3>
+                        <p>Offer different allowances for full-time vs part-time, salaried vs hourly, or by location — flexibility traditional plans don't allow.</p>
+                    </div>
+                </div>
+
+                <div class="value-prop-item">
+                    <div class="prop-icon">📉</div>
+                    <div class="prop-content">
+                        <h3>Simplified Administration</h3>
+                        <p>No carrier negotiations, participation requirements, or network management. Just approve monthly reimbursements through an admin platform.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Badges -->
+            <div class="trust-badges-section">
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">IRS Approved</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">ACA Compliant</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">Tax-Free Benefit</div>
+                </div>
+                <div class="trust-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-text">Established 2020</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA to FAQs -->
+        <div class="faq-cta-section">
+            <h2>Have Questions About ICHRA?</h2>
+            <p>Get honest answers to common questions about costs, compliance, administration, and more</p>
+            <a href="faqs.html" class="secondary-button">View All FAQs →</a>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Ready to Find Out If ICHRA is Right for You?</h2>
+            <p>Take our free 2-minute assessment and get your personalized fit score</p>
+            <a href="index.html#start-quiz" class="cta-button">Start Your Assessment →</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="page-footer">
+            <p><a href="index.html" style="color: #00A7E1; text-decoration: none;">Home</a> • <a href="learn-more.html" style="color: #00A7E1; text-decoration: none;">Learn More</a> • <a href="faqs.html" style="color: #00A7E1; text-decoration: none;">FAQs</a></p>
+            <p style="margin-top: 10px;">© 2026 ICHRA Qualification Tool. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links  
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
