@@ -785,7 +785,7 @@ function handleLeadSubmit(event){
         'group-plan': {'-1':'Premiums stable',1:'Premiums rising moderately',4:'Premiums unsustainable / high claims',3:'Participation/multi-state issues'},
         'stipend': {3:'Tax burden / wants compliance',2:'Wants more structure',4:'Approaching 50 employees'}
     };
-    const q3Label = q3RawMap[answers.q2]?.(String(answers.q3)) || ('Score: '+answers.q3);
+    const q3Label = (q3RawMap[answers.q2] && q3RawMap[answers.q2][String(answers.q3)]) || ('Score: '+answers.q3);
     submitToSheet({
         name:n.value.trim(), company:co.value.trim(), email:em.value.trim(), phone:ph.value.trim(),
         score:totalScore, tier:getTier(), industry:answers.industry||'Not specified',
