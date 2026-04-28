@@ -2986,10 +2986,9 @@
             }, 100);
         }
 
-        function handleLeadSubmit(event) {
+function handleLeadSubmit(event) {
             event.preventDefault();
             
-            // Get form fields
             const form = event.target;
             const nameInput = form.querySelector('#name');
             const companyInput = form.querySelector('#company');
@@ -3036,29 +3035,42 @@
             if (!isValid) {
                 return false;
             }
-            
-            const formData = new FormData(event.target);
-            
-            // Determine tier name based on score
-            let tierName;
-            if (totalScore >= 12) tierName = 'Prime ICHRA Candidate';
-            else if (totalScore >= 8) tierName = 'Strong Fit';
-            else if (totalScore >= 4) tierName = 'Worth Exploring';
-            else if (totalScore >= 1) tierName = 'Monitor Situation';
-            else tierName = 'Not Recommended';
-            
-            const data = {
-                name: formData.get('name'),
-                company: formData.get('company'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
+
+            const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwBMR3STysxVyWOdOl5724fCl5rv3d0X3C7xaNYHmny4fkJCtcz9PADvxdopN6-lnU6/exec';
+
+            const submitBtn = form.querySelector('.submit-button');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const payload = {
+                name: nameInput.value.trim(),
+                company: companyInput.value.trim(),
+                email: emailInput.value.trim(),
+                phone: phoneInput.value.trim(),
                 score: totalScore,
-                tier: tierName,
-                answers: answers
+                tier: totalScore >= 12 ? 'Prime ICHRA Candidate' :
+                      totalScore >= 8  ? 'Strong Fit' :
+                      totalScore >= 4  ? 'Worth Exploring' :
+                      totalScore >= 1  ? 'Monitor Situation' : 'Not Recommended',
+                industry: answers.industry || 'Not specified'
             };
-            
-            console.log('Lead captured:', data);
-            alert('Thank you! An Aflac benefits advisor will contact you within 1 business day.');
+
+            fetch(SHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                submitBtn.textContent = '✅ Submitted!';
+                submitBtn.style.background = '#27AE60';
+                form.querySelectorAll('input').forEach(i => i.disabled = true);
+            })
+            .catch(() => {
+                submitBtn.textContent = 'Try again';
+                submitBtn.disabled = false;
+                alert('There was a connection issue. Please try again.');
+            });
         }
         
         function showError(input) {
