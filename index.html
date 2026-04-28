@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ICHRA Lead Qualification Tool</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     
     <style>
@@ -202,10 +201,6 @@
         .submit-button { background:var(--orange); color:var(--white); border:none; padding:16px 40px; font-size:17px; font-weight:700; cursor:pointer; transition:all 0.2s ease; width:100%; margin-top:8px; border-radius:8px; font-family:var(--font-body); }
         .submit-button:hover { background:var(--orange-dark); transform:translateY(-1px); box-shadow:0 6px 20px rgba(248,151,40,0.35); }
 
-        /* EXPORT */
-        .export-buttons { display:flex; gap:14px; margin:18px 0; flex-wrap:wrap; }
-        .export-button { background:var(--white); border:2px solid var(--blue-bright); color:var(--blue-bright); padding:13px 28px; border-radius:8px; font-size:15px; font-weight:600; cursor:pointer; transition:all 0.2s ease; display:flex; align-items:center; gap:8px; font-family:var(--font-body); }
-        .export-button:hover { background:var(--blue-bright); color:var(--white); }
         .restart-button { background:var(--white); color:var(--text-light); border:2px solid var(--gray-mid); padding:11px 28px; font-size:14px; margin-top:18px; display:block; margin-left:auto; margin-right:auto; border-radius:8px; cursor:pointer; font-family:var(--font-body); transition:all 0.2s ease; }
         .restart-button:hover { border-color:var(--blue-bright); color:var(--blue-bright); background:var(--blue-light); }
 
@@ -272,8 +267,6 @@
             .button-container button.secondary { flex:0 0 auto; }
             .option { padding:16px 18px; min-height:48px; font-size:14.5px; }
             .priority-item { padding:15px 18px; min-height:56px; touch-action:none; }
-            .export-buttons { flex-direction:column; }
-            .export-button { width:100%; justify-content:center; }
             .timeline { flex-direction:column; padding:0 16px; }
             .timeline::before { top:38px; bottom:38px; left:56px; right:auto; width:4px; height:auto; background:linear-gradient(to bottom,var(--blue-bright) 33%,var(--orange) 33%,var(--orange) 66%,var(--green) 66%); }
             .timeline-step { display:flex; align-items:flex-start; text-align:left; margin-bottom:36px; }
@@ -721,7 +714,7 @@ function showResults(){
         ${genIndustryInsight(answers)}
 
         <div class="video-container">
-            <iframe width="100%" height="400" src="https://www.youtube.com/embed/kxXVEb5qmi8?autoplay=1&mute=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <iframe width="100%" height="400" src="https://www.youtube.com/embed/kxXVEb5qmi8?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <div class="timeline-container">
@@ -733,10 +726,6 @@ function showResults(){
             </div>
         </div>
 
-        <div class="export-buttons">
-            <button class="export-button" onclick="downloadPDF()">Download PDF Results</button>
-            <button class="export-button" onclick="window.print()">Print Results</button>
-        </div>
 
         <div class="lead-form">
             <h3>Take the next step</h3>
@@ -787,7 +776,22 @@ function handleLeadSubmit(event){
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){showErr(em);ok=false;}else showOk(em);
     if(!/[\d\s\-\(\)\+]{10,}/.test(ph.value.trim())){showErr(ph);ok=false;}else showOk(ph);
     if(!ok) return false;
-    submitToSheet({name:n.value.trim(),company:co.value.trim(),email:em.value.trim(),phone:ph.value.trim(),score:totalScore,tier:getTier(),industry:answers.industry||'Not specified'},form.querySelector('.submit-button'),'Submitted!');
+    const q1Label = answers.q1===0?'1-4 employees':answers.q1===1?'5-49 employees':'50+ employees (ALE)';
+    const q2Label = answers.q2==='no-offer'?'No health benefits currently':answers.q2==='group-plan'?'Traditional group health plan':answers.q2==='stipend'?'Taxable stipend/reimbursement':'Not specified';
+    const q4Label = answers.q4.length>0?answers.q4.join(' > '):'Default order';
+    const q5Label = answers.q5===0?'Full-time, single location':answers.q5===3?'Multi-state or remote':answers.q5===2?'Mixed full/part-time/seasonal':'Marketplace subsidy eligible';
+    const q3RawMap = {
+        'no-offer': {3:'Too expensive',2:'Not enough employees / dont know where to start','-2':'Employees covered elsewhere'},
+        'group-plan': {'-1':'Premiums stable',1:'Premiums rising moderately',4:'Premiums unsustainable / high claims',3:'Participation/multi-state issues'},
+        'stipend': {3:'Tax burden / wants compliance',2:'Wants more structure',4:'Approaching 50 employees'}
+    };
+    const q3Label = q3RawMap[answers.q2]?.(String(answers.q3)) || ('Score: '+answers.q3);
+    submitToSheet({
+        name:n.value.trim(), company:co.value.trim(), email:em.value.trim(), phone:ph.value.trim(),
+        score:totalScore, tier:getTier(), industry:answers.industry||'Not specified',
+        companySize:q1Label, currentBenefits:q2Label, benefitDetail:q3Label,
+        priorityOrder:q4Label, workforce:q5Label
+    },form.querySelector('.submit-button'),'Submitted!');
 }
 
 function handleModalSubmit(event){
@@ -798,7 +802,7 @@ function handleModalSubmit(event){
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){showErr(em);ok=false;}else showOk(em);
     if(!/[\d\s\-\(\)\+]{10,}/.test(ph.value.trim())){showErr(ph);ok=false;}else showOk(ph);
     if(!ok) return false;
-    submitToSheet({name:n.value.trim(),company:co.value.trim(),email:em.value.trim(),phone:ph.value.trim(),score:'Direct inquiry',tier:'Direct inquiry',industry:'Not specified'},document.getElementById('modalSubmitBtn'),"We'll be in touch!");
+    submitToSheet({name:n.value.trim(),company:co.value.trim(),email:em.value.trim(),phone:ph.value.trim(),score:'Direct inquiry',tier:'Direct inquiry',industry:'Not specified',companySize:'Not captured',currentBenefits:'Not captured',benefitDetail:'Not captured',priorityOrder:'Not captured',workforce:'Not captured'},document.getElementById('modalSubmitBtn'),"We'll be in touch!");
 }
 
 function showErr(input){ const fg=input.parentElement; fg.classList.remove('success'); fg.classList.add('error'); }
@@ -830,17 +834,6 @@ document.addEventListener('keydown',function(e){
     if(e.key==='Enter'&&document.activeElement.classList.contains('option')) document.activeElement.click();
 });
 
-// PDF
-function downloadPDF(){
-    const el=document.getElementById('resultsContainer');
-    const ld=document.createElement('div');
-    ld.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:40px;border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,0.2);z-index:10001;text-align:center;font-family:sans-serif;';
-    ld.innerHTML='<div style="font-size:17px;color:#0088B8;margin-bottom:10px;">Generating PDF…</div><div style="font-size:13px;color:#888;">This takes a few seconds</div>';
-    document.body.appendChild(ld);
-    html2pdf().from(el).set({margin:0.5,filename:'ICHRA-Results.pdf',image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,useCORS:true},jsPDF:{unit:'in',format:'letter',orientation:'portrait'}}).save()
-        .then(()=>document.body.removeChild(ld))
-        .catch(()=>{ document.body.removeChild(ld); alert('PDF error — use Print instead.'); });
-}
 
 // CONFETTI
 function createConfetti(){
@@ -877,7 +870,7 @@ document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('.que
 
 // PRINT STYLES
 const ps=document.createElement('style');
-ps.textContent='@media print { .utility-buttons,.advisor-float,.export-buttons,.lead-form,.restart-button,.modal-overlay { display:none !important; } @page { margin:0.5in; } }';
+ps.textContent='@media print { .utility-buttons,.advisor-float,.lead-form,.restart-button,.modal-overlay { display:none !important; } @page { margin:0.5in; } }';
 document.head.appendChild(ps);
 </script>
 </body>
