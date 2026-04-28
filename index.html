@@ -92,6 +92,16 @@
         .priority-number { background:var(--blue-bright); color:var(--white); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-right:16px; font-weight:700; font-size:15px; flex-shrink:0; }
         .priority-item-text { flex:1; }
         .drag-hint { font-size:13px; color:var(--text-light); margin-bottom:16px; padding:12px 16px; background:#FFF9E6; border-left:3px solid var(--orange); border-radius:4px; }
+        .priority-move-btns { display:none; flex-direction:column; gap:4px; margin-left:10px; flex-shrink:0; }
+        .priority-move-btn { background:var(--white); border:1.5px solid var(--gray-mid); color:var(--text-mid); width:32px; height:28px; border-radius:6px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s ease; padding:0; min-height:unset; width:32px; flex:none; }
+        .priority-move-btn:hover { border-color:var(--blue-bright); color:var(--blue-bright); background:var(--blue-light); }
+        .priority-move-btn:disabled { opacity:0.25; cursor:not-allowed; }
+        @media (max-width:768px) {
+            .priority-move-btns { display:flex; }
+            .priority-item { cursor:default; padding-right:12px; }
+            .priority-item::after { display:none; }
+            .drag-hint { display:none; }
+        }
 
         /* INTRO */
         .intro-section { background:var(--white); padding:52px 40px; margin-bottom:36px; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,0.07); }
@@ -240,7 +250,7 @@
         @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
         .modal-close { position:absolute; top:16px; right:16px; background:none; border:1px solid var(--gray-mid); font-size:12px; font-weight:600; color:#aaa; cursor:pointer; padding:5px 12px; border-radius:6px; transition:all 0.2s; letter-spacing:0.5px; text-transform:uppercase; }
         .modal-close:hover { color:var(--text-dark); background:var(--gray-light); }
-        .modal-box h3 { font-family:var(--font-display); font-weight:800; font-size:24px; color:var(--text-dark); margin-bottom:6px; }
+        .modal-box h3 { font-family:var(--font-display); font-weight:800; font-size:24px; color:var(--text-dark); margin-bottom:6px; padding-right:70px; }
         .modal-box > p { font-size:14px; color:var(--text-light); margin-bottom:22px; }
         .modal-field { margin-bottom:14px; }
 
@@ -257,8 +267,9 @@
             .intro-section { padding:36px 22px; }
             .lead-form { padding:30px 22px; }
             .form-row { grid-template-columns:1fr; }
-            .button-container { flex-direction:column; }
-            button { width:100%; min-height:46px; }
+            .button-container { flex-wrap:wrap; }
+            .button-container button { flex:1; min-width:110px; min-height:46px; }
+            .button-container button.secondary { flex:0 0 auto; }
             .option { padding:16px 18px; min-height:48px; font-size:14.5px; }
             .priority-item { padding:15px 18px; min-height:56px; touch-action:none; }
             .export-buttons { flex-direction:column; }
@@ -365,6 +376,9 @@
             <div class="option" data-value="1" data-question="1">5–49 employees</div>
             <div class="option" data-value="2" data-question="1">50+ employees (Applicable Large Employer)</div>
         </div>
+        <div class="button-container">
+            <button id="next1" disabled>Next</button>
+        </div>
     </div>
 
     <!-- Q2 Industry -->
@@ -391,7 +405,7 @@
             <div class="option" data-value="group-plan" data-question="2">We offer a traditional group health plan</div>
             <div class="option" data-value="stipend" data-question="2">We provide a taxable stipend or reimbursement</div>
         </div>
-        <div class="button-container"><button class="secondary" id="back3">Back</button></div>
+        <div class="button-container"><button class="secondary" id="back3">Back</button><button id="next3" disabled>Next</button></div>
     </div>
 
     <!-- Q4a -->
@@ -405,7 +419,7 @@
             <div class="option" data-value="2" data-question="3a">Don't know where to start</div>
             <div class="option" data-value="-2" data-question="3a">Employees are covered elsewhere (spouse, parent, Medicare)</div>
         </div>
-        <div class="button-container"><button class="secondary" id="back4a">Back</button></div>
+        <div class="button-container"><button class="secondary" id="back4a">Back</button><button id="next4a" disabled>Next</button></div>
     </div>
 
     <!-- Q4b -->
@@ -420,7 +434,7 @@
             <div class="option" data-value="3" data-question="3b">Can't meet minimum participation requirements</div>
             <div class="option" data-value="3" data-question="3b">Multi-state employees make coverage complicated</div>
         </div>
-        <div class="button-container"><button class="secondary" id="back4b">Back</button></div>
+        <div class="button-container"><button class="secondary" id="back4b">Back</button><button id="next4b" disabled>Next</button></div>
     </div>
 
     <!-- Q4c -->
@@ -433,7 +447,7 @@
             <div class="option" data-value="3" data-question="3c">It feels informal and we want something compliant</div>
             <div class="option" data-value="4" data-question="3c">We're approaching 50 employees and need ACA compliance</div>
         </div>
-        <div class="button-container"><button class="secondary" id="back4c">Back</button></div>
+        <div class="button-container"><button class="secondary" id="back4c">Back</button><button id="next4c" disabled>Next</button></div>
     </div>
 
     <!-- Q5 Priority -->
@@ -442,11 +456,11 @@
         <h2 class="question-title">Rank these in order of importance to your business</h2>
         <div class="drag-hint">Drag to reorder — most important at top</div>
         <div class="priority-list" id="priorityList">
-            <div class="priority-item" draggable="true" data-id="predictability"><div class="priority-number">1</div><div class="priority-item-text">Cost predictability (knowing exact monthly spend)</div></div>
-            <div class="priority-item" draggable="true" data-id="control"><div class="priority-number">2</div><div class="priority-item-text">Budget control (capping maximum exposure)</div></div>
-            <div class="priority-item" draggable="true" data-id="choice"><div class="priority-number">3</div><div class="priority-item-text">Employee choice and flexibility</div></div>
-            <div class="priority-item" draggable="true" data-id="simplicity"><div class="priority-number">4</div><div class="priority-item-text">Simplicity (easy to administer)</div></div>
-            <div class="priority-item" draggable="true" data-id="competitive"><div class="priority-number">5</div><div class="priority-item-text">Competitive benefits for attracting talent</div></div>
+            <div class="priority-item" draggable="true" data-id="predictability"><div class="priority-number">1</div><div class="priority-item-text">Cost predictability (knowing exact monthly spend)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
+            <div class="priority-item" draggable="true" data-id="control"><div class="priority-number">2</div><div class="priority-item-text">Budget control (capping maximum exposure)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
+            <div class="priority-item" draggable="true" data-id="choice"><div class="priority-number">3</div><div class="priority-item-text">Employee choice and flexibility</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
+            <div class="priority-item" draggable="true" data-id="simplicity"><div class="priority-number">4</div><div class="priority-item-text">Simplicity (easy to administer)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
+            <div class="priority-item" draggable="true" data-id="competitive"><div class="priority-number">5</div><div class="priority-item-text">Competitive benefits for attracting talent</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
         </div>
         <div class="button-container">
             <button class="secondary" id="back5">Back</button>
@@ -464,7 +478,7 @@
             <div class="option" data-value="2" data-question="5">Mix of full-time, part-time, and seasonal workers</div>
             <div class="option" data-value="-3" data-question="5">Many employees likely qualify for marketplace subsidies</div>
         </div>
-        <div class="button-container"><button class="secondary" id="back6">Back</button></div>
+        <div class="button-container"><button class="secondary" id="back6">Back</button><button id="calculate" disabled>See Results</button></div>
     </div>
 
     <div class="results-container" id="resultsContainer"></div>
@@ -484,7 +498,7 @@ const MAX_SCORE = 20;
 let currentQuestion = 1;
 
 // UPDATE THIS URL with your personal Google Apps Script URL
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycby8o_F2S9jDgGEGbP3msSUPx0xlNkmNUxc_efVklVlMOJrd-D7vOM7xrd0zOHo1vCHiIg/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwBMR3STysxVyWOdOl5724fCl5rv3d0X3C7xaNYHmny4fkJCtcz9PADvxdopN6-lnU6/exec';
 
 // BULLETS
 const bullets = {
@@ -570,6 +584,9 @@ document.querySelectorAll('.option').forEach(o => {
         else if(q==='2') answers.q2=v;
         else if(q==='3a'||q==='3b'||q==='3c') answers.q3=parseInt(v);
         else if(q==='5') answers.q5=parseInt(v);
+        // Enable the Next button for this question
+        const nextBtnMap={'1':'next1','2':'next3','3a':'next4a','3b':'next4b','3c':'next4c','5':'calculate'};
+        if(nextBtnMap[q]){ const nb=document.getElementById(nextBtnMap[q]); if(nb) nb.disabled=false; }
         if(autoAdv[q]) setTimeout(autoAdv[q],480);
     });
 });
@@ -583,11 +600,19 @@ document.querySelectorAll('.priority-item').forEach(item=>{
     item.addEventListener('dragleave',function(){ this.classList.remove('drag-over'); });
     item.addEventListener('drop',function(e){ e.preventDefault(); this.classList.remove('drag-over'); if(draggedItem!==this){ const all=[...document.querySelectorAll('.priority-item')]; if(all.indexOf(draggedItem)<all.indexOf(this)) this.parentNode.insertBefore(draggedItem,this.nextSibling); else this.parentNode.insertBefore(draggedItem,this); } });
 });
-function updatePriorityNumbers(){ const items=document.querySelectorAll('.priority-item'); items.forEach((x,i)=>x.querySelector('.priority-number').textContent=i+1); answers.q4=Array.from(items).map(x=>x.dataset.id); }
+function updatePriorityNumbers(){
+    const items=document.querySelectorAll('.priority-item');
+    items.forEach((x,i)=>{
+        x.querySelector('.priority-number').textContent=i+1;
+        const btns=x.querySelectorAll('.priority-move-btn');
+        if(btns.length===2){ btns[0].disabled=(i===0); btns[1].disabled=(i===items.length-1); }
+    });
+    answers.q4=Array.from(items).map(x=>x.dataset.id);
+}
 
 // NAVIGATION
 function setupNav(){
-    const ids=['back2Industry','next2Industry','back3','back4a','back4b','back4c','back5','next5','back6'];
+    const ids=['back2Industry','next2Industry','back3','next3','back4a','next4a','back4b','next4b','back4c','next4c','back5','next5','back6','calculate'];
     for(const id of ids){ if(!document.getElementById(id)){ setTimeout(setupNav,400); return; } }
     document.getElementById('back2Industry').addEventListener('click',()=>{ showQuestion(1); updateProgress(1); });
     document.getElementById('next2Industry').addEventListener('click',()=>{ showQuestion(3); updateProgress(3); });
@@ -598,6 +623,12 @@ function setupNav(){
     document.getElementById('back5').addEventListener('click',()=>{ if(answers.q2==='no-offer') showQuestion('4a'); else if(answers.q2==='group-plan') showQuestion('4b'); else showQuestion('4c'); updateProgress(4); });
     document.getElementById('next5').addEventListener('click',()=>{ showQuestion(6); updateProgress(6); });
     document.getElementById('back6').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
+    document.getElementById('next1').addEventListener('click',()=>{ showQuestion('2Industry'); updateProgress(2); });
+    document.getElementById('next3').addEventListener('click',()=>{ if(answers.q2==='no-offer') showQuestion('4a'); else if(answers.q2==='group-plan') showQuestion('4b'); else showQuestion('4c'); updateProgress(4); });
+    document.getElementById('next4a').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
+    document.getElementById('next4b').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
+    document.getElementById('next4c').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
+    document.getElementById('calculate').addEventListener('click',()=>{ calculateScore(); showLoadingState(); setTimeout(()=>{ hideLoadingState(); showResults(); updateProgress(6); },2000); });
 }
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupNav); else setupNav();
 
@@ -817,6 +848,24 @@ function createConfetti(){
     const c=document.createElement('div'); c.className='confetti-container'; document.body.appendChild(c);
     for(let i=0;i<120;i++){ setTimeout(()=>{ const el=document.createElement('div'); el.className='confetti'; const sz=6+Math.random()*9; el.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*0.4}s;${Math.random()>0.5?'border-radius:50%;':''}`; c.appendChild(el); setTimeout(()=>el.remove(),4000); },i*12); }
     setTimeout(()=>c.remove(),5500);
+}
+
+// MOBILE MOVE BUTTONS
+function movePriority(btn, direction) {
+    const item = btn.closest('.priority-item');
+    const list = item.parentElement;
+    const items = [...list.querySelectorAll('.priority-item')];
+    const idx = items.indexOf(item);
+    const targetIdx = idx + direction;
+    if (targetIdx < 0 || targetIdx >= items.length) return;
+    if (direction === -1) list.insertBefore(item, items[targetIdx]);
+    else list.insertBefore(items[targetIdx], item);
+    updatePriorityNumbers();
+    // Update button states
+    list.querySelectorAll('.priority-item').forEach((it, i) => {
+        const btns = it.querySelectorAll('.priority-move-btn');
+        if (btns.length === 2) { btns[0].disabled = (i === 0); btns[1].disabled = (i === items.length - 1); }
+    });
 }
 
 // MOBILE DRAG
