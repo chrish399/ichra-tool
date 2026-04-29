@@ -4,10 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ICHRA Assessment Tool — OTB Solutions LLC</title>
-<meta name="description" content="Find out if ICHRA is right for your business in 6 questions. Free assessment tool from OTB Solutions LLC.">
+<meta name="description" content="Find out if ICHRA is right for your business in 6 questions. Free assessment tool from OTB Solutions LLC — the smarter way to offer employee health benefits.">
+<link rel="canonical" href="https://ichra.solutionotb.com">
 <meta property="og:title" content="ICHRA Assessment Tool — OTB Solutions LLC">
-<meta property="og:description" content="Discover if ICHRA is the right health benefits solution for your business. Free 6-question assessment.">
+<meta property="og:description" content="Discover if ICHRA is the smarter way to offer health benefits for your business. Free 6-question assessment from OTB Solutions LLC.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://ichra.solutionotb.com">
+<meta property="og:site_name" content="OTB Solutions LLC">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ICHRA Assessment Tool — OTB Solutions LLC">
+<meta name="twitter:description" content="There's a smarter way to offer health benefits. Find out if ICHRA fits your business in 6 questions.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ichra.solutionotb.com/#organization",
+      "name": "OTB Solutions LLC",
+      "url": "https://ichra.solutionotb.com",
+      "email": "chris@solutionotb.com",
+      "description": "OTB Solutions LLC is a consulting firm building digital tools at the intersection of AI and insurance."
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://ichra.solutionotb.com/#webapp",
+      "name": "ICHRA Employer Assessment Tool",
+      "url": "https://ichra.solutionotb.com",
+      "applicationCategory": "BusinessApplication",
+      "description": "Free 6-question assessment to determine if an Individual Coverage HRA (ICHRA) is right for your business.",
+      "publisher": {"@id": "https://ichra.solutionotb.com/#organization"},
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ichra.solutionotb.com/#faq",
+      "mainEntity": [
+        {"@type": "Question", "name": "Is ICHRA legal and ACA-compliant?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. ICHRAs were established by federal regulation in 2020 and are fully ACA-compliant. For applicable large employers, an ICHRA satisfies the ACA employer mandate when the allowance meets affordability standards."}},
+        {"@type": "Question", "name": "What is the minimum I can contribute?", "acceptedAnswer": {"@type": "Answer", "text": "There is no federal minimum. You can contribute any amount that works for your budget — even $100/month is a legitimate, tax-free health benefit."}},
+        {"@type": "Question", "name": "Do I have to offer ICHRA to all employees?", "acceptedAnswer": {"@type": "Answer", "text": "No. ICHRA allows 11 IRS-defined employee classes. You can offer different allowance amounts to full-time vs. part-time, salaried vs. hourly, or employees in different geographic areas."}},
+        {"@type": "Question", "name": "What if an employee can't find a good plan in their area?", "acceptedAnswer": {"@type": "Answer", "text": "ACA marketplace plans are available in all 50 states. Employees can shop on-Exchange or off-Exchange. Employees who cannot find affordable coverage can opt out of the ICHRA and may be eligible for premium tax credits."}},
+        {"@type": "Question", "name": "Will ICHRA affect my payroll system?", "acceptedAnswer": {"@type": "Answer", "text": "ICHRA reimbursements are processed outside payroll — through an ICHRA administration platform. They are not subject to payroll taxes. Most employers spend less than 30 minutes per month on administration."}}
+      ]
+    }
+  ]
+}
+</script>
 <style>
 :root {
   --blue-dark:#005f87; --blue-mid:#0088B8; --blue-bright:#00A7E1;
@@ -268,6 +310,12 @@ button.secondary:hover{background:var(--blue-light)}
 .restart-button:hover{border-color:var(--navy);color:var(--navy)}
 
 /* FOOTER */
+.faq-item{border-bottom:1px solid var(--gray-mid);padding:0}
+.faq-q{padding:18px 0;font-weight:600;font-size:16px;color:var(--text-dark);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'＋';font-size:18px;color:var(--blue-mid);flex-shrink:0;transition:transform .2s}
+details[open] .faq-q::after{content:'－'}
+.faq-a{padding:0 0 18px;font-size:15px;color:var(--text-mid);line-height:1.7}
 footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;text-align:center}
 .footer-inner{max-width:860px;margin:0 auto}
 .footer-copy{font-size:13px;margin-bottom:12px}
@@ -287,10 +335,10 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
 .privacy-section ul{margin-left:20px;margin-bottom:8px}
 
 /* MODALS */
-.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:10001;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:10001;display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .modal-overlay.active{display:flex;animation:fadeIn .2s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-box{background:var(--white);border-radius:16px;padding:36px;max-width:500px;width:100%;border-top:5px solid var(--navy);box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;animation:slideUp .3s ease}
+.modal-box{background:var(--white);border-radius:16px;padding:36px;max-width:500px;width:100%;border-top:5px solid var(--navy);box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;animation:slideUp .3s ease;margin:auto;max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .modal-close{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--gray-mid);font-size:11px;font-weight:600;color:#aaa;cursor:pointer;padding:4px 10px;border-radius:5px;text-transform:uppercase;letter-spacing:.5px;transition:all .2s}
 .modal-close:hover{color:var(--text-dark);border-color:var(--text-dark)}
@@ -398,7 +446,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
   <div class="modal-box">
     <button class="modal-close" id="modalClose">Close</button>
     <h3>Talk to an Advisor</h3>
-    <p>Skip the quiz — connect directly. We'll reach out within one business day.</p>
+    <p>Skip the quiz — connect directly. A licensed advisor will reach out within one business day to walk you through your options, answer compliance questions, and help you determine if ICHRA is the right fit.</p>
     <form id="modalLeadForm" onsubmit="handleModalSubmit(event)" novalidate>
       <div class="modal-field"><div class="form-group"><label for="m-name">Name *</label><input type="text" id="m-name" required placeholder="John Smith"><span class="error-message">Please enter your name</span></div></div>
       <div class="modal-field"><div class="form-group"><label for="m-company">Company *</label><input type="text" id="m-company" required placeholder="ABC Corporation"><span class="error-message">Please enter your company</span></div></div>
@@ -437,7 +485,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
     <input type="text" id="chatInputField" placeholder="Ask about ICHRA..." onkeydown="if(event.key==='Enter')sendChatMessage()">
     <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
   </div>
-  <div class="chat-advisor-link" id="chatAdvisorLink">Need specific numbers? <a onclick="toggleChat();document.getElementById('advisorModal').classList.add('active')">Talk to an advisor</a></div>
+  <div class="chat-advisor-link" id="chatAdvisorLink">Need specific numbers? <a onclick="toggleChat();openAdvisorModal()">Talk to an advisor</a></div>
 </div>
 
 <!-- LOADING OVERLAY -->
@@ -455,14 +503,14 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
     <li><a href="#why-ichra">Why ICHRA</a></li>
     <li><a href="#start-assessment">Start Assessment</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('advisorModal').classList.add('active')">Talk to Advisor</button>
+  <button class="nav-cta" onclick="openAdvisorModal()">Talk to Advisor</button>
   <button class="hamburger" id="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-nav" id="mobileNav">
   <a href="#how-it-works" onclick="toggleMobileNav()">How It Works</a>
   <a href="#why-ichra" onclick="toggleMobileNav()">Why ICHRA</a>
   <a href="#start-assessment" onclick="toggleMobileNav()">Start Assessment</a>
-  <button class="nav-cta" onclick="toggleMobileNav();document.getElementById('advisorModal').classList.add('active')">Talk to Advisor</button>
+  <button class="nav-cta" onclick="toggleMobileNav();openAdvisorModal()">Talk to Advisor</button>
 </div>
 
 <!-- HERO -->
@@ -473,12 +521,12 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
     <p class="hero-sub">ICHRA lets you offer real health benefits at any budget. Set a fixed monthly allowance, employees pick their own plan, you reimburse tax-free — whether you're starting fresh or replacing a plan that stopped making sense.</p>
     <div class="hero-ctas">
       <button class="btn-primary" onclick="document.getElementById('start-assessment').scrollIntoView({behavior:'smooth'})">Take the Free Assessment</button>
-      <button class="btn-outline" onclick="document.getElementById('advisorModal').classList.add('active')">Talk to an Advisor</button>
+      <button class="btn-outline" onclick="openAdvisorModal()">Talk to an Advisor</button>
     </div>
     <div class="cred-strip">
       <span class="cred-item">IRS Approved</span>
       <span class="cred-item">ACA Compliant</span>
-      <span class="cred-item">50,000+ employers since 2020</span>
+      <span class="cred-item">200,000+ employees covered nationwide</span>
       <span class="cred-item">Free Assessment</span>
     </div>
   </div>
@@ -564,10 +612,10 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
       <div class="comp-row"><div class="comp-cell"><span class="cross">&#x2715;</span>Carrier negotiations required</div><div class="comp-cell good"><span class="check">&#x2713;</span>No carrier involved</div></div>
     </div>
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num">52%</div><div class="stat-label">adoption growth in 2024</div></div>
+      <div class="stat-card"><div class="stat-num">29%</div><div class="stat-label">employer adoption growth in 2024</div><div style="font-size:10px;color:var(--text-light);margin-top:4px;">Source: HRA Council</div></div>
       <div class="stat-card"><div class="stat-num">$0</div><div class="stat-label">claims risk to employer</div></div>
       <div class="stat-card"><div class="stat-num">100+</div><div class="stat-label">plan options per employee</div></div>
-      <div class="stat-card"><div class="stat-num">92%</div><div class="stat-label">of employers renew yearly</div></div>
+      <div class="stat-card"><div class="stat-num">92%</div><div class="stat-label">of employers renew year over year</div><div style="font-size:10px;color:var(--text-light);margin-top:4px;">Source: HRA Council</div></div>
     </div>
   </div>
 </section>
@@ -744,6 +792,84 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
 </div><!-- /quizArea -->
 
 <!-- PRIVACY POLICY -->
+
+
+<!-- ABOUT OTB -->
+<section id="about" style="background:var(--navy);padding:72px 24px;">
+  <div style="max-width:780px;margin:0 auto;text-align:center;">
+    <div class="section-eyebrow" style="color:rgba(255,255,255,.6);">Who we are</div>
+    <h2 class="section-title" style="color:#fff;margin-bottom:20px;">Built by OTB Solutions LLC</h2>
+    <p style="font-size:17px;color:rgba(255,255,255,.82);line-height:1.7;max-width:620px;margin:0 auto 32px;">OTB Solutions LLC is a consulting firm building digital tools at the intersection of AI and insurance. We help employers of all sizes discover, evaluate, and implement modern benefits strategies — cutting through complexity so you can make confident, informed decisions for your team.</p>
+    <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:8px;">
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:#fff;">ICHRA</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">Specialization</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:#fff;">AI-Powered</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">Tools & Guidance</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:28px;font-weight:700;color:#fff;">Licensed</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;">Advisor Network</div>
+      </div>
+    </div>
+    <p style="margin-top:32px;font-size:14px;color:rgba(255,255,255,.5);">Questions? Reach us at <a href="mailto:chris@solutionotb.com" style="color:rgba(255,255,255,.75);text-decoration:underline;">chris@solutionotb.com</a></p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--white);padding:72px 24px;border-top:1px solid var(--gray-mid);">
+  <div style="max-width:780px;margin:0 auto;">
+    <div class="section-eyebrow" style="text-align:center;">Common questions</div>
+    <h2 class="section-title" style="text-align:center;margin-bottom:8px;">Frequently asked questions</h2>
+    <p class="section-sub" style="text-align:center;margin:0 auto 48px;">Straight answers to the questions we hear most from employers.</p>
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-q">Is ICHRA legal and ACA-compliant?</summary>
+        <div class="faq-a">Yes. ICHRAs were created by federal regulation effective January 1, 2020, and are fully ACA-compliant. For applicable large employers (50+ FTEs), an ICHRA that meets affordability standards satisfies the ACA employer mandate — avoiding both §4980H penalties.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What's the minimum I can contribute?</summary>
+        <div class="faq-a">There is no federal minimum contribution. You can start at any amount that fits your budget — even $100/month per employee is a legitimate, tax-free health benefit. There are also no maximum limits, unlike QSEHRAs.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Do I have to offer it to every employee?</summary>
+        <div class="faq-a">No. IRS rules allow 11 defined employee classes — including full-time vs. part-time, salaried vs. hourly, and employees in different geographic areas. You can offer ICHRA to one class and a traditional group plan to another, as long as the classes don't overlap.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What if an employee can't find a good plan in their area?</summary>
+        <div class="faq-a">ACA-compliant individual plans are available in all 50 states, both on and off the Exchange. Employees who cannot find a plan they consider affordable can opt out of the ICHRA and may qualify for premium tax credits (subsidies) on the Exchange instead.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What if an employee doesn't want to shop for their own insurance?</summary>
+        <div class="faq-a">Employees are never required to participate. Those who prefer not to can opt out once per plan year. However, most employees find the ability to choose their own plan — including plans with their preferred doctors and medications — far more valuable than a one-size-fits-all group option.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Will this affect my payroll system?</summary>
+        <div class="faq-a">ICHRA reimbursements are processed outside of payroll through a third-party administration platform. They are not subject to payroll taxes (FICA) for either the employer or employee. Your payroll system does not need to change — the administration platform handles verification and reimbursement in the background.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">What happens if an employee loses their individual coverage?</summary>
+        <div class="faq-a">ICHRA reimbursements can only be made for months in which the employee has qualifying individual coverage. If an employee's coverage lapses, reimbursements stop for that period. The administration platform monitors this as part of the substantiation process.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">Is ICHRA subject to ERISA?</summary>
+        <div class="faq-a">Yes — ICHRAs are group health plans subject to ERISA. This means you'll need a formal plan document and Summary Plan Description. ICHRA administration platforms typically provide these as part of their setup process, so this is handled for you.</div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
 <section id="privacy-policy">
   <div class="privacy-inner">
     <h2>Privacy Policy</h2>
@@ -782,7 +908,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
     </div>
     <div class="privacy-section">
       <h3>6. Contact</h3>
-      <p>OTB Solutions LLC &mdash; [Address] &mdash; [Email] &mdash; [Phone]</p>
+      <p>OTB Solutions LLC &mdash; <a href="mailto:chris@solutionotb.com">chris@solutionotb.com</a></p>
     </div>
     <div class="privacy-section">
       <h3>7. Changes to this policy</h3>
@@ -791,15 +917,82 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
   </div>
 </section>
 
+
+<!-- TERMS OF USE -->
+<section id="terms-of-use" style="background:var(--blue-light);padding:60px 24px;border-top:1px solid var(--gray-mid);">
+  <div class="privacy-inner">
+    <h2>Terms of Use</h2>
+    <p class="privacy-meta">OTB Solutions LLC &mdash; Last updated: 2025.</p>
+    <div class="privacy-section">
+      <h3>1. Acceptance of terms</h3>
+      <p>By accessing or using this assessment tool and website ("Tool"), you agree to be bound by these Terms of Use. If you do not agree, do not use the Tool.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>2. Educational purpose only</h3>
+      <p>This Tool is provided for informational and educational purposes only. It does not constitute insurance advice, legal advice, tax advice, or a binding coverage determination. Results generated by the Tool are estimates based on your inputs and do not guarantee eligibility, savings, or compliance with any law or regulation. Always consult a licensed insurance professional before making benefits decisions.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>3. No insurance solicitation</h3>
+      <p>Use of this Tool does not create an insurance agent-client relationship. OTB Solutions LLC is not an insurance carrier. Any follow-up communication from a licensed advisor is informational and subject to your explicit consent.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>4. AI-generated content</h3>
+      <p>The BenefitIQ chat assistant is powered by third-party AI technology (Anthropic Claude). Responses are generated automatically and may not reflect the most current regulatory guidance. AI responses are educational only and should not be relied upon as legal or compliance advice.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>5. Intellectual property</h3>
+      <p>All content on this Tool, including text, graphics, and software, is the property of OTB Solutions LLC or its licensors. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>6. Limitation of liability</h3>
+      <p>OTB Solutions LLC is not liable for any damages arising from your use of or reliance on this Tool. The Tool is provided "as is" without warranties of any kind, express or implied.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>7. Governing law</h3>
+      <p>These Terms are governed by the laws of the State of Georgia. Any disputes shall be resolved in the courts of Georgia.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>8. Contact</h3>
+      <p>OTB Solutions LLC &mdash; <a href="mailto:chris@solutionotb.com">chris@solutionotb.com</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-copy">&copy; 2025 OTB Solutions LLC. All rights reserved.</div>
-    <div class="footer-links">
-      <a href="#privacy-policy">Privacy Policy</a>
-      <a href="#privacy-policy">Terms of Use</a>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:36px;text-align:left;margin-bottom:40px;">
+      <div>
+        <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:14px;">OTB Solutions LLC</div>
+        <p style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;margin:0 0 12px;">Building AI-powered tools at the intersection of technology and insurance.</p>
+        <a href="mailto:chris@solutionotb.com" style="font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;">chris@solutionotb.com</a>
+      </div>
+      <div>
+        <div style="font-weight:700;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Navigate</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="#how-it-works" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">How It Works</a>
+          <a href="#why-ichra" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Why ICHRA</a>
+          <a href="#start-assessment" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Start Assessment</a>
+          <a href="#faq" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">FAQ</a>
+          <a href="#about" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">About Us</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Legal</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a href="#privacy-policy" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Privacy Policy</a>
+          <a href="#terms-of-use" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Terms of Use</a>
+        </div>
+        <div style="margin-top:20px;">
+          <div style="font-weight:700;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Contact</div>
+          <a href="mailto:chris@solutionotb.com" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Send us a message</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-disclaimer">This tool is for informational purposes only and does not constitute insurance, legal, or financial advice. ICHRA eligibility and suitability depends on your specific business circumstances. Consult a licensed insurance professional before making benefits decisions.</div>
+    <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;">
+      <div class="footer-copy">&copy; 2025 OTB Solutions LLC. All rights reserved.</div>
+      <div class="footer-disclaimer">This tool is for informational and educational purposes only. It does not constitute insurance, legal, tax, or financial advice. ICHRA eligibility and suitability depends on your specific business circumstances. Consult a licensed insurance professional before making benefits decisions. OTB Solutions LLC is not an insurance carrier or licensed insurance agent.</div>
+    </div>
   </div>
 </footer>
 <script>
@@ -855,12 +1048,12 @@ const industryMapping = {
 const industryInsights = {
   healthcare:{badge:'Healthcare',title:'Healthcare employers see 23% faster ICHRA adoption',description:'Medical practices lead ICHRA adoption due to multi-state operations and diverse employee classifications.',stats:[{number:'67%',label:'Multi-state operations'},{number:'41%',label:'Avg. cost reduction'},{number:'89%',label:'Employee satisfaction'}]},
   retail:{badge:'Retail & Hospitality',title:'Retail employers love ICHRA for part-time flexibility',description:'ICHRA eliminates participation minimums that excluded part-time and seasonal workers from traditional benefits.',stats:[{number:'73%',label:'Part-time eligible'},{number:'31%',label:'Cost savings'},{number:'2.3x',label:'Better retention'}]},
-  tech:{badge:'Technology',title:'Tech companies scale benefits without group plan limits',description:'Fast-growing tech companies offer competitive benefits while maintaining predictable per-employee costs.',stats:[{number:'52%',label:'Faster scaling'},{number:'95%',label:'Remote-ready'},{number:'$847',label:'Avg monthly allowance'}]},
+  tech:{badge:'Technology',title:'Tech companies scale benefits without group plan limits',description:'Fast-growing tech companies offer competitive benefits while maintaining predictable per-employee costs.',stats:[{number:'29%',label:'YoY adoption growth'},{number:'95%',label:'Remote-ready'},{number:'$847',label:'Avg monthly allowance'}]},
   construction:{badge:'Construction & Trades',title:'Construction companies eliminate multi-state complexity',description:'ICHRA simplifies benefits across state lines and handles project-based staffing fluctuations.',stats:[{number:'84%',label:'Multi-state projects'},{number:'38%',label:'Admin time saved'},{number:'91%',label:'Contractor coverage'}]},
   manufacturing:{badge:'Manufacturing',title:'Manufacturers cap rising group health costs with ICHRA',description:'Lock in predictable costs and eliminate claims-driven premium spikes entirely.',stats:[{number:'44%',label:'Cost predictability'},{number:'0%',label:'Claims impact'},{number:'86%',label:'Budget certainty'}]},
   professional:{badge:'Professional Services',title:'Professional services firms offer flexible, competitive benefits',description:'Attract talent while maintaining profitability across variable team sizes.',stats:[{number:'79%',label:'Talent attraction'},{number:'$923',label:'Avg contribution'},{number:'94%',label:'Partner approval'}]},
   transportation:{badge:'Transportation & Logistics',title:'Logistics companies simplify multi-state coverage',description:'ICHRA resolves the multi-state coverage complexity that frustrates transportation employers.',stats:[{number:'88%',label:'Multi-state coverage'},{number:'35%',label:'Admin reduction'},{number:'91%',label:'Driver participation'}]},
-  default:{badge:'Your Industry',title:'Employers like you are adopting ICHRA rapidly',description:'ICHRA adoption grew 52% across all industries in 2024-2025 as employers seek cost predictability.',stats:[{number:'52%',label:'Growth rate'},{number:'3-20%',label:'Avg savings'},{number:'92%',label:'Retention rate'}]},
+  default:{badge:'Your Industry',title:'Employers like you are adopting ICHRA rapidly',description:'ICHRA adoption grew 29% year-over-year in 2024 as employers seek cost predictability.',stats:[{number:'29%',label:'YoY growth'},{number:'3-20%',label:'Avg savings'},{number:'92%',label:'Retention rate'}]},
 };
 
 // ── BULLETS ───────────────────────────────────────────────────────────
@@ -1121,7 +1314,7 @@ function showResults(){
     resultTitle='Your situation has several strong ICHRA indicators';
     resultDescription='Multiple factors in your situation align with what makes ICHRA work well. This is not a guarantee — every business is different — but the profile you have described is representative of employers who see real, measurable benefit from this structure.';
     whatNext='Schedule a Free Consultation';
-    dataPoints=`<p><strong>What the data shows:</strong></p><ul><li>ICHRA adoption grew 52% among employers with your profile from 2024-2025</li><li>Employers in similar situations report 3-20% cost reduction vs. prior group plans</li><li>Employees get access to 30-100+ plan options vs. 1-3 under a group plan</li></ul>`;
+    dataPoints=`<p><strong>What the data shows:</strong></p><ul><li>ICHRA adoption grew 29% year-over-year in 2024 (HRA Council)</li><li>Employers in similar situations report 3-20% cost reduction vs. prior group plans</li><li>Employees get access to 30-100+ plan options vs. 1-3 under a group plan</li></ul>`;
   } else if(totalScore>=8){
     tierClass='tier-likely-fit';tierLabel='Likely a Good Fit';
     resultTitle='ICHRA is likely worth a serious look for your business';
@@ -1270,10 +1463,12 @@ function showOk(i){const fg=i.parentElement;fg.classList.remove('error');fg.clas
 document.getElementById('advisorFloatBtn').addEventListener('click',()=>{
   const rc=document.getElementById('resultsContainer');
   if(rc.classList.contains('active')){const lf=rc.querySelector('.lead-form');if(lf)lf.scrollIntoView({behavior:'smooth',block:'start'});}
-  else document.getElementById('advisorModal').classList.add('active');
+  else openAdvisorModal();
 });
-document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('advisorModal').classList.remove('active'));
-document.getElementById('advisorModal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});
+function openAdvisorModal(){openAdvisorModal();document.body.style.overflow='hidden';}
+function closeAdvisorModal(){closeAdvisorModal();document.body.style.overflow='';}
+document.getElementById('modalClose').addEventListener('click',()=>{closeAdvisorModal();document.body.style.overflow='';});
+document.getElementById('advisorModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('active');document.body.style.overflow='';}});
 
 // ── CHAT WIDGET ───────────────────────────────────────────────────────
 function toggleChat(){
