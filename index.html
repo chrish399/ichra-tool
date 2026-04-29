@@ -1,877 +1,1423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICHRA Lead Qualification Tool</title>
-    
-    
-    <style>
-        :root {
-            --blue-dark: #005f87;
-            --blue-mid: #0088B8;
-            --blue-bright: #00A7E1;
-            --blue-light: #E8F7FC;
-            --blue-pale: #D1F0FA;
-            --orange: #F89728;
-            --orange-dark: #E07818;
-            --green: #27AE60;
-            --gray-light: #F5F5F5;
-            --gray-mid: #E0E0E0;
-            --text-dark: #1A1A2E;
-            --text-mid: #444;
-            --text-light: #777;
-            --white: #ffffff;
-            --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:var(--font-body); font-weight:400; background:var(--gray-light); color:var(--text-dark); line-height:1.6; }
-        .container { max-width:860px; margin:0 auto; padding:40px 20px; position:relative; z-index:2; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICHRA Assessment Tool — OTB Solutions LLC</title>
+<meta name="description" content="Find out if ICHRA is right for your business in 6 questions. Free assessment tool from OTB Solutions LLC.">
+<meta property="og:title" content="ICHRA Assessment Tool — OTB Solutions LLC">
+<meta property="og:description" content="Discover if ICHRA is the right health benefits solution for your business. Free 6-question assessment.">
+<meta property="og:type" content="website">
+<style>
+:root {
+  --blue-dark:#005f87; --blue-mid:#0088B8; --blue-bright:#00A7E1;
+  --blue-light:#E8F7FC; --blue-pale:#D1F0FA;
+  --navy:#2C4A6E; --navy-dark:#1E3550; --navy-light:#E8EEF5;
+  --green:#27AE60; --gray-light:#F5F5F5; --gray-mid:#E0E0E0;
+  --text-dark:#1A1A2E; --text-mid:#444; --text-light:#777; --white:#ffffff;
+  --font:'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);font-weight:400;background:var(--gray-light);color:var(--text-dark);line-height:1.6}
 
-        /* BANNER */
-        .header-banner {
-            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 45%, var(--blue-bright) 100%);
-            border-radius:14px; padding:52px 40px 48px; margin-bottom:36px; text-align:center;
-            position:relative; overflow:hidden;
-            box-shadow:0 12px 40px rgba(0,95,135,0.35);
-        }
-        .header-banner::before { content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,0.06); }
-        .header-banner::after { content:''; position:absolute; bottom:-100px; left:-60px; width:380px; height:380px; border-radius:50%; background:rgba(255,255,255,0.04); }
-        .banner-accent { position:absolute; top:24px; left:36px; width:70px; height:70px; border-radius:50%; background:rgba(248,151,40,0.2); }
-        .banner-content { position:relative; z-index:2; }
-        .banner-eyebrow { display:inline-block; background:rgba(255,255,255,0.18); color:rgba(255,255,255,0.95); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; padding:6px 18px; border-radius:20px; margin-bottom:18px; border:1px solid rgba(255,255,255,0.25); }
-        .banner-title { font-family:var(--font-display); font-size:clamp(30px,6vw,56px); font-weight:800; color:var(--white); margin-bottom:14px; line-height:1.1; letter-spacing:-0.5px; }
-        .banner-subtitle { font-size:clamp(14px,2.2vw,18px); color:rgba(255,255,255,0.85); max-width:540px; margin:0 auto 28px; line-height:1.6; }
-        .banner-badges { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
-        .banner-badge { background:rgba(255,255,255,0.15); color:var(--white); padding:7px 18px; border-radius:30px; font-size:13px; font-weight:600; border:1px solid rgba(255,255,255,0.22); }
-        .banner-badge.accent { background:rgba(248,151,40,0.3); border-color:rgba(248,151,40,0.45); }
+/* NAV */
+#navbar{position:sticky;top:0;z-index:900;background:var(--white);border-bottom:1px solid var(--gray-mid);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:15px;font-weight:700;color:var(--blue-dark);text-decoration:none;letter-spacing:-0.2px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text-mid);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--blue-mid)}
+.nav-cta{background:var(--navy);color:var(--white);border:none;padding:9px 20px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--navy-dark)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text-dark);border-radius:2px;transition:all .3s}
+.mobile-nav{display:none;position:absolute;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--gray-mid);padding:16px 24px;flex-direction:column;gap:16px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-size:15px;font-weight:500;color:var(--text-mid);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--gray-mid)}
+.mobile-nav .nav-cta{text-align:center;padding:12px}
 
-        /* PROGRESS */
-        .progress-bar { background:var(--gray-mid); height:5px; margin-bottom:18px; border-radius:3px; overflow:hidden; }
-        .progress-fill { background:var(--blue-bright); height:100%; width:0%; transition:width 0.4s ease; }
-        .progress-steps { display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:28px; }
-        .step { width:38px; height:38px; border-radius:50%; background:var(--gray-mid); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; color:var(--text-light); transition:all 0.3s ease; position:relative; font-family:var(--font-body); }
-        .step.completed { background:var(--blue-bright); color:var(--white); }
-        .step.active { background:var(--orange); color:var(--white); transform:scale(1.2); box-shadow:0 4px 14px rgba(248,151,40,0.4); }
-        .step-connector { width:36px; height:3px; background:var(--gray-mid); transition:background 0.3s; }
-        .step-connector.completed { background:var(--blue-bright); }
+/* SECTIONS */
+.section{padding:72px 24px;max-width:860px;margin:0 auto}
+.section-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--blue-mid);margin-bottom:12px}
+.section-title{font-size:clamp(26px,4vw,38px);font-weight:700;color:var(--text-dark);margin-bottom:14px;line-height:1.2}
+.section-sub{font-size:17px;color:var(--text-mid);max-width:600px;line-height:1.65}
 
-        /* QUESTIONS */
-        .question-container { background:var(--white); padding:44px 40px 36px; margin-bottom:20px; display:none; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.07); animation:slideIn 0.35s ease forwards; }
-        .question-container.active { display:block; }
-        .question-container.exiting { animation:slideOut 0.35s ease forwards; }
-        @keyframes slideIn { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
-        @keyframes slideOut { from { opacity:1; transform:translateX(0); } to { opacity:0; transform:translateX(-40px); } }
-        .question-number { font-size:11px; color:var(--text-light); text-transform:uppercase; letter-spacing:2.5px; margin-bottom:14px; font-weight:600; }
-        .question-title { font-family:var(--font-display); font-weight:700; font-size:clamp(22px,3.5vw,28px); color:var(--text-dark); margin-bottom:28px; line-height:1.25; }
+/* FADE IN ANIMATION */
+.fade-section{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-section.visible{opacity:1;transform:translateY(0)}
 
-        /* OPTIONS */
-        .options { margin-bottom:32px; }
-        .option { background:var(--blue-light); border:2px solid transparent; padding:18px 22px; margin-bottom:10px; cursor:pointer; transition:all 0.18s ease; font-size:15.5px; font-weight:500; color:var(--text-dark); border-radius:8px; position:relative; font-family:var(--font-body); }
-        .option:hover { background:var(--blue-pale); border-color:var(--blue-bright); transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,167,225,0.15); }
-        .option.selected { border-color:var(--blue-mid); background:var(--blue-mid); color:var(--white); transform:scale(1.015); box-shadow:0 4px 18px rgba(0,136,184,0.3); }
-        .option.selected::after { content:'✓'; position:absolute; right:18px; top:50%; transform:translateY(-50%); font-size:20px; font-weight:700; color:var(--white); }
+/* HERO */
+#hero{background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 50%,#3a5f8a 100%);padding:80px 24px;text-align:center;position:relative;overflow:hidden}
+#hero::before{content:"";position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.05)}
+#hero::after{content:"";position:absolute;bottom:-100px;left:-60px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.03)}
+.hero-inner{position:relative;z-index:2;max-width:720px;margin:0 auto}
+.hero-eyebrow{display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:20px;margin-bottom:20px;border:1px solid rgba(255,255,255,.2)}
+.hero-headline{font-size:clamp(28px,5vw,50px);font-weight:800;color:var(--white);line-height:1.1;margin-bottom:18px;letter-spacing:-0.5px}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:rgba(255,255,255,.82);margin-bottom:36px;line-height:1.65;max-width:580px;margin-left:auto;margin-right:auto}
+.hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.btn-primary{background:var(--blue-bright);color:var(--white);border:none;padding:15px 36px;font-size:16px;font-weight:700;border-radius:8px;cursor:pointer;font-family:var(--font);transition:all .25s;box-shadow:0 4px 18px rgba(0,167,225,.35)}
+.btn-primary:hover{background:var(--blue-mid);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.5);padding:15px 36px;font-size:16px;font-weight:700;border-radius:8px;cursor:pointer;font-family:var(--font);transition:all .25s}
+.btn-outline:hover{background:rgba(255,255,255,.1);border-color:var(--white)}
+.cred-strip{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+.cred-item{font-size:12px;color:rgba(255,255,255,.7);font-weight:500;display:flex;align-items:center;gap:5px}
+.cred-item::before{content:"✓";color:var(--blue-bright);font-weight:700}
 
-        /* BUTTONS */
-        .button-container { display:flex; gap:10px; justify-content:flex-end; margin-top:8px; }
-        button { background:var(--blue-bright); color:var(--white); border:none; padding:13px 32px; font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s ease; font-family:var(--font-body); border-radius:8px; }
-        button:hover { background:var(--blue-mid); transform:translateY(-1px); }
-        button:disabled { background:var(--gray-mid); color:#aaa; cursor:not-allowed; transform:none; }
-        button.secondary { background:var(--white); color:var(--blue-bright); border:2px solid var(--blue-bright); }
-        button.secondary:hover { background:var(--blue-light); }
+/* PAIN SECTION */
+#pain-points{background:var(--white);padding:72px 24px}
+.pain-inner{max-width:860px;margin:0 auto}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.pain-card{background:var(--gray-light);border-radius:12px;padding:28px;border-left:4px solid var(--gray-mid);transition:all .25s ease}
+.pain-card:hover{border-left-color:var(--navy);background:var(--white);box-shadow:0 4px 18px rgba(44,74,110,.1);transform:translateY(-2px)}
+.pain-card-num{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-bottom:10px}
+.pain-card h3{font-size:18px;font-weight:700;color:var(--text-dark);margin-bottom:10px}
+.pain-card p{font-size:14px;color:var(--text-mid);line-height:1.65}
 
-        /* PRIORITY */
-        .priority-list { margin-bottom:28px; }
-        .priority-item { background:var(--blue-light); border:2px solid transparent; padding:16px 22px; margin-bottom:10px; cursor:move; font-size:15px; font-weight:500; display:flex; align-items:center; transition:all 0.2s ease; position:relative; border-radius:8px; font-family:var(--font-body); }
-        .priority-item::after { content:'⋮⋮'; position:absolute; right:18px; color:#ccc; font-size:18px; letter-spacing:-2px; }
-        .priority-item:hover { border-color:var(--blue-bright); background:var(--blue-pale); transform:translateY(-1px); }
-        .priority-item.dragging { opacity:0.5; transform:rotate(1deg); }
-        .priority-item.drag-over { border-color:var(--orange); border-style:dashed; background:#FFF8F0; }
-        .priority-number { background:var(--blue-bright); color:var(--white); width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-right:16px; font-weight:700; font-size:15px; flex-shrink:0; }
-        .priority-item-text { flex:1; }
-        .drag-hint { font-size:13px; color:var(--text-light); margin-bottom:16px; padding:12px 16px; background:#FFF9E6; border-left:3px solid var(--orange); border-radius:4px; }
-        .priority-move-btns { display:none; flex-direction:column; gap:4px; margin-left:10px; flex-shrink:0; }
-        .priority-move-btn { background:var(--white); border:1.5px solid var(--gray-mid); color:var(--text-mid); width:32px; height:28px; border-radius:6px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s ease; padding:0; min-height:unset; width:32px; flex:none; }
-        .priority-move-btn:hover { border-color:var(--blue-bright); color:var(--blue-bright); background:var(--blue-light); }
-        .priority-move-btn:disabled { opacity:0.25; cursor:not-allowed; }
-        @media (max-width:768px) {
-            .priority-move-btns { display:flex; }
-            .priority-item { cursor:default; padding-right:12px; }
-            .priority-item::after { display:none; }
-            .drag-hint { display:none; }
-        }
+/* INFOGRAPHIC SECTION */
+#how-it-works{background:var(--gray-light);padding:72px 24px}
+.infographic-inner{max-width:860px;margin:0 auto}
+.step-cards{display:flex;gap:10px;align-items:stretch;margin:32px 0 24px}
+.step-card{flex:1;border-radius:10px;padding:22px 16px}
+.step-arrow{display:flex;align-items:center;color:var(--text-light);font-size:18px;flex-shrink:0}
+.step-num{font-size:11px;font-weight:600;letter-spacing:2px;margin:0 0 8px}
+.step-title{font-size:15px;font-weight:700;margin:0 0 8px}
+.step-desc{font-size:12px;line-height:1.55;margin:0}
+.comp-table{border:1px solid var(--gray-mid);border-radius:10px;overflow:hidden;margin-bottom:20px}
+.comp-head{display:grid;grid-template-columns:1fr 1fr;background:var(--gray-light)}
+.comp-head div{padding:10px 14px;font-size:12px;font-weight:600}
+.comp-head div:last-child{border-left:1px solid var(--gray-mid);color:var(--navy)}
+.comp-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--gray-mid)}
+.comp-cell{padding:9px 14px;font-size:13px;line-height:1.4;color:var(--text-mid)}
+.comp-cell.good{color:var(--text-dark);border-left:1px solid var(--gray-mid)}
+.cross{color:var(--text-light);margin-right:7px}.check{color:var(--green);margin-right:7px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.stat-card{background:var(--white);border-radius:8px;padding:16px 12px;text-align:center;border:1px solid var(--gray-mid)}
+.stat-num{font-size:24px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.stat-label{font-size:11px;color:var(--text-light);line-height:1.4}
 
-        /* INTRO */
-        .intro-section { background:var(--white); padding:52px 40px; margin-bottom:36px; border-radius:14px; box-shadow:0 4px 16px rgba(0,0,0,0.07); }
-        .intro-header { text-align:center; margin-bottom:44px; }
-        .intro-title { font-family:var(--font-display); font-size:clamp(26px,4vw,36px); font-weight:800; color:var(--text-dark); margin-bottom:10px; }
-        .intro-subtitle { font-size:17px; color:var(--text-light); }
-        .value-props { max-width:860px; margin:0 auto 44px; }
-        .value-prop-item { display:flex; gap:22px; align-items:flex-start; margin-bottom:16px; padding:22px; background:var(--gray-light); border-radius:10px; border-left:4px solid transparent; transition:all 0.25s ease; }
-        .value-prop-item:hover { border-left-color:var(--blue-bright); background:var(--white); box-shadow:0 4px 14px rgba(0,167,225,0.1); }
-        .prop-icon {
-            width:48px; height:48px; flex-shrink:0;
-            background: var(--blue-mid);
-            color: var(--white);
-            border-radius:10px;
-            display:flex; align-items:center; justify-content:center;
-            font-size:14px; font-weight:800; letter-spacing:0.5px;
-        }
-        .prop-content h3 { font-family:var(--font-display); font-size:19px; font-weight:700; color:var(--text-dark); margin-bottom:6px; }
-        .prop-content p { font-size:15px; color:var(--text-mid); line-height:1.65; }
-        .trust-badges-section { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; padding:32px 0 0; border-top:2px solid var(--gray-mid); }
-        .trust-badge { display:flex; align-items:center; gap:10px; background:var(--gray-light); padding:14px 24px; border-radius:40px; border:2px solid var(--gray-mid); transition:all 0.2s ease; }
-        .trust-badge:hover { border-color:var(--blue-bright); background:var(--white); }
-        .badge-icon { width:28px; height:28px; background:var(--green); color:var(--white); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; }
-        .badge-text { font-size:14px; font-weight:600; color:var(--text-dark); }
+/* VALUE PROPS */
+#why-ichra{background:var(--white);padding:72px 24px}
+.why-inner{max-width:860px;margin:0 auto}
+.value-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.value-item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--gray-light);border-radius:10px;border-left:3px solid transparent;transition:all .25s}
+.value-item:hover{border-left-color:var(--blue-mid);background:var(--white);box-shadow:0 4px 12px rgba(0,136,184,.08)}
+.value-num{width:34px;height:34px;background:var(--blue-mid);color:var(--white);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.value-content h3{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.value-content p{font-size:14px;color:var(--text-mid);line-height:1.6}
 
-        /* START CTA */
-        .start-quiz-cta { text-align:center; margin:44px 0; }
-        .start-quiz-button { background:var(--blue-bright); color:var(--white); border:none; padding:18px 52px; font-size:19px; font-weight:700; border-radius:50px; cursor:pointer; display:inline-block; transition:all 0.25s ease; box-shadow:0 6px 20px rgba(0,167,225,0.35); font-family:var(--font-body); }
-        .start-quiz-button:hover { background:var(--blue-mid); transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,136,184,0.4); }
+/* ASSESSMENT CTA */
+#start-assessment{background:linear-gradient(135deg,var(--blue-dark),var(--blue-mid));padding:64px 24px;text-align:center}
+.assess-inner{max-width:600px;margin:0 auto}
+.assess-inner h2{font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--white);margin-bottom:12px}
+.assess-inner p{font-size:16px;color:rgba(255,255,255,.82);margin-bottom:28px;line-height:1.6}
+.trust-signals{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px}
+.trust-signal{font-size:12px;color:rgba(255,255,255,.7);font-weight:500}
+.trust-signal::before{content:"✓ "}
 
-        /* RESULTS */
-        .results-container { display:none; }
-        .results-container.active { display:block; animation:fadeUp 0.5s ease; }
-        @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-        .results-header { background:var(--white); padding:44px 40px; margin-bottom:20px; border-radius:12px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,0.07); }
-        .thermometer-container { margin:28px auto 36px; max-width:560px; }
-        .thermometer { background:var(--gray-mid); height:64px; border-radius:32px; overflow:hidden; margin-bottom:10px; }
-        .thermometer-fill { background:linear-gradient(90deg,var(--blue-mid),var(--blue-bright)); height:100%; transition:width 1.5s ease-out; display:flex; align-items:center; justify-content:flex-end; padding-right:18px; border-radius:32px 0 0 32px; }
-        .thermometer-score { color:var(--white); font-weight:800; font-size:26px; font-family:var(--font-display); }
-        .thermometer-labels { display:flex; justify-content:space-between; font-size:12px; color:var(--text-light); margin-top:8px; font-weight:600; letter-spacing:0.5px; }
-        .level-badge { display:inline-block; padding:9px 28px; font-size:17px; font-weight:700; color:var(--white); margin-bottom:22px; border-radius:30px; letter-spacing:0.3px; font-family:var(--font-display); }
-        .tier-not-recommended { background:#95A5A6; }
-        .tier-monitor { background:#7B8FA6; }
-        .tier-worth-exploring { background:var(--orange); }
-        .tier-strong-fit { background:var(--blue-bright); }
-        .tier-prime-candidate { background:var(--blue-dark); }
-        .result-title { font-family:var(--font-display); font-weight:800; font-size:clamp(24px,4vw,32px); color:var(--text-dark); margin-bottom:14px; line-height:1.15; }
-        .result-description { font-size:17px; color:var(--text-mid); margin-bottom:28px; line-height:1.65; max-width:640px; margin-left:auto; margin-right:auto; }
-        .result-section { background:var(--blue-light); padding:32px; margin:18px 0; text-align:left; border-radius:10px; }
-        .result-section h3 { font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--blue-mid); margin-bottom:16px; }
-        .result-section ul { margin-left:18px; margin-bottom:12px; }
-        .result-section li { font-size:15.5px; color:var(--text-dark); line-height:1.7; margin-bottom:8px; }
+/* QUIZ WRAPPER */
+#quizArea{background:var(--gray-light);padding:40px 20px 60px}
+.quiz-container{max-width:860px;margin:0 auto}
+.progress-bar{background:var(--gray-mid);height:5px;margin-bottom:16px;border-radius:3px;overflow:hidden}
+.progress-fill{background:var(--blue-bright);height:100%;width:0%;transition:width .4s ease}
+.progress-steps{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:24px}
+.step{width:36px;height:36px;border-radius:50%;background:var(--gray-mid);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--text-light);transition:all .3s;font-family:var(--font)}
+.step.completed{background:var(--blue-bright);color:var(--white)}
+.step.active{background:var(--navy);color:var(--white);transform:scale(1.2);box-shadow:0 4px 14px rgba(44,74,110,.4)}
+.step-connector{width:32px;height:3px;background:var(--gray-mid);transition:background .3s}
+.step-connector.completed{background:var(--blue-bright)}
 
-        /* INDUSTRY INSIGHT */
-        .industry-insight { background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue-mid) 100%); padding:30px; border-radius:12px; margin:18px 0; color:var(--white); position:relative; overflow:hidden; }
-        .industry-insight::before { content:''; position:absolute; top:-50%; right:-50%; width:200%; height:200%; background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%); }
-        .industry-insight-content { position:relative; z-index:1; }
-        .industry-badge { display:inline-block; background:rgba(255,255,255,0.18); padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:10px; }
-        .industry-insight h4 { font-family:var(--font-display); font-size:22px; font-weight:700; margin-bottom:10px; }
-        .industry-insight p { font-size:15px; line-height:1.65; opacity:0.92; }
-        .industry-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:16px; margin-top:18px; }
-        .industry-stat { background:rgba(255,255,255,0.14); padding:18px; border-radius:8px; text-align:center; }
-        .industry-stat-number { font-family:var(--font-display); font-size:30px; font-weight:800; margin-bottom:6px; }
-        .industry-stat-label { font-size:12px; opacity:0.88; }
+/* QUESTION CONTAINERS */
+.question-container{background:var(--white);padding:40px;margin-bottom:20px;display:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);animation:slideIn .35s ease forwards}
+.question-container.active{display:block}
+.question-container.exiting{animation:slideOut .35s ease forwards}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-40px)}}
+.question-number{font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:12px;font-weight:600}
+.question-title{font-size:clamp(20px,3.5vw,26px);font-weight:700;color:var(--text-dark);margin-bottom:24px;line-height:1.25}
 
-        /* VIDEO */
-        .video-container { margin:18px 0; border-radius:12px; overflow:hidden; box-shadow:0 8px 28px rgba(0,95,135,0.2); background:#000; }
-        .video-container iframe { display:block; }
+/* OPTIONS */
+.options{margin-bottom:28px}
+.option{background:var(--blue-light);border:2px solid transparent;padding:17px 20px;margin-bottom:10px;cursor:pointer;transition:all .18s;font-size:15px;font-weight:500;color:var(--text-dark);border-radius:8px;position:relative;font-family:var(--font)}
+.option:hover{background:var(--blue-pale);border-color:var(--blue-bright);transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,167,225,.15)}
+.option.selected{border-color:var(--navy);background:var(--navy);color:var(--white);transform:scale(1.015);box-shadow:0 4px 18px rgba(44,74,110,.3)}
+.option.selected::after{content:"✓";position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:18px;font-weight:700;color:var(--white)}
 
-        /* TIMELINE */
-        .timeline-container { margin:18px 0; padding:36px 0; background:#FAFAFA; border-radius:12px; }
-        .timeline { display:flex; justify-content:space-between; align-items:flex-start; position:relative; max-width:760px; margin:0 auto; padding:0 36px; }
-        .timeline::before { content:''; position:absolute; top:38px; left:36px; right:36px; height:4px; background:linear-gradient(to right,var(--blue-bright) 33%,var(--orange) 33%,var(--orange) 66%,var(--green) 66%); z-index:1; }
-        .timeline-step { flex:1; text-align:center; position:relative; z-index:2; }
-        .timeline-icon { width:76px; height:76px; border-radius:50%; background:var(--white); border:4px solid var(--blue-bright); margin:0 auto 18px; display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; color:var(--blue-bright); box-shadow:0 4px 14px rgba(0,0,0,0.1); }
-        .timeline-step:nth-child(2) .timeline-icon { border-color:var(--orange); color:var(--orange); }
-        .timeline-step:nth-child(3) .timeline-icon { border-color:var(--green); color:var(--green); }
-        .timeline-label { font-size:11px; font-weight:700; color:var(--blue-bright); margin-bottom:6px; text-transform:uppercase; letter-spacing:1.5px; }
-        .timeline-step:nth-child(2) .timeline-label { color:var(--orange); }
-        .timeline-step:nth-child(3) .timeline-label { color:var(--green); }
-        .timeline-title { font-family:var(--font-display); font-size:17px; font-weight:700; color:var(--text-dark); margin-bottom:6px; }
-        .timeline-description { font-size:13px; color:var(--text-light); line-height:1.5; }
+/* BUTTONS */
+.button-container{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+button{background:var(--blue-bright);color:var(--white);border:none;padding:12px 28px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font);border-radius:8px}
+button:hover{background:var(--blue-mid);transform:translateY(-1px)}
+button:disabled{background:var(--gray-mid);color:#aaa;cursor:not-allowed;transform:none}
+button.secondary{background:var(--white);color:var(--blue-bright);border:2px solid var(--blue-bright)}
+button.secondary:hover{background:var(--blue-light)}
 
-        /* LEAD FORM */
-        .lead-form { background:var(--white); border:none; border-top:5px solid var(--orange); padding:40px; margin:18px 0; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.1); }
-        .lead-form h3 { font-family:var(--font-display); font-weight:800; font-size:26px; color:var(--text-dark); margin-bottom:6px; }
-        .lead-form-subtitle { font-size:15px; color:var(--text-light); margin-bottom:24px; }
-        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
-        .form-group { display:flex; flex-direction:column; }
-        .form-group label { font-size:13px; font-weight:700; color:var(--text-dark); margin-bottom:7px; letter-spacing:0.3px; }
-        .form-group input { padding:12px 14px; border:2px solid var(--gray-mid); font-family:var(--font-body); font-size:15px; transition:all 0.2s ease; border-radius:8px; color:var(--text-dark); }
-        .form-group input:focus { outline:none; border-color:var(--blue-bright); background:var(--blue-light); }
-        .form-group input::placeholder { color:#bbb; }
-        .form-group.error input { border-color:#E74C3C; background:#FFF5F5; }
-        .form-group.success input { border-color:var(--green); }
-        .error-message { color:#E74C3C; font-size:12px; margin-top:5px; display:none; }
-        .form-group.error .error-message { display:block; }
-        .submit-button { background:var(--orange); color:var(--white); border:none; padding:16px 40px; font-size:17px; font-weight:700; cursor:pointer; transition:all 0.2s ease; width:100%; margin-top:8px; border-radius:8px; font-family:var(--font-body); }
-        .submit-button:hover { background:var(--orange-dark); transform:translateY(-1px); box-shadow:0 6px 20px rgba(248,151,40,0.35); }
+/* INDUSTRY TILES */
+.industry-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.industry-tile{background:var(--blue-light);border:2px solid transparent;border-radius:8px;padding:14px 12px;cursor:pointer;font-size:14px;font-weight:500;color:var(--text-dark);text-align:center;transition:all .18s;font-family:var(--font);line-height:1.3}
+.industry-tile:hover{background:var(--blue-pale);border-color:var(--blue-bright);transform:translateY(-2px)}
+.industry-tile.selected{background:var(--navy);border-color:var(--navy);color:var(--white);transform:scale(1.02)}
+.industry-tile.tile-notsure{background:var(--gray-light);border:2px dashed var(--gray-mid);color:var(--text-light)}
+.industry-tile.tile-notsure.selected{background:var(--navy);border-color:var(--navy);border-style:solid;color:var(--white)}
+.industry-search-label{font-size:13px;color:var(--text-light);margin-bottom:10px}
 
-        .restart-button { background:var(--white); color:var(--text-light); border:2px solid var(--gray-mid); padding:11px 28px; font-size:14px; margin-top:18px; display:block; margin-left:auto; margin-right:auto; border-radius:8px; cursor:pointer; font-family:var(--font-body); transition:all 0.2s ease; }
-        .restart-button:hover { border-color:var(--blue-bright); color:var(--blue-bright); background:var(--blue-light); }
+/* AUTOCOMPLETE */
+.autocomplete-container{position:relative;width:100%}
+.autocomplete-input{width:100%;padding:14px 40px 14px 16px;font-size:15px;border:2px solid transparent;border-radius:8px;background:var(--blue-light);color:var(--text-dark);font-family:var(--font);transition:all .2s}
+.autocomplete-input:focus{outline:none;border-color:var(--blue-bright);background:var(--blue-pale)}
+.autocomplete-input::placeholder{color:#aaa}
+.autocomplete-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--blue-bright);font-size:16px;pointer-events:none}
+.autocomplete-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--white);border:2px solid var(--blue-bright);border-top:none;border-radius:0 0 8px 8px;max-height:250px;overflow-y:auto;z-index:1000;display:none;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.autocomplete-dropdown.active{display:block}
+.autocomplete-option{padding:12px 16px;cursor:pointer;transition:all .15s;border-bottom:1px solid #f0f0f0;font-size:14px;color:var(--text-dark);font-family:var(--font)}
+.autocomplete-option:last-child{border-bottom:none}
+.autocomplete-option:hover{background:var(--blue-light);color:var(--blue-mid)}
+.autocomplete-option strong{color:var(--blue-mid)}
+.autocomplete-no-results{padding:16px;text-align:center;color:#aaa;font-style:italic;font-size:13px}
 
-        /* AUTOCOMPLETE */
-        .autocomplete-container { position:relative; width:100%; }
-        .autocomplete-input { width:100%; padding:16px 44px 16px 18px; font-size:15.5px; border:2px solid transparent; border-radius:8px; background:var(--blue-light); color:var(--text-dark); font-family:var(--font-body); transition:all 0.2s ease; }
-        .autocomplete-input:focus { outline:none; border-color:var(--blue-bright); background:var(--blue-pale); }
-        .autocomplete-input::placeholder { color:#aaa; }
-        .autocomplete-icon { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--blue-bright); font-size:18px; pointer-events:none; }
-        .autocomplete-dropdown { position:absolute; top:100%; left:0; right:0; background:var(--white); border:2px solid var(--blue-bright); border-top:none; border-radius:0 0 8px 8px; max-height:280px; overflow-y:auto; z-index:1000; display:none; box-shadow:0 6px 20px rgba(0,0,0,0.12); }
-        .autocomplete-dropdown.active { display:block; }
-        .autocomplete-option { padding:13px 18px; cursor:pointer; transition:all 0.15s; border-bottom:1px solid #f0f0f0; font-size:14.5px; color:var(--text-dark); font-family:var(--font-body); }
-        .autocomplete-option:last-child { border-bottom:none; }
-        .autocomplete-option:hover { background:var(--blue-light); color:var(--blue-mid); }
-        .autocomplete-option.selected { background:var(--blue-bright); color:var(--white); }
-        .autocomplete-option strong { color:var(--blue-mid); }
-        .autocomplete-no-results { padding:18px; text-align:center; color:#aaa; font-style:italic; }
+/* PRIORITY */
+.priority-list{margin-bottom:24px}
+.priority-item{background:var(--blue-light);border:2px solid transparent;padding:15px 20px;margin-bottom:10px;cursor:move;font-size:15px;font-weight:500;display:flex;align-items:center;transition:all .2s;position:relative;border-radius:8px;font-family:var(--font)}
+.priority-item::after{content:"⋮⋮";position:absolute;right:16px;color:#ccc;font-size:16px;letter-spacing:-2px}
+.priority-item:hover{border-color:var(--blue-bright);background:var(--blue-pale)}
+.priority-item.dragging{opacity:.5;transform:rotate(1deg)}
+.priority-item.drag-over{border-color:var(--navy);border-style:dashed;background:var(--navy-light)}
+.priority-number{background:var(--blue-bright);color:var(--white);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:14px;font-weight:700;font-size:14px;flex-shrink:0}
+.priority-item-text{flex:1}
+.drag-hint{font-size:13px;color:var(--text-light);margin-bottom:14px;padding:10px 14px;background:var(--navy-light);border-left:3px solid var(--navy);border-radius:4px}
+.priority-move-btns{display:none;flex-direction:column;gap:3px;margin-left:8px;flex-shrink:0}
+.priority-move-btn{background:var(--white);border:1.5px solid var(--gray-mid);color:var(--text-mid);width:28px;height:26px;border-radius:5px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;min-height:unset;flex:none;transition:all .15s}
+.priority-move-btn:hover{border-color:var(--navy);color:var(--navy)}
+.priority-move-btn:disabled{opacity:.25;cursor:not-allowed}
 
-        /* LOADING */
-        .loading-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.72); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10000; opacity:0; pointer-events:none; transition:opacity 0.3s ease; }
-        .loading-overlay.active { opacity:1; pointer-events:all; }
-        .loading-spinner { width:52px; height:52px; border:4px solid rgba(255,255,255,0.25); border-top:4px solid var(--blue-bright); border-radius:50%; animation:spin 0.9s linear infinite; }
-        @keyframes spin { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
-        .loading-text { color:var(--white); font-size:17px; margin-top:18px; font-weight:600; font-family:var(--font-body); }
-        .loading-subtext { color:rgba(255,255,255,0.7); font-size:13px; margin-top:6px; font-family:var(--font-body); }
+/* RESULTS */
+.results-container{display:none}
+.results-container.active{display:block;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.results-header{background:var(--white);padding:40px;margin-bottom:18px;border-radius:12px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.thermometer-container{margin:24px auto 32px;max-width:540px}
+.thermometer{background:var(--gray-mid);height:60px;border-radius:30px;overflow:hidden;margin-bottom:10px}
+.thermometer-fill{height:100%;transition:width 1.5s ease-out;border-radius:30px 0 0 30px;background:linear-gradient(90deg,var(--blue-mid),var(--blue-bright))}
+.thermometer-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--text-light);margin-top:8px;font-weight:500}
+.level-badge{display:inline-block;padding:9px 26px;font-size:16px;font-weight:700;color:var(--white);margin-bottom:20px;border-radius:28px}
+.tier-strong-candidate{background:var(--navy-dark)}
+.tier-likely-fit{background:var(--blue-dark)}
+.tier-worth-conversation{background:var(--blue-mid)}
+.tier-not-now{background:#7B8FA6}
+.tier-not-fit{background:#95A5A6}
+.result-title{font-size:clamp(22px,4vw,30px);font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.2}
+.result-description{font-size:16px;color:var(--text-mid);margin-bottom:16px;line-height:1.65;max-width:640px;margin-left:auto;margin-right:auto}
+.objectivity-note{font-size:13px;color:var(--text-light);font-style:italic;margin-bottom:8px;max-width:600px;margin-left:auto;margin-right:auto;padding:12px 16px;background:var(--gray-light);border-radius:8px;border-left:3px solid var(--gray-mid)}
+.result-section{background:var(--blue-light);padding:28px;margin:16px 0;text-align:left;border-radius:10px}
+.result-section h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.result-section ul{margin-left:18px;margin-bottom:10px}
+.result-section li{font-size:15px;color:var(--text-dark);line-height:1.7;margin-bottom:8px}
+.result-section p{font-size:15px;color:var(--text-dark);line-height:1.7;margin-bottom:10px}
 
-        /* UTILITY BUTTONS */
-        .utility-buttons { position:fixed; bottom:20px; right:20px; display:flex; flex-direction:column; gap:9px; z-index:1000; }
-        .utility-button { background:var(--white); border:2px solid var(--blue-bright); color:var(--blue-bright); padding:10px 18px; border-radius:40px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.12); transition:all 0.25s ease; display:flex; align-items:center; gap:7px; white-space:nowrap; font-family:var(--font-body); }
-        .utility-button:hover { background:var(--blue-bright); color:var(--white); transform:translateY(-2px); }
-        .utility-button.saved { background:var(--green); border-color:var(--green); color:var(--white); }
+/* INDUSTRY INSIGHT */
+.industry-insight{background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 100%);padding:28px;border-radius:12px;margin:16px 0;color:var(--white);position:relative;overflow:hidden}
+.industry-insight::before{content:"";position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%)}
+.industry-insight-content{position:relative;z-index:1}
+.industry-badge{display:inline-block;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.industry-insight h4{font-size:20px;font-weight:700;margin-bottom:8px}
+.industry-insight p{font-size:14px;line-height:1.6;opacity:.9}
+.industry-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-top:16px}
+.industry-stat{background:rgba(255,255,255,.13);padding:16px;border-radius:8px;text-align:center}
+.industry-stat-number{font-size:28px;font-weight:700;margin-bottom:4px}
+.industry-stat-label{font-size:11px;opacity:.85}
 
-        /* ADVISOR FLOAT */
-        .advisor-float { position:fixed; bottom:20px; left:20px; background:var(--orange); color:var(--white); border:none; padding:12px 20px; border-radius:40px; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 4px 18px rgba(248,151,40,0.4); transition:all 0.25s ease; display:flex; align-items:center; gap:7px; z-index:1000; font-family:var(--font-body); }
-        .advisor-float:hover { background:var(--orange-dark); transform:translateY(-2px); }
+/* VIDEO */
+.video-container{margin:16px 0;border-radius:12px;overflow:hidden;box-shadow:0 8px 28px rgba(0,95,135,.2);background:#000}
+.video-container iframe{display:block}
 
-        /* MODAL */
-        .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:10001; display:none; align-items:center; justify-content:center; padding:20px; }
-        .modal-overlay.active { display:flex; animation:fadeIn 0.2s ease; }
-        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-        .modal-box { background:var(--white); border-radius:16px; padding:40px; max-width:500px; width:100%; border-top:5px solid var(--orange); box-shadow:0 20px 60px rgba(0,0,0,0.3); position:relative; animation:slideUp 0.3s ease; }
-        @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-        .modal-close { position:absolute; top:16px; right:16px; background:none; border:1px solid var(--gray-mid); font-size:12px; font-weight:600; color:#aaa; cursor:pointer; padding:5px 12px; border-radius:6px; transition:all 0.2s; letter-spacing:0.5px; text-transform:uppercase; }
-        .modal-close:hover { color:var(--text-dark); background:var(--gray-light); }
-        .modal-box h3 { font-family:var(--font-display); font-weight:800; font-size:24px; color:var(--text-dark); margin-bottom:6px; padding-right:70px; }
-        .modal-box > p { font-size:14px; color:var(--text-light); margin-bottom:22px; }
-        .modal-field { margin-bottom:14px; }
+/* TIMELINE */
+.timeline-container{margin:16px 0;padding:32px 0;background:#FAFAFA;border-radius:12px}
+.timeline{display:flex;justify-content:space-between;align-items:flex-start;position:relative;max-width:720px;margin:0 auto;padding:0 32px}
+.timeline::before{content:"";position:absolute;top:36px;left:32px;right:32px;height:4px;background:linear-gradient(to right,var(--blue-bright) 33%,var(--navy) 33%,var(--navy) 66%,var(--green) 66%);z-index:1}
+.timeline-step{flex:1;text-align:center;position:relative;z-index:2}
+.timeline-icon{width:72px;height:72px;border-radius:50%;background:var(--white);border:4px solid var(--blue-bright);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--blue-bright);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.timeline-step:nth-child(2) .timeline-icon{border-color:var(--navy);color:var(--navy)}
+.timeline-step:nth-child(3) .timeline-icon{border-color:var(--green);color:var(--green)}
+.timeline-label{font-size:10px;font-weight:700;color:var(--blue-bright);margin-bottom:4px;text-transform:uppercase;letter-spacing:1.5px}
+.timeline-step:nth-child(2) .timeline-label{color:var(--navy)}
+.timeline-step:nth-child(3) .timeline-label{color:var(--green)}
+.timeline-title{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:4px}
+.timeline-description{font-size:12px;color:var(--text-light);line-height:1.45}
 
-        /* CONFETTI */
-        .confetti-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9999; }
-        .confetti { position:absolute; animation:confetti-fall 3s linear forwards; z-index:9999; }
-        @keyframes confetti-fall { 0% { transform:translateY(0) rotateZ(0deg); opacity:1; } 100% { transform:translateY(100vh) rotateZ(720deg); opacity:0; } }
+/* LEAD FORM */
+.lead-form{background:var(--white);border-top:5px solid var(--navy);padding:36px;margin:16px 0;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.lead-form h3{font-size:24px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.lead-form-subtitle{font-size:14px;color:var(--text-light);margin-bottom:22px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column}
+.form-group label{font-size:12px;font-weight:700;color:var(--text-dark);margin-bottom:6px;letter-spacing:.3px}
+.form-group input{padding:11px 13px;border:2px solid var(--gray-mid);font-family:var(--font);font-size:14px;transition:all .2s;border-radius:8px;color:var(--text-dark)}
+.form-group input:focus{outline:none;border-color:var(--blue-bright);background:var(--blue-light)}
+.form-group input::placeholder{color:#bbb}
+.form-group.error input{border-color:#E74C3C;background:#FFF5F5}
+.form-group.success input{border-color:var(--green)}
+.error-message{color:#E74C3C;font-size:11px;margin-top:4px;display:none}
+.form-group.error .error-message{display:block}
+.tcpa-block{margin:16px 0;padding:14px;background:var(--gray-light);border-radius:8px;border-left:3px solid var(--navy)}
+.tcpa-label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.tcpa-label input[type=checkbox]{margin-top:3px;width:16px;height:16px;flex-shrink:0;cursor:pointer;accent-color:var(--navy)}
+.tcpa-text{font-size:12px;color:var(--text-mid);line-height:1.55}
+.tcpa-text a{color:var(--blue-mid);text-decoration:none}
+.tcpa-error{color:#E74C3C;font-size:11px;margin-top:4px;display:none}
+.submit-button{background:var(--navy);color:var(--white);border:none;padding:14px 40px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s;width:100%;margin-top:8px;border-radius:8px;font-family:var(--font)}
+.submit-button:hover{background:var(--navy-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(44,74,110,.35)}
+.restart-button{background:var(--white);color:var(--text-light);border:2px solid var(--gray-mid);padding:10px 28px;font-size:14px;margin-top:16px;display:block;margin-left:auto;margin-right:auto;border-radius:8px;cursor:pointer;font-family:var(--font);transition:all .2s}
+.restart-button:hover{border-color:var(--navy);color:var(--navy)}
 
-        /* RESPONSIVE */
-        @media (max-width:768px) {
-            .container { padding:24px 15px; }
-            .header-banner { padding:38px 24px 34px; }
-            .question-container { padding:32px 22px 26px; }
-            .intro-section { padding:36px 22px; }
-            .lead-form { padding:30px 22px; }
-            .form-row { grid-template-columns:1fr; }
-            .button-container { flex-wrap:wrap; }
-            .button-container button { flex:1; min-width:110px; min-height:46px; }
-            .button-container button.secondary { flex:0 0 auto; }
-            .option { padding:16px 18px; min-height:48px; font-size:14.5px; }
-            .priority-item { padding:15px 18px; min-height:56px; touch-action:none; }
-            .timeline { flex-direction:column; padding:0 16px; }
-            .timeline::before { top:38px; bottom:38px; left:56px; right:auto; width:4px; height:auto; background:linear-gradient(to bottom,var(--blue-bright) 33%,var(--orange) 33%,var(--orange) 66%,var(--green) 66%); }
-            .timeline-step { display:flex; align-items:flex-start; text-align:left; margin-bottom:36px; }
-            .timeline-icon { margin:0 18px 0 0; flex-shrink:0; }
-            .timeline-content { flex:1; padding-top:12px; }
-            .value-prop-item { flex-direction:column; gap:12px; padding:18px; }
-            .trust-badges-section { gap:10px; }
-            .trust-badge { padding:12px 18px; }
-            .advisor-float { bottom:12px; left:12px; font-size:12px; padding:10px 14px; }
-            .utility-buttons { bottom:12px; right:12px; }
-        }
-    </style>
+/* FOOTER */
+footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;text-align:center}
+.footer-inner{max-width:860px;margin:0 auto}
+.footer-copy{font-size:13px;margin-bottom:12px}
+.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.9)}
+.footer-disclaimer{font-size:11px;color:rgba(255,255,255,.4);line-height:1.6;max-width:600px;margin:0 auto}
+
+/* PRIVACY SECTION */
+#privacy-policy{background:var(--white);padding:60px 24px;border-top:1px solid var(--gray-mid)}
+.privacy-inner{max-width:720px;margin:0 auto}
+.privacy-inner h2{font-size:24px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.privacy-meta{font-size:12px;color:var(--text-light);margin-bottom:28px}
+.privacy-section{margin-bottom:24px}
+.privacy-section h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.privacy-section p,.privacy-section li{font-size:14px;color:var(--text-mid);line-height:1.7}
+.privacy-section ul{margin-left:20px;margin-bottom:8px}
+
+/* MODALS */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:10001;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.active{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-box{background:var(--white);border-radius:16px;padding:36px;max-width:500px;width:100%;border-top:5px solid var(--navy);box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;animation:slideUp .3s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--gray-mid);font-size:11px;font-weight:600;color:#aaa;cursor:pointer;padding:4px 10px;border-radius:5px;text-transform:uppercase;letter-spacing:.5px;transition:all .2s}
+.modal-close:hover{color:var(--text-dark);border-color:var(--text-dark)}
+.modal-box h3{font-size:22px;font-weight:700;color:var(--text-dark);margin-bottom:6px;padding-right:60px}
+.modal-box>p{font-size:14px;color:var(--text-light);margin-bottom:20px}
+.modal-field{margin-bottom:14px}
+
+/* CHAT WIDGET */
+.chat-btn{position:fixed;bottom:20px;right:20px;background:var(--navy);color:var(--white);border:none;width:52px;height:52px;border-radius:50%;cursor:pointer;box-shadow:0 4px 18px rgba(44,74,110,.45);font-size:11px;font-weight:700;z-index:990;display:flex;align-items:center;justify-content:center;transition:all .25s;font-family:var(--font);letter-spacing:.5px}
+.chat-btn:hover{background:var(--navy-dark);transform:scale(1.07)}
+.chat-panel{position:fixed;bottom:84px;right:20px;width:340px;max-height:520px;background:var(--white);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.18);display:none;flex-direction:column;z-index:1000;overflow:hidden;border-top:4px solid var(--navy)}
+.chat-panel.open{display:flex}
+.chat-header{background:var(--navy);color:var(--white);padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.chat-header-title{font-size:14px;font-weight:700}
+.chat-header-sub{font-size:11px;opacity:.7}
+.chat-close-btn{background:rgba(255,255,255,.15);border:none;color:var(--white);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.chat-consent{padding:20px;flex:1;display:flex;flex-direction:column;justify-content:center}
+.chat-consent-title{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:10px}
+.chat-consent-text{font-size:12px;color:var(--text-mid);line-height:1.6;margin-bottom:20px}
+.chat-consent-text a{color:var(--blue-mid);text-decoration:none}
+.chat-consent-btns{display:flex;gap:10px}
+.chat-agree-btn{background:var(--navy);color:var(--white);border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);flex:1}
+.chat-decline-btn{background:none;color:var(--text-light);border:1px solid var(--gray-mid);padding:10px 16px;border-radius:8px;font-size:13px;cursor:pointer;font-family:var(--font)}
+.chat-messages{flex:1;overflow-y:auto;padding:14px;display:none;flex-direction:column;gap:10px;min-height:200px}
+.chat-message{max-width:88%;padding:10px 13px;border-radius:10px;font-size:13px;line-height:1.5}
+.chat-message.assistant{background:var(--blue-light);color:var(--text-dark);align-self:flex-start;border-radius:10px 10px 10px 2px}
+.chat-message.user{background:var(--navy);color:var(--white);align-self:flex-end;border-radius:10px 10px 2px 10px}
+.chat-input-area{display:none;padding:10px;border-top:1px solid var(--gray-mid);gap:8px}
+.chat-input-area input{flex:1;padding:9px 12px;border:1px solid var(--gray-mid);border-radius:8px;font-size:13px;font-family:var(--font);outline:none}
+.chat-input-area input:focus{border-color:var(--navy)}
+.chat-send-btn{background:var(--navy);color:var(--white);border:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);white-space:nowrap}
+.chat-advisor-link{padding:8px 14px;border-top:1px solid var(--gray-mid);text-align:center;font-size:11px;color:var(--text-light);display:none}
+.chat-advisor-link a{color:var(--navy);font-weight:600;cursor:pointer;text-decoration:none}
+
+/* UTILITY BUTTONS */
+.utility-buttons{position:fixed;bottom:20px;right:82px;display:flex;flex-direction:column;gap:8px;z-index:990}
+.utility-button{background:var(--white);border:2px solid var(--blue-bright);color:var(--blue-bright);padding:8px 16px;border-radius:36px;font-size:12px;font-weight:600;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.1);transition:all .25s;display:flex;align-items:center;gap:6px;white-space:nowrap;font-family:var(--font)}
+.utility-button:hover{background:var(--blue-bright);color:var(--white)}
+.utility-button.saved{background:var(--green);border-color:var(--green);color:var(--white)}
+.advisor-float{position:fixed;bottom:20px;left:20px;background:var(--navy);color:var(--white);border:none;padding:11px 18px;border-radius:36px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 4px 18px rgba(44,74,110,.4);transition:all .25s;z-index:990;font-family:var(--font)}
+.advisor-float:hover{background:var(--navy-dark);transform:translateY(-2px)}
+
+/* LOADING */
+.loading-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.72);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10000;opacity:0;pointer-events:none;transition:opacity .3s}
+.loading-overlay.active{opacity:1;pointer-events:all}
+.loading-spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,.2);border-top:4px solid var(--blue-bright);border-radius:50%;animation:spin .9s linear infinite}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.loading-text{color:var(--white);font-size:16px;margin-top:16px;font-weight:500}
+.loading-subtext{color:rgba(255,255,255,.6);font-size:12px;margin-top:6px}
+
+/* CONFETTI */
+.confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+.confetti{position:absolute;animation:confetti-fall 3s linear forwards;z-index:9999}
+@keyframes confetti-fall{0%{transform:translateY(0) rotateZ(0deg);opacity:1}100%{transform:translateY(100vh) rotateZ(720deg);opacity:0}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  #navbar{padding:0 16px}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .section{padding:48px 16px}
+  #hero{padding:56px 16px}
+  .hero-ctas{flex-direction:column;align-items:center}
+  .btn-primary,.btn-outline{width:100%;max-width:300px}
+  .pain-grid{grid-template-columns:1fr}
+  .step-cards{flex-direction:column}
+  .step-arrow{display:none}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .value-grid{grid-template-columns:1fr}
+  .industry-tiles{grid-template-columns:repeat(2,1fr)}
+  .question-container{padding:28px 20px}
+  .form-row{grid-template-columns:1fr}
+  .button-container{flex-wrap:wrap}
+  .button-container button{flex:1;min-width:100px;min-height:44px}
+  .lead-form{padding:28px 20px}
+  .timeline{flex-direction:column;padding:0 16px}
+  .timeline::before{top:36px;bottom:36px;left:52px;right:auto;width:4px;height:auto;background:linear-gradient(to bottom,var(--blue-bright) 33%,var(--navy) 33%,var(--navy) 66%,var(--green) 66%)}
+  .timeline-step{display:flex;align-items:flex-start;text-align:left;margin-bottom:32px}
+  .timeline-icon{margin:0 16px 0 0;flex-shrink:0}
+  .timeline-content{flex:1;padding-top:10px}
+  .priority-item{padding:14px 16px;min-height:54px;touch-action:none}
+  .priority-item::after{display:none}
+  .priority-move-btns{display:flex}
+  .utility-buttons{right:76px;bottom:12px}
+  .chat-btn{bottom:12px;right:12px;width:46px;height:46px}
+  .chat-panel{bottom:0;right:0;width:100%;max-height:85vh;border-radius:16px 16px 0 0}
+  .advisor-float{bottom:12px;left:12px;font-size:11px;padding:9px 14px}
+}
+@media(max-width:480px){
+  .cred-strip{flex-direction:column;gap:8px;align-items:center}
+  .trust-signals{flex-direction:column;gap:6px;align-items:center}
+}
+</style>
 </head>
 <body>
 
 <button class="advisor-float" id="advisorFloatBtn">Talk to Advisor</button>
-
 <div class="utility-buttons">
-    <button class="utility-button" id="saveProgressBtn" style="display:none;">Save Progress</button>
-    <button class="utility-button" id="resumeProgressBtn" style="display:none;">Resume</button>
+  <button class="utility-button" id="saveProgressBtn" style="display:none">Save Progress</button>
+  <button class="utility-button" id="resumeProgressBtn" style="display:none">Resume</button>
 </div>
 
 <!-- ADVISOR MODAL -->
 <div class="modal-overlay" id="advisorModal">
-    <div class="modal-box">
-        <button class="modal-close" id="modalClose">Close</button>
-        <h3>Talk to an Advisor</h3>
-        <p>Skip the quiz — connect directly. We'll reach out within one business day with real numbers for your business.</p>
-        <form id="modalLeadForm" onsubmit="handleModalSubmit(event)" novalidate>
-            <div class="modal-field"><div class="form-group"><label for="modal-name">Name *</label><input type="text" id="modal-name" required placeholder="John Smith"><span class="error-message">Please enter your name</span></div></div>
-            <div class="modal-field"><div class="form-group"><label for="modal-company">Company *</label><input type="text" id="modal-company" required placeholder="ABC Corporation"><span class="error-message">Please enter your company</span></div></div>
-            <div class="modal-field"><div class="form-group"><label for="modal-email">Email *</label><input type="email" id="modal-email" required placeholder="john@company.com"><span class="error-message">Please enter a valid email</span></div></div>
-            <div class="modal-field"><div class="form-group"><label for="modal-phone">Phone *</label><input type="tel" id="modal-phone" required placeholder="(555) 123-4567"><span class="error-message">Please enter a valid phone</span></div></div>
-            <button type="submit" class="submit-button" id="modalSubmitBtn">Connect with an Advisor →</button>
-        </form>
-    </div>
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">Close</button>
+    <h3>Talk to an Advisor</h3>
+    <p>Skip the quiz — connect directly. We'll reach out within one business day.</p>
+    <form id="modalLeadForm" onsubmit="handleModalSubmit(event)" novalidate>
+      <div class="modal-field"><div class="form-group"><label for="m-name">Name *</label><input type="text" id="m-name" required placeholder="John Smith"><span class="error-message">Please enter your name</span></div></div>
+      <div class="modal-field"><div class="form-group"><label for="m-company">Company *</label><input type="text" id="m-company" required placeholder="ABC Corporation"><span class="error-message">Please enter your company</span></div></div>
+      <div class="modal-field"><div class="form-group"><label for="m-email">Email *</label><input type="email" id="m-email" required placeholder="john@company.com"><span class="error-message">Please enter a valid email</span></div></div>
+      <div class="modal-field"><div class="form-group"><label for="m-phone">Phone *</label><input type="tel" id="m-phone" required placeholder="(555) 123-4567"><span class="error-message">Please enter a valid phone</span></div></div>
+      <div class="modal-field"><div class="form-group"><label for="m-zip">Zip Code *</label><input type="text" id="m-zip" required placeholder="30301" maxlength="10"><span class="error-message">Please enter your zip code</span></div></div>
+      <div class="tcpa-block">
+        <label class="tcpa-label">
+          <input type="checkbox" id="m-tcpa" required>
+          <span class="tcpa-text">By submitting this form, I consent to be contacted by OTB Solutions LLC and its licensed insurance representatives at the phone number and email provided, including through the use of automated telephone dialing systems, pre-recorded messages, and artificial intelligence voice agents, regarding ICHRA and health benefit solutions. Message and data rates may apply. Consent is not a condition of purchasing any product or service. You may opt out at any time by replying STOP or contacting us directly. <a href="#privacy-policy">Privacy Policy</a>.</span>
+        </label>
+        <div class="tcpa-error" id="m-tcpa-error">You must agree to the terms above to submit.</div>
+      </div>
+      <button type="submit" class="submit-button" id="modalSubmitBtn">Connect with an Advisor</button>
+    </form>
+  </div>
 </div>
 
-<div class="container">
-    <!-- BANNER -->
-    <div class="header-banner">
-        <div class="banner-accent"></div>
-        <div class="banner-content">
-            <div class="banner-eyebrow">Free Assessment Tool</div>
-            <h1 class="banner-title">ICHRA Qualification Tool</h1>
-            <p class="banner-subtitle">Find out if Individual Coverage Health Reimbursement is right for your business — in under 2 minutes.</p>
-            <div class="banner-badges">
-                <div class="banner-badge">✓ 6 Questions</div>
-                <div class="banner-badge">✓ 2 Minutes</div>
-                <div class="banner-badge accent">✓ Free Assessment</div>
-            </div>
-        </div>
+<!-- CHAT WIDGET -->
+<button class="chat-btn" id="chatBtn" title="Ask ICHRA questions">AI</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <div><div class="chat-header-title">ICHRA Assistant</div><div class="chat-header-sub">Powered by OTB Solutions LLC</div></div>
+    <button class="chat-close-btn" onclick="toggleChat()">&#x2715;</button>
+  </div>
+  <div class="chat-consent" id="chatConsentScreen">
+    <div class="chat-consent-title">Before we chat</div>
+    <div class="chat-consent-text">Hi, I am an AI assistant for OTB Solutions LLC, powered by Claude (Anthropic). I can answer questions about ICHRA, help you understand your assessment results, and connect you with an advisor.<br><br>Conversations with this assistant may be retained and used by OTB Solutions LLC to improve our services, consistent with our <a href="#privacy-policy">Privacy Policy</a>. By continuing to chat you agree to these terms.</div>
+    <div class="chat-consent-btns">
+      <button class="chat-agree-btn" onclick="agreeToChat()">Yes, let's chat</button>
+      <button class="chat-decline-btn" onclick="declineChat()">No thanks</button>
     </div>
-
-    <div class="start-quiz-cta" style="margin-top:20px;margin-bottom:40px;">
-        <button class="start-quiz-button" onclick="document.getElementById('start-quiz').scrollIntoView({behavior:'smooth'})">Start Your Free Assessment →</button>
-    </div>
-
-    <!-- INTRO -->
-    <div class="intro-section">
-        <div class="intro-header">
-            <h2 class="intro-title">Why Consider ICHRA?</h2>
-            <p class="intro-subtitle">Five reasons ICHRA is the fastest-growing health benefit in America</p>
-        </div>
-        <div class="value-props">
-            <div class="value-prop-item"><div class="prop-icon">01</div><div class="prop-content"><h3>Predictable, Fixed Costs</h3><p>You set a fixed monthly allowance per employee. No more surprise premium increases at renewal based on claims experience.</p></div></div>
-            <div class="value-prop-item"><div class="prop-icon">02</div><div class="prop-content"><h3>Employee Choice &amp; Flexibility</h3><p>Employees choose from dozens of marketplace plans that fit their doctors, needs, and budget — not one carrier's limited network.</p></div></div>
-            <div class="value-prop-item"><div class="prop-icon">03</div><div class="prop-content"><h3>Fully ACA Compliant</h3><p>ICHRA is an official IRS regulation (established 2020) satisfying ACA employer mandate requirements when properly structured.</p></div></div>
-            <div class="value-prop-item"><div class="prop-icon">04</div><div class="prop-content"><h3>No Minimums — No Participation Requirements</h3><p>Unlike group plans, ICHRA has zero minimum contribution amounts and no employee participation thresholds. Any size business qualifies.</p></div></div>
-            <div class="value-prop-item"><div class="prop-icon">05</div><div class="prop-content"><h3>Simplified Administration</h3><p>No carrier negotiations, no network management. Approve monthly reimbursements through a simple admin platform.</p></div></div>
-        </div>
-        <div class="trust-badges-section">
-            <div class="trust-badge"><div class="badge-icon">✓</div><div class="badge-text">IRS Approved</div></div>
-            <div class="trust-badge"><div class="badge-icon">✓</div><div class="badge-text">ACA Compliant</div></div>
-            <div class="trust-badge"><div class="badge-icon">✓</div><div class="badge-text">Tax-Free Benefit</div></div>
-            <div class="trust-badge"><div class="badge-icon">✓</div><div class="badge-text">Established 2020</div></div>
-        </div>
-    </div>
-
-    <div class="start-quiz-cta">
-        <button class="start-quiz-button" onclick="document.getElementById('start-quiz').scrollIntoView({behavior:'smooth'})">Start Your Free Assessment →</button>
-    </div>
-
-    <div class="progress-bar" id="start-quiz"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-steps">
-        <div class="step active" data-step="1">1</div><div class="step-connector"></div>
-        <div class="step" data-step="2">2</div><div class="step-connector"></div>
-        <div class="step" data-step="3">3</div><div class="step-connector"></div>
-        <div class="step" data-step="4">4</div><div class="step-connector"></div>
-        <div class="step" data-step="5">5</div><div class="step-connector"></div>
-        <div class="step" data-step="6">6</div>
-    </div>
-
-    <!-- Q1 -->
-    <div class="question-container active" id="question1">
-        <div class="question-number">Question 1 of 6</div>
-        <h2 class="question-title">How many full-time equivalent employees do you have?</h2>
-        <div class="options">
-            <div class="option" data-value="0" data-question="1">1–4 employees</div>
-            <div class="option" data-value="1" data-question="1">5–49 employees</div>
-            <div class="option" data-value="2" data-question="1">50+ employees (Applicable Large Employer)</div>
-        </div>
-        <div class="button-container">
-            <button id="next1" disabled>Next</button>
-        </div>
-    </div>
-
-    <!-- Q2 Industry -->
-    <div class="question-container" id="question2Industry">
-        <div class="question-number">Question 2 of 6</div>
-        <h2 class="question-title">What industry is your business in?</h2>
-        <div class="autocomplete-container" style="margin-bottom:32px;">
-            <input type="text" id="industryInput" class="autocomplete-input" placeholder="Start typing (e.g. Healthcare, Retail, Tech…)" autocomplete="off">
-            <span class="autocomplete-icon">🔍</span>
-            <div class="autocomplete-dropdown" id="industryDropdown"></div>
-        </div>
-        <div class="button-container">
-            <button class="secondary" id="back2Industry">Back</button>
-            <button id="next2Industry" disabled>Next</button>
-        </div>
-    </div>
-
-    <!-- Q3 -->
-    <div class="question-container" id="question3">
-        <div class="question-number">Question 3 of 6</div>
-        <h2 class="question-title">What's your current health benefit situation?</h2>
-        <div class="options">
-            <div class="option" data-value="no-offer" data-question="2">We don't offer health insurance currently</div>
-            <div class="option" data-value="group-plan" data-question="2">We offer a traditional group health plan</div>
-            <div class="option" data-value="stipend" data-question="2">We provide a taxable stipend or reimbursement</div>
-        </div>
-        <div class="button-container"><button class="secondary" id="back3">Back</button><button id="next3" disabled>Next</button></div>
-    </div>
-
-    <!-- Q4a -->
-    <div class="question-container" id="question4a">
-        <div class="question-number">Question 4 of 6</div>
-        <h2 class="question-title">What's preventing you from offering health benefits today?</h2>
-        <div class="options">
-            <div class="option" data-value="3" data-question="3a">Too expensive — can't afford traditional group plans</div>
-            <div class="option" data-value="2" data-question="3a">Don't have enough employees for group coverage</div>
-            <div class="option" data-value="3" data-question="3a">Can't meet minimum participation requirements</div>
-            <div class="option" data-value="2" data-question="3a">Don't know where to start</div>
-            <div class="option" data-value="-2" data-question="3a">Employees are covered elsewhere (spouse, parent, Medicare)</div>
-        </div>
-        <div class="button-container"><button class="secondary" id="back4a">Back</button><button id="next4a" disabled>Next</button></div>
-    </div>
-
-    <!-- Q4b -->
-    <div class="question-container" id="question4b">
-        <div class="question-number">Question 4 of 6</div>
-        <h2 class="question-title">What's happening with your group health insurance?</h2>
-        <div class="options">
-            <div class="option" data-value="-1" data-question="3b">Premiums are stable (less than 5% annual increase)</div>
-            <div class="option" data-value="1" data-question="3b">Premiums are rising moderately (5–15% annual increase)</div>
-            <div class="option" data-value="4" data-question="3b">Premiums are unsustainable (15%+ annual increases)</div>
-            <div class="option" data-value="4" data-question="3b">High claims are driving our rates up</div>
-            <div class="option" data-value="3" data-question="3b">Can't meet minimum participation requirements</div>
-            <div class="option" data-value="3" data-question="3b">Multi-state employees make coverage complicated</div>
-        </div>
-        <div class="button-container"><button class="secondary" id="back4b">Back</button><button id="next4b" disabled>Next</button></div>
-    </div>
-
-    <!-- Q4c -->
-    <div class="question-container" id="question4c">
-        <div class="question-number">Question 4 of 6</div>
-        <h2 class="question-title">How's your current stipend arrangement working?</h2>
-        <div class="options">
-            <div class="option" data-value="3" data-question="3c">Works fine, but we're paying too much in taxes</div>
-            <div class="option" data-value="2" data-question="3c">Employees want more structure and guidance</div>
-            <div class="option" data-value="3" data-question="3c">It feels informal and we want something compliant</div>
-            <div class="option" data-value="4" data-question="3c">We're approaching 50 employees and need ACA compliance</div>
-        </div>
-        <div class="button-container"><button class="secondary" id="back4c">Back</button><button id="next4c" disabled>Next</button></div>
-    </div>
-
-    <!-- Q5 Priority -->
-    <div class="question-container" id="question5">
-        <div class="question-number">Question 5 of 6</div>
-        <h2 class="question-title">Rank these in order of importance to your business</h2>
-        <div class="drag-hint">Drag to reorder — most important at top</div>
-        <div class="priority-list" id="priorityList">
-            <div class="priority-item" draggable="true" data-id="predictability"><div class="priority-number">1</div><div class="priority-item-text">Cost predictability (knowing exact monthly spend)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
-            <div class="priority-item" draggable="true" data-id="control"><div class="priority-number">2</div><div class="priority-item-text">Budget control (capping maximum exposure)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
-            <div class="priority-item" draggable="true" data-id="choice"><div class="priority-number">3</div><div class="priority-item-text">Employee choice and flexibility</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
-            <div class="priority-item" draggable="true" data-id="simplicity"><div class="priority-number">4</div><div class="priority-item-text">Simplicity (easy to administer)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
-            <div class="priority-item" draggable="true" data-id="competitive"><div class="priority-number">5</div><div class="priority-item-text">Competitive benefits for attracting talent</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)" title="Move up">▲</button><button class="priority-move-btn" onclick="movePriority(this,1)" title="Move down">▼</button></div></div>
-        </div>
-        <div class="button-container">
-            <button class="secondary" id="back5">Back</button>
-            <button id="next5">Next</button>
-        </div>
-    </div>
-
-    <!-- Q6 -->
-    <div class="question-container" id="question6">
-        <div class="question-number">Question 6 of 6</div>
-        <h2 class="question-title">Which best describes your team?</h2>
-        <div class="options">
-            <div class="option" data-value="0" data-question="5">Mostly full-time, single location</div>
-            <div class="option" data-value="3" data-question="5">Multi-state or remote workforce</div>
-            <div class="option" data-value="2" data-question="5">Mix of full-time, part-time, and seasonal workers</div>
-            <div class="option" data-value="-3" data-question="5">Many employees likely qualify for marketplace subsidies</div>
-        </div>
-        <div class="button-container"><button class="secondary" id="back6">Back</button><button id="calculate" disabled>See Results</button></div>
-    </div>
-
-    <div class="results-container" id="resultsContainer"></div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input-area" id="chatInputArea">
+    <input type="text" id="chatInputField" placeholder="Ask about ICHRA..." onkeydown="if(event.key==='Enter')sendChatMessage()">
+    <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
+  </div>
+  <div class="chat-advisor-link" id="chatAdvisorLink">Need specific numbers? <a onclick="toggleChat();document.getElementById('advisorModal').classList.add('active')">Talk to an advisor</a></div>
 </div>
 
+<!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">Analyzing your responses…</div>
-    <div class="loading-subtext">Calculating your ICHRA fit score</div>
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Analyzing your responses...</div>
+  <div class="loading-subtext">Calculating your ICHRA fit</div>
 </div>
 
+<!-- NAV -->
+<nav id="navbar" style="position:sticky">
+  <a class="nav-logo" href="#">OTB Solutions LLC</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#why-ichra">Why ICHRA</a></li>
+    <li><a href="#start-assessment">Start Assessment</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('advisorModal').classList.add('active')">Talk to Advisor</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#how-it-works" onclick="toggleMobileNav()">How It Works</a>
+  <a href="#why-ichra" onclick="toggleMobileNav()">Why ICHRA</a>
+  <a href="#start-assessment" onclick="toggleMobileNav()">Start Assessment</a>
+  <button class="nav-cta" onclick="toggleMobileNav();document.getElementById('advisorModal').classList.add('active')">Talk to Advisor</button>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Free Assessment Tool</div>
+    <h1 class="hero-headline">Health insurance renewals going up again?</h1>
+    <p class="hero-sub">ICHRA lets you set a fixed monthly allowance per employee — they pick their own plan, you reimburse tax-free. No renewals, no surprises, no carrier negotiations.</p>
+    <div class="hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('start-assessment').scrollIntoView({behavior:'smooth'})">Take the Free Assessment</button>
+      <button class="btn-outline" onclick="document.getElementById('advisorModal').classList.add('active')">Talk to an Advisor</button>
+    </div>
+    <div class="cred-strip">
+      <span class="cred-item">IRS Approved</span>
+      <span class="cred-item">ACA Compliant</span>
+      <span class="cred-item">50,000+ employers since 2020</span>
+      <span class="cred-item">Free Assessment</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section id="pain-points">
+  <div class="pain-inner fade-section">
+    <div class="section-eyebrow">The problem</div>
+    <h2 class="section-title">Sound familiar?</h2>
+    <p class="section-sub">These are the reasons most employers start looking at ICHRA.</p>
+    <div class="pain-grid">
+      <div class="pain-card fade-section">
+        <div class="pain-card-num">01</div>
+        <h3>Annual renewals you can't predict</h3>
+        <p>Your group plan premium changes every year based on your employees' claims. One bad year and everyone pays. ICHRA gives you a fixed monthly amount you set — permanently.</p>
+      </div>
+      <div class="pain-card fade-section">
+        <div class="pain-card-num">02</div>
+        <h3>Participation minimums blocking you</h3>
+        <p>Traditional group plans require 70%+ employee participation. If yours don't enroll, you lose coverage entirely. ICHRA has zero minimums — offer benefits to any employee, any time.</p>
+      </div>
+      <div class="pain-card fade-section">
+        <div class="pain-card-num">03</div>
+        <h3>Coverage that doesn't work across states</h3>
+        <p>Managing one group plan for a multi-state team means network gaps and compliance headaches. ICHRA works identically in all 50 states — each employee picks what works in their market.</p>
+      </div>
+      <div class="pain-card fade-section">
+        <div class="pain-card-num">04</div>
+        <h3>Taxable stipends wasting your money</h3>
+        <p>A $400/month taxable stipend loses roughly 30% to FICA and income taxes before it helps anyone. The same $400 as an ICHRA allowance goes to the employee 100% intact, tax-free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="infographic-inner fade-section">
+    <div class="section-eyebrow">How it works</div>
+    <h2 class="section-title">ICHRA in plain English</h2>
+    <p class="section-sub">A tax-free way for employers to fund health insurance — without picking the plan.</p>
+    <div class="step-cards">
+      <div class="step-card" style="background:var(--blue-light);border-top:2px solid var(--blue-mid)">
+        <p class="step-num" style="color:var(--blue-mid)">01</p>
+        <p class="step-title" style="color:var(--navy)">You set a budget</p>
+        <p class="step-desc" style="color:var(--text-mid)">Pick a fixed monthly allowance per employee. That is your maximum cost — always.</p>
+      </div>
+      <div class="step-arrow">&#8594;</div>
+      <div class="step-card" style="background:var(--navy)">
+        <p class="step-num" style="color:rgba(255,255,255,.6)">02</p>
+        <p class="step-title" style="color:#fff">Employees choose</p>
+        <p class="step-desc" style="color:rgba(255,255,255,.85)">Each employee picks any ACA marketplace plan — their doctors, their budget, their call.</p>
+      </div>
+      <div class="step-arrow">&#8594;</div>
+      <div class="step-card" style="background:var(--blue-dark)">
+        <p class="step-num" style="color:rgba(255,255,255,.6)">03</p>
+        <p class="step-title" style="color:#fff">You reimburse</p>
+        <p class="step-desc" style="color:rgba(255,255,255,.9)">Employees submit proof of coverage. You reimburse up to your cap — tax-free.</p>
+      </div>
+    </div>
+    <div class="comp-table">
+      <div class="comp-head">
+        <div>Traditional group plan</div>
+        <div>With ICHRA</div>
+      </div>
+      <div class="comp-row"><div class="comp-cell"><span class="cross">&#x2715;</span>Premiums rise unpredictably</div><div class="comp-cell good"><span class="check">&#x2713;</span>Fixed cost, every month</div></div>
+      <div class="comp-row"><div class="comp-cell"><span class="cross">&#x2715;</span>One plan for everyone</div><div class="comp-cell good"><span class="check">&#x2713;</span>Each employee picks their own</div></div>
+      <div class="comp-row"><div class="comp-cell"><span class="cross">&#x2715;</span>Participation minimums required</div><div class="comp-cell good"><span class="check">&#x2713;</span>Zero minimums at all</div></div>
+      <div class="comp-row"><div class="comp-cell"><span class="cross">&#x2715;</span>Claims drive your rates up</div><div class="comp-cell good"><span class="check">&#x2713;</span>Claims never affect you</div></div>
+      <div class="comp-row"><div class="comp-cell"><span class="cross">&#x2715;</span>Carrier negotiations required</div><div class="comp-cell good"><span class="check">&#x2713;</span>No carrier involved</div></div>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">52%</div><div class="stat-label">adoption growth in 2024</div></div>
+      <div class="stat-card"><div class="stat-num">$0</div><div class="stat-label">claims risk to employer</div></div>
+      <div class="stat-card"><div class="stat-num">100+</div><div class="stat-label">plan options per employee</div></div>
+      <div class="stat-card"><div class="stat-num">92%</div><div class="stat-label">of employers renew yearly</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ICHRA -->
+<section id="why-ichra">
+  <div class="why-inner fade-section">
+    <div class="section-eyebrow">Key benefits</div>
+    <h2 class="section-title">Why employers are switching</h2>
+    <div class="value-grid">
+      <div class="value-item"><div class="value-num">01</div><div class="value-content"><h3>Predictable, fixed costs</h3><p>Set a fixed monthly allowance per employee. No more surprise premium increases based on claims experience.</p></div></div>
+      <div class="value-item"><div class="value-num">02</div><div class="value-content"><h3>Employee choice and flexibility</h3><p>Employees choose from dozens of marketplace plans that fit their doctors, needs, and budget — not one carrier's limited network.</p></div></div>
+      <div class="value-item"><div class="value-num">03</div><div class="value-content"><h3>Fully ACA compliant</h3><p>ICHRA is an official IRS regulation (2020) satisfying ACA employer mandate requirements when properly structured.</p></div></div>
+      <div class="value-item"><div class="value-num">04</div><div class="value-content"><h3>No minimums — zero participation requirements</h3><p>Unlike group plans, ICHRA has no minimum contribution amounts and no employee participation thresholds.</p></div></div>
+      <div class="value-item"><div class="value-num">05</div><div class="value-content"><h3>Works in all 50 states</h3><p>Multi-state teams are fully covered. Each employee participates in their local ACA marketplace — no network gaps.</p></div></div>
+      <div class="value-item"><div class="value-num">06</div><div class="value-content"><h3>Simplified administration</h3><p>No carrier negotiations, no network management. Approve monthly reimbursements through a simple admin platform.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSESSMENT CTA -->
+<section id="start-assessment">
+  <div class="assess-inner">
+    <h2>Ready to find out if ICHRA fits your business?</h2>
+    <p>Six questions. Two minutes. Personalized results based on your team size, industry, and current benefits situation.</p>
+    <button class="btn-primary" style="font-size:17px;padding:16px 44px" onclick="document.getElementById('quizArea').scrollIntoView({behavior:'smooth'})">Start the Free Assessment</button>
+    <div class="trust-signals">
+      <span class="trust-signal">No commitment required</span>
+      <span class="trust-signal">Free results</span>
+      <span class="trust-signal">Takes 2 minutes</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ AREA -->
+<div id="quizArea">
+<div class="quiz-container">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-steps">
+    <div class="step active" data-step="1">1</div><div class="step-connector"></div>
+    <div class="step" data-step="2">2</div><div class="step-connector"></div>
+    <div class="step" data-step="3">3</div><div class="step-connector"></div>
+    <div class="step" data-step="4">4</div><div class="step-connector"></div>
+    <div class="step" data-step="5">5</div><div class="step-connector"></div>
+    <div class="step" data-step="6">6</div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-container active" id="question1">
+    <div class="question-number">Question 1 of 6</div>
+    <h2 class="question-title">How many full-time equivalent employees do you have?</h2>
+    <div class="options">
+      <div class="option" data-value="0" data-question="1">1&#8211;4 employees</div>
+      <div class="option" data-value="1" data-question="1">5&#8211;49 employees</div>
+      <div class="option" data-value="2" data-question="1">50+ employees (Applicable Large Employer)</div>
+    </div>
+    <div class="button-container"><button id="next1" disabled>Next</button></div>
+  </div>
+
+  <!-- Q2 INDUSTRY -->
+  <div class="question-container" id="question2Industry">
+    <div class="question-number">Question 2 of 6</div>
+    <h2 class="question-title">What industry is your business in?</h2>
+    <div class="industry-tiles">
+      <div class="industry-tile" data-industry="Healthcare &amp; Medical Services" onclick="selectIndustryTile(this)">Healthcare</div>
+      <div class="industry-tile" data-industry="Retail &amp; Hospitality" onclick="selectIndustryTile(this)">Retail &amp; Hospitality</div>
+      <div class="industry-tile" data-industry="Construction &amp; Trades" onclick="selectIndustryTile(this)">Construction &amp; Trades</div>
+      <div class="industry-tile" data-industry="Technology &amp; Software" onclick="selectIndustryTile(this)">Technology</div>
+      <div class="industry-tile" data-industry="Professional Services" onclick="selectIndustryTile(this)">Professional Services</div>
+      <div class="industry-tile" data-industry="Manufacturing &amp; Production" onclick="selectIndustryTile(this)">Manufacturing</div>
+      <div class="industry-tile" data-industry="Transportation &amp; Logistics" onclick="selectIndustryTile(this)">Transportation &amp; Logistics</div>
+      <div class="industry-tile" data-industry="Other" onclick="selectIndustryTile(this)">Other</div>
+      <div class="industry-tile tile-notsure" data-industry="General Business" onclick="selectIndustryTile(this)">Not sure</div>
+    </div>
+    <p class="industry-search-label">Or search for a more specific industry:</p>
+    <div class="autocomplete-container" style="margin-bottom:24px">
+      <input type="text" id="industryInput" class="autocomplete-input" placeholder="e.g. Dental, Plumbing, Software..." autocomplete="off">
+      <span class="autocomplete-icon">&#x1F50D;</span>
+      <div class="autocomplete-dropdown" id="industryDropdown"></div>
+    </div>
+    <div class="button-container">
+      <button class="secondary" id="back2Industry">Back</button>
+      <button id="next2Industry" disabled>Next</button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-container" id="question3">
+    <div class="question-number">Question 3 of 6</div>
+    <h2 class="question-title">What is your current health benefit situation?</h2>
+    <div class="options">
+      <div class="option" data-value="no-offer" data-question="2">We don't offer health insurance currently</div>
+      <div class="option" data-value="group-plan" data-question="2">We offer a traditional group health plan</div>
+      <div class="option" data-value="stipend" data-question="2">We provide a taxable stipend or reimbursement</div>
+    </div>
+    <div class="button-container"><button class="secondary" id="back3">Back</button><button id="next3" disabled>Next</button></div>
+  </div>
+
+  <!-- Q4a -->
+  <div class="question-container" id="question4a">
+    <div class="question-number">Question 4 of 6</div>
+    <h2 class="question-title">What is preventing you from offering health benefits today?</h2>
+    <div class="options">
+      <div class="option" data-value="3" data-question="3a">Too expensive &#8212; can't afford traditional group plans</div>
+      <div class="option" data-value="2" data-question="3a">Don't have enough employees for group coverage</div>
+      <div class="option" data-value="3" data-question="3a">Can't meet minimum participation requirements</div>
+      <div class="option" data-value="2" data-question="3a">Don't know where to start</div>
+      <div class="option" data-value="-2" data-question="3a">Employees are covered elsewhere (spouse, parent, Medicare)</div>
+    </div>
+    <div class="button-container"><button class="secondary" id="back4a">Back</button><button id="next4a" disabled>Next</button></div>
+  </div>
+
+  <!-- Q4b -->
+  <div class="question-container" id="question4b">
+    <div class="question-number">Question 4 of 6</div>
+    <h2 class="question-title">What is happening with your group health insurance?</h2>
+    <div class="options">
+      <div class="option" data-value="-1" data-question="3b">Premiums are stable (less than 5% annual increase)</div>
+      <div class="option" data-value="1" data-question="3b">Premiums are rising moderately (5&#8211;15% annual increase)</div>
+      <div class="option" data-value="4" data-question="3b">Premiums are unsustainable (15%+ annual increases)</div>
+      <div class="option" data-value="4" data-question="3b">High claims are driving our rates up</div>
+      <div class="option" data-value="3" data-question="3b">Can't meet minimum participation requirements</div>
+      <div class="option" data-value="3" data-question="3b">Multi-state employees make coverage complicated</div>
+    </div>
+    <div class="button-container"><button class="secondary" id="back4b">Back</button><button id="next4b" disabled>Next</button></div>
+  </div>
+
+  <!-- Q4c -->
+  <div class="question-container" id="question4c">
+    <div class="question-number">Question 4 of 6</div>
+    <h2 class="question-title">How is your current stipend arrangement working?</h2>
+    <div class="options">
+      <div class="option" data-value="3" data-question="3c">Works fine, but we're paying too much in taxes</div>
+      <div class="option" data-value="2" data-question="3c">Employees want more structure and guidance</div>
+      <div class="option" data-value="3" data-question="3c">It feels informal and we want something compliant</div>
+      <div class="option" data-value="4" data-question="3c">We're approaching 50 employees and need ACA compliance</div>
+    </div>
+    <div class="button-container"><button class="secondary" id="back4c">Back</button><button id="next4c" disabled>Next</button></div>
+  </div>
+
+  <!-- Q5 PRIORITY -->
+  <div class="question-container" id="question5">
+    <div class="question-number">Question 5 of 6</div>
+    <h2 class="question-title">Rank these in order of importance to your business</h2>
+    <div class="drag-hint">Drag to reorder &#8212; most important at top</div>
+    <div class="priority-list" id="priorityList">
+      <div class="priority-item" draggable="true" data-id="predictability"><div class="priority-number">1</div><div class="priority-item-text">Cost predictability (knowing exact monthly spend)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)">&#x25B2;</button><button class="priority-move-btn" onclick="movePriority(this,1)">&#x25BC;</button></div></div>
+      <div class="priority-item" draggable="true" data-id="control"><div class="priority-number">2</div><div class="priority-item-text">Budget control (capping maximum exposure)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)">&#x25B2;</button><button class="priority-move-btn" onclick="movePriority(this,1)">&#x25BC;</button></div></div>
+      <div class="priority-item" draggable="true" data-id="choice"><div class="priority-number">3</div><div class="priority-item-text">Employee choice and flexibility</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)">&#x25B2;</button><button class="priority-move-btn" onclick="movePriority(this,1)">&#x25BC;</button></div></div>
+      <div class="priority-item" draggable="true" data-id="simplicity"><div class="priority-number">4</div><div class="priority-item-text">Simplicity (easy to administer)</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)">&#x25B2;</button><button class="priority-move-btn" onclick="movePriority(this,1)">&#x25BC;</button></div></div>
+      <div class="priority-item" draggable="true" data-id="competitive"><div class="priority-number">5</div><div class="priority-item-text">Competitive benefits for attracting talent</div><div class="priority-move-btns"><button class="priority-move-btn" onclick="movePriority(this,-1)">&#x25B2;</button><button class="priority-move-btn" onclick="movePriority(this,1)">&#x25BC;</button></div></div>
+    </div>
+    <div class="button-container">
+      <button class="secondary" id="back5">Back</button>
+      <button id="next5">Next</button>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-container" id="question6">
+    <div class="question-number">Question 6 of 6</div>
+    <h2 class="question-title">Which best describes your team?</h2>
+    <div class="options">
+      <div class="option" data-value="0" data-question="5">Mostly full-time, single location</div>
+      <div class="option" data-value="3" data-question="5">Multi-state or remote workforce</div>
+      <div class="option" data-value="2" data-question="5">Mix of full-time, part-time, and seasonal workers</div>
+      <div class="option" data-value="-3" data-question="5">Many employees likely qualify for marketplace subsidies</div>
+    </div>
+    <div class="button-container"><button class="secondary" id="back6">Back</button><button id="calculate" disabled>See My Results</button></div>
+  </div>
+
+  <div class="results-container" id="resultsContainer"></div>
+</div><!-- /quiz-container -->
+</div><!-- /quizArea -->
+
+<!-- PRIVACY POLICY -->
+<section id="privacy-policy">
+  <div class="privacy-inner">
+    <h2>Privacy Policy</h2>
+    <p class="privacy-meta">OTB Solutions LLC &mdash; Last updated: 2025. <em>This is a draft. Have this reviewed by a licensed attorney before publication.</em></p>
+    <div class="privacy-section">
+      <h3>1. Information we collect</h3>
+      <ul>
+        <li>Personal information you provide: name, company name, email address, phone number, zip code</li>
+        <li>Assessment responses: answers to quiz questions about your business and benefits situation</li>
+        <li>Usage data: how you interact with this assessment tool</li>
+      </ul>
+    </div>
+    <div class="privacy-section">
+      <h3>2. How we use your information</h3>
+      <ul>
+        <li>To provide personalized ICHRA assessment results</li>
+        <li>To contact you about ICHRA and related health benefit solutions, including via automated systems and AI voice agents where you have provided consent</li>
+        <li>To improve our assessment tool and services</li>
+      </ul>
+    </div>
+    <div class="privacy-section">
+      <h3>3. Information sharing</h3>
+      <p>We do not sell your personal information to third parties. We may share information with licensed insurance professionals working on our behalf to fulfill your consultation request. We use Google services to store lead information securely.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>4. Data retention</h3>
+      <p>We retain your information for as long as necessary to provide our services and as required by applicable law. To request deletion of your data, contact us at the address below.</p>
+    </div>
+    <div class="privacy-section">
+      <h3>5. Your rights and choices</h3>
+      <ul>
+        <li>Opt out of communications at any time by replying STOP to texts or clicking unsubscribe in emails</li>
+        <li>Request access to or deletion of your personal data by contacting us directly</li>
+        <li>You may withdraw consent for AI-assisted contact at any time</li>
+      </ul>
+    </div>
+    <div class="privacy-section">
+      <h3>6. Contact</h3>
+      <p>OTB Solutions LLC &mdash; [Address] &mdash; [Email] &mdash; [Phone]</p>
+    </div>
+    <div class="privacy-section">
+      <h3>7. Changes to this policy</h3>
+      <p>We may update this policy periodically. Continued use of this tool constitutes acceptance of the updated policy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-copy">&copy; 2025 OTB Solutions LLC. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#privacy-policy">Privacy Policy</a>
+      <a href="#privacy-policy">Terms of Use</a>
+    </div>
+    <div class="footer-disclaimer">This tool is for informational purposes only and does not constitute insurance, legal, or financial advice. ICHRA eligibility and suitability depends on your specific business circumstances. Consult a licensed insurance professional before making benefits decisions.</div>
+  </div>
+</footer>
 <script>
-// STATE
+// ── CONFIGURATION ─────────────────────────────────────────────────────
+// Replace WORKER_URL after deploying worker.js to Cloudflare
+const WORKER_URL = 'https://YOUR-WORKER.workers.dev';
+const SHEET_URL  = 'https://script.google.com/macros/s/AKfycbxYnXTB-V8fOErzVwEE-0HI1jaLyn7030Uyxnk0YuuatV7vkupZvtCCv4feAy9XEmviOA/exec';
+
+// ── STATE ──────────────────────────────────────────────────────────────
 let answers = { q1:null, q2:null, q3:null, q4:[], q5:null, industry:null };
-let totalScore = 0;
+let totalScore = 0, currentQuestion = 1;
 const MAX_SCORE = 20;
-let currentQuestion = 1;
+let quizContext = null, chatHistory = [], chatConsented = false;
 
-// UPDATE THIS URL with your personal Google Apps Script URL
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxYnXTB-V8fOErzVwEE-0HI1jaLyn7030Uyxnk0YuuatV7vkupZvtCCv4feAy9XEmviOA/exec';
+// ── INDUSTRIES ────────────────────────────────────────────────────────
+const industries = ['Healthcare & Medical Services','Hospitals & Health Systems','Medical Practices & Clinics','Dental Practices','Mental Health Services','Home Healthcare','Nursing & Residential Care','Retail & Consumer Goods','Restaurants & Food Service','Hospitality & Hotels','E-commerce & Online Retail','Grocery & Convenience Stores','Technology & Software','IT Services & Consulting','SaaS & Cloud Computing','Cybersecurity','Telecommunications','Construction & Building','General Contractors','Specialty Trade Contractors','Engineering & Architecture','Real Estate Development','Manufacturing & Production','Automotive Manufacturing','Food & Beverage Manufacturing','Pharmaceutical Manufacturing','Electronics Manufacturing','Professional Services','Legal Services & Law Firms','Accounting & Finance','Consulting & Advisory','Marketing & Advertising','Public Relations','Financial Services & Banking','Insurance','Investment & Wealth Management','Mortgage & Lending','Education & Training','K-12 Schools','Higher Education','Corporate Training','Transportation & Logistics','Trucking & Freight','Warehousing & Distribution','Courier & Delivery Services','Agriculture & Farming','Energy & Utilities','Oil & Gas','Renewable Energy','Non-Profit Organizations','Other'];
 
-// BULLETS
-const bullets = {
-    highScore_noOffer_expensive:"You're experiencing the exact pain point ICHRA was designed to solve — traditional group plans pricing you out",
-    highScore_noOffer_participation:"ICHRA eliminates participation requirements that have prevented you from offering benefits",
-    highScore_noOffer_general:"83% of employers adopting ICHRA in 2025 previously offered no benefits — you're in good company",
-    highScore_groupPlan_unsustainable:"Your 15%+ premium increases are unsustainable — ICHRA locks in predictable costs immediately",
-    highScore_groupPlan_highClaims:"High claims have made your group plan unaffordable — ICHRA eliminates claims risk entirely",
-    highScore_groupPlan_multiState:"Multi-state employees create compliance headaches — ICHRA simplifies to one solution nationwide",
-    highScore_groupPlan_participation:"Participation requirement failures end with ICHRA — no minimums required",
-    highScore_stipend_tax:"You're losing 20–30% to taxes on your stipend — ICHRA makes the same dollars go further tax-free",
-    highScore_stipend_approaching50:"At 50 employees, you need ACA compliance — ICHRA satisfies the mandate without group plan complexity",
-    highScore_stipend_structure:"Your informal stipend becomes a fully compliant group health benefit with ICHRA",
-    highScore_predictability_top:"Cost predictability is your top priority — ICHRA delivers exactly that with fixed monthly contributions",
-    highScore_control_top:"Budget control matters most to you — ICHRA caps your maximum exposure permanently",
-    highScore_multiState_workforce:"Your multi-state team is perfectly suited — ICHRA scales seamlessly across all 50 states",
-    highScore_mixed_workforce:"Part-time, seasonal, and full-time employees all covered under one ICHRA without separate plans",
-    highScore_largeCo_50plus:"As an ALE, ICHRA satisfies your employer mandate while giving you total budget certainty",
-    mediumScore_groupPlan_moderate:"10% annual increases double costs in 7 years — ICHRA stops that compounding trend cold",
-    mediumScore_groupPlan_stable:"Stable premiums won't last forever — ICHRA lets you lock in predictability before the next spike",
-    mediumScore_noOffer_dontKnow:"Not knowing where to start has kept you from offering benefits — ICHRA is the simplest entry point",
-    mediumScore_predictability_ranked:"Cost predictability is in your top priorities — that's ICHRA's single biggest strength",
-    mediumScore_control_ranked:"Budget control matters to you — ICHRA gives that certainty traditional plans never can",
-    mediumScore_choice_ranked:"Employee choice matters to you — ICHRA gives them 30–100+ plan options instead of 1–3",
-    mediumScore_retention:"92% of employers offering ICHRA continue year over year — it earns long-term loyalty",
-    mediumScore_largeCo_strategic:"Large employers saw 34% ICHRA adoption growth in 2025 — your peers are making this move",
-    lowScore_stable_strategic:"Your stable rates are rare — ICHRA positions you to maintain that advantage when markets shift",
-    lowScore_singleLocation:"Single location operations often work well with traditional plans — ICHRA may not add immediate value",
-    lowScore_predictability_matters:"Watch your next renewal — one bad year makes ICHRA immediately relevant",
-    lowScore_future_growth:"Multi-state expansion would make ICHRA relevant immediately — keep it in mind as you grow",
-    veryLow_subsidyEligible:"Many of your employees likely qualify for marketplace subsidies — ICHRA would eliminate those, increasing their costs",
-    veryLow_coveredElsewhere:"Employees on spouse/parent plans can't use ICHRA — participation would be too low to justify",
-    veryLow_simplicity_top:"ICHRA's active enrollment model adds complexity your situation doesn't currently need",
-    veryLow_stable_satisfied:"Stable premiums and satisfied with the current approach — no urgent case for disruption"
+const synonymMap = {
+  'Healthcare & Medical Services':['doctor','physician','medical','dentist','nurse','clinic','hospital','health','therapy','dental','optometry','pharmacy','surgeon','psychiatry','chiropractic','veterinarian','vet','senior care','nursing','pediatric'],
+  'Restaurants & Food Service':['restaurant','food','bar','cafe','coffee','bakery','catering','diner','brewery','winery','caterer'],
+  'Hospitality & Hotels':['hotel','motel','lodging','hospitality','inn','resort','airbnb'],
+  'Retail & Consumer Goods':['retail','shop','store','boutique','clothing','apparel','grocery','supermarket','salon','spa','beauty','ecommerce'],
+  'Construction & Building':['construction','contractor','builder','building','renovation','remodel','remodeling'],
+  'General Contractors':['plumber','plumbing','electrician','electrical','roofer','roofing','hvac','carpenter','mason','painter','landscaping','handyman'],
+  'Technology & Software':['tech','technology','software','app','startup','saas','developer','coding','it','computer','digital','cloud','cyber','data','ai','machine learning'],
+  'Legal Services & Law Firms':['lawyer','attorney','legal','law','paralegal'],
+  'Accounting & Finance':['accountant','accounting','cpa','bookkeeper','tax','bookkeeping'],
+  'Consulting & Advisory':['consultant','consulting','advisor','advisory','strategy'],
+  'Marketing & Advertising':['marketing','advertising','pr','public relations','social media','agency','branding','seo'],
+  'Financial Services & Banking':['bank','banking','financial','investment','wealth','mortgage','insurance','lending','broker'],
+  'Manufacturing & Production':['manufacturing','factory','production','assembly','fabrication','machining','industrial','plant'],
+  'Transportation & Logistics':['trucking','truck','freight','logistics','shipping','delivery','courier','driver','fleet','moving'],
+};
+
+const industryMapping = {
+  healthcare:['Healthcare','Medical','Hospital','Dental','Mental Health','Nursing','Home Healthcare'],
+  retail:['Retail','Restaurant','Food Service','Hospitality','Hotel','E-commerce','Grocery'],
+  tech:['Technology','Software','IT Services','SaaS','Cloud','Cybersecurity','Telecom'],
+  construction:['Construction','Contractor','Engineering','Architecture','Real Estate'],
+  manufacturing:['Manufacturing','Production','Automotive','Pharmaceutical','Electronics'],
+  professional:['Professional Services','Legal','Law','Accounting','Finance','Consulting','Advisory','Marketing','Advertising'],
+  transportation:['Transportation','Logistics','Trucking','Freight','Warehousing','Delivery'],
+};
+
+const industryInsights = {
+  healthcare:{badge:'Healthcare',title:'Healthcare employers see 23% faster ICHRA adoption',description:'Medical practices lead ICHRA adoption due to multi-state operations and diverse employee classifications.',stats:[{number:'67%',label:'Multi-state operations'},{number:'41%',label:'Avg. cost reduction'},{number:'89%',label:'Employee satisfaction'}]},
+  retail:{badge:'Retail & Hospitality',title:'Retail employers love ICHRA for part-time flexibility',description:'ICHRA eliminates participation minimums that excluded part-time and seasonal workers from traditional benefits.',stats:[{number:'73%',label:'Part-time eligible'},{number:'31%',label:'Cost savings'},{number:'2.3x',label:'Better retention'}]},
+  tech:{badge:'Technology',title:'Tech companies scale benefits without group plan limits',description:'Fast-growing tech companies offer competitive benefits while maintaining predictable per-employee costs.',stats:[{number:'52%',label:'Faster scaling'},{number:'95%',label:'Remote-ready'},{number:'$847',label:'Avg monthly allowance'}]},
+  construction:{badge:'Construction & Trades',title:'Construction companies eliminate multi-state complexity',description:'ICHRA simplifies benefits across state lines and handles project-based staffing fluctuations.',stats:[{number:'84%',label:'Multi-state projects'},{number:'38%',label:'Admin time saved'},{number:'91%',label:'Contractor coverage'}]},
+  manufacturing:{badge:'Manufacturing',title:'Manufacturers cap rising group health costs with ICHRA',description:'Lock in predictable costs and eliminate claims-driven premium spikes entirely.',stats:[{number:'44%',label:'Cost predictability'},{number:'0%',label:'Claims impact'},{number:'86%',label:'Budget certainty'}]},
+  professional:{badge:'Professional Services',title:'Professional services firms offer flexible, competitive benefits',description:'Attract talent while maintaining profitability across variable team sizes.',stats:[{number:'79%',label:'Talent attraction'},{number:'$923',label:'Avg contribution'},{number:'94%',label:'Partner approval'}]},
+  transportation:{badge:'Transportation & Logistics',title:'Logistics companies simplify multi-state coverage',description:'ICHRA resolves the multi-state coverage complexity that frustrates transportation employers.',stats:[{number:'88%',label:'Multi-state coverage'},{number:'35%',label:'Admin reduction'},{number:'91%',label:'Driver participation'}]},
+  default:{badge:'Your Industry',title:'Employers like you are adopting ICHRA rapidly',description:'ICHRA adoption grew 52% across all industries in 2024-2025 as employers seek cost predictability.',stats:[{number:'52%',label:'Growth rate'},{number:'3-20%',label:'Avg savings'},{number:'92%',label:'Retention rate'}]},
+};
+
+// ── BULLETS ───────────────────────────────────────────────────────────
+const blt = {
+  noOffer_expensive:"Your situation is the exact profile ICHRA was designed for — traditional group plans pricing you out",
+  noOffer_participation:"ICHRA eliminates participation requirements that have prevented you from offering benefits",
+  noOffer_general:"Employers who previously offered no benefits represent the largest ICHRA growth segment",
+  group_unsustainable:"Your 15%+ premium increases are unsustainable — ICHRA locks in predictable costs immediately",
+  group_highClaims:"High claims have made your group plan unaffordable — ICHRA eliminates claims risk entirely",
+  group_multiState:"Multi-state employees create compliance headaches — ICHRA simplifies to one solution nationwide",
+  group_participation:"Participation requirement failures end with ICHRA — no minimums required",
+  stipend_tax:"You are losing 20-30% to taxes on your stipend — ICHRA makes the same dollars go further tax-free",
+  stipend_50:"At 50 employees, you need ACA compliance — ICHRA satisfies the mandate without group plan complexity",
+  stipend_structure:"Your informal stipend becomes a fully compliant group health benefit with ICHRA",
+  pred_top:"Cost predictability is your top priority — ICHRA delivers exactly that with fixed monthly contributions",
+  ctrl_top:"Budget control matters most to you — ICHRA caps your maximum exposure permanently",
+  multiState:"Your multi-state team is well-suited — ICHRA scales seamlessly across all 50 states",
+  mixed:"Part-time, seasonal, and full-time employees all covered under one ICHRA without separate plans",
+  ale:"As an ALE, ICHRA satisfies your employer mandate while giving you total budget certainty",
+  med_group_mod:"10% annual increases double costs in 7 years — ICHRA stops that compounding trend",
+  med_group_stable:"Stable premiums will not last forever — ICHRA lets you lock in predictability before the next spike",
+  med_dontKnow:"ICHRA is the simplest entry point for employers who have not offered benefits before",
+  med_pred:"Cost predictability is in your top priorities — that is ICHRA's single biggest strength",
+  med_ctrl:"Budget control matters to you — ICHRA gives that certainty traditional plans cannot",
+  med_choice:"Employee choice matters to you — ICHRA gives them 30-100+ plan options instead of 1-3",
+  retention:"92% of employers offering ICHRA continue year over year",
+  low_stable:"Your stable rates are an advantage — ICHRA positions you to maintain that when markets shift",
+  low_single:"Single location operations often work well with traditional plans — ICHRA may not add immediate value",
+  low_watch:"Watch your next renewal — one significant increase makes ICHRA relevant immediately",
+  low_grow:"Multi-state expansion would make ICHRA relevant immediately — keep it in mind as you grow",
+  vlow_subsidy:"Many of your employees likely qualify for marketplace subsidies — ICHRA would eliminate those",
+  vlow_elsewhere:"Employees on spouse or parent plans cannot use ICHRA — participation would be too low",
+  vlow_simplicity:"ICHRA's active enrollment model adds complexity your situation does not currently need",
+  vlow_stable:"Stable premiums and no urgent change needed — no compelling case for disruption today",
 };
 
 function selectBullets(ans, score) {
-    const b = [];
-    const { q2, q3:q3v, q4:p, q5:q5v, q1 } = ans;
-    const pr = p.indexOf('predictability')+1, cr = p.indexOf('control')+1, chr = p.indexOf('choice')+1, sr = p.indexOf('simplicity')+1;
-    if (score >= 12) {
-        if (q2==='no-offer') { if(q3v===3) b.push(bullets.highScore_noOffer_expensive,bullets.highScore_noOffer_participation); b.push(bullets.highScore_noOffer_general); }
-        else if (q2==='group-plan') { if(q3v===4) b.push(bullets.highScore_groupPlan_unsustainable,bullets.highScore_groupPlan_highClaims); if(q3v===3) b.push(bullets.highScore_groupPlan_multiState,bullets.highScore_groupPlan_participation); }
-        else if (q2==='stipend') { if(q3v>=3) b.push(bullets.highScore_stipend_tax); if(q3v===4) b.push(bullets.highScore_stipend_approaching50); b.push(bullets.highScore_stipend_structure); }
-        if(pr<=2) b.push(bullets.highScore_predictability_top); if(cr<=2) b.push(bullets.highScore_control_top);
-        if(q5v===3) b.push(bullets.highScore_multiState_workforce); if(q5v===2) b.push(bullets.highScore_mixed_workforce);
-        if(q1===2) b.push(bullets.highScore_largeCo_50plus);
-    } else if (score >= 8) {
-        if(q2==='group-plan') { if(q3v===1) b.push(bullets.mediumScore_groupPlan_moderate); if(q3v===-1) b.push(bullets.mediumScore_groupPlan_stable); }
-        else if(q2==='no-offer'&&q3v===2) b.push(bullets.mediumScore_noOffer_dontKnow);
-        if(pr<=2) b.push(bullets.mediumScore_predictability_ranked); if(cr<=2) b.push(bullets.mediumScore_control_ranked); if(chr<=2) b.push(bullets.mediumScore_choice_ranked);
-        b.push(bullets.mediumScore_retention); if(q1===2) b.push(bullets.mediumScore_largeCo_strategic);
-    } else if (score >= 4) {
-        if(q5v===0) b.push(bullets.lowScore_singleLocation); if(pr<=3) b.push(bullets.lowScore_predictability_matters);
-        b.push(bullets.lowScore_future_growth); if(q3v===-1) b.push(bullets.lowScore_stable_strategic);
-    } else {
-        if(q5v===-3) b.push(bullets.veryLow_subsidyEligible); if(q3v===-2) b.push(bullets.veryLow_coveredElsewhere);
-        if(sr===1) b.push(bullets.veryLow_simplicity_top); if(q3v===-1) b.push(bullets.veryLow_stable_satisfied);
-    }
-    const g = ["ICHRA locks in your maximum monthly spend — no claims surprises ever","ICHRA eliminates claims risk entirely — your costs stay fixed regardless of employee health events","92% of ICHRA employers continue year over year, showing strong long-term satisfaction"];
-    while(b.length<3&&g.length>0) b.push(g.shift());
-    return b.slice(0,5);
+  const b = [];
+  const {q2,q3:v3,q4:p,q5:v5,q1} = ans;
+  const pr=p.indexOf('predictability')+1, cr=p.indexOf('control')+1, chr=p.indexOf('choice')+1, sr=p.indexOf('simplicity')+1;
+  if (score>=12) {
+    if(q2==='no-offer'){if(v3===3)b.push(blt.noOffer_expensive,blt.noOffer_participation);b.push(blt.noOffer_general);}
+    else if(q2==='group-plan'){if(v3===4)b.push(blt.group_unsustainable,blt.group_highClaims);if(v3===3)b.push(blt.group_multiState,blt.group_participation);}
+    else if(q2==='stipend'){if(v3>=3)b.push(blt.stipend_tax);if(v3===4)b.push(blt.stipend_50);b.push(blt.stipend_structure);}
+    if(pr<=2)b.push(blt.pred_top);if(cr<=2)b.push(blt.ctrl_top);
+    if(v5===3)b.push(blt.multiState);if(v5===2)b.push(blt.mixed);if(q1===2)b.push(blt.ale);
+  } else if(score>=8) {
+    if(q2==='group-plan'){if(v3===1)b.push(blt.med_group_mod);if(v3===-1)b.push(blt.med_group_stable);}
+    else if(q2==='no-offer'&&v3===2)b.push(blt.med_dontKnow);
+    if(pr<=2)b.push(blt.med_pred);if(cr<=2)b.push(blt.med_ctrl);if(chr<=2)b.push(blt.med_choice);
+    b.push(blt.retention);
+  } else if(score>=4) {
+    if(v5===0)b.push(blt.low_single);if(pr<=3)b.push(blt.low_watch);b.push(blt.low_grow);if(v3===-1)b.push(blt.low_stable);
+  } else {
+    if(v5===-3)b.push(blt.vlow_subsidy);if(v3===-2)b.push(blt.vlow_elsewhere);
+    if(sr===1)b.push(blt.vlow_simplicity);if(v3===-1)b.push(blt.vlow_stable);
+  }
+  const gen=["ICHRA locks in your maximum monthly spend — no claims surprises","92% of ICHRA employers continue year over year","ICHRA eliminates claims risk — costs stay fixed regardless of employee health events"];
+  while(b.length<3&&gen.length>0)b.push(gen.shift());
+  return b.slice(0,5);
 }
 
-// AUTO-ADVANCE
+// ── AUTO-ADVANCE ──────────────────────────────────────────────────────
 const autoAdv = {
-    '1': ()=>{ showQuestion('2Industry'); updateProgress(2); },
-    '2': ()=>{ if(answers.q2==='no-offer') showQuestion('4a'); else if(answers.q2==='group-plan') showQuestion('4b'); else showQuestion('4c'); updateProgress(4); },
-    '3a': ()=>{ showQuestion(5); updateProgress(5); },
-    '3b': ()=>{ showQuestion(5); updateProgress(5); },
-    '3c': ()=>{ showQuestion(5); updateProgress(5); },
-    '5': ()=>{ calculateScore(); showLoadingState(); setTimeout(()=>{ hideLoadingState(); showResults(); updateProgress(6); },2000); }
+  '1':()=>{showQuestion('2Industry');updateProgress(2);},
+  '2':()=>{if(answers.q2==='no-offer')showQuestion('4a');else if(answers.q2==='group-plan')showQuestion('4b');else showQuestion('4c');updateProgress(4);},
+  '3a':()=>{showQuestion(5);updateProgress(5);},'3b':()=>{showQuestion(5);updateProgress(5);},'3c':()=>{showQuestion(5);updateProgress(5);},
+  '5':()=>{calculateScore();showLoadingState();setTimeout(()=>{hideLoadingState();showResults();updateProgress(6);},2000);}
 };
 
-// OPTION SELECTION
-document.querySelectorAll('.option').forEach(o => {
-    o.addEventListener('click', function() {
-        const q = this.dataset.question;
-        document.querySelectorAll(`[data-question="${q}"]`).forEach(x=>x.classList.remove('selected'));
-        this.classList.add('selected');
-        const v = this.dataset.value;
-        if(q==='1') answers.q1=parseInt(v);
-        else if(q==='2') answers.q2=v;
-        else if(q==='3a'||q==='3b'||q==='3c') answers.q3=parseInt(v);
-        else if(q==='5') answers.q5=parseInt(v);
-        // Enable the Next button for this question
-        const nextBtnMap={'1':'next1','2':'next3','3a':'next4a','3b':'next4b','3c':'next4c','5':'calculate'};
-        if(nextBtnMap[q]){ const nb=document.getElementById(nextBtnMap[q]); if(nb) nb.disabled=false; }
-        if(autoAdv[q]) setTimeout(autoAdv[q],480);
-    });
+// ── INDUSTRY TILES ────────────────────────────────────────────────────
+function selectIndustryTile(t) {
+  document.querySelectorAll('.industry-tile').forEach(x=>x.classList.remove('selected'));
+  t.classList.add('selected');
+  answers.industry = t.dataset.industry;
+  const ni = document.getElementById('next2Industry');
+  if(ni) ni.disabled = false;
+  const ii = document.getElementById('industryInput');
+  if(ii) ii.value = '';
+  setTimeout(()=>{showQuestion(3);updateProgress(3);},480);
+}
+
+// ── OPTION SELECTION ──────────────────────────────────────────────────
+document.querySelectorAll('.option').forEach(o=>{
+  o.addEventListener('click',function(){
+    const q=this.dataset.question;
+    document.querySelectorAll(`[data-question="${q}"]`).forEach(x=>x.classList.remove('selected'));
+    this.classList.add('selected');
+    const v=this.dataset.value;
+    if(q==='1')answers.q1=parseInt(v);
+    else if(q==='2')answers.q2=v;
+    else if(q==='3a'||q==='3b'||q==='3c')answers.q3=parseInt(v);
+    else if(q==='5')answers.q5=parseInt(v);
+    const nbMap={'1':'next1','2':'next3','3a':'next4a','3b':'next4b','3c':'next4c','5':'calculate'};
+    if(nbMap[q]){const nb=document.getElementById(nbMap[q]);if(nb)nb.disabled=false;}
+    if(autoAdv[q])setTimeout(autoAdv[q],480);
+  });
 });
 
-// DRAG & DROP
+// ── DRAG & DROP ───────────────────────────────────────────────────────
 let draggedItem=null;
 document.querySelectorAll('.priority-item').forEach(item=>{
-    item.addEventListener('dragstart',function(e){ draggedItem=this; setTimeout(()=>this.classList.add('dragging'),0); e.dataTransfer.effectAllowed='move'; });
-    item.addEventListener('dragend',function(){ this.classList.remove('dragging'); document.querySelectorAll('.priority-item').forEach(i=>i.classList.remove('drag-over')); updatePriorityNumbers(); });
-    item.addEventListener('dragover',function(e){ e.preventDefault(); if(this!==draggedItem) this.classList.add('drag-over'); });
-    item.addEventListener('dragleave',function(){ this.classList.remove('drag-over'); });
-    item.addEventListener('drop',function(e){ e.preventDefault(); this.classList.remove('drag-over'); if(draggedItem!==this){ const all=[...document.querySelectorAll('.priority-item')]; if(all.indexOf(draggedItem)<all.indexOf(this)) this.parentNode.insertBefore(draggedItem,this.nextSibling); else this.parentNode.insertBefore(draggedItem,this); } });
+  item.addEventListener('dragstart',function(e){draggedItem=this;setTimeout(()=>this.classList.add('dragging'),0);e.dataTransfer.effectAllowed='move';});
+  item.addEventListener('dragend',function(){this.classList.remove('dragging');document.querySelectorAll('.priority-item').forEach(i=>i.classList.remove('drag-over'));updatePriorityNumbers();});
+  item.addEventListener('dragover',function(e){e.preventDefault();if(this!==draggedItem)this.classList.add('drag-over');});
+  item.addEventListener('dragleave',function(){this.classList.remove('drag-over');});
+  item.addEventListener('drop',function(e){e.preventDefault();this.classList.remove('drag-over');if(draggedItem!==this){const all=[...document.querySelectorAll('.priority-item')];if(all.indexOf(draggedItem)<all.indexOf(this))this.parentNode.insertBefore(draggedItem,this.nextSibling);else this.parentNode.insertBefore(draggedItem,this);}});
 });
+
 function updatePriorityNumbers(){
-    const items=document.querySelectorAll('.priority-item');
-    items.forEach((x,i)=>{
-        x.querySelector('.priority-number').textContent=i+1;
-        const btns=x.querySelectorAll('.priority-move-btn');
-        if(btns.length===2){ btns[0].disabled=(i===0); btns[1].disabled=(i===items.length-1); }
-    });
-    answers.q4=Array.from(items).map(x=>x.dataset.id);
+  const items=document.querySelectorAll('.priority-item');
+  items.forEach((x,i)=>{
+    x.querySelector('.priority-number').textContent=i+1;
+    const btns=x.querySelectorAll('.priority-move-btn');
+    if(btns.length===2){btns[0].disabled=(i===0);btns[1].disabled=(i===items.length-1);}
+  });
+  answers.q4=Array.from(items).map(x=>x.dataset.id);
 }
 
-// NAVIGATION
+function movePriority(btn,dir){
+  const item=btn.closest('.priority-item'),list=item.parentElement;
+  const items=[...list.querySelectorAll('.priority-item')];
+  const idx=items.indexOf(item),ti=idx+dir;
+  if(ti<0||ti>=items.length)return;
+  if(dir===-1)list.insertBefore(item,items[ti]);else list.insertBefore(items[ti],item);
+  updatePriorityNumbers();
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────────
 function setupNav(){
-    const ids=['back2Industry','next2Industry','back3','next3','back4a','next4a','back4b','next4b','back4c','next4c','back5','next5','back6','calculate'];
-    for(const id of ids){ if(!document.getElementById(id)){ setTimeout(setupNav,400); return; } }
-    document.getElementById('back2Industry').addEventListener('click',()=>{ showQuestion(1); updateProgress(1); });
-    document.getElementById('next2Industry').addEventListener('click',()=>{ showQuestion(3); updateProgress(3); });
-    document.getElementById('back3').addEventListener('click',()=>{ showQuestion('2Industry'); updateProgress(2); });
-    document.getElementById('back4a').addEventListener('click',()=>{ showQuestion(3); updateProgress(3); });
-    document.getElementById('back4b').addEventListener('click',()=>{ showQuestion(3); updateProgress(3); });
-    document.getElementById('back4c').addEventListener('click',()=>{ showQuestion(3); updateProgress(3); });
-    document.getElementById('back5').addEventListener('click',()=>{ if(answers.q2==='no-offer') showQuestion('4a'); else if(answers.q2==='group-plan') showQuestion('4b'); else showQuestion('4c'); updateProgress(4); });
-    document.getElementById('next5').addEventListener('click',()=>{ showQuestion(6); updateProgress(6); });
-    document.getElementById('back6').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
-    document.getElementById('next1').addEventListener('click',()=>{ showQuestion('2Industry'); updateProgress(2); });
-    document.getElementById('next3').addEventListener('click',()=>{ if(answers.q2==='no-offer') showQuestion('4a'); else if(answers.q2==='group-plan') showQuestion('4b'); else showQuestion('4c'); updateProgress(4); });
-    document.getElementById('next4a').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
-    document.getElementById('next4b').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
-    document.getElementById('next4c').addEventListener('click',()=>{ showQuestion(5); updateProgress(5); });
-    document.getElementById('calculate').addEventListener('click',()=>{ calculateScore(); showLoadingState(); setTimeout(()=>{ hideLoadingState(); showResults(); updateProgress(6); },2000); });
+  const ids=['back2Industry','next2Industry','back3','next3','back4a','next4a','back4b','next4b','back4c','next4c','back5','next5','back6','calculate','next1'];
+  for(const id of ids){if(!document.getElementById(id)){setTimeout(setupNav,400);return;}}
+  document.getElementById('next1').addEventListener('click',()=>{showQuestion('2Industry');updateProgress(2);});
+  document.getElementById('back2Industry').addEventListener('click',()=>{showQuestion(1);updateProgress(1);});
+  document.getElementById('next2Industry').addEventListener('click',()=>{showQuestion(3);updateProgress(3);});
+  document.getElementById('back3').addEventListener('click',()=>{showQuestion('2Industry');updateProgress(2);});
+  document.getElementById('next3').addEventListener('click',()=>{if(answers.q2==='no-offer')showQuestion('4a');else if(answers.q2==='group-plan')showQuestion('4b');else showQuestion('4c');updateProgress(4);});
+  document.getElementById('back4a').addEventListener('click',()=>{showQuestion(3);updateProgress(3);});
+  document.getElementById('next4a').addEventListener('click',()=>{showQuestion(5);updateProgress(5);});
+  document.getElementById('back4b').addEventListener('click',()=>{showQuestion(3);updateProgress(3);});
+  document.getElementById('next4b').addEventListener('click',()=>{showQuestion(5);updateProgress(5);});
+  document.getElementById('back4c').addEventListener('click',()=>{showQuestion(3);updateProgress(3);});
+  document.getElementById('next4c').addEventListener('click',()=>{showQuestion(5);updateProgress(5);});
+  document.getElementById('back5').addEventListener('click',()=>{if(answers.q2==='no-offer')showQuestion('4a');else if(answers.q2==='group-plan')showQuestion('4b');else showQuestion('4c');updateProgress(4);});
+  document.getElementById('next5').addEventListener('click',()=>{showQuestion(6);updateProgress(6);});
+  document.getElementById('back6').addEventListener('click',()=>{showQuestion(5);updateProgress(5);});
+  document.getElementById('calculate').addEventListener('click',()=>{calculateScore();showLoadingState();setTimeout(()=>{hideLoadingState();showResults();updateProgress(6);},2000);});
 }
-if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupNav); else setupNav();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setupNav);else setupNav();
 
-function updateProgress(n){ document.getElementById('progressFill').style.width=(n/6*100)+'%'; }
-function showLoadingState(){ const o=document.getElementById('loadingOverlay'); if(o) o.classList.add('active'); }
-function hideLoadingState(){ const o=document.getElementById('loadingOverlay'); if(o) o.classList.remove('active'); }
+function updateProgress(n){document.getElementById('progressFill').style.width=(n/6*100)+'%';}
+function showLoadingState(){const o=document.getElementById('loadingOverlay');if(o)o.classList.add('active');}
+function hideLoadingState(){const o=document.getElementById('loadingOverlay');if(o)o.classList.remove('active');}
 
 function showQuestion(num){
-    const cur=document.querySelector('.question-container.active');
-    const next=document.getElementById('question'+num);
-    if(!next) return;
-    if(cur){ cur.classList.add('exiting'); setTimeout(()=>{ cur.classList.remove('active','exiting'); next.classList.add('active'); updateStepIndicator(num); setTimeout(()=>next.scrollIntoView({behavior:'smooth',block:'start'}),100); },350); }
-    else { next.classList.add('active'); updateStepIndicator(num); }
-    currentQuestion=num;
+  const cur=document.querySelector('.question-container.active');
+  const next=document.getElementById('question'+num);
+  if(!next)return;
+  if(cur){cur.classList.add('exiting');setTimeout(()=>{cur.classList.remove('active','exiting');next.classList.add('active');updateStepIndicator(num);setTimeout(()=>next.scrollIntoView({behavior:'smooth',block:'start'}),100);},350);}
+  else{next.classList.add('active');updateStepIndicator(num);}
+  currentQuestion=num;
 }
 
 function updateStepIndicator(n){
-    const steps=document.querySelectorAll('.step'), conns=document.querySelectorAll('.step-connector');
-    let a=n; if(n==='2Industry') a=2; if(n==='4a'||n==='4b'||n==='4c') a=4;
-    steps.forEach((s,i)=>{ const x=i+1; if(x<a){s.classList.add('completed');s.classList.remove('active');}else if(x===a){s.classList.add('active');s.classList.remove('completed');}else s.classList.remove('active','completed'); });
-    conns.forEach((c,i)=>{ if(i+1<a) c.classList.add('completed'); else c.classList.remove('completed'); });
+  const steps=document.querySelectorAll('.step'),conns=document.querySelectorAll('.step-connector');
+  let a=n;if(n==='2Industry')a=2;if(n==='4a'||n==='4b'||n==='4c')a=4;
+  steps.forEach((s,i)=>{const x=i+1;if(x<a){s.classList.add('completed');s.classList.remove('active');}else if(x===a){s.classList.add('active');s.classList.remove('completed');}else s.classList.remove('active','completed');});
+  conns.forEach((c,i)=>{if(i+1<a)c.classList.add('completed');else c.classList.remove('completed');});
 }
 
+// ── SCORING ───────────────────────────────────────────────────────────
 function calculateScore(){
-    totalScore=0;
-    totalScore+=(answers.q1||0);
-    if(answers.q2==='no-offer') totalScore+=2; else if(answers.q2==='group-plan') totalScore+=1; else if(answers.q2==='stipend') totalScore+=3;
-    totalScore+=(answers.q3||0);
-    const p=answers.q4;
-    const pr=p.indexOf('predictability')+1, cr=p.indexOf('control')+1, chr=p.indexOf('choice')+1, sr=p.indexOf('simplicity')+1;
-    if(pr<=2) totalScore+=3; if(cr<=2) totalScore+=3; if(chr<=2) totalScore+=2;
-    if(sr===1) totalScore-=2; else if(sr>=3) totalScore+=1;
-    totalScore+=(answers.q5||0);
+  totalScore=0;
+  totalScore+=(answers.q1||0);
+  if(answers.q2==='no-offer')totalScore+=2;else if(answers.q2==='group-plan')totalScore+=1;else if(answers.q2==='stipend')totalScore+=3;
+  totalScore+=(answers.q3||0);
+  const p=answers.q4;
+  const pr=p.indexOf('predictability')+1,cr=p.indexOf('control')+1,chr=p.indexOf('choice')+1,sr=p.indexOf('simplicity')+1;
+  if(pr<=2)totalScore+=3;if(cr<=2)totalScore+=3;if(chr<=2)totalScore+=2;
+  if(sr===1)totalScore-=2;else if(sr>=3)totalScore+=1;
+  totalScore+=(answers.q5||0);
 }
 
-// INDUSTRY
-const industryInsights={
-    healthcare:{badge:'Healthcare',title:'Healthcare employers see 23% faster ICHRA adoption',description:'Medical practices lead ICHRA adoption due to multi-state operations and diverse employee classifications.',stats:[{number:'67%',label:'Multi-state operations'},{number:'41%',label:'Avg. cost reduction'},{number:'89%',label:'Employee satisfaction'}]},
-    retail:{badge:'Retail & Hospitality',title:'Retail employers love ICHRA for part-time flexibility',description:'ICHRA eliminates participation minimums that excluded part-time and seasonal workers from traditional benefits.',stats:[{number:'73%',label:'Part-time eligible'},{number:'31%',label:'Cost savings'},{number:'2.3x',label:'Better retention'}]},
-    tech:{badge:'Technology',title:'Tech companies scale benefits without group plan limits',description:'Fast-growing tech companies offer competitive benefits while maintaining predictable per-employee costs.',stats:[{number:'52%',label:'Faster scaling'},{number:'95%',label:'Remote-ready'},{number:'$847',label:'Avg monthly allowance'}]},
-    construction:{badge:'Construction & Trades',title:'Construction companies eliminate multi-state complexity',description:'ICHRA simplifies benefits across state lines and accommodates project-based staffing fluctuations.',stats:[{number:'84%',label:'Multi-state projects'},{number:'38%',label:'Admin time saved'},{number:'91%',label:'Contractor coverage'}]},
-    manufacturing:{badge:'Manufacturing',title:'Manufacturers cap rising group health costs with ICHRA',description:'Lock in predictable costs and eliminate claims-driven premium spikes entirely.',stats:[{number:'44%',label:'Cost predictability'},{number:'0%',label:'Claims impact'},{number:'86%',label:'Budget certainty'}]},
-    professional:{badge:'Professional Services',title:'Law firms and consultancies offer flexible, competitive benefits',description:'Professional services firms attract talent while maintaining profitability across variable team sizes.',stats:[{number:'79%',label:'Talent attraction'},{number:'$923',label:'Avg contribution'},{number:'94%',label:'Partner approval'}]},
-    default:{badge:'Your Industry',title:'Employers like you are adopting ICHRA rapidly',description:'ICHRA adoption grew 52% across all industries in 2024–2025 as employers seek cost predictability and flexibility.',stats:[{number:'52%',label:'Growth rate'},{number:'3–20%',label:'Avg savings'},{number:'92%',label:'Retention rate'}]}
-};
-const industries=['Healthcare & Medical Services','Hospitals & Health Systems','Medical Practices & Clinics','Dental Practices','Mental Health Services','Home Healthcare','Nursing & Residential Care','Retail & Consumer Goods','Restaurants & Food Service','Hospitality & Hotels','E-commerce & Online Retail','Grocery & Convenience Stores','Technology & Software','IT Services & Consulting','SaaS & Cloud Computing','Cybersecurity','Telecommunications','Construction & Building','General Contractors','Specialty Trade Contractors','Engineering & Architecture','Real Estate Development','Manufacturing & Production','Automotive Manufacturing','Food & Beverage Manufacturing','Pharmaceutical Manufacturing','Electronics Manufacturing','Professional Services','Legal Services & Law Firms','Accounting & Finance','Consulting & Advisory','Marketing & Advertising','Public Relations','Financial Services & Banking','Insurance','Investment & Wealth Management','Mortgage & Lending','Education & Training','K-12 Schools','Higher Education','Online Education','Corporate Training','Transportation & Logistics','Trucking & Freight','Warehousing & Distribution','Courier & Delivery Services','Agriculture & Farming','Energy & Utilities','Oil & Gas','Renewable Energy','Utilities & Infrastructure','Government & Public Sector','Non-Profit Organizations','Religious Organizations','Arts & Entertainment','Media & Broadcasting','Sports & Recreation','Beauty & Personal Care','Automotive Services & Repair','Property Management','Janitorial & Facilities Services','Security Services','Other'];
-const industryMap={healthcare:['Healthcare','Medical','Hospital','Dental','Mental Health','Nursing','Home Healthcare'],retail:['Retail','Restaurant','Food Service','Hospitality','Hotel','E-commerce','Grocery','Convenience'],tech:['Technology','Software','IT Services','SaaS','Cloud','Cybersecurity','Telecom'],construction:['Construction','Contractor','Engineering','Architecture','Real Estate'],manufacturing:['Manufacturing','Production','Automotive','Pharmaceutical','Electronics','Food & Beverage Manufacturing'],professional:['Professional Services','Legal','Law','Accounting','Finance','Consulting','Advisory','Marketing','Advertising','PR']};
+function getTier(){
+  return totalScore>=12?'Strong ICHRA Candidate':totalScore>=8?'Likely a Good Fit':totalScore>=4?'Worth a Conversation':totalScore>=1?'Not Right Now':'Likely Not the Right Fit';
+}
 
-function detectIndustry(ans){ if(!ans.industry) return 'default'; const s=ans.industry.toLowerCase(); for(const[c,ks] of Object.entries(industryMap)){ if(ks.some(k=>s.includes(k.toLowerCase()))) return c; } return 'default'; }
-function genIndustryInsight(ans){ const ins=industryInsights[detectIndustry(ans)]; return `<div class="industry-insight"><div class="industry-insight-content"><span class="industry-badge">${ins.badge}</span><h4>${ins.title}</h4><p>${ins.description}</p><div class="industry-stats">${ins.stats.map(s=>`<div class="industry-stat"><div class="industry-stat-number">${s.number}</div><div class="industry-stat-label">${s.label}</div></div>`).join('')}</div></div></div>`; }
+// ── INDUSTRY INSIGHT ──────────────────────────────────────────────────
+function detectIndustry(ans){
+  if(!ans.industry)return 'default';
+  const s=ans.industry.toLowerCase();
+  for(const[c,ks]of Object.entries(industryMapping)){if(ks.some(k=>s.includes(k.toLowerCase())))return c;}
+  return 'default';
+}
+function genInsight(ans){
+  const ins=industryInsights[detectIndustry(ans)];
+  return `<div class="industry-insight"><div class="industry-insight-content"><span class="industry-badge">${ins.badge}</span><h4>${ins.title}</h4><p>${ins.description}</p><div class="industry-stats">${ins.stats.map(s=>`<div class="industry-stat"><div class="industry-stat-number">${s.number}</div><div class="industry-stat-label">${s.label}</div></div>`).join('')}</div></div></div>`;
+}
 
-// AUTOCOMPLETE
-const indInput=document.getElementById('industryInput'), indDrop=document.getElementById('industryDropdown'), next2Btn=document.getElementById('next2Industry');
+// ── AUTOCOMPLETE ──────────────────────────────────────────────────────
+const indInput=document.getElementById('industryInput');
+const indDrop=document.getElementById('industryDropdown');
+const next2Btn=document.getElementById('next2Industry');
 let selOptIdx=-1;
-function showDrop(res,term){ if(!res.length){ indDrop.innerHTML='<div class="autocomplete-no-results">No industries found</div>'; indDrop.classList.add('active'); return; } indDrop.innerHTML=res.map(i=>`<div class="autocomplete-option" data-value="${i}">${term?i.replace(new RegExp('('+term+')','gi'),'<strong>$1</strong>'):i}</div>`).join(''); indDrop.classList.add('active'); indDrop.querySelectorAll('.autocomplete-option').forEach(o=>o.addEventListener('click',function(){ selInd(this.dataset.value); })); }
-function selInd(v){ answers.industry=v; indInput.value=v; indDrop.classList.remove('active'); next2Btn.disabled=false; }
+
+function filterWithSynonyms(term){
+  if(!term)return industries;
+  const t=term.toLowerCase();
+  const direct=industries.filter(i=>i.toLowerCase().includes(t));
+  const syn=[];
+  for(const[ind,words]of Object.entries(synonymMap)){
+    if(words.some(w=>w.includes(t)||t.includes(w))){
+      if(!direct.includes(ind)&&industries.includes(ind))syn.push(ind);
+    }
+  }
+  return [...new Set([...syn,...direct])];
+}
+
+function showDrop(res,term){
+  if(!res.length){indDrop.innerHTML='<div class="autocomplete-no-results">No industries found — try a different term</div>';indDrop.classList.add('active');return;}
+  indDrop.innerHTML=res.map(i=>`<div class="autocomplete-option" data-value="${i}">${term?i.replace(new RegExp('('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<strong>$1</strong>'):i}</div>`).join('');
+  indDrop.classList.add('active');
+  indDrop.querySelectorAll('.autocomplete-option').forEach(o=>o.addEventListener('click',function(){selInd(this.dataset.value);}));
+}
+
+function selInd(v){
+  answers.industry=v;indInput.value=v;indDrop.classList.remove('active');
+  if(next2Btn)next2Btn.disabled=false;
+  document.querySelectorAll('.industry-tile').forEach(t=>t.classList.remove('selected'));
+  selOptIdx=-1;
+}
+
 if(indInput){
-    indInput.addEventListener('input',function(){ const t=this.value.trim(); if(!t){ indDrop.classList.remove('active'); next2Btn.disabled=true; return; } showDrop(industries.filter(i=>i.toLowerCase().includes(t.toLowerCase())),t); });
-    indInput.addEventListener('focus',function(){ if(!this.value.trim()) showDrop(industries,''); });
-    document.addEventListener('click',e=>{ if(!e.target.closest('.autocomplete-container')) indDrop.classList.remove('active'); });
-    indInput.addEventListener('keydown',function(e){ const opts=indDrop.querySelectorAll('.autocomplete-option'); if(e.key==='ArrowDown'){e.preventDefault();selOptIdx=Math.min(selOptIdx+1,opts.length-1);opts.forEach((o,i)=>o.classList.toggle('selected',i===selOptIdx));}else if(e.key==='ArrowUp'){e.preventDefault();selOptIdx=Math.max(selOptIdx-1,0);opts.forEach((o,i)=>o.classList.toggle('selected',i===selOptIdx));}else if(e.key==='Enter'){e.preventDefault();if(selOptIdx>=0&&opts[selOptIdx]) selInd(opts[selOptIdx].dataset.value);} });
+  indInput.addEventListener('input',function(){
+    const t=this.value.trim();
+    if(!t){indDrop.classList.remove('active');if(next2Btn)next2Btn.disabled=!answers.industry;return;}
+    showDrop(filterWithSynonyms(t),t);
+  });
+  indInput.addEventListener('focus',function(){if(!this.value.trim())showDrop(industries,'');});
+  document.addEventListener('click',e=>{if(!e.target.closest('.autocomplete-container'))indDrop.classList.remove('active');});
+  indInput.addEventListener('keydown',function(e){
+    const opts=indDrop.querySelectorAll('.autocomplete-option');
+    if(e.key==='ArrowDown'){e.preventDefault();selOptIdx=Math.min(selOptIdx+1,opts.length-1);opts.forEach((o,i)=>o.classList.toggle('selected',i===selOptIdx));}
+    else if(e.key==='ArrowUp'){e.preventDefault();selOptIdx=Math.max(selOptIdx-1,0);opts.forEach((o,i)=>o.classList.toggle('selected',i===selOptIdx));}
+    else if(e.key==='Enter'){e.preventDefault();if(selOptIdx>=0&&opts[selOptIdx])selInd(opts[selOptIdx].dataset.value);}
+  });
 }
 
-// SHOW RESULTS
+// ── SHOW RESULTS ──────────────────────────────────────────────────────
 function showResults(){
-    const rc=document.getElementById('resultsContainer');
-    if(!rc) return;
-    let tierClass,tierLabel,resultTitle,resultDescription,whatNext;
-    const bs=selectBullets(answers,totalScore);
-    const bHTML='<ul>'+bs.map(b=>`<li>${b}</li>`).join('')+'</ul>';
-    if(totalScore>=12){ tierClass='tier-prime-candidate';tierLabel='Prime ICHRA Candidate';resultTitle="You're the perfect ICHRA profile";resultDescription="Based on your answers, ICHRA represents an immediate, high-ROI opportunity. You're in the exact employer profile seeing the fastest adoption and strongest results.";whatNext='See Your Custom ICHRA Model'; }
-    else if(totalScore>=8){ tierClass='tier-strong-fit';tierLabel='Strong Fit';resultTitle='ICHRA is your strategic path forward';resultDescription="You're thinking strategically about benefits costs. ICHRA offers a clear path from unpredictable group plan expenses to fixed, controllable monthly contributions.";whatNext='Request a Cost Comparison'; }
-    else if(totalScore>=4){ tierClass='tier-worth-exploring';tierLabel='Worth Exploring';resultTitle="ICHRA is worth a closer look";resultDescription="You're in a relatively stable position, but there are specific elements of ICHRA that could address challenges you're starting to face.";whatNext='Schedule a Consultation'; }
-    else if(totalScore>=1){ tierClass='tier-monitor';tierLabel='Monitor Your Situation';resultTitle='Your current approach may still be working';resultDescription="No urgent need to disrupt what's in place — but the market conditions that make ICHRA compelling could arrive at your next renewal.";whatNext='Stay Informed'; }
-    else { tierClass='tier-not-recommended';tierLabel='Not the Right Fit Yet';resultTitle="ICHRA likely isn't right for your situation today";resultDescription="Based on your answers, ICHRA doesn't align well with your current workforce and benefits situation. That could change — here's what to watch for.";whatNext='Explore Other Options'; }
+  const rc=document.getElementById('resultsContainer');if(!rc)return;
+  let tierClass,tierLabel,resultTitle,resultDescription,whatNext,dataPoints;
+  const bs=selectBullets(answers,totalScore);
+  const bHTML='<ul>'+bs.map(b=>`<li>${b}</li>`).join('')+'</ul>';
 
-    rc.innerHTML=`
-        <div class="results-header">
-            <div class="thermometer-container">
-                <div class="level-badge ${tierClass}">${tierLabel}</div>
-                <div class="thermometer"><div class="thermometer-fill" style="width:0%"><div class="thermometer-score">${totalScore}</div></div></div>
-                <div class="thermometer-labels"><span>Not a fit</span><span>Prime candidate</span></div>
-            </div>
-            <h2 class="result-title">${resultTitle}</h2>
-            <p class="result-description">${resultDescription}</p>
+  if(totalScore>=12){
+    tierClass='tier-strong-candidate';tierLabel='Strong ICHRA Candidate';
+    resultTitle='Your situation has several strong ICHRA indicators';
+    resultDescription='Multiple factors in your situation align with what makes ICHRA work well. This is not a guarantee — every business is different — but the profile you have described is representative of employers who see real, measurable benefit from this structure.';
+    whatNext='Schedule a Free Consultation';
+    dataPoints=`<p><strong>What the data shows:</strong></p><ul><li>ICHRA adoption grew 52% among employers with your profile from 2024-2025</li><li>Employers in similar situations report 3-20% cost reduction vs. prior group plans</li><li>Employees get access to 30-100+ plan options vs. 1-3 under a group plan</li></ul>`;
+  } else if(totalScore>=8){
+    tierClass='tier-likely-fit';tierLabel='Likely a Good Fit';
+    resultTitle='ICHRA is likely worth a serious look for your business';
+    resultDescription='Several meaningful factors in your situation point toward ICHRA being an improvement over your current approach. This is the most common result for employers who go on to make a successful transition. The specifics are worth exploring with an advisor who can run the numbers for your headcount and budget.';
+    whatNext='Request a Cost Comparison';
+    dataPoints=`<p><strong>What the data shows:</strong></p><ul><li>92% of employers offering ICHRA continue year over year — strong long-term satisfaction</li><li>Multi-state and mixed-workforce employers report ICHRA as the most flexible structure they have used</li><li>Average time from assessment to first ICHRA enrollment: 45-60 days</li></ul>`;
+  } else if(totalScore>=4){
+    tierClass='tier-worth-conversation';tierLabel='Worth a Conversation';
+    resultTitle='Some factors point toward ICHRA — others are neutral';
+    resultDescription='Your situation does not strongly indicate ICHRA as an obvious improvement right now, but there are specific elements that are worth discussing. Whether this makes sense for your business requires a more detailed look at your numbers and circumstances.';
+    whatNext='Schedule a Consultation';
+    dataPoints=`<p><strong>Triggers that would change this result:</strong></p><ul><li>Next renewal with more than 10% increase</li><li>Adding employees in new states</li><li>Approaching 50 total employees (ACA mandate threshold)</li><li>Losing a group plan due to participation minimums</li></ul>`;
+  } else if(totalScore>=1){
+    tierClass='tier-not-now';tierLabel='Not Right Now';
+    resultTitle='The timing likely is not right — but that could change';
+    resultDescription='Based on your answers, the factors that make ICHRA most compelling are not strongly present in your situation today. Your circumstances can change — below are the specific conditions that would shift this assessment.';
+    whatNext='Stay Informed';
+    dataPoints=`<p><strong>Watch for these triggers:</strong></p><ul><li>Annual renewal with double-digit increase</li><li>Employee requests for more plan choice</li><li>Business expansion into new states</li><li>Growth approaching 50 employees</li></ul><p>The small group market averages 8-12% annual premium increases. If you are beating that today, you are in a good position — but stay informed.</p>`;
+  } else {
+    tierClass='tier-not-fit';tierLabel='Likely Not the Right Fit';
+    resultTitle='Specific factors in your situation work against ICHRA today';
+    resultDescription='Based on your answers, ICHRA would likely create more complexity than it resolves for your business in its current state. The factors that make it most valuable are not present. Here is what would need to change for that to shift.';
+    whatNext='Explore Other Options';
+    dataPoints=`<p><strong>Better alternatives to consider:</strong></p><ul><li>Traditional group plan (if participation requirements can be met)</li><li>Level-funded plans (cost control with group structure)</li><li>Voluntary benefits packages (if budget is primary constraint)</li></ul><p><strong>When to revisit ICHRA:</strong></p><ul><li>Workforce composition changes</li><li>Fewer employees covered by subsidies or spouse plans</li><li>Significant business growth or geographic expansion</li></ul>`;
+  }
+
+  const q1Label=answers.q1===0?'1-4 employees':answers.q1===1?'5-49 employees':'50+ employees (ALE)';
+  const q2Label=answers.q2==='no-offer'?'No health benefits currently':answers.q2==='group-plan'?'Traditional group health plan':'Taxable stipend/reimbursement';
+  const q4Label=answers.q4.length>0?answers.q4.join(' > '):'Default order';
+  const q5Label=answers.q5===0?'Full-time, single location':answers.q5===3?'Multi-state or remote':answers.q5===2?'Mixed workforce':'Marketplace subsidy eligible';
+  const q3RawMap={'no-offer':{3:'Too expensive',2:'Not enough employees / unsure','-2':'Employees covered elsewhere'},'group-plan':{'-1':'Premiums stable',1:'Premiums rising moderately',4:'Premiums unsustainable/high claims',3:'Participation/multi-state issues'},'stipend':{3:'Tax burden/wants compliance',2:'Wants more structure',4:'Approaching 50 employees'}};
+  const q3Label=(q3RawMap[answers.q2]&&q3RawMap[answers.q2][String(answers.q3)])||('Score: '+answers.q3);
+
+  quizContext={score:totalScore,tier:tierLabel,industry:answers.industry||'Not specified',companySize:q1Label,currentBenefits:q2Label};
+
+  rc.innerHTML=`
+    <div class="results-header">
+      <div class="thermometer-container">
+        <div class="level-badge ${tierClass}">${tierLabel}</div>
+        <div class="thermometer"><div class="thermometer-fill" id="thermometerFill" style="width:0%"></div></div>
+        <div class="thermometer-labels"><span>Not a fit</span><span>Strong candidate</span></div>
+      </div>
+      <h2 class="result-title">${resultTitle}</h2>
+      <p class="result-description">${resultDescription}</p>
+      <p class="objectivity-note">This assessment is a general indicator based on your answers — not a formal recommendation. An advisor can give you specific numbers for your situation.</p>
+    </div>
+    <div class="result-section"><h3>What your answers indicate:</h3>${bHTML}</div>
+    ${genInsight(answers)}
+    <div class="video-container"><iframe width="100%" height="400" src="https://www.youtube.com/embed/kxXVEb5qmi8?autoplay=1&mute=1&rel=0&playsinline=1" frameborder="0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe></div>
+    <div class="timeline-container">
+      <h3 style="text-align:center;margin-bottom:32px;font-size:20px;font-weight:700;color:var(--text-dark)">Your path to ICHRA</h3>
+      <div class="timeline">
+        <div class="timeline-step"><div class="timeline-icon">1</div><div class="timeline-content"><div class="timeline-label">Today</div><div class="timeline-title">Free Consultation</div><div class="timeline-description">Review your results with an advisor and build your custom ICHRA model</div></div></div>
+        <div class="timeline-step"><div class="timeline-icon">2</div><div class="timeline-content"><div class="timeline-label">30 Days</div><div class="timeline-title">Design &amp; Setup</div><div class="timeline-description">Configure employee classes, set allowance amounts, select your platform</div></div></div>
+        <div class="timeline-step"><div class="timeline-icon">3</div><div class="timeline-content"><div class="timeline-label">60 Days</div><div class="timeline-title">Launch &amp; Enroll</div><div class="timeline-description">Employee education, enrollment support, and go-live with your new benefit</div></div></div>
+      </div>
+    </div>
+    <div class="lead-form">
+      <h3>Take the next step</h3>
+      <p class="lead-form-subtitle">Connect with a benefits advisor — real numbers for your headcount and budget. No pressure.</p>
+      <form id="leadForm" onsubmit="handleLeadSubmit(event)" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label for="l-name">Name *</label><input type="text" id="l-name" required placeholder="John Smith"><span class="error-message">Please enter your full name</span></div>
+          <div class="form-group"><label for="l-company">Company *</label><input type="text" id="l-company" required placeholder="ABC Corporation"><span class="error-message">Please enter your company</span></div>
         </div>
-
-        <div class="result-section"><h3>Why this fits your situation:</h3>${bHTML}</div>
-
-        ${genIndustryInsight(answers)}
-
-        <div class="video-container">
-            <iframe width="100%" height="400" src="https://www.youtube.com/embed/kxXVEb5qmi8?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <div class="form-row">
+          <div class="form-group"><label for="l-email">Email *</label><input type="email" id="l-email" required placeholder="john@company.com"><span class="error-message">Please enter a valid email</span></div>
+          <div class="form-group"><label for="l-phone">Phone *</label><input type="tel" id="l-phone" required placeholder="(555) 123-4567"><span class="error-message">Please enter a valid phone</span></div>
         </div>
-
-        <div class="timeline-container">
-            <h3 style="text-align:center;margin-bottom:36px;font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--text-dark);">Your Path to ICHRA</h3>
-            <div class="timeline">
-                <div class="timeline-step"><div class="timeline-icon">1</div><div class="timeline-content"><div class="timeline-label">Today</div><div class="timeline-title">Free Consultation</div><div class="timeline-description">Review your results with an advisor and build your custom ICHRA model</div></div></div>
-                <div class="timeline-step"><div class="timeline-icon">2</div><div class="timeline-content"><div class="timeline-label">30 Days</div><div class="timeline-title">Design &amp; Setup</div><div class="timeline-description">Configure employee classes, set allowance amounts, select your platform</div></div></div>
-                <div class="timeline-step"><div class="timeline-icon">3</div><div class="timeline-content"><div class="timeline-label">60 Days</div><div class="timeline-title">Launch &amp; Enroll</div><div class="timeline-description">Employee education, enrollment support, and go-live with your new benefit</div></div></div>
-            </div>
+        <div class="form-row" style="grid-template-columns:1fr 1fr">
+          <div class="form-group"><label for="l-zip">Zip Code *</label><input type="text" id="l-zip" required placeholder="30301" maxlength="10"><span class="error-message">Please enter your zip code</span></div>
         </div>
-
-
-        <div class="lead-form">
-            <h3>Take the next step</h3>
-            <p class="lead-form-subtitle">Connect with a benefits advisor — real numbers, your headcount, your budget. No pressure, just answers.</p>
-            <form id="leadForm" onsubmit="handleLeadSubmit(event)" novalidate>
-                <div class="form-row">
-                    <div class="form-group"><label for="name">Name *</label><input type="text" id="name" name="name" required placeholder="John Smith"><span class="error-message">Please enter your full name</span></div>
-                    <div class="form-group"><label for="company">Company *</label><input type="text" id="company" name="company" required placeholder="ABC Corporation"><span class="error-message">Please enter your company name</span></div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" required placeholder="john@company.com"><span class="error-message">Please enter a valid email</span></div>
-                    <div class="form-group"><label for="phone">Phone *</label><input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567"><span class="error-message">Please enter a valid phone number</span></div>
-                </div>
-                <button type="submit" class="submit-button">${whatNext} →</button>
-            </form>
+        <div class="tcpa-block">
+          <label class="tcpa-label">
+            <input type="checkbox" id="l-tcpa" required>
+            <span class="tcpa-text">By submitting this form, I consent to be contacted by OTB Solutions LLC and its licensed insurance representatives at the phone number and email provided, including through the use of automated telephone dialing systems, pre-recorded messages, and artificial intelligence voice agents, regarding ICHRA and health benefit solutions. Message and data rates may apply. Consent is not a condition of purchasing any product or service. You may opt out at any time by replying STOP or contacting us directly. <a href="#privacy-policy">Privacy Policy</a>.</span>
+          </label>
+          <div class="tcpa-error" id="l-tcpa-error">You must agree to the terms above to submit.</div>
         </div>
+        <button type="submit" class="submit-button">${whatNext} &rarr;</button>
+      </form>
+    </div>
+    <div class="result-section"><h3>Data points &amp; context:</h3>${dataPoints}</div>
+    <button class="restart-button" onclick="location.reload()">&larr; Start over</button>
+  `;
 
-        <button class="restart-button" onclick="location.reload()">← Start over</button>
-    `;
-
-    document.querySelectorAll('.question-container').forEach(q=>q.classList.remove('active'));
-    rc.classList.add('active');
-    clearProgress();
-    document.getElementById('saveProgressBtn').style.display='none';
-
-    setTimeout(()=>{
-        const fill=document.querySelector('.thermometer-fill');
-        if(fill) fill.style.width=Math.min((totalScore/MAX_SCORE)*100,100)+'%';
-        if(totalScore>=12) setTimeout(createConfetti,800);
-    },100);
+  document.querySelectorAll('.question-container').forEach(q=>q.classList.remove('active'));
+  rc.classList.add('active');
+  clearProgress();
+  const spb=document.getElementById('saveProgressBtn');if(spb)spb.style.display='none';
+  const nb=document.getElementById('navbar');if(nb){const nl=nb.querySelector('#navLinks');if(nl)nl.style.visibility='hidden';}
+  setTimeout(()=>{
+    const fill=document.getElementById('thermometerFill');
+    if(fill)fill.style.width=Math.max(0,Math.min((totalScore/MAX_SCORE)*100,100))+'%';
+    if(totalScore>=12)setTimeout(createConfetti,800);
+    rc.scrollIntoView({behavior:'smooth',block:'start'});
+    const cal=document.getElementById('chatAdvisorLink');if(cal)cal.style.display='block';
+  },100);
 }
 
-// FORM SUBMISSION
+// ── FORM SUBMISSION ───────────────────────────────────────────────────
 function submitToSheet(payload,btn,successText){
-    btn.textContent='Sending…'; btn.disabled=true;
-    fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)})
-        .then(()=>{ btn.textContent=successText; btn.style.background='var(--green)'; btn.closest('form').querySelectorAll('input').forEach(i=>i.disabled=true); })
-        .catch(()=>{ btn.textContent='Try again'; btn.disabled=false; alert('Connection issue. Please try again.'); });
+  btn.textContent='Sending...';btn.disabled=true;
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)})
+    .then(()=>{btn.textContent='Submitted!';btn.style.background='var(--green)';btn.closest('form').querySelectorAll('input').forEach(i=>i.disabled=true);})
+    .catch(()=>{btn.textContent='Try again';btn.disabled=false;alert('Connection issue. Please try again.');});
 }
-function getTier(){ return totalScore>=12?'Prime ICHRA Candidate':totalScore>=8?'Strong Fit':totalScore>=4?'Worth Exploring':totalScore>=1?'Monitor Situation':'Not Recommended'; }
+
+function validateForm(form,prefix){
+  const n=form.querySelector(`#${prefix}-name`),co=form.querySelector(`#${prefix}-company`),em=form.querySelector(`#${prefix}-email`),ph=form.querySelector(`#${prefix}-phone`),zp=form.querySelector(`#${prefix}-zip`),tc=form.querySelector(`#${prefix}-tcpa`);
+  let ok=true;
+  [n,co].forEach(f=>{if(!f||f.value.trim().length<2){if(f)showErr(f);ok=false;}else showOk(f);});
+  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){if(em)showErr(em);ok=false;}else showOk(em);
+  if(!ph||!/[\d\s\-\(\)\+]{10,}/.test(ph.value.trim())){if(ph)showErr(ph);ok=false;}else showOk(ph);
+  if(!zp||zp.value.trim().length<5){if(zp)showErr(zp);ok=false;}else showOk(zp);
+  if(tc&&!tc.checked){const te=form.querySelector(`#${prefix}-tcpa-error`);if(te)te.style.display='block';ok=false;}else if(tc){const te=form.querySelector(`#${prefix}-tcpa-error`);if(te)te.style.display='none';}
+  return {ok,n,co,em,ph,zp};
+}
 
 function handleLeadSubmit(event){
-    event.preventDefault();
-    const form=event.target;
-    const n=form.querySelector('#name'),co=form.querySelector('#company'),em=form.querySelector('#email'),ph=form.querySelector('#phone');
-    let ok=true;
-    [n,co].forEach(f=>{ if(f.value.trim().length<2){showErr(f);ok=false;}else showOk(f); });
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){showErr(em);ok=false;}else showOk(em);
-    if(!/[\d\s\-\(\)\+]{10,}/.test(ph.value.trim())){showErr(ph);ok=false;}else showOk(ph);
-    if(!ok) return false;
-    const q1Label = answers.q1===0?'1-4 employees':answers.q1===1?'5-49 employees':'50+ employees (ALE)';
-    const q2Label = answers.q2==='no-offer'?'No health benefits currently':answers.q2==='group-plan'?'Traditional group health plan':answers.q2==='stipend'?'Taxable stipend/reimbursement':'Not specified';
-    const q4Label = answers.q4.length>0?answers.q4.join(' > '):'Default order';
-    const q5Label = answers.q5===0?'Full-time, single location':answers.q5===3?'Multi-state or remote':answers.q5===2?'Mixed full/part-time/seasonal':'Marketplace subsidy eligible';
-    const q3RawMap = {
-        'no-offer': {3:'Too expensive',2:'Not enough employees / dont know where to start','-2':'Employees covered elsewhere'},
-        'group-plan': {'-1':'Premiums stable',1:'Premiums rising moderately',4:'Premiums unsustainable / high claims',3:'Participation/multi-state issues'},
-        'stipend': {3:'Tax burden / wants compliance',2:'Wants more structure',4:'Approaching 50 employees'}
-    };
-    const q3Label = (q3RawMap[answers.q2] && q3RawMap[answers.q2][String(answers.q3)]) || ('Score: '+answers.q3);
-    submitToSheet({
-        name:n.value.trim(), company:co.value.trim(), email:em.value.trim(), phone:ph.value.trim(),
-        score:totalScore, tier:getTier(), industry:answers.industry||'Not specified',
-        companySize:q1Label, currentBenefits:q2Label, benefitDetail:q3Label,
-        priorityOrder:q4Label, workforce:q5Label
-    },form.querySelector('.submit-button'),'Submitted!');
+  event.preventDefault();
+  const form=event.target;
+  const {ok,n,co,em,ph,zp}=validateForm(form,'l');
+  if(!ok)return false;
+  const q1Label=answers.q1===0?'1-4 employees':answers.q1===1?'5-49 employees':'50+ employees (ALE)';
+  const q2Label=answers.q2==='no-offer'?'No health benefits':answers.q2==='group-plan'?'Group health plan':'Taxable stipend';
+  const q4Label=answers.q4.length>0?answers.q4.join(' > '):'Default';
+  const q5Label=answers.q5===0?'Single location':answers.q5===3?'Multi-state':answers.q5===2?'Mixed workforce':'Subsidy eligible';
+  const q3Map={'no-offer':{3:'Too expensive',2:'Not enough employees','-2':'Covered elsewhere'},'group-plan':{'-1':'Stable',1:'Rising mod.',4:'Unsustainable',3:'Participation/multistate'},'stipend':{3:'Tax/compliance',2:'More structure',4:'ACA threshold'}};
+  const q3Label=(q3Map[answers.q2]&&q3Map[answers.q2][String(answers.q3)])||String(answers.q3);
+  submitToSheet({name:n.value.trim(),company:co.value.trim(),email:em.value.trim(),phone:ph.value.trim(),zip:zp.value.trim(),score:totalScore,tier:getTier(),industry:answers.industry||'Not specified',companySize:q1Label,currentBenefits:q2Label,benefitDetail:q3Label,priorityOrder:q4Label,workforce:q5Label},form.querySelector('.submit-button'),'Submitted!');
 }
 
 function handleModalSubmit(event){
-    event.preventDefault();
-    const n=document.getElementById('modal-name'),co=document.getElementById('modal-company'),em=document.getElementById('modal-email'),ph=document.getElementById('modal-phone');
-    let ok=true;
-    [n,co].forEach(f=>{ if(f.value.trim().length<2){showErr(f);ok=false;}else showOk(f); });
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim())){showErr(em);ok=false;}else showOk(em);
-    if(!/[\d\s\-\(\)\+]{10,}/.test(ph.value.trim())){showErr(ph);ok=false;}else showOk(ph);
-    if(!ok) return false;
-    submitToSheet({name:n.value.trim(),company:co.value.trim(),email:em.value.trim(),phone:ph.value.trim(),score:'Direct inquiry',tier:'Direct inquiry',industry:'Not specified',companySize:'Not captured',currentBenefits:'Not captured',benefitDetail:'Not captured',priorityOrder:'Not captured',workforce:'Not captured'},document.getElementById('modalSubmitBtn'),"We'll be in touch!");
+  event.preventDefault();
+  const form=event.target;
+  const {ok,n,co,em,ph,zp}=validateForm(form,'m');
+  if(!ok)return false;
+  submitToSheet({name:n.value.trim(),company:co.value.trim(),email:em.value.trim(),phone:ph.value.trim(),zip:zp.value.trim(),score:'Direct inquiry',tier:'Direct inquiry',industry:'Not specified',companySize:'Not captured',currentBenefits:'Not captured',benefitDetail:'Not captured',priorityOrder:'Not captured',workforce:'Not captured'},document.getElementById('modalSubmitBtn'),"We'll be in touch!");
 }
 
-function showErr(input){ const fg=input.parentElement; fg.classList.remove('success'); fg.classList.add('error'); }
-function showOk(input){ const fg=input.parentElement; fg.classList.remove('error'); fg.classList.add('success'); }
+function showErr(i){const fg=i.parentElement;fg.classList.remove('success');fg.classList.add('error');}
+function showOk(i){const fg=i.parentElement;fg.classList.remove('error');fg.classList.add('success');}
 
-// MODAL
+// ── ADVISOR MODAL ─────────────────────────────────────────────────────
 document.getElementById('advisorFloatBtn').addEventListener('click',()=>{
-    const rc=document.getElementById('resultsContainer');
-    if(rc.classList.contains('active')){ const lf=rc.querySelector('.lead-form'); if(lf) lf.scrollIntoView({behavior:'smooth',block:'start'}); }
-    else document.getElementById('advisorModal').classList.add('active');
+  const rc=document.getElementById('resultsContainer');
+  if(rc.classList.contains('active')){const lf=rc.querySelector('.lead-form');if(lf)lf.scrollIntoView({behavior:'smooth',block:'start'});}
+  else document.getElementById('advisorModal').classList.add('active');
 });
 document.getElementById('modalClose').addEventListener('click',()=>document.getElementById('advisorModal').classList.remove('active'));
-document.getElementById('advisorModal').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('active'); });
+document.getElementById('advisorModal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('active');});
 
-// SAVE/RESUME
-function saveProgress(){ localStorage.setItem('ichra_progress',JSON.stringify({currentQuestion,answers,timestamp:new Date().toISOString()})); const btn=document.getElementById('saveProgressBtn'); btn.textContent='Saved!'; btn.classList.add('saved'); setTimeout(()=>{ btn.textContent='Save Progress'; btn.classList.remove('saved'); },2000); }
-function loadProgress(){ const saved=localStorage.getItem('ichra_progress'); if(!saved) return false; try{ const p=JSON.parse(saved); answers=p.answers; currentQuestion=p.currentQuestion; showQuestion(currentQuestion); document.getElementById('resumeProgressBtn').style.display='none'; document.getElementById('saveProgressBtn').style.display='flex'; return true; }catch(e){ return false; } }
-function clearProgress(){ localStorage.removeItem('ichra_progress'); }
-window.addEventListener('DOMContentLoaded',()=>{ if(localStorage.getItem('ichra_progress')) document.getElementById('resumeProgressBtn').style.display='flex'; else document.getElementById('saveProgressBtn').style.display='flex'; });
-document.addEventListener('click',e=>{ if(e.target.classList.contains('option')){ document.getElementById('saveProgressBtn').style.display='flex'; setTimeout(saveProgress,600); } });
+// ── CHAT WIDGET ───────────────────────────────────────────────────────
+function toggleChat(){
+  const panel=document.getElementById('chatPanel');
+  const isOpen=panel.classList.contains('open');
+  if(isOpen){panel.classList.remove('open');}
+  else{panel.classList.add('open');if(!chatConsented)showChatConsentScreen();}
+}
+function showChatConsentScreen(){
+  document.getElementById('chatConsentScreen').style.display='';
+  document.getElementById('chatMessages').style.display='none';
+  document.getElementById('chatInputArea').style.display='none';
+}
+function agreeToChat(){
+  chatConsented=true;
+  document.getElementById('chatConsentScreen').style.display='none';
+  document.getElementById('chatMessages').style.display='flex';
+  document.getElementById('chatInputArea').style.display='flex';
+  appendChatMsg('assistant','Hi! I can answer questions about ICHRA, explain how it works, or help you understand your assessment results. What would you like to know?');
+}
+function declineChat(){
+  document.getElementById('chatPanel').classList.remove('open');
+}
+document.getElementById('chatBtn').addEventListener('click',toggleChat);
+
+function buildSysPrompt(){
+  let sys=`You are an ICHRA specialist assistant for OTB Solutions LLC. ICHRA (Individual Coverage Health Reimbursement Arrangement) is a tax-free health benefit allowing employers to give employees a fixed monthly allowance to purchase their own ACA marketplace health insurance.\n\nYour role: Answer questions about ICHRA clearly and accurately. Help users understand their assessment results. Explain ICHRA vs. traditional group plans. Address common objections and concerns. Be concise — under 150 words per response when possible.\n\nKey facts: Established by IRS regulation in 2020. No minimum contributions. No participation minimums. ACA compliant. Tax-free reimbursements. Employees must have their own ACA-compliant insurance.\n\nDo NOT give specific legal or tax advice. Do NOT guarantee specific savings. When users need formal quotes or advice, say: "For numbers specific to your business, speak with an OTB Solutions LLC advisor directly — use the Talk to Advisor button."`;
+  if(quizContext)sys+=`\n\nThis user completed the ICHRA assessment. Results: Tier: ${quizContext.tier}. Industry: ${quizContext.industry}. Company size: ${quizContext.companySize}. Current benefits: ${quizContext.currentBenefits}. Use this to personalize responses.`;
+  return sys;
+}
+
+async function sendChatMessage(){
+  const input=document.getElementById('chatInputField');
+  const msg=input.value.trim();if(!msg)return;
+  input.value='';
+  appendChatMsg('user',msg);
+  chatHistory.push({role:'user',content:msg});
+  const tid=appendChatMsg('assistant','...');
+  try{
+    if(!WORKER_URL||WORKER_URL.includes('YOUR-WORKER')){
+      const el=document.getElementById(tid);if(el)el.querySelector('.chat-msg-text').textContent='Chat is not yet configured. Please use the Talk to Advisor button to connect directly.';return;
+    }
+    const resp=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:buildSysPrompt(),messages:chatHistory})});
+    const data=await resp.json();
+    const text=data?.content?.[0]?.text||'Sorry, I had trouble with that. Please try again.';
+    chatHistory.push({role:'assistant',content:text});
+    const el=document.getElementById(tid);if(el)el.querySelector('.chat-msg-text').textContent=text;
+  }catch(e){
+    const el=document.getElementById(tid);if(el)el.querySelector('.chat-msg-text').textContent='Connection issue. Please try again or use the Talk to Advisor button.';
+  }
+}
+
+let chatMsgId=0;
+function appendChatMsg(role,text){
+  const id='cm-'+(++chatMsgId);
+  const msgs=document.getElementById('chatMessages');
+  const d=document.createElement('div');d.id=id;d.className='chat-message '+role;
+  d.innerHTML=`<div class="chat-msg-text">${text}</div>`;
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+  return id;
+}
+
+// ── SAVE / RESUME ─────────────────────────────────────────────────────
+function saveProgress(){
+  localStorage.setItem('ichra_v2',JSON.stringify({currentQuestion,answers,ts:new Date().toISOString()}));
+  const btn=document.getElementById('saveProgressBtn');btn.textContent='Saved!';btn.classList.add('saved');
+  setTimeout(()=>{btn.textContent='Save Progress';btn.classList.remove('saved');},2000);
+}
+function loadProgress(){
+  const s=localStorage.getItem('ichra_v2');if(!s)return false;
+  try{const p=JSON.parse(s);answers=p.answers;currentQuestion=p.currentQuestion;showQuestion(currentQuestion);document.getElementById('resumeProgressBtn').style.display='none';document.getElementById('saveProgressBtn').style.display='flex';return true;}catch(e){return false;}
+}
+function clearProgress(){localStorage.removeItem('ichra_v2');}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('ichra_v2');
+  if(saved)document.getElementById('resumeProgressBtn').style.display='flex';
+  else document.getElementById('saveProgressBtn').style.display='flex';
+  updatePriorityNumbers();
+});
+document.addEventListener('click',e=>{if(e.target.classList.contains('option')){document.getElementById('saveProgressBtn').style.display='flex';setTimeout(saveProgress,600);}});
 document.getElementById('saveProgressBtn').addEventListener('click',saveProgress);
-document.getElementById('resumeProgressBtn').addEventListener('click',()=>{ if(loadProgress()) alert('Progress restored!'); });
+document.getElementById('resumeProgressBtn').addEventListener('click',()=>{if(loadProgress())alert('Progress restored!');});
 
-// KEYBOARD
+// ── KEYBOARD NAV ──────────────────────────────────────────────────────
 document.addEventListener('keydown',function(e){
-    const aq=document.querySelector('.question-container.active'); if(!aq) return;
-    const opts=aq.querySelectorAll('.option'), cur=aq.querySelector('.option.selected');
-    if(e.key==='ArrowDown'||e.key==='ArrowUp'){ e.preventDefault(); let idx=cur?Array.from(opts).indexOf(cur):-1; idx=e.key==='ArrowDown'?(idx+1)%opts.length:(idx-1+opts.length)%opts.length; opts[idx].focus(); }
-    if(e.key==='Enter'&&document.activeElement.classList.contains('option')) document.activeElement.click();
+  const aq=document.querySelector('.question-container.active');if(!aq)return;
+  const opts=aq.querySelectorAll('.option'),cur=aq.querySelector('.option.selected');
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();let idx=cur?Array.from(opts).indexOf(cur):-1;idx=e.key==='ArrowDown'?(idx+1)%opts.length:(idx-1+opts.length)%opts.length;opts[idx].focus();}
+  if(e.key==='Enter'&&document.activeElement.classList.contains('option'))document.activeElement.click();
 });
 
+// ── NAV HAMBURGER ─────────────────────────────────────────────────────
+function toggleMobileNav(){document.getElementById('mobileNav').classList.toggle('open');}
 
-// CONFETTI
+// ── CONFETTI ──────────────────────────────────────────────────────────
 function createConfetti(){
-    const colors=['#00A7E1','#F89728','#0088B8','#FFD700','#27AE60'];
-    const c=document.createElement('div'); c.className='confetti-container'; document.body.appendChild(c);
-    for(let i=0;i<120;i++){ setTimeout(()=>{ const el=document.createElement('div'); el.className='confetti'; const sz=6+Math.random()*9; el.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*0.4}s;${Math.random()>0.5?'border-radius:50%;':''}`; c.appendChild(el); setTimeout(()=>el.remove(),4000); },i*12); }
-    setTimeout(()=>c.remove(),5500);
+  const colors=['#00A7E1','#2C4A6E','#0088B8','#FFD700','#27AE60'];
+  const c=document.createElement('div');c.className='confetti-container';document.body.appendChild(c);
+  for(let i=0;i<120;i++){setTimeout(()=>{const el=document.createElement('div');el.className='confetti';const sz=6+Math.random()*9;el.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${2+Math.random()*2}s;animation-delay:${Math.random()*0.4}s;${Math.random()>.5?'border-radius:50%;':''}`;c.appendChild(el);setTimeout(()=>el.remove(),4500);},i*12);}
+  setTimeout(()=>c.remove(),6000);
 }
 
-// MOBILE MOVE BUTTONS
-function movePriority(btn, direction) {
-    const item = btn.closest('.priority-item');
-    const list = item.parentElement;
-    const items = [...list.querySelectorAll('.priority-item')];
-    const idx = items.indexOf(item);
-    const targetIdx = idx + direction;
-    if (targetIdx < 0 || targetIdx >= items.length) return;
-    if (direction === -1) list.insertBefore(item, items[targetIdx]);
-    else list.insertBefore(items[targetIdx], item);
-    updatePriorityNumbers();
-    // Update button states
-    list.querySelectorAll('.priority-item').forEach((it, i) => {
-        const btns = it.querySelectorAll('.priority-move-btn');
-        if (btns.length === 2) { btns[0].disabled = (i === 0); btns[1].disabled = (i === items.length - 1); }
-    });
-}
-
-// MOBILE DRAG
-let lpt=null, imd=false;
+// ── MOBILE DRAG ───────────────────────────────────────────────────────
+let lpt=null,imd=false;
 const mob=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-function setupMobDrag(){ document.querySelectorAll('.priority-item').forEach(item=>{ item.addEventListener('touchstart',function(e){ if(!mob) return; lpt=setTimeout(()=>{ imd=true; this.style.opacity='0.6'; this.style.transform='scale(1.03)'; if(navigator.vibrate) navigator.vibrate(40); },200); },{passive:true}); item.addEventListener('touchmove',function(e){ if(!imd) return; e.preventDefault(); const t=e.touches[0]; const after=[...this.parentElement.querySelectorAll('.priority-item:not(.dragging)')].reduce((cl,ch)=>{ const b=ch.getBoundingClientRect(),off=t.clientY-b.top-b.height/2; return(off<0&&off>cl.offset)?{offset:off,element:ch}:cl; },{offset:Number.NEGATIVE_INFINITY}).element; if(after==null) this.parentElement.appendChild(this); else this.parentElement.insertBefore(this,after); updatePriorityNumbers(); },{passive:false}); item.addEventListener('touchend',function(){ clearTimeout(lpt); if(imd){ this.style.opacity=''; this.style.transform=''; imd=false; if(navigator.vibrate) navigator.vibrate(25); } }); item.addEventListener('touchcancel',function(){ clearTimeout(lpt); this.style.opacity=''; this.style.transform=''; imd=false; }); }); }
-const po=new MutationObserver(ms=>ms.forEach(m=>{ if(m.target.id==='question5'&&m.target.classList.contains('active')) setTimeout(setupMobDrag,100); }));
+function setupMobDrag(){
+  document.querySelectorAll('.priority-item').forEach(item=>{
+    item.addEventListener('touchstart',function(e){if(!mob)return;lpt=setTimeout(()=>{imd=true;this.style.opacity='.6';this.style.transform='scale(1.03)';if(navigator.vibrate)navigator.vibrate(40);},200);},{passive:true});
+    item.addEventListener('touchmove',function(e){if(!imd)return;e.preventDefault();const t=e.touches[0];const after=[...this.parentElement.querySelectorAll('.priority-item')].reduce((cl,ch)=>{const b=ch.getBoundingClientRect(),off=t.clientY-b.top-b.height/2;return(off<0&&off>cl.offset)?{offset:off,element:ch}:cl;},{offset:Number.NEGATIVE_INFINITY}).element;if(after==null)this.parentElement.appendChild(this);else this.parentElement.insertBefore(this,after);updatePriorityNumbers();},{passive:false});
+    item.addEventListener('touchend',function(){clearTimeout(lpt);if(imd){this.style.opacity='';this.style.transform='';imd=false;if(navigator.vibrate)navigator.vibrate(25);}});
+    item.addEventListener('touchcancel',function(){clearTimeout(lpt);this.style.opacity='';this.style.transform='';imd=false;});
+  });
+}
+const po=new MutationObserver(ms=>ms.forEach(m=>{if(m.target.id==='question5'&&m.target.classList.contains('active'))setTimeout(setupMobDrag,100);}));
 document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('.question-container').forEach(q=>po.observe(q,{attributes:true,attributeFilter:['class']})));
 
-// PRINT STYLES
+// ── SCROLL ANIMATIONS ─────────────────────────────────────────────────
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
+
+// ── PRINT STYLES ──────────────────────────────────────────────────────
 const ps=document.createElement('style');
-ps.textContent='@media print { .utility-buttons,.advisor-float,.lead-form,.restart-button,.modal-overlay { display:none !important; } @page { margin:0.5in; } }';
+ps.textContent='@media print{.utility-buttons,.advisor-float,.chat-btn,.chat-panel,.lead-form,.restart-button,.modal-overlay{display:none!important}@page{margin:.5in}}';
 document.head.appendChild(ps);
 </script>
+
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  GOOGLE APPS SCRIPT — UPDATE YOUR SHEET SCRIPT TO THIS      ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  function doPost(e) {                                        ║
+║    try {                                                     ║
+║      var sheet = SpreadsheetApp.getActiveSpreadsheet()       ║
+║                    .getActiveSheet();                        ║
+║      var data = JSON.parse(e.postData.contents);             ║
+║      sheet.appendRow([                                       ║
+║        new Date(), data.name, data.company, data.email,      ║
+║        data.phone, data.zip || '',                           ║
+║        data.score, data.tier, data.industry,                 ║
+║        data.companySize || '',                               ║
+║        data.currentBenefits || '',                           ║
+║        data.benefitDetail || '',                             ║
+║        data.priorityOrder || '',                             ║
+║        data.workforce || ''                                  ║
+║      ]);                                                     ║
+║      return ContentService                                   ║
+║        .createTextOutput(JSON.stringify({result:'success'})) ║
+║        .setMimeType(ContentService.MimeType.JSON);           ║
+║    } catch(error) {                                          ║
+║      return ContentService                                   ║
+║        .createTextOutput(JSON.stringify({result:'error',     ║
+║          message:error.toString()}))                         ║
+║        .setMimeType(ContentService.MimeType.JSON);           ║
+║    }                                                         ║
+║  }                                                           ║
+║                                                              ║
+║  SHEET HEADERS (Row 1):                                      ║
+║  Timestamp | Name | Company | Email | Phone | Zip |         ║
+║  Score | Tier | Industry | Company Size | Current Benefits   ║
+║  | Benefit Detail | Priority Order | Workforce Type          ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+
 </body>
 </html>
