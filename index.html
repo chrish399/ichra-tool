@@ -1465,8 +1465,8 @@ document.getElementById('advisorFloatBtn').addEventListener('click',()=>{
   if(rc.classList.contains('active')){const lf=rc.querySelector('.lead-form');if(lf)lf.scrollIntoView({behavior:'smooth',block:'start'});}
   else openAdvisorModal();
 });
-function openAdvisorModal(){openAdvisorModal();document.body.style.overflow='hidden';}
-function closeAdvisorModal(){closeAdvisorModal();document.body.style.overflow='';}
+function openAdvisorModal(){document.getElementById('advisorModal').classList.add('active');document.body.style.overflow='hidden';}
+function closeAdvisorModal(){document.getElementById('advisorModal').classList.remove('active');document.body.style.overflow='';}
 document.getElementById('modalClose').addEventListener('click',()=>{closeAdvisorModal();document.body.style.overflow='';});
 document.getElementById('advisorModal').addEventListener('click',function(e){if(e.target===this){this.classList.remove('active');document.body.style.overflow='';}});
 
