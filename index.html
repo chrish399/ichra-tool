@@ -403,7 +403,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
       <div class="modal-field"><div class="form-group"><label for="m-name">Name *</label><input type="text" id="m-name" required placeholder="John Smith"><span class="error-message">Please enter your name</span></div></div>
       <div class="modal-field"><div class="form-group"><label for="m-company">Company *</label><input type="text" id="m-company" required placeholder="ABC Corporation"><span class="error-message">Please enter your company</span></div></div>
       <div class="modal-field"><div class="form-group"><label for="m-email">Email *</label><input type="email" id="m-email" required placeholder="john@company.com"><span class="error-message">Please enter a valid email</span></div></div>
-      <div class="modal-field"><div class="form-group"><label for="m-phone">Phone *</label><input type="tel" id="m-phone" required placeholder="(555) 123-4567"><span class="error-message">Please enter a valid phone</span></div></div>
+      <div class="modal-field"><div class="form-group"><label for="m-phone">Phone *</label><input type="tel" id="m-phone" required placeholder="(555) 123-4567" oninput="fmtPhone(this)"><span class="error-message">Please enter a valid phone</span></div></div>
       <div class="modal-field"><div class="form-group"><label for="m-zip">Zip Code *</label><input type="text" id="m-zip" required placeholder="30301" maxlength="10"><span class="error-message">Please enter your zip code</span></div></div>
       <div class="tcpa-block">
         <label class="tcpa-label">
@@ -418,15 +418,15 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
 </div>
 
 <!-- CHAT WIDGET -->
-<button class="chat-btn" id="chatBtn" title="Ask ICHRA questions">AI</button>
+<button class="chat-btn" id="chatBtn" title="Chat with BenefitIQ · AI Assistant" style="font-size:9px;letter-spacing:.3px;line-height:1.2">Benefit<br>IQ</button>
 <div class="chat-panel" id="chatPanel">
   <div class="chat-header">
-    <div><div class="chat-header-title">ICHRA Assistant</div><div class="chat-header-sub">Powered by OTB Solutions LLC</div></div>
+    <div><div class="chat-header-title">BenefitIQ</div><div class="chat-header-sub">AI Assistant · OTB Solutions LLC</div></div>
     <button class="chat-close-btn" onclick="toggleChat()">&#x2715;</button>
   </div>
   <div class="chat-consent" id="chatConsentScreen">
-    <div class="chat-consent-title">Before we chat</div>
-    <div class="chat-consent-text">Hi, I am an AI assistant for OTB Solutions LLC, powered by Claude (Anthropic). I can answer questions about ICHRA, help you understand your assessment results, and connect you with an advisor.<br><br>Conversations with this assistant may be retained and used by OTB Solutions LLC to improve our services, consistent with our <a href="#privacy-policy">Privacy Policy</a>. By continuing to chat you agree to these terms.</div>
+    <div class="chat-consent-title">Meet BenefitIQ</div>
+    <div class="chat-consent-text">Hi, I'm BenefitIQ — an AI assistant for OTB Solutions LLC, powered by Claude (Anthropic). Ask me anything about ICHRA, your assessment results, or how health benefits work for your business.<br><br>Conversations with this assistant may be retained and used by OTB Solutions LLC to improve our services, consistent with our <a href="#privacy-policy">Privacy Policy</a>. By continuing to chat you agree to these terms.</div>
     <div class="chat-consent-btns">
       <button class="chat-agree-btn" onclick="agreeToChat()">Yes, let's chat</button>
       <button class="chat-decline-btn" onclick="declineChat()">No thanks</button>
@@ -791,6 +791,14 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
   </div>
 </footer>
 <script>
+// ── PHONE FORMAT ─────────────────────────────────────────────────────
+function fmtPhone(el){
+  let v=el.value.replace(/\D/g,'').substring(0,10);
+  if(v.length>=6)v='('+v.substring(0,3)+') '+v.substring(3,6)+'-'+v.substring(6);
+  else if(v.length>=3)v='('+v.substring(0,3)+') '+v.substring(3);
+  el.value=v;
+}
+
 // ── CONFIGURATION ─────────────────────────────────────────────────────
 // Replace WORKER_URL after deploying worker.js to Cloudflare
 const WORKER_URL = 'https://ichra-chat-proxy.chris-c33.workers.dev';
@@ -1169,7 +1177,7 @@ function showResults(){
         </div>
         <div class="form-row">
           <div class="form-group"><label for="l-email">Email *</label><input type="email" id="l-email" required placeholder="john@company.com"><span class="error-message">Please enter a valid email</span></div>
-          <div class="form-group"><label for="l-phone">Phone *</label><input type="tel" id="l-phone" required placeholder="(555) 123-4567"><span class="error-message">Please enter a valid phone</span></div>
+          <div class="form-group"><label for="l-phone">Phone *</label><input type="tel" id="l-phone" required placeholder="(555) 123-4567" oninput="fmtPhone(this)"><span class="error-message">Please enter a valid phone</span></div>
         </div>
         <div class="form-row" style="grid-template-columns:1fr 1fr">
           <div class="form-group"><label for="l-zip">Zip Code *</label><input type="text" id="l-zip" required placeholder="30301" maxlength="10"><span class="error-message">Please enter your zip code</span></div>
@@ -1272,7 +1280,7 @@ function agreeToChat(){
   document.getElementById('chatConsentScreen').style.display='none';
   document.getElementById('chatMessages').style.display='flex';
   document.getElementById('chatInputArea').style.display='flex';
-  appendChatMsg('assistant','Hi! I can answer questions about ICHRA, explain how it works, or help you understand your assessment results. What would you like to know?');
+  appendChatMsg('assistant','Hi! I\'m BenefitIQ. Ask me anything about ICHRA — how it works, whether it fits your business, or what your assessment results mean. What\'s on your mind?');
 }
 function declineChat(){
   document.getElementById('chatPanel').classList.remove('open');
