@@ -173,8 +173,8 @@ body{font-family:var(--font);font-weight:400;background:var(--gray-light);color:
 .step-connector.completed{background:var(--blue-bright)}
 
 /* QUESTION CONTAINERS */
-.question-container{background:var(--white);padding:40px;margin-bottom:20px;display:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07);animation:slideIn .35s ease forwards}
-.question-container.active{display:block}
+.question-container{background:var(--white);padding:40px;margin-bottom:20px;display:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+.question-container.active{display:block}.question-container.entering{animation:slideIn .35s ease forwards}
 .question-container.exiting{animation:slideOut .35s ease forwards}
 @keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
 @keyframes slideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-40px)}}
@@ -460,7 +460,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
       <div class="tcpa-block">
         <label class="tcpa-label">
           <input type="checkbox" id="m-tcpa" required>
-          <span class="tcpa-text">By submitting this form, I consent to be contacted by OTB Solutions LLC and its licensed insurance representatives at the phone number and email provided, including through the use of automated telephone dialing systems, pre-recorded messages, and artificial intelligence voice agents, regarding ICHRA and health benefit solutions. Message and data rates may apply. Consent is not a condition of purchasing any product or service. You may opt out at any time by replying STOP or contacting us directly. <a href="#privacy-policy">Privacy Policy</a>.</span>
+          <span class="tcpa-text">By submitting this form, I consent to be contacted by OTB Solutions LLC and its licensed insurance representatives at the phone number and email provided, including through the use of automated telephone dialing systems, pre-recorded messages, and artificial intelligence voice agents, regarding ICHRA and health benefit solutions. Message and data rates may apply. Consent is not a condition of purchasing any product or service. You may opt out at any time by replying STOP or contacting us directly. <a href="privacy.html">Privacy Policy</a>.</span>
         </label>
         <div class="tcpa-error" id="m-tcpa-error">You must agree to the terms above to submit.</div>
       </div>
@@ -478,7 +478,7 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
   </div>
   <div class="chat-consent" id="chatConsentScreen">
     <div class="chat-consent-title">Meet BenefitIQ</div>
-    <div class="chat-consent-text">Hi, I'm BenefitIQ — an AI assistant for OTB Solutions LLC, powered by Claude (Anthropic). Ask me anything about ICHRA, your assessment results, or how health benefits work for your business.<br><br>Conversations with this assistant may be retained and used by OTB Solutions LLC to improve our services, consistent with our <a href="#privacy-policy">Privacy Policy</a>. By continuing to chat you agree to these terms.</div>
+    <div class="chat-consent-text">Hi, I'm BenefitIQ — an AI assistant for OTB Solutions LLC, powered by Claude (Anthropic). Ask me anything about ICHRA, your assessment results, or how health benefits work for your business.<br><br>Conversations with this assistant may be retained and used by OTB Solutions LLC to improve our services, consistent with our <a href="privacy.html">Privacy Policy</a>. By continuing to chat you agree to these terms.</div>
     <div class="chat-consent-btns">
       <button class="chat-agree-btn" onclick="agreeToChat()">Yes, let's chat</button>
       <button class="chat-decline-btn" onclick="declineChat()">No thanks</button>
@@ -878,93 +878,6 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
   </div>
 </section>
 
-<section id="privacy-policy">
-  <div class="privacy-inner">
-    <h2>Privacy Policy</h2>
-    <p class="privacy-meta">OTB Solutions LLC &mdash; Last updated: 2025.</p>
-    <div class="privacy-section">
-      <h3>1. Information we collect</h3>
-      <ul>
-        <li>Personal information you provide: name, company name, email address, phone number, zip code</li>
-        <li>Assessment responses: answers to quiz questions about your business and benefits situation</li>
-        <li>Usage data: how you interact with this assessment tool</li>
-      </ul>
-    </div>
-    <div class="privacy-section">
-      <h3>2. How we use your information</h3>
-      <ul>
-        <li>To provide personalized ICHRA assessment results</li>
-        <li>To contact you about ICHRA and related health benefit solutions, including via automated systems and AI voice agents where you have provided consent</li>
-        <li>To improve our assessment tool and services</li>
-      </ul>
-    </div>
-    <div class="privacy-section">
-      <h3>3. Information sharing</h3>
-      <p>We do not sell your personal information to third parties. We may share information with licensed insurance professionals working on our behalf to fulfill your consultation request. We use Google services to store lead information securely.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>4. Data retention</h3>
-      <p>We retain your information for as long as necessary to provide our services and as required by applicable law. To request deletion of your data, contact us at the address below.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>5. Your rights and choices</h3>
-      <ul>
-        <li>Opt out of communications at any time by replying STOP to texts or clicking unsubscribe in emails</li>
-        <li>Request access to or deletion of your personal data by contacting us directly</li>
-        <li>You may withdraw consent for AI-assisted contact at any time</li>
-      </ul>
-    </div>
-    <div class="privacy-section">
-      <h3>6. Contact</h3>
-      <p>OTB Solutions LLC &mdash; <a href="mailto:chris@solutionotb.com">chris@solutionotb.com</a></p>
-    </div>
-    <div class="privacy-section">
-      <h3>7. Changes to this policy</h3>
-      <p>We may update this policy periodically. Continued use of this tool constitutes acceptance of the updated policy.</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- TERMS OF USE -->
-<section id="terms-of-use" style="background:var(--blue-light);padding:60px 24px;border-top:1px solid var(--gray-mid);">
-  <div class="privacy-inner">
-    <h2>Terms of Use</h2>
-    <p class="privacy-meta">OTB Solutions LLC &mdash; Last updated: 2025.</p>
-    <div class="privacy-section">
-      <h3>1. Acceptance of terms</h3>
-      <p>By accessing or using this assessment tool and website ("Tool"), you agree to be bound by these Terms of Use. If you do not agree, do not use the Tool.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>2. Educational purpose only</h3>
-      <p>This Tool is provided for informational and educational purposes only. It does not constitute insurance advice, legal advice, tax advice, or a binding coverage determination. Results generated by the Tool are estimates based on your inputs and do not guarantee eligibility, savings, or compliance with any law or regulation. Always consult a licensed insurance professional before making benefits decisions.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>3. No insurance solicitation</h3>
-      <p>Use of this Tool does not create an insurance agent-client relationship. OTB Solutions LLC is not an insurance carrier. Any follow-up communication from a licensed advisor is informational and subject to your explicit consent.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>4. AI-generated content</h3>
-      <p>The BenefitIQ chat assistant is powered by third-party AI technology (Anthropic Claude). Responses are generated automatically and may not reflect the most current regulatory guidance. AI responses are educational only and should not be relied upon as legal or compliance advice.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>5. Intellectual property</h3>
-      <p>All content on this Tool, including text, graphics, and software, is the property of OTB Solutions LLC or its licensors. You may not reproduce, distribute, or create derivative works without prior written permission.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>6. Limitation of liability</h3>
-      <p>OTB Solutions LLC is not liable for any damages arising from your use of or reliance on this Tool. The Tool is provided "as is" without warranties of any kind, express or implied.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>7. Governing law</h3>
-      <p>These Terms are governed by the laws of the State of Georgia. Any disputes shall be resolved in the courts of Georgia.</p>
-    </div>
-    <div class="privacy-section">
-      <h3>8. Contact</h3>
-      <p>OTB Solutions LLC &mdash; <a href="mailto:chris@solutionotb.com">chris@solutionotb.com</a></p>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
@@ -988,8 +901,8 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
       <div>
         <div style="font-weight:700;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;">Legal</div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <a href="#privacy-policy" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Privacy Policy</a>
-          <a href="#terms-of-use" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Terms of Use</a>
+          <a href="privacy.html" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Privacy Policy</a>
+          <a href="terms.html" style="font-size:13px;color:rgba(255,255,255,.55);text-decoration:none;">Terms of Use</a>
         </div>
         <div style="margin-top:20px;">
           <div style="font-weight:700;color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Contact</div>
@@ -1220,8 +1133,8 @@ function showQuestion(num){
   const cur=document.querySelector('.question-container.active');
   const next=document.getElementById('question'+num);
   if(!next)return;
-  if(cur){cur.classList.add('exiting');setTimeout(()=>{cur.classList.remove('active','exiting');next.classList.add('active');updateStepIndicator(num);setTimeout(()=>next.scrollIntoView({behavior:'smooth',block:'start'}),100);},350);}
-  else{next.classList.add('active');updateStepIndicator(num);}
+  if(cur){cur.classList.add('exiting');setTimeout(()=>{cur.classList.remove('active','exiting');next.classList.add('active','entering');updateStepIndicator(num);setTimeout(()=>next.classList.remove('entering'),350);setTimeout(()=>next.scrollIntoView({behavior:'smooth',block:'start'}),100);},350);}
+  else{next.classList.add('active','entering');updateStepIndicator(num);setTimeout(()=>next.classList.remove('entering'),350);}
   currentQuestion=num;
 }
 
@@ -1414,7 +1327,7 @@ function showResults(){
         <div class="tcpa-block">
           <label class="tcpa-label">
             <input type="checkbox" id="l-tcpa" required>
-            <span class="tcpa-text">By submitting this form, I consent to be contacted by OTB Solutions LLC and its licensed insurance representatives at the phone number and email provided, including through the use of automated telephone dialing systems, pre-recorded messages, and artificial intelligence voice agents, regarding ICHRA and health benefit solutions. Message and data rates may apply. Consent is not a condition of purchasing any product or service. You may opt out at any time by replying STOP or contacting us directly. <a href="#privacy-policy">Privacy Policy</a>.</span>
+            <span class="tcpa-text">By submitting this form, I consent to be contacted by OTB Solutions LLC and its licensed insurance representatives at the phone number and email provided, including through the use of automated telephone dialing systems, pre-recorded messages, and artificial intelligence voice agents, regarding ICHRA and health benefit solutions. Message and data rates may apply. Consent is not a condition of purchasing any product or service. You may opt out at any time by replying STOP or contacting us directly. <a href="privacy.html">Privacy Policy</a>.</span>
           </label>
           <div class="tcpa-error" id="l-tcpa-error">You must agree to the terms above to submit.</div>
         </div>
@@ -1518,10 +1431,16 @@ function agreeToChat(){
     setTimeout(() => {
       const msgDiv = document.createElement('div');
       msgDiv.style.cssText = 'padding:6px 16px 10px 54px;display:flex;flex-wrap:wrap;gap:8px;animation:fadeUp 0.3s ease';
-      msgDiv.innerHTML = \`
-        <button onclick="openContribCalc()" style="background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Open Contribution Calculator</button>
-        <button onclick="appendChatMsg('user','What should I contribute?');this.closest('div').remove();sendChatMessage();" style="background:var(--navy);border:2px solid var(--navy);color:#fff;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Ask BenefitIQ instead</button>
-      \`;
+      var b1 = document.createElement('button');
+      b1.textContent = 'Open Contribution Calculator';
+      b1.setAttribute('style','background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;');
+      b1.onclick = function(){ openContribCalc(); };
+      var b2 = document.createElement('button');
+      b2.textContent = 'Ask BenefitIQ instead';
+      b2.setAttribute('style','background:var(--navy);border:2px solid var(--navy);color:#fff;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;');
+      b2.onclick = function(){ appendChatMsg('user','What should I contribute?'); this.closest('div').remove(); sendChatMessage(); };
+      msgDiv.appendChild(b1);
+      msgDiv.appendChild(b2);
       document.getElementById('chatMessages').appendChild(msgDiv);
       document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
     }, 600);
