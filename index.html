@@ -523,6 +523,10 @@ footer{background:var(--text-dark);color:rgba(255,255,255,.7);padding:40px 24px;
       <button class="btn-primary" onclick="document.getElementById('start-assessment').scrollIntoView({behavior:'smooth'})">Take the Free Assessment</button>
       <button class="btn-outline" onclick="openAdvisorModal()">Talk to an Advisor</button>
     </div>
+    <div style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.65);">
+      Already know ICHRA is right for you?
+      <a href="contribution.html" target="_blank" style="color:rgba(255,255,255,0.9);text-decoration:underline;font-weight:600;margin-left:4px;">Calculate your contributions →</a>
+    </div>
     <div class="cred-strip">
       <span class="cred-item">IRS Approved</span>
       <span class="cred-item">ACA Compliant</span>
@@ -1350,6 +1354,21 @@ function showResults(){
 
   quizContext={score:totalScore,tier:tierLabel,industry:answers.industry||'Not specified',companySize:q1Label,currentBenefits:q2Label};
 
+  // Contribution calculator CTA — only for Strong and Likely tiers
+  const showCalcCTA = totalScore >= 8;
+  const calcCTABlock = showCalcCTA ? `
+    <div style="background:linear-gradient(135deg,var(--navy),#2C4A6E);border-radius:12px;padding:22px 24px;margin:16px 0;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:200px;">
+        <div style="color:rgba(255,255,255,0.7);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Next Step</div>
+        <div style="color:#fff;font-weight:700;font-size:17px;margin-bottom:6px;">Curious what you'd need to contribute?</div>
+        <div style="color:rgba(255,255,255,0.75);font-size:13px;line-height:1.55;">BenefitIQ can walk you through estimated contribution amounts for your employees — no census required to get started.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
+        <button onclick="openContribCalc()" style="background:#fff;color:var(--navy);border:none;border-radius:8px;padding:11px 22px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;">Calculate Contributions →</button>
+        <button onclick="openContribChat()" style="background:transparent;color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.4);border-radius:8px;padding:9px 22px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">Ask BenefitIQ first</button>
+      </div>
+    </div>` : '';
+
   rc.innerHTML=`
     <div class="results-header">
       <div class="thermometer-container">
@@ -1361,6 +1380,7 @@ function showResults(){
       <p class="result-description">${resultDescription}</p>
       <p class="objectivity-note">This assessment is a general indicator based on your answers — not a formal recommendation. An advisor can give you specific numbers for your situation.</p>
     </div>
+    ${calcCTABlock}
     <div class="result-section"><h3>What your answers indicate:</h3>${bHTML}</div>
     ${genInsight(answers)}
     <div class="video-container"><iframe width="100%" height="400" src="https://www.youtube.com/embed/kxXVEb5qmi8?autoplay=1&mute=1&rel=0&playsinline=1" frameborder="0" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe></div>
@@ -1487,12 +1507,46 @@ function agreeToChat(){
   document.getElementById('chatConsentScreen').style.display='none';
   document.getElementById('chatMessages').style.display='flex';
   document.getElementById('chatInputArea').style.display='flex';
-  appendChatMsg('assistant','Hi! I\'m BenefitIQ. Ask me anything about ICHRA — how it works, whether it fits your business, or what your assessment results mean. What\'s on your mind?');
+  // Context-aware opening message
+  if (quizContext && (quizContext.tier === 'Strong ICHRA Candidate' || quizContext.tier === 'Likely a Good Fit')) {
+    appendChatMsg('assistant','Good news — based on your assessment, ICHRA looks like a strong fit for your business. The natural next question is: what would you need to contribute per employee? I can walk you through that, or you can jump straight into the contribution calculator. What would you like to do?');
+    // Inject quick-action buttons into the chat
+    setTimeout(() => {
+      const msgDiv = document.createElement('div');
+      msgDiv.style.cssText = 'padding:6px 16px 10px 54px;display:flex;flex-wrap:wrap;gap:8px;animation:fadeUp 0.3s ease';
+      msgDiv.innerHTML = \`
+        <button onclick="openContribCalc()" style="background:#fff;border:2px solid var(--navy);color:var(--navy);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Open Contribution Calculator</button>
+        <button onclick="appendChatMsg('user','What should I contribute?');this.closest('div').remove();sendChatMessage();" style="background:var(--navy);border:2px solid var(--navy);color:#fff;border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Ask BenefitIQ instead</button>
+      \`;
+      document.getElementById('chatMessages').appendChild(msgDiv);
+      document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+    }, 600);
+  } else if (quizContext && quizContext.tier === 'Worth a Conversation') {
+    appendChatMsg('assistant','Based on your assessment, ICHRA is worth exploring — a few factors in your situation make it worth a closer look. What questions can I answer about how it works or whether it fits your setup?');
+  } else {
+    appendChatMsg('assistant','Hi! I\'m BenefitIQ. Ask me anything about ICHRA — how it works, whether it fits your business, or what your assessment results mean. What\'s on your mind?');
+  }
 }
 function declineChat(){
   document.getElementById('chatPanel').classList.remove('open');
 }
 document.getElementById('chatBtn').addEventListener('click',toggleChat);
+
+function openContribCalc(){
+  window.open('contribution.html','_blank');
+}
+function openContribChat(){
+  // Close calculator CTA prompt and ask the contribution question
+  const chatPanel = document.getElementById('chatPanel');
+  if (!chatPanel.classList.contains('open')) {
+    chatPanel.classList.add('open');
+    if (!chatConsented) { agreeToChat(); }
+  }
+  setTimeout(() => {
+    appendChatMsg('user','What should I contribute per employee?');
+    sendChatMessage();
+  }, 300);
+}
 
 function buildSysPrompt(){
   let sys=`You are BenefitIQ, an AI assistant for OTB Solutions LLC specializing in ICHRA (Individual Coverage Health Reimbursement Arrangements). You are knowledgeable, accurate, and helpful. Be concise — aim for under 180 words per response. Use plain language, not legalese.
