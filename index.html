@@ -86,6 +86,10 @@ body{font-family:var(--font);font-weight:400;background:var(--gray-light);color:
 
 /* FADE IN ANIMATION */
 .fade-section{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+/* Safety fallback: force visible after 1.2s if JS observer never fires */
+@keyframes forceFadeIn{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:translateY(0)}}
+.fade-section{animation:forceFadeIn .6s ease 1.2s forwards}
+.fade-section.visible{opacity:1;transform:translateY(0);animation:none}
 .fade-section.visible{opacity:1;transform:translateY(0)}
 
 /* HERO */
@@ -1835,8 +1839,18 @@ const po=new MutationObserver(ms=>ms.forEach(m=>{if(m.target.id==='question5'&&m
 document.addEventListener('DOMContentLoaded',()=>document.querySelectorAll('.question-container').forEach(q=>po.observe(q,{attributes:true,attributeFilter:['class']})));
 
 // ── SCROLL ANIMATIONS ─────────────────────────────────────────────────
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
-document.querySelectorAll('.fade-section').forEach(s=>observer.observe(s));
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-section').forEach(s=>{
+  // Mark immediately visible if already in viewport on load
+  const r=s.getBoundingClientRect();
+  if(r.top<window.innerHeight&&r.bottom>0){s.classList.add('visible');}
+  else{observer.observe(s);}
+});
+// Fallback: force all visible after 800ms in case observer misfires
+setTimeout(()=>{document.querySelectorAll('.fade-section:not(.visible)').forEach(s=>{
+  const r=s.getBoundingClientRect();
+  if(r.top<window.innerHeight*1.2)s.classList.add('visible');
+});},800);
 
 // ── PRINT STYLES ──────────────────────────────────────────────────────
 const ps=document.createElement('style');
