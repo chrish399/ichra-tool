@@ -97,9 +97,11 @@ button { font-family: inherit; }
 }
 .entry-title {
   font-family: var(--font);
-  font-size: clamp(40px, 6vw, 68px); font-weight: 700;
-  letter-spacing: -2.5px; line-height: 1.02;
+  font-size: clamp(34px, 6vw, 68px); font-weight: 700;
+  letter-spacing: -2px; line-height: 1.05;
   color: var(--ink); margin-bottom: 16px;
+  max-width: 720px; margin-left: auto; margin-right: auto;
+  text-align: center;
 }
 .entry-title em { font-style: normal; color: var(--accent); font-weight: 700; }
 .entry-sub {
@@ -151,6 +153,8 @@ button { font-family: inherit; }
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.1px;
+  white-space: nowrap;
+  display: inline-block;
 }
 .persona:hover .persona-tool { color: var(--accent-deep); }
 .persona-cta {
@@ -544,8 +548,35 @@ input[type=range]::-moz-range-thumb {
 .fit-tier.good { color: var(--accent-deep); border-color: var(--accent); }
 .fit-tier.maybe { color: var(--amber); border-color: var(--amber); }
 .fit-tier.no { color: var(--ink-dim); border-color: var(--line); }
-.fit-result h5 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.fit-result h5 { font-size: 16px; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.3px; }
 .fit-result ul { margin-left: 18px; font-size: 13px; color: var(--ink-dim); line-height: 1.65; }
+.fit-result ul li { margin-bottom: 5px; }
+.fit-industry-note {
+  background: var(--surface-warm);
+  border: 0.5px solid var(--line);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.55;
+  margin: 12px 0 14px;
+}
+.fit-industry-note strong { color: var(--ink); font-weight: 600; }
+
+/* Industry tile grid inside fit assessment */
+.fit-industry-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+}
+.fit-industry {
+  background: transparent; border: 0.5px solid var(--line);
+  padding: 9px 8px; border-radius: var(--r-sm);
+  font-family: inherit; font-size: 12px; font-weight: 500;
+  color: var(--ink-dim); cursor: pointer; transition: all .15s;
+  line-height: 1.3; text-align: center;
+}
+.fit-industry:hover { border-color: var(--ink); color: var(--ink); }
+.fit-industry.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
 /* ── LEAD CAPTURE WIDGET ──────────────────────────────────────────── */
 .lead-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
@@ -798,7 +829,10 @@ input[type=range]::-moz-range-thumb {
 
 /* ── RESPONSIVE ────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
-  .persona-grid { grid-template-columns: 1fr; }
+  .persona-grid { grid-template-columns: 1fr; gap: 12px; }
+  .persona { padding: 22px 22px 20px; border-radius: var(--r-md); }
+  .persona-title { font-size: 19px; }
+  .persona-mark { margin-bottom: 16px; }
   .calc { grid-template-columns: 1fr; }
   .basics-steps { grid-template-columns: 1fr; }
   .compare-grid { grid-template-columns: 1fr; }
@@ -811,6 +845,13 @@ input[type=range]::-moz-range-thumb {
   .tool-banner { min-height: 80px; padding: 14px 18px; gap: 12px; }
   .tool-banner-svg { width: 52px; height: 52px; }
   .tool-banner-title { font-size: 15px; }
+  /* Fit assessment industry grid: 3 → 2 cols on mobile */
+  .fit-industry-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Entry hero tightens on mobile */
+  .entry-wrap { padding: 32px 16px; }
+  .entry-inner { padding: 0 4px; }
+  .entry-eyebrow { font-size: 10px; letter-spacing: 2px; margin-bottom: 16px; }
+  .entry-sub { font-size: 14px; line-height: 1.55; margin-bottom: 32px; }
   /* Slide-over becomes a bottom sheet on mobile */
   .slideover {
     width: 100vw; right: 0; left: 0; top: auto;
@@ -821,6 +862,17 @@ input[type=range]::-moz-range-thumb {
   .slideover.open { transform: translateY(0); }
   .why-fab { bottom: 92px; left: 14px; font-size: 12px; padding: 8px 14px 8px 8px; }
   .advisor-fab { bottom: 92px; right: 14px; font-size: 12px; padding: 8px 14px; }
+}
+@media (max-width: 420px) {
+  /* On very narrow screens, FABs shrink + Why becomes icon-only to prevent overlap */
+  .why-fab { padding: 8px 10px; }
+  .why-fab > span:last-child { display: none; }
+  .why-fab::after { content: ''; }
+  .advisor-fab { font-size: 11px; padding: 8px 12px; }
+  .entry-title { font-size: 32px; letter-spacing: -1.5px; }
+  .entry-quiet-link { font-size: 12px; padding: 9px 14px; }
+  .fit-industry-grid { gap: 5px; }
+  .fit-industry { font-size: 11px; padding: 8px 6px; }
 }
 </style>
 </head>
@@ -849,7 +901,7 @@ input[type=range]::-moz-range-thumb {
 <div class="entry-wrap" id="entryScreen">
   <div class="entry-inner">
     <div class="entry-eyebrow">OTB Solutions · ICHRA</div>
-    <h1 class="entry-title">Making <em>ICHRA</em><br>simple.</h1>
+    <h1 class="entry-title">Making <em>ICHRA</em> simple.</h1>
     <p class="entry-sub">Explanations, math, and direct answers — for employers, brokers, and Agents. The tools live inside the conversation.</p>
 
     <div class="persona-grid">
@@ -2195,129 +2247,75 @@ function buildComparison() {
 }
 
 // ── FIT ASSESSMENT WIDGET ──────────────────────────────────────────
+const FIT_INDUSTRY_INSIGHTS = {
+  healthcare:    'Healthcare leads ICHRA adoption — multi-state operations and diverse roles make individual coverage especially appealing.',
+  retail:        'Retail and hospitality are strong ICHRA fits. Part-time and seasonal workers get covered without the participation minimums group plans require.',
+  construction:  'Construction companies use ICHRA to handle multi-state projects. One ICHRA replaces multiple state-specific group plans.',
+  tech:          'Tech companies use ICHRA to scale benefits with remote teams — fixed cost for you, real plan choice for engineers anywhere.',
+  professional:  'Professional services firms use ICHRA to compete with larger employers on benefits without committing to volatile group premiums.',
+  manufacturing: 'Manufacturers use ICHRA to lock in benefit costs permanently. Claims experience can\'t spike your rates because there are no group claims.',
+  transportation:'Transportation and logistics use ICHRA to standardize benefits across drivers in different states. One platform, every market.',
+  nonprofit:     'Non-profits use ICHRA to extend real health benefits within tight budgets — start at any contribution amount.',
+  other:         'ICHRA works across industries. The fixed-cost predictability is universal, and the admin platform handles everything in the background.'
+};
+
 function buildFitAssessment() {
-  const QS = [
-    { id: 'size', q: 'How many employees do you have?', opts: [['1–4', 0], ['5–49', 2], ['50+', 3]] },
-    { id: 'situation', q: 'Your current benefits situation:', opts: [["We don't offer", 3], ['Group plan', 2], ['Taxable stipend', 3]] },
-    { id: 'pressure', q: "What's pushing you to look at ICHRA?", opts: [['Premiums rising fast', 4], ['Multi-state team', 3], ['Want to offer something', 2], ['Just curious', 0]] },
-    { id: 'goal', q: 'Most important to you:', opts: [['Predictable costs', 3], ['Employee choice', 2], ['Simple admin', 1]] }
+  const industries = [
+    ['Healthcare',       'healthcare'],
+    ['Retail / Hospitality','retail'],
+    ['Construction',     'construction'],
+    ['Tech / Software',  'tech'],
+    ['Professional Services','professional'],
+    ['Manufacturing',    'manufacturing'],
+    ['Transportation',   'transportation'],
+    ['Non-profit',       'nonprofit'],
+    ['Other',            'other']
   ];
   return `
-    ${QS.map(q => `
-      <div class="fit-question" data-fq="${q.id}">
-        <div class="fit-q">${q.q}</div>
-        <div class="fit-options">
-          ${q.opts.map(([lbl, v]) => `<button class="fit-opt" data-v="${v}">${lbl}</button>`).join('')}
-        </div>
+    <div class="fit-question" data-fq="size">
+      <div class="fit-q">How many employees do you have?</div>
+      <div class="fit-options">
+        <button class="fit-opt" data-v="0">1–4</button>
+        <button class="fit-opt" data-v="2">5–49</button>
+        <button class="fit-opt" data-v="3">50+</button>
       </div>
-    `).join('')}
-    <button class="fit-submit" data-fs disabled>See my result</button>
-    <div class="fit-result" data-fr></div>`;
-}
-
-function wireFitAssessment(rootEl) {
-  const root = rootEl.querySelector('.tool-body');
-  const answers = {};
-  root.querySelectorAll('[data-fq]').forEach(q => {
-    q.querySelectorAll('.fit-opt').forEach(opt => {
-      opt.addEventListener('click', () => {
-        q.querySelectorAll('.fit-opt').forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        answers[q.dataset.fq] = parseInt(opt.dataset.v);
-        // Enable submit if all answered
-        const allAns = Object.keys(answers).length === root.querySelectorAll('[data-fq]').length;
-        const btn = root.querySelector('[data-fs]');
-        btn.disabled = !allAns;
-      });
-    });
-  });
-  root.querySelector('[data-fs]').addEventListener('click', () => {
-    const score = Object.values(answers).reduce((a, b) => a + b, 0);
-    const max = 13;
-    let tier, headline, bullets;
-    if (score >= 10) {
-      tier = ['strong', 'Strong ICHRA candidate'];
-      headline = "You're an ideal ICHRA candidate.";
-      bullets = ['Your size + situation match the highest-fit profile we see', 'A licensed advisor can model your exact contribution cost in under a week', 'Most employers like you save 15–30% vs traditional group'];
-    } else if (score >= 7) {
-      tier = ['good', 'Likely a good fit'];
-      headline = 'ICHRA is probably worth a serious look.';
-      bullets = ['You have most of the conditions that make ICHRA work well', 'Worth running the contribution math against your current spend', 'A 20-minute call with an advisor would clarify the path'];
-    } else if (score >= 4) {
-      tier = ['maybe', 'Worth a conversation'];
-      headline = "There's a case here — but it depends.";
-      bullets = ['ICHRA could help, but the case isn\'t airtight from these answers', 'A custom assessment would tell you more', 'Compare against your current renewal increases'];
-    } else {
-      tier = ['no', 'Probably not the right fit'];
-      headline = 'Right now, ICHRA may not be your best move.';
-      bullets = ['Your situation suggests sticking with your current setup', 'Re-check ICHRA if your renewal pricing spikes', 'Stipends or QSEHRA may be more relevant alternatives'];
-    }
-    const result = root.querySelector('[data-fr]');
-    result.innerHTML = `
-      <span class="fit-tier ${tier[0]}">${tier[1]}</span>
-      <h5>${headline}</h5>
-      <ul>${bullets.map(b => `<li>${b}</li>`).join('')}</ul>
-    `;
-    result.classList.add('show');
-    scrollToBottom();
-  });
-}
-
-// ── LEAD CAPTURE WIDGET ────────────────────────────────────────────
-function buildLeadCapture(props) {
-  const prompt = props.prompt || 'Want this in your inbox?';
-  return `
-    <p style="font-size:14px;color:var(--ink-dim);margin-bottom:14px">${escapeHtml(prompt)}</p>
-    <div class="lead-row">
-      <div class="lead-field"><label>Name</label><input type="text" data-lf="name" placeholder="Jane Doe"></div>
-      <div class="lead-field"><label>Email</label><input type="email" data-lf="email" placeholder="jane@company.com"></div>
     </div>
-    <div class="lead-row">
-      <div class="lead-field"><label>Company / agency</label><input type="text" data-lf="org" placeholder="Acme Inc."></div>
-      <div class="lead-field"><label>Phone (optional)</label><input type="tel" data-lf="phone" placeholder="(555) 123-4567"></div>
+    <div class="fit-question" data-fq="industry" data-type="industry">
+      <div class="fit-q">What industry are you in?</div>
+      <div class="fit-industry-grid">
+        ${industries.map(([lbl, key]) => `<button class="fit-industry" data-v="${key}">${lbl}</button>`).join('')}
+      </div>
     </div>
-    <button class="lead-submit" data-ls>Send it</button>
-    <div class="lead-tcpa">By submitting, you agree to be contacted by OTB Solutions LLC. We don't share your info. Reply STOP to opt out of texts at any time.</div>`;
-}
-
-function wireLeadCapture(rootEl, opts = {}) {
-  // Accept either a tool-card wrapper (chat-inline use) or a direct container (modal use)
-  const root = rootEl.querySelector('.tool-body') || rootEl;
-  const btn = root.querySelector('[data-ls]');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const data = {
-      source: opts.source || ('unified-' + (state.persona || 'unknown')),
-      name: root.querySelector('[data-lf="name"]').value,
-      email: root.querySelector('[data-lf="email"]').value,
-      org: root.querySelector('[data-lf="org"]').value,
-      phone: root.querySelector('[data-lf="phone"]').value,
-      persona: state.persona || null,
-      snapshot: state.calc
-    };
-    if (!data.name || !data.email) {
-      alert('Name and email please.');
-      return;
-    }
-    fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }).catch(()=>{});
-    root.innerHTML = `
-      <div style="text-align:center;padding:24px 12px">
-        <div style="font-size:40px;color:var(--green);margin-bottom:10px;line-height:1">✓</div>
-        <h5 style="font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-0.3px">Got it.</h5>
-        <p style="font-size:14px;color:var(--ink-dim);line-height:1.6">A human at OTB will be in touch within one business day.</p>
-      </div>`;
-  });
-}
-
-// ── INIT ───────────────────────────────────────────────────────────
-// Close password gate when clicking outside the Aflac card
-document.addEventListener('click', e => {
-  const card = document.querySelector('.persona[data-key="aflac"]');
-  const gate = document.getElementById('pwGate');
-  if (card && gate.classList.contains('open') && !card.contains(e.target)) {
-    gate.classList.remove('open');
-  }
-});
-</script>
-</body>
-</html>
+    <div class="fit-question" data-fq="situation">
+      <div class="fit-q">Your current health benefits situation:</div>
+      <div class="fit-options">
+        <button class="fit-opt" data-v="3">We don't offer</button>
+        <button class="fit-opt" data-v="2">Traditional group plan</button>
+        <button class="fit-opt" data-v="3">Taxable stipend</button>
+      </div>
+    </div>
+    <div class="fit-question" data-fq="pressure">
+      <div class="fit-q">What's pushing you to look at ICHRA?</div>
+      <div class="fit-options">
+        <button class="fit-opt" data-v="4">Premiums rising fast</button>
+        <button class="fit-opt" data-v="3">Multi-state team</button>
+        <button class="fit-opt" data-v="3">Hard to hit participation minimums</button>
+        <button class="fit-opt" data-v="2">Want to offer something</button>
+        <button class="fit-opt" data-v="0">Just curious</button>
+      </div>
+    </div>
+    <div class="fit-question" data-fq="priority">
+      <div class="fit-q">What matters most to you?</div>
+      <div class="fit-options">
+        <button class="fit-opt" data-v="3">Predictable, fixed costs</button>
+        <button class="fit-opt" data-v="2">Employee plan choice</button>
+        <button class="fit-opt" data-v="2">Simple, low-touch admin</button>
+        <button class="fit-opt" data-v="3">Multi-state coverage</button>
+      </div>
+    </div>
+    <div class="fit-question" data-fq="team">
+      <div class="fit-q">Your team is mostly:</div>
+      <div class="fit-options">
+        <button class="fit-opt" data-v="0">Single-location, full-time</button>
+        <button class="fit-opt" data-v="3">Multi-state or remote</button>
+        <button class="fit-opt" data-v="2">Mix of FT, PT, and seasonal</b
