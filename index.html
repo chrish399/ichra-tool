@@ -196,6 +196,49 @@ button { font-family: inherit; }
 .entry-foot a { color: var(--ink-dim); text-decoration: none; }
 .entry-foot a:hover { color: var(--ink); text-decoration: underline; }
 
+/* ── Site footer ───────────────────────────────────────────────── */
+.site-footer {
+  background: var(--ink); color: var(--bg);
+  padding: 56px 24px 28px;
+  border-top: 1px solid var(--line);
+}
+.chat-wrap.active ~ .site-footer { display: none; } /* hide on chat */
+.site-footer-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+  padding-bottom: 36px;
+  border-bottom: 0.5px solid rgba(248,246,241,0.12);
+}
+.site-footer-col { display: flex; flex-direction: column; gap: 10px; }
+.site-footer-brand { display: flex; align-items: center; gap: 10px; }
+.site-footer-brand .brand-mark { background: transparent; }
+.site-footer-name { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; color: var(--bg); }
+.site-footer-tag {
+  font-size: 13px; color: rgba(248,246,241,0.7);
+  line-height: 1.6; max-width: 360px; margin-top: 6px;
+}
+.site-footer-label {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(248,246,241,0.45); margin-bottom: 4px;
+}
+.site-footer-link {
+  font-size: 13px; color: rgba(248,246,241,0.8);
+  text-decoration: none; cursor: pointer; padding: 4px 0;
+  transition: color .15s;
+}
+.site-footer-link:hover { color: var(--bg); text-decoration: underline; }
+.site-footer-bottom {
+  max-width: 1080px; margin: 0 auto;
+  padding-top: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.site-footer-copy { font-size: 12px; color: rgba(248,246,241,0.5); }
+.site-footer-disclaimer {
+  font-size: 11px; color: rgba(248,246,241,0.4);
+  line-height: 1.6; max-width: 760px;
+}
+
 /* ── CHAT SCREEN ──────────────────────────────────────────────────── */
 .chat-wrap { display: none; flex-direction: column; min-height: calc(100vh - 56px); }
 .chat-wrap.active { display: flex; animation: fadeIn .35s ease; }
@@ -564,6 +607,26 @@ input[type=range]::-moz-range-thumb {
 }
 .fit-industry-note strong { color: var(--ink); font-weight: 600; }
 
+/* Three-stat tile grid inside fit assessment result */
+.fit-industry-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+  margin: 12px 0 16px;
+}
+.fit-stat {
+  background: var(--surface); border: 0.5px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 12px 10px;
+  text-align: center;
+}
+.fit-stat-n {
+  font-family: var(--mono); font-size: 18px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.3px;
+  line-height: 1.1; margin-bottom: 4px;
+}
+.fit-stat-l {
+  font-size: 10.5px; color: var(--ink-soft); line-height: 1.35;
+}
+
 /* Industry tile grid inside fit assessment */
 .fit-industry-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
@@ -577,6 +640,45 @@ input[type=range]::-moz-range-thumb {
 }
 .fit-industry:hover { border-color: var(--ink); color: var(--ink); }
 .fit-industry.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+/* Rank-order question */
+.fit-q-sub { font-size: 12px; color: var(--ink-soft); margin: -4px 0 10px; }
+.fit-rank { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.fit-rank-item {
+  background: var(--surface); border: 0.5px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: grab;
+  transition: border-color .15s, background .15s;
+  user-select: none;
+}
+.fit-rank-item:hover { border-color: var(--ink); }
+.fit-rank-item.dragging { opacity: 0.5; cursor: grabbing; }
+.fit-rank-item.drag-over { border-color: var(--accent); border-style: dashed; background: var(--accent-soft); }
+.fit-rank-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--ink); color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  flex-shrink: 0;
+}
+.fit-rank-text {
+  flex: 1; font-size: 13px; color: var(--ink); line-height: 1.4;
+}
+.fit-rank-btns { display: flex; gap: 2px; flex-shrink: 0; }
+.fit-rank-btn {
+  width: 24px; height: 24px;
+  background: transparent; border: 0.5px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink-dim); font-size: 12px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit;
+  transition: all .12s;
+}
+.fit-rank-btn:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
+.fit-rank-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
 /* ── LEAD CAPTURE WIDGET ──────────────────────────────────────────── */
 .lead-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
@@ -778,6 +880,35 @@ input[type=range]::-moz-range-thumb {
 }
 .so-cta.secondary:hover { background: var(--ink); color: var(--bg); opacity: 1; }
 
+/* FAQ accordion inside the Why ICHRA slide-over */
+.so-faq details {
+  border-bottom: 0.5px solid var(--line);
+}
+.so-faq details:first-child { border-top: 0.5px solid var(--line); }
+.so-faq summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 14px; font-weight: 500;
+  color: var(--ink);
+  padding: 14px 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.so-faq summary::-webkit-details-marker { display: none; }
+.so-faq summary::after {
+  content: '+';
+  color: var(--ink-soft);
+  font-size: 18px; font-weight: 400;
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+.so-faq details[open] summary::after { content: '−'; }
+.so-faq summary:hover { color: var(--accent-deep); }
+.so-faq-a {
+  font-size: 13.5px; color: var(--ink-dim);
+  line-height: 1.65; padding: 0 0 16px;
+}
+
 /* ── Entry quiet link below persona cards ───────────────────────── */
 .entry-quiet-link {
   margin-top: 28px;
@@ -847,6 +978,8 @@ input[type=range]::-moz-range-thumb {
   .tool-banner-title { font-size: 15px; }
   /* Fit assessment industry grid: 3 → 2 cols on mobile */
   .fit-industry-grid { grid-template-columns: repeat(2, 1fr); }
+  .site-footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .site-footer { padding: 40px 20px 24px; }
   /* Entry hero tightens on mobile */
   .entry-wrap { padding: 32px 16px; }
   .entry-inner { padding: 0 4px; }
@@ -959,12 +1092,44 @@ input[type=range]::-moz-range-thumb {
     </div>
 
     <button class="entry-quiet-link" onclick="openWhy({ fromEntry: true })">Don't want to chat? Tell me what ICHRA is</button>
-
-    <div class="entry-foot">
-      <a href="mailto:chris@solutionotb.com">chris@solutionotb.com</a>
-    </div>
   </div>
 </div>
+
+<!-- Real footer · entry surface only -->
+<footer class="site-footer" id="siteFooter">
+  <div class="site-footer-inner">
+    <div class="site-footer-col">
+      <div class="site-footer-brand">
+        <span class="brand-mark" style="width:24px;height:30px" aria-hidden="true">
+          <svg viewBox="0 0 30 36" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="30" height="36" fill="#1A1A1A"/>
+            <rect x="2.5" y="2.5" width="25" height="31" fill="none" stroke="#F8F6F1" stroke-width="1.5"/>
+            <text x="15" y="16.5" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">O</text>
+            <line x1="6" y1="19" x2="24" y2="19" stroke="#F8F6F1" stroke-width="0.8" opacity="0.55"/>
+            <text x="15" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">B</text>
+          </svg>
+        </span>
+        <span class="site-footer-name">OTB Solutions LLC</span>
+      </div>
+      <p class="site-footer-tag">Tools at the intersection of AI and insurance. Helping employers, brokers, and Agents make sense of ICHRA.</p>
+    </div>
+    <div class="site-footer-col">
+      <div class="site-footer-label">Navigate</div>
+      <a class="site-footer-link" onclick="openWhy({ fromEntry: true })">Why ICHRA</a>
+      <a class="site-footer-link" onclick="openLeadModal({ source: 'footer' })">Talk to an advisor</a>
+      <a class="site-footer-link" href="mailto:chris@solutionotb.com">chris@solutionotb.com</a>
+    </div>
+    <div class="site-footer-col">
+      <div class="site-footer-label">Legal</div>
+      <a class="site-footer-link" href="privacy.html">Privacy Policy</a>
+      <a class="site-footer-link" href="terms.html">Terms of Use</a>
+    </div>
+  </div>
+  <div class="site-footer-bottom">
+    <div class="site-footer-copy">© 2026 OTB Solutions LLC. All rights reserved.</div>
+    <p class="site-footer-disclaimer">This tool is for informational purposes only. It does not constitute insurance, legal, tax, or financial advice. ICHRA eligibility depends on your specific business circumstances. Consult a licensed insurance professional before making benefits decisions. OTB Solutions LLC is not an insurance carrier.</p>
+  </div>
+</footer>
 
 <!-- CHAT SCREEN -->
 <div class="chat-wrap" id="chatScreen">
@@ -1067,6 +1232,18 @@ input[type=range]::-moz-range-thumb {
     <div class="so-section">
       <div class="so-section-label">By the numbers</div>
       <div id="soStats"></div>
+    </div>
+
+    <div class="so-section">
+      <div class="so-section-label">Common questions</div>
+      <div class="so-faq">
+        <details><summary>Is ICHRA legal and ACA-compliant?</summary><div class="so-faq-a">Yes. ICHRAs were established by federal regulation in 2020 and are fully ACA-compliant. For applicable large employers (50+ FTEs), it satisfies the employer mandate when the allowance meets affordability standards.</div></details>
+        <details><summary>What's the minimum I can contribute?</summary><div class="so-faq-a">No federal minimum. Any amount that fits your budget. Even $100/month per employee is a legitimate, tax-free health benefit. No maximum, either.</div></details>
+        <details><summary>Will this affect my payroll system?</summary><div class="so-faq-a">No. ICHRA reimbursements process outside of payroll through the admin platform. Not subject to payroll taxes (FICA) for either side. Your payroll system doesn't change.</div></details>
+        <details><summary>What if an employee can't find a plan in their area?</summary><div class="so-faq-a">ACA-compliant individual plans are available in all 50 states, on and off the Exchange. Employees who don't find an affordable plan can opt out of the ICHRA and may qualify for premium tax credits instead.</div></details>
+        <details><summary>How much of my time does this actually take?</summary><div class="so-faq-a">Under 30 minutes a month for most employers. The admin platform verifies coverage, processes reimbursements, and handles ERISA documentation automatically. You approve. The platform does the work.</div></details>
+        <details><summary>Is ICHRA subject to ERISA?</summary><div class="so-faq-a">Yes — ICHRAs are group health plans subject to ERISA. The admin platform generates the formal plan document and Summary Plan Description automatically as part of setup, so the paperwork is handled.</div></details>
+      </div>
     </div>
 
     <div class="so-section" id="soActions">
@@ -2248,15 +2425,42 @@ function buildComparison() {
 
 // ── FIT ASSESSMENT WIDGET ──────────────────────────────────────────
 const FIT_INDUSTRY_INSIGHTS = {
-  healthcare:    'Healthcare leads ICHRA adoption — multi-state operations and diverse roles make individual coverage especially appealing.',
-  retail:        'Retail and hospitality are strong ICHRA fits. Part-time and seasonal workers get covered without the participation minimums group plans require.',
-  construction:  'Construction companies use ICHRA to handle multi-state projects. One ICHRA replaces multiple state-specific group plans.',
-  tech:          'Tech companies use ICHRA to scale benefits with remote teams — fixed cost for you, real plan choice for engineers anywhere.',
-  professional:  'Professional services firms use ICHRA to compete with larger employers on benefits without committing to volatile group premiums.',
-  manufacturing: 'Manufacturers use ICHRA to lock in benefit costs permanently. Claims experience can\'t spike your rates because there are no group claims.',
-  transportation:'Transportation and logistics use ICHRA to standardize benefits across drivers in different states. One platform, every market.',
-  nonprofit:     'Non-profits use ICHRA to extend real health benefits within tight budgets — start at any contribution amount.',
-  other:         'ICHRA works across industries. The fixed-cost predictability is universal, and the admin platform handles everything in the background.'
+  healthcare: {
+    blurb: 'Healthcare leads ICHRA adoption — multi-state operations and diverse roles make individual coverage especially appealing.',
+    stats: [['67%','multi-state operations'], ['41%','avg cost reduction'], ['89%','employee satisfaction']]
+  },
+  retail: {
+    blurb: 'Retail and hospitality are strong ICHRA fits. Part-time and seasonal workers get covered without the participation minimums group plans require.',
+    stats: [['73%','part-time eligible'], ['31%','avg cost savings'], ['2.3×','better retention']]
+  },
+  construction: {
+    blurb: 'Construction companies use ICHRA to handle multi-state projects. One ICHRA replaces multiple state-specific group plans.',
+    stats: [['84%','multi-state projects'], ['38%','admin time saved'], ['91%','contractor coverage']]
+  },
+  tech: {
+    blurb: 'Tech companies use ICHRA to scale benefits with remote teams — fixed cost for you, real plan choice for engineers anywhere.',
+    stats: [['95%','remote-ready'], ['29%','YoY adoption growth'], ['$847','avg monthly allowance']]
+  },
+  professional: {
+    blurb: 'Professional services firms use ICHRA to compete with larger employers on benefits without committing to volatile group premiums.',
+    stats: [['79%','talent attraction'], ['$923','avg contribution'], ['94%','partner approval']]
+  },
+  manufacturing: {
+    blurb: 'Manufacturers use ICHRA to lock in benefit costs permanently. Claims experience can\'t spike your rates because there are no group claims.',
+    stats: [['44%','cost predictability gain'], ['$0','claims-driven risk'], ['86%','budget certainty']]
+  },
+  transportation: {
+    blurb: 'Transportation and logistics use ICHRA to standardize benefits across drivers in different states. One platform, every market.',
+    stats: [['88%','multi-state coverage'], ['35%','admin reduction'], ['91%','driver participation']]
+  },
+  nonprofit: {
+    blurb: 'Non-profits use ICHRA to extend real health benefits within tight budgets — start at any contribution amount.',
+    stats: [['$0','minimum contribution'], ['100%','tax-free dollars'], ['12mo','typical setup ROI']]
+  },
+  other: {
+    blurb: 'ICHRA works across industries. The fixed-cost predictability is universal, and the admin platform handles everything in the background.',
+    stats: [['29%','YoY adoption growth'], ['92%','renew year-over-year'], ['<30min','admin time / month']]
+  }
 };
 
 function buildFitAssessment() {
@@ -2304,18 +2508,258 @@ function buildFitAssessment() {
         <button class="fit-opt" data-v="0">Just curious</button>
       </div>
     </div>
-    <div class="fit-question" data-fq="priority">
-      <div class="fit-q">What matters most to you?</div>
-      <div class="fit-options">
-        <button class="fit-opt" data-v="3">Predictable, fixed costs</button>
-        <button class="fit-opt" data-v="2">Employee plan choice</button>
-        <button class="fit-opt" data-v="2">Simple, low-touch admin</button>
-        <button class="fit-opt" data-v="3">Multi-state coverage</button>
-      </div>
+    <div class="fit-question" data-fq="priority" data-type="rank">
+      <div class="fit-q">Rank these in order of importance to you</div>
+      <div class="fit-q-sub">Drag to reorder, or use the arrows. Most important at the top.</div>
+      <ul class="fit-rank" data-rank-list>
+        <li class="fit-rank-item" draggable="true" data-id="predictability"><span class="fit-rank-num">1</span><span class="fit-rank-text">Cost predictability — knowing exact monthly spend</span><span class="fit-rank-btns"><button class="fit-rank-btn" data-dir="up" aria-label="Move up">↑</button><button class="fit-rank-btn" data-dir="down" aria-label="Move down">↓</button></span></li>
+        <li class="fit-rank-item" draggable="true" data-id="control"><span class="fit-rank-num">2</span><span class="fit-rank-text">Budget control — capping maximum exposure</span><span class="fit-rank-btns"><button class="fit-rank-btn" data-dir="up" aria-label="Move up">↑</button><button class="fit-rank-btn" data-dir="down" aria-label="Move down">↓</button></span></li>
+        <li class="fit-rank-item" draggable="true" data-id="choice"><span class="fit-rank-num">3</span><span class="fit-rank-text">Employee plan choice and flexibility</span><span class="fit-rank-btns"><button class="fit-rank-btn" data-dir="up" aria-label="Move up">↑</button><button class="fit-rank-btn" data-dir="down" aria-label="Move down">↓</button></span></li>
+        <li class="fit-rank-item" draggable="true" data-id="simplicity"><span class="fit-rank-num">4</span><span class="fit-rank-text">Simple, low-touch admin</span><span class="fit-rank-btns"><button class="fit-rank-btn" data-dir="up" aria-label="Move up">↑</button><button class="fit-rank-btn" data-dir="down" aria-label="Move down">↓</button></span></li>
+        <li class="fit-rank-item" draggable="true" data-id="competitive"><span class="fit-rank-num">5</span><span class="fit-rank-text">Competitive benefits for attracting talent</span><span class="fit-rank-btns"><button class="fit-rank-btn" data-dir="up" aria-label="Move up">↑</button><button class="fit-rank-btn" data-dir="down" aria-label="Move down">↓</button></span></li>
+      </ul>
     </div>
     <div class="fit-question" data-fq="team">
       <div class="fit-q">Your team is mostly:</div>
       <div class="fit-options">
         <button class="fit-opt" data-v="0">Single-location, full-time</button>
         <button class="fit-opt" data-v="3">Multi-state or remote</button>
-        <button class="fit-opt" data-v="2">Mix of FT, PT, and seasonal</b
+        <button class="fit-opt" data-v="2">Mix of FT, PT, and seasonal</button>
+        <button class="fit-opt" data-v="-2">Many likely qualify for subsidies</button>
+      </div>
+    </div>
+    <button class="fit-submit" data-fs disabled>See my result</button>
+    <div class="fit-result" data-fr></div>`;
+}
+
+function wireFitAssessment(rootEl) {
+  const root = rootEl.querySelector('.tool-body');
+  const answers = {};
+  const total = root.querySelectorAll('[data-fq]').length;
+
+  // Pill-style questions (excludes industry tiles + rank list)
+  root.querySelectorAll('.fit-question:not([data-type="industry"]):not([data-type="rank"])').forEach(q => {
+    q.querySelectorAll('.fit-opt').forEach(opt => {
+      opt.addEventListener('click', () => {
+        q.querySelectorAll('.fit-opt').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        answers[q.dataset.fq] = parseInt(opt.dataset.v);
+        maybeEnableSubmit();
+      });
+    });
+  });
+
+  // Industry tile picker
+  const indQ = root.querySelector('.fit-question[data-type="industry"]');
+  if (indQ) {
+    indQ.querySelectorAll('.fit-industry').forEach(tile => {
+      tile.addEventListener('click', () => {
+        indQ.querySelectorAll('.fit-industry').forEach(t => t.classList.remove('selected'));
+        tile.classList.add('selected');
+        answers.industry = tile.dataset.v;
+        maybeEnableSubmit();
+      });
+    });
+  }
+
+  // Rank-order question (drag-drop + up/down)
+  const rankQ = root.querySelector('.fit-question[data-type="rank"]');
+  if (rankQ) {
+    const list = rankQ.querySelector('[data-rank-list]');
+    const readOrder = () => Array.from(list.querySelectorAll('.fit-rank-item')).map(li => li.dataset.id);
+    answers.priority = readOrder(); // initialize so the question counts as answered
+    updateRankUI();
+
+    function updateRankUI() {
+      const items = list.querySelectorAll('.fit-rank-item');
+      items.forEach((li, i) => {
+        li.querySelector('.fit-rank-num').textContent = i + 1;
+        const btns = li.querySelectorAll('.fit-rank-btn');
+        btns[0].disabled = (i === 0);
+        btns[1].disabled = (i === items.length - 1);
+      });
+      answers.priority = readOrder();
+    }
+
+    function moveItem(item, dir) {
+      const items = Array.from(list.querySelectorAll('.fit-rank-item'));
+      const idx = items.indexOf(item);
+      const target = idx + dir;
+      if (target < 0 || target >= items.length) return;
+      if (dir === -1) list.insertBefore(item, items[target]);
+      else list.insertBefore(items[target], item);
+      updateRankUI();
+    }
+
+    // Up/down buttons
+    list.querySelectorAll('.fit-rank-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const item = e.target.closest('.fit-rank-item');
+        const dir = e.target.dataset.dir === 'up' ? -1 : 1;
+        moveItem(item, dir);
+      });
+    });
+
+    // HTML5 drag and drop
+    let dragged = null;
+    list.querySelectorAll('.fit-rank-item').forEach(item => {
+      item.addEventListener('dragstart', () => {
+        dragged = item;
+        setTimeout(() => item.classList.add('dragging'), 0);
+      });
+      item.addEventListener('dragend', () => {
+        item.classList.remove('dragging');
+        list.querySelectorAll('.fit-rank-item').forEach(i => i.classList.remove('drag-over'));
+        updateRankUI();
+      });
+      item.addEventListener('dragover', e => {
+        e.preventDefault();
+        if (item !== dragged) item.classList.add('drag-over');
+      });
+      item.addEventListener('dragleave', () => item.classList.remove('drag-over'));
+      item.addEventListener('drop', e => {
+        e.preventDefault();
+        item.classList.remove('drag-over');
+        if (dragged && dragged !== item) {
+          const items = Array.from(list.querySelectorAll('.fit-rank-item'));
+          const draggedIdx = items.indexOf(dragged);
+          const targetIdx = items.indexOf(item);
+          if (draggedIdx < targetIdx) list.insertBefore(dragged, item.nextSibling);
+          else list.insertBefore(dragged, item);
+        }
+      });
+    });
+  }
+
+  function maybeEnableSubmit() {
+    const btn = root.querySelector('[data-fs]');
+    btn.disabled = Object.keys(answers).length < total;
+  }
+  maybeEnableSubmit(); // priority already answered via default order
+
+
+  root.querySelector('[data-fs]').addEventListener('click', () => {
+    // Score quant questions (industry excluded — narrative only)
+    const quant = ['size','situation','pressure','team'].map(k => answers[k] || 0);
+    let score = quant.reduce((a, b) => a + b, 0);
+    // Score the rank order
+    const order = answers.priority || [];
+    const rankOf = id => order.indexOf(id); // 0 = top
+    if (rankOf('predictability') <= 1 && rankOf('predictability') !== -1) score += 3;
+    if (rankOf('control')        <= 1 && rankOf('control')        !== -1) score += 3;
+    if (rankOf('choice')         <= 1 && rankOf('choice')         !== -1) score += 2;
+    if (rankOf('simplicity') === 0) score -= 2;
+    else if (rankOf('simplicity') >= 2) score += 1;
+    const industry = answers.industry || 'other';
+    const insightData = FIT_INDUSTRY_INSIGHTS[industry] || FIT_INDUSTRY_INSIGHTS.other;
+    const insight = insightData.blurb;
+    const stats = insightData.stats || [];
+
+    let tier, headline, bullets;
+    if (score >= 12) {
+      tier = ['strong', 'Strong ICHRA candidate'];
+      headline = "You're an ideal ICHRA candidate.";
+      bullets = [
+        'Your size + situation match the highest-fit profile OTB sees',
+        'A licensed advisor can model your exact contribution cost in under a week',
+        'Most employers like you save 15–30% vs traditional group, with under 30 min/month of admin'
+      ];
+    } else if (score >= 8) {
+      tier = ['good', 'Likely a good fit'];
+      headline = 'ICHRA is probably worth a serious look.';
+      bullets = [
+        'You have most of the conditions that make ICHRA work well',
+        'Worth running the contribution math against your current spend',
+        'A 20-minute call with an advisor would clarify the path forward'
+      ];
+    } else if (score >= 4) {
+      tier = ['maybe', 'Worth a conversation'];
+      headline = "There's a case here — but it depends.";
+      bullets = [
+        "ICHRA could help, but the case isn't airtight from these answers alone",
+        'A custom assessment would tell you more',
+        'Compare against your current renewal increases'
+      ];
+    } else {
+      tier = ['no', 'Probably not the right fit'];
+      headline = 'Right now, ICHRA may not be your best move.';
+      bullets = [
+        'Your situation suggests sticking with your current setup',
+        'Re-check ICHRA if your renewal pricing spikes',
+        'Stipends or QSEHRA may be more relevant alternatives'
+      ];
+    }
+
+    const result = root.querySelector('[data-fr]');
+    const indCap = industry === 'nonprofit' ? 'Non-profit' : industry.charAt(0).toUpperCase()+industry.slice(1);
+    const statsHTML = stats.length ? `<div class="fit-industry-stats">${stats.map(([n,l]) => `<div class="fit-stat"><div class="fit-stat-n">${n}</div><div class="fit-stat-l">${l}</div></div>`).join('')}</div>` : '';
+    result.innerHTML = `
+      <span class="fit-tier ${tier[0]}">${tier[1]}</span>
+      <h5>${headline}</h5>
+      <div class="fit-industry-note"><strong>${indCap}.</strong> ${insight}</div>
+      ${statsHTML}
+      <ul>${bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+    `;
+    result.classList.add('show');
+    scrollToBottom();
+  });
+}
+
+// ── LEAD CAPTURE WIDGET ────────────────────────────────────────────
+function buildLeadCapture(props) {
+  const prompt = props.prompt || 'Want this in your inbox?';
+  return `
+    <p style="font-size:14px;color:var(--ink-dim);margin-bottom:14px">${escapeHtml(prompt)}</p>
+    <div class="lead-row">
+      <div class="lead-field"><label>Name</label><input type="text" data-lf="name" placeholder="Jane Doe"></div>
+      <div class="lead-field"><label>Email</label><input type="email" data-lf="email" placeholder="jane@company.com"></div>
+    </div>
+    <div class="lead-row">
+      <div class="lead-field"><label>Company / agency</label><input type="text" data-lf="org" placeholder="Acme Inc."></div>
+      <div class="lead-field"><label>Phone (optional)</label><input type="tel" data-lf="phone" placeholder="(555) 123-4567"></div>
+    </div>
+    <button class="lead-submit" data-ls>Send it</button>
+    <div class="lead-tcpa">By submitting, you agree to be contacted by OTB Solutions LLC. We don't share your info. Reply STOP to opt out of texts at any time.</div>`;
+}
+
+function wireLeadCapture(rootEl, opts = {}) {
+  // Accept either a tool-card wrapper (chat-inline use) or a direct container (modal use)
+  const root = rootEl.querySelector('.tool-body') || rootEl;
+  const btn = root.querySelector('[data-ls]');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const data = {
+      source: opts.source || ('unified-' + (state.persona || 'unknown')),
+      name: root.querySelector('[data-lf="name"]').value,
+      email: root.querySelector('[data-lf="email"]').value,
+      org: root.querySelector('[data-lf="org"]').value,
+      phone: root.querySelector('[data-lf="phone"]').value,
+      persona: state.persona || null,
+      snapshot: state.calc
+    };
+    if (!data.name || !data.email) {
+      alert('Name and email please.');
+      return;
+    }
+    fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) }).catch(()=>{});
+    root.innerHTML = `
+      <div style="text-align:center;padding:24px 12px">
+        <div style="font-size:40px;color:var(--green);margin-bottom:10px;line-height:1">✓</div>
+        <h5 style="font-size:18px;font-weight:700;margin-bottom:6px;letter-spacing:-0.3px">Got it.</h5>
+        <p style="font-size:14px;color:var(--ink-dim);line-height:1.6">A human at OTB will be in touch within one business day.</p>
+      </div>`;
+  });
+}
+
+// ── INIT ───────────────────────────────────────────────────────────
+// Close password gate when clicking outside the Aflac card
+document.addEventListener('click', e => {
+  const card = document.querySelector('.persona[data-key="aflac"]');
+  const gate = document.getElementById('pwGate');
+  if (card && gate.classList.contains('open') && !card.contains(e.target)) {
+    gate.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
