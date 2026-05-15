@@ -139,12 +139,12 @@ button { font-family: inherit; }
   line-height: 1.65;
 }
 .persona-inside-label {
-  display: inline-block;
+  display: block;
   font-size: 10px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--ink-soft);
-  margin-right: 10px;
+  margin-bottom: 10px;
   font-weight: 500;
 }
 .persona-tool {
@@ -157,6 +157,59 @@ button { font-family: inherit; }
   display: inline-block;
 }
 .persona:hover .persona-tool { color: var(--accent-deep); }
+.persona-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.persona-chip {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.1px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 11px;
+  cursor: pointer;
+  transition: all .15s ease;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+.persona-chip:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-deep);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.persona-chip-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  font-weight: 500;
+  border-style: dashed;
+}
+.persona-chip-ghost:hover {
+  background: var(--surface-warm);
+  color: var(--ink);
+  border-style: solid;
+  border-color: var(--ink-dim);
+}
+.persona-chip-locked {
+  opacity: 0.55;
+}
+.persona-chip-locked::before {
+  content: '🔒';
+  font-size: 10px;
+  margin-right: 4px;
+  opacity: 0.7;
+}
+.persona:hover .persona-chip {
+  border-color: var(--line);
+}
+.persona:hover .persona-chip:hover {
+  border-color: var(--accent);
+}
 .persona-cta {
   margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
   font-size: 12px; font-weight: 500; color: var(--ink-dim);
@@ -547,7 +600,7 @@ input[type=range]::-moz-range-thumb {
   line-height: 1.6;
 }
 .basics-note strong { color: var(--ink); font-weight: 600; }
-.basics-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.basics-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
 .basics-stat { background: transparent; border: 0.5px solid var(--line); padding: 14px 12px; border-radius: var(--r-md); text-align: center; }
 .basics-stat .n { font-family: var(--mono); font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 6px; letter-spacing: -0.3px; }
 .basics-stat .l { font-size: 11px; color: var(--ink-soft); line-height: 1.4; }
@@ -717,6 +770,183 @@ input[type=range]::-moz-range-thumb {
 .tool-banner.banner-fit::before     { background: var(--green); }
 .tool-banner.banner-lead::before    { background: var(--accent); }
 .tool-banner.banner-calc::before    { background: var(--accent); }
+.tool-banner.banner-contrib::before { background: var(--purple); }
+
+/* ── CONTRIBUTION CALCULATOR ───────────────────────────────────── */
+.contrib { display: grid; gap: 16px; }
+.contrib-step { display: none; }
+.contrib-step.active { display: block; animation: contribFade .25s ease; }
+@keyframes contribFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.contrib-step-eye {
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--ink-soft); font-weight: 500; margin-bottom: 8px;
+}
+.contrib-q { font-size: 17px; font-weight: 700; letter-spacing: -0.4px; color: var(--ink); margin-bottom: 4px; }
+.contrib-help { font-size: 13px; color: var(--ink-dim); margin-bottom: 14px; line-height: 1.55; }
+.contrib-progress { display: flex; gap: 4px; margin-bottom: 14px; }
+.contrib-progress .dot { flex: 1; height: 3px; border-radius: 2px; background: var(--line); }
+.contrib-progress .dot.done { background: var(--accent); }
+.contrib-progress .dot.current { background: var(--ink); }
+.contrib-options { display: grid; gap: 8px; }
+.contrib-options.two { grid-template-columns: 1fr 1fr; }
+.contrib-options.three { grid-template-columns: repeat(3, 1fr); }
+.contrib-opt {
+  border: 1px solid var(--line); background: var(--surface);
+  border-radius: var(--r-md); padding: 12px 14px;
+  cursor: pointer; transition: all .15s; text-align: left;
+  font-family: var(--font); font-size: 14px; color: var(--ink);
+}
+.contrib-opt:hover { border-color: var(--accent); background: var(--accent-soft); }
+.contrib-opt.selected { border-color: var(--accent-deep); background: var(--accent-soft); box-shadow: var(--shadow-sm); }
+.contrib-opt .opt-title { font-weight: 700; margin-bottom: 4px; display: block; }
+.contrib-opt .opt-desc { font-size: 12px; color: var(--ink-dim); line-height: 1.4; font-weight: 400; }
+.contrib-num-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.contrib-num-row label { display: block; font-size: 12px; color: var(--ink-dim); margin-bottom: 4px; font-weight: 500; }
+.contrib-num-row input[type=number] {
+  width: 100%; padding: 9px 12px; border: 1px solid var(--line);
+  border-radius: var(--r-sm); font-family: var(--font); font-size: 15px;
+  background: var(--surface); color: var(--ink);
+}
+.contrib-num-row input[type=number]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.contrib-state-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr));
+  gap: 4px; max-height: 220px; overflow-y: auto;
+  padding: 8px; border: 1px solid var(--line); border-radius: var(--r-sm);
+  background: var(--surface-warm);
+}
+.contrib-state {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  padding: 5px 0; text-align: center;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-dim);
+  border-radius: var(--r-sm); cursor: pointer; transition: all .12s;
+}
+.contrib-state:hover { border-color: var(--accent); color: var(--accent-deep); }
+.contrib-state.selected { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+.contrib-state-meta { font-size: 11px; color: var(--ink-soft); margin-top: 6px; font-family: var(--mono); }
+.contrib-strategy-card {
+  border: 1px solid var(--line); background: var(--surface);
+  border-radius: var(--r-md); padding: 14px 16px; cursor: pointer;
+  transition: all .15s ease; display: block; text-align: left;
+  font-family: var(--font); width: 100%; margin-bottom: 8px;
+}
+.contrib-strategy-card:hover { border-color: var(--accent); background: var(--accent-soft); }
+.contrib-strategy-card.selected { border-color: var(--accent-deep); background: var(--accent-soft); box-shadow: var(--shadow-sm); }
+.contrib-strategy-card .ico { font-size: 18px; margin-right: 8px; }
+.contrib-strategy-card .ttl { font-weight: 700; font-size: 14px; color: var(--ink); display: inline-block; }
+.contrib-strategy-card .dsc { font-size: 12px; color: var(--ink-dim); margin-top: 6px; line-height: 1.4; }
+.contrib-strategy-inputs { display: none; padding: 10px 14px; background: var(--surface-warm); border-radius: var(--r-sm); margin-top: 8px; }
+.contrib-strategy-inputs.visible { display: block; }
+.contrib-presets { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.contrib-preset-btn {
+  font-size: 11px; padding: 4px 10px; border: 1px solid var(--line);
+  background: var(--surface); border-radius: 999px; cursor: pointer;
+  color: var(--ink-dim); font-family: var(--font); font-weight: 600;
+  transition: all .12s;
+}
+.contrib-preset-btn:hover { border-color: var(--accent); color: var(--accent-deep); }
+.contrib-preset-btn.active { background: var(--accent); color: #fff; border-color: var(--accent-deep); }
+.contrib-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.contrib-btn {
+  padding: 9px 18px; border-radius: var(--r-sm); font-family: var(--font);
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-dim);
+}
+.contrib-btn:hover:not(:disabled) { border-color: var(--ink-dim); color: var(--ink); }
+.contrib-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.contrib-btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.contrib-btn.primary:hover:not(:disabled) { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
+.contrib-btn.shake { animation: shake .35s; }
+.contrib-yesno { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* RESULTS PANEL */
+.contrib-results { display: none; }
+.contrib-results.visible { display: block; }
+.contrib-summary {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, var(--surface-warm) 100%);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: 16px 18px; margin-bottom: 14px;
+}
+.contrib-summary-eye { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-deep); font-weight: 600; margin-bottom: 6px; }
+.contrib-summary-big { font-size: 32px; font-weight: 800; color: var(--ink); letter-spacing: -1.2px; line-height: 1.1; font-family: var(--mono); }
+.contrib-summary-sub { font-size: 13px; color: var(--ink-dim); margin-top: 4px; }
+.contrib-summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.contrib-summary-stat .n { font-size: 17px; font-weight: 700; color: var(--ink); font-family: var(--mono); }
+.contrib-summary-stat .l { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; font-weight: 500; }
+.contrib-savings-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--green-soft); color: var(--green);
+  padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700;
+  margin-top: 8px;
+}
+.contrib-table-wrap { overflow-x: auto; margin-top: 8px; border: 1px solid var(--line); border-radius: var(--r-md); }
+.contrib-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.contrib-table th { background: var(--surface-warm); padding: 9px 10px; text-align: left; color: var(--ink-soft); text-transform: uppercase; font-size: 10px; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid var(--line); }
+.contrib-table th.r, .contrib-table td.r { text-align: right; }
+.contrib-table td { padding: 9px 10px; border-bottom: 1px solid var(--line-soft); color: var(--ink); font-family: var(--mono); }
+.contrib-table tr:last-child td { border-bottom: none; }
+.contrib-table .profile-name { font-family: var(--font); font-weight: 600; }
+.contrib-aca-safe { color: var(--green); font-weight: 700; font-size: 11px; }
+.contrib-aca-review { color: var(--red); font-weight: 700; font-size: 11px; }
+.contrib-chart { margin-top: 14px; }
+.contrib-chart svg { width: 100%; height: auto; display: block; }
+.contrib-cite { font-size: 10px; color: var(--ink-soft); background: var(--amber-soft); padding: 8px 12px; border-radius: var(--r-sm); margin-top: 10px; line-height: 1.5; }
+.contrib-anc-panel { margin-top: 14px; border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px; background: var(--surface-warm); }
+.contrib-anc-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.contrib-anc-sub { font-size: 12px; color: var(--ink-dim); margin-bottom: 10px; line-height: 1.5; }
+.contrib-anc-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line-soft); font-size: 13px; }
+.contrib-anc-row:first-of-type { border-top: none; }
+.contrib-anc-row label { display: flex; align-items: center; gap: 10px; flex: 1; cursor: pointer; }
+.contrib-anc-row input[type=number] { width: 70px; padding: 4px 6px; font-family: var(--mono); font-size: 12px; border: 1px solid var(--line); border-radius: var(--r-sm); text-align: right; }
+.contrib-anc-row .anc-label { font-weight: 600; }
+.contrib-anc-row .anc-desc { font-size: 11px; color: var(--ink-soft); }
+.contrib-anc-row .anc-icon {
+  flex: 0 0 32px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+  background: #FFF6EE; border: 1px solid #FDDBC1; border-radius: 8px;
+  color: #F37321; /* Aflac orange */
+  transition: all .15s;
+}
+.contrib-anc-row .anc-icon svg { width: 18px; height: 18px; display: block; }
+.contrib-anc-row input[type=checkbox]:checked ~ .anc-icon,
+.contrib-anc-row label:has(input[type=checkbox]:checked) .anc-icon {
+  background: #002D72; /* Aflac navy */
+  border-color: #002D72;
+  color: #FFFFFF;
+}
+.contrib-anc-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; margin-top: 8px; border-top: 1px solid var(--line); font-weight: 700; }
+.contrib-anc-total .v { font-family: var(--mono); font-size: 15px; color: var(--accent-deep); }
+
+.contrib-grand-total {
+  margin-top: 14px; padding: 16px 18px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, #002D72 0%, #003D8F 100%);
+  color: #FFFFFF; box-shadow: var(--shadow-md);
+}
+.contrib-grand-eye {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: #F37321; font-weight: 700; margin-bottom: 10px;
+}
+.contrib-grand-rows { display: flex; flex-direction: column; gap: 4px; }
+.contrib-grand-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; padding: 4px 0; }
+.contrib-grand-row .k { color: rgba(255,255,255,0.78); font-weight: 500; }
+.contrib-grand-row .v { font-family: var(--mono); font-weight: 700; color: #FFFFFF; }
+.contrib-grand-row.total {
+  margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.18);
+  align-items: center;
+}
+.contrib-grand-row.total .k { color: #FFFFFF; font-weight: 700; font-size: 14px; letter-spacing: -0.2px; }
+.contrib-grand-row.total .v.big { font-size: 24px; letter-spacing: -0.8px; color: #FFFFFF; }
+.contrib-grand-row.sub .k { font-size: 11px; color: rgba(255,255,255,0.6); }
+.contrib-grand-row.sub .v { font-size: 12px; color: rgba(255,255,255,0.78); font-weight: 600; }
+.contrib-restart {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; border: 1px solid var(--line);
+  color: var(--ink-dim); font-size: 12px; font-weight: 500;
+  padding: 6px 12px; border-radius: var(--r-sm); cursor: pointer;
+  margin-top: 10px; transition: all .12s;
+}
+.contrib-restart:hover { border-color: var(--ink-dim); color: var(--ink); }
+.contrib-strategy-readout { display: none; margin-top: 12px; padding: 10px 12px; background: var(--surface-warm); border-radius: var(--r-sm); font-size: 12px; color: var(--ink-dim); border-left: 3px solid var(--accent); }
+.contrib-strategy-readout.visible { display: block; }
+.contrib-strategy-readout strong { color: var(--ink); font-weight: 700; }
 .tool-banner-svg {
   flex-shrink: 0; width: 40px; height: 40px;
   display: flex; align-items: center; justify-content: center;
@@ -1049,7 +1279,14 @@ input[type=range]::-moz-range-thumb {
         <div class="persona-title">Employers</div>
         <div class="persona-desc">Is ICHRA right for your business? Direct answers, on your terms.</div>
         <div class="persona-inside">
-          <span class="persona-inside-label">Inside</span><span class="persona-tool">Fit assessment</span> · <span class="persona-tool">ICHRA primer</span> · <span class="persona-tool">Group vs ICHRA</span> · <span class="persona-tool">Direct chat</span>
+          <span class="persona-inside-label">Open a tool</span>
+          <div class="persona-chips">
+            <button type="button" class="persona-chip" data-persona="employer" data-tool="show_fit_assessment" onclick="launchChipTool(event,'employer','show_fit_assessment')">Fit assessment</button>
+            <button type="button" class="persona-chip" data-persona="employer" data-tool="show_contribution_calculator" onclick="launchChipTool(event,'employer','show_contribution_calculator')">Contribution calculator</button>
+            <button type="button" class="persona-chip" data-persona="employer" data-tool="show_ichra_basics" onclick="launchChipTool(event,'employer','show_ichra_basics')">ICHRA primer</button>
+            <button type="button" class="persona-chip" data-persona="employer" data-tool="show_group_vs_ichra" onclick="launchChipTool(event,'employer','show_group_vs_ichra')">Group vs ICHRA</button>
+            <button type="button" class="persona-chip persona-chip-ghost" data-persona="employer" data-tool="" onclick="launchChipTool(event,'employer','')">Direct chat</button>
+          </div>
         </div>
         <div class="persona-cta">Start →</div>
       </div>
@@ -1065,7 +1302,13 @@ input[type=range]::-moz-range-thumb {
         <div class="persona-title">Brokers</div>
         <div class="persona-desc">The commission math when a client moves to ICHRA. Group, ancillary, both sides.</div>
         <div class="persona-inside">
-          <span class="persona-inside-label">Inside</span><span class="persona-tool">Commission calculator</span> · <span class="persona-tool">ICHRA primer</span> · <span class="persona-tool">Group vs ICHRA</span> · <span class="persona-tool">Direct chat</span>
+          <span class="persona-inside-label">Open a tool</span>
+          <div class="persona-chips">
+            <button type="button" class="persona-chip" data-persona="broker" data-tool="show_commission_calculator" onclick="launchChipTool(event,'broker','show_commission_calculator')">Commission calculator</button>
+            <button type="button" class="persona-chip" data-persona="broker" data-tool="show_ichra_basics" onclick="launchChipTool(event,'broker','show_ichra_basics')">ICHRA primer</button>
+            <button type="button" class="persona-chip" data-persona="broker" data-tool="show_group_vs_ichra" onclick="launchChipTool(event,'broker','show_group_vs_ichra')">Group vs ICHRA</button>
+            <button type="button" class="persona-chip persona-chip-ghost" data-persona="broker" data-tool="" onclick="launchChipTool(event,'broker','')">Direct chat</button>
+          </div>
         </div>
         <div class="persona-cta">Start →</div>
       </div>
@@ -1079,7 +1322,13 @@ input[type=range]::-moz-range-thumb {
         <div class="persona-title">Agent <span class="persona-locked">locked</span></div>
         <div class="persona-desc">Commission tools with full hierarchy — Associate, DSC, RSC.</div>
         <div class="persona-inside">
-          <span class="persona-inside-label">Inside</span><span class="persona-tool">Commission calculator</span> · <span class="persona-tool">Hierarchy view</span> · <span class="persona-tool">Scenario presets</span> · <span class="persona-tool">Direct chat</span>
+          <span class="persona-inside-label">Open a tool</span>
+          <div class="persona-chips">
+            <button type="button" class="persona-chip persona-chip-locked" data-persona="aflac" data-tool="show_commission_calculator" onclick="launchChipTool(event,'aflac','show_commission_calculator')">Commission calculator</button>
+            <button type="button" class="persona-chip persona-chip-locked" data-persona="aflac" data-tool="show_commission_calculator" data-preset="allAnc" onclick="launchChipTool(event,'aflac','show_commission_calculator','allAnc')">All Ancillary preset</button>
+            <button type="button" class="persona-chip persona-chip-locked" data-persona="aflac" data-tool="show_commission_calculator" data-preset="allBen" onclick="launchChipTool(event,'aflac','show_commission_calculator','allBen')">All Benefits preset</button>
+            <button type="button" class="persona-chip persona-chip-locked persona-chip-ghost" data-persona="aflac" data-tool="" onclick="launchChipTool(event,'aflac','')">Direct chat</button>
+          </div>
         </div>
         <div class="persona-cta">Unlock →</div>
         <div class="pw-gate" id="pwGate" onclick="event.stopPropagation()">
@@ -1303,7 +1552,7 @@ const state = {
 
 const SUGGESTIONS = {
   employer: [
-    'How much would it cost?',
+    'What should I contribute per employee?',
     'What happens to my group plan?',
     'Is ICHRA ACA-compliant?'
   ],
@@ -1360,24 +1609,31 @@ const SVGS = {
   </svg>`,
   spark: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
     <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z"/>
+  </svg>`,
+  contrib: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9"/>
+    <line x1="12" y1="7" x2="12" y2="17"/>
+    <path d="M14.5 9.5 a2.5 2 0 1 0 0 2 H10 a2.5 2 0 1 1 0 -2"/>
   </svg>`
 };
 
 // Banner config per tool
 const TOOL_META = {
-  show_commission_calculator: { banner: 'banner-calc',    eye: 'Calculator',  title: 'Commission scenarios',   sub: 'Channel One rates · drag sliders to model your case', svg: SVGS.calc },
-  show_ichra_basics:          { banner: 'banner-basics',  eye: 'Primer',      title: 'ICHRA in three steps',   sub: 'Set a budget, employees pick a plan, you reimburse',  svg: SVGS.basics },
-  show_group_vs_ichra:        { banner: 'banner-compare', eye: 'Comparison',  title: 'Group plan vs ICHRA',    sub: 'Side-by-side on cost, choice, and admin',            svg: SVGS.compare },
-  show_fit_assessment:        { banner: 'banner-fit',     eye: 'Assessment',  title: 'Is ICHRA a fit?',        sub: 'Four questions, takes twenty seconds',                svg: SVGS.fit },
-  capture_lead:               { banner: 'banner-lead',    eye: 'Connect',     title: 'Get in touch',           sub: 'A human at OTB follows up within one business day',  svg: SVGS.lead }
+  show_commission_calculator:   { banner: 'banner-calc',    eye: 'Calculator',  title: 'Commission scenarios',   sub: 'Channel One rates · drag sliders to model your case', svg: SVGS.calc },
+  show_contribution_calculator: { banner: 'banner-contrib', eye: 'Calculator',  title: 'Contribution calculator', sub: 'BenefitIQ · what to contribute per employee under ICHRA', svg: SVGS.contrib },
+  show_ichra_basics:            { banner: 'banner-basics',  eye: 'Primer',      title: 'ICHRA in three steps',   sub: 'Set a budget, employees pick a plan, you reimburse',  svg: SVGS.basics },
+  show_group_vs_ichra:          { banner: 'banner-compare', eye: 'Comparison',  title: 'Group plan vs ICHRA',    sub: 'Side-by-side on cost, choice, and admin',            svg: SVGS.compare },
+  show_fit_assessment:          { banner: 'banner-fit',     eye: 'Assessment',  title: 'Is ICHRA a fit?',        sub: 'Four questions, takes twenty seconds',                svg: SVGS.fit },
+  capture_lead:                 { banner: 'banner-lead',    eye: 'Connect',     title: 'Get in touch',           sub: 'A human at OTB follows up within one business day',  svg: SVGS.lead }
 };
 
 // Starter launchpad per persona — 3 most useful tools, presented as tiles
 const STARTERS = {
   employer: [
-    { tool: 'show_fit_assessment',     icon: SVGS.fit,    iconCls: '',  title: 'Fit assessment',         desc: 'Four questions. See if ICHRA suits your business.' },
-    { tool: 'show_ichra_basics',       icon: SVGS.basics, iconCls: '',  title: 'ICHRA primer',           desc: 'What it is, in three steps.' },
-    { tool: 'show_group_vs_ichra',     icon: SVGS.compare,iconCls: '',  title: 'Group vs ICHRA',         desc: 'Side-by-side on cost, choice, and admin.' }
+    { tool: 'show_fit_assessment',         icon: SVGS.fit,     iconCls: '', title: 'Fit assessment',         desc: 'Four questions. See if ICHRA suits your business.' },
+    { tool: 'show_contribution_calculator',icon: SVGS.contrib, iconCls: '', title: 'Contribution calculator',desc: 'What to give each employee. ACA-safe by default.' },
+    { tool: 'show_ichra_basics',           icon: SVGS.basics,  iconCls: '', title: 'ICHRA primer',           desc: 'What it is, in three steps.' },
+    { tool: 'show_group_vs_ichra',         icon: SVGS.compare, iconCls: '', title: 'Group vs ICHRA',         desc: 'Side-by-side on cost, choice, and admin.' }
   ],
   broker: [
     { tool: 'show_commission_calculator', icon: SVGS.calc,   iconCls: '', title: 'Commission scenarios',   desc: 'Group, ancillary, both sides. Model your case.' },
@@ -1398,6 +1654,24 @@ const PERSONA_INTROS = {
 };
 
 // ── ENTRY → CHAT ───────────────────────────────────────────────────
+// Pending tool to auto-open after persona selection (used by entry-page chips
+// and after the agent password gate unlocks).
+let pendingChipTool = null;
+let pendingChipPreset = null;
+
+function launchChipTool(e, persona, toolName, preset) {
+  // Stop the parent persona card's onclick from firing too
+  if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
+  pendingChipTool = toolName || null;
+  pendingChipPreset = preset || null;
+  if (persona === 'aflac') {
+    // Agent is locked — open the password gate; checkPassword() will route in
+    openAflacGate(e || { stopPropagation: () => {} });
+  } else {
+    selectPersona(persona);
+  }
+}
+
 function selectPersona(persona) {
   state.persona = persona;
   state.chatHistory = [];
@@ -1421,8 +1695,23 @@ function selectPersona(persona) {
   state.chatHistory.push({ role: 'assistant', content: introText });
   // Reveal Why ICHRA FAB with pulse
   showWhyFab();
-  // Focus composer
-  setTimeout(() => document.getElementById('composerInput').focus(), 200);
+  // If user clicked a chip from the entry page, auto-launch that tool now
+  if (pendingChipTool) {
+    const tool = pendingChipTool;
+    const preset = pendingChipPreset;
+    pendingChipTool = null;
+    pendingChipPreset = null;
+    setTimeout(() => {
+      launchStarterTool({
+        tool: tool,
+        title: TOOL_META[tool] ? TOOL_META[tool].title : tool.replace('show_', '').replace(/_/g, ' '),
+        preset: preset ? { scenario: preset } : {}
+      });
+    }, 260);
+  } else {
+    // Focus composer
+    setTimeout(() => document.getElementById('composerInput').focus(), 200);
+  }
 }
 
 function goBackToEntry() {
@@ -1788,12 +2077,20 @@ const LOCAL_QA_SHARED = [
 
 const LOCAL_QA_PERSONA = {
   employer: [
-    { keys: ['how much', 'cost', 'budget', 'spend'],
-      a: "Whatever monthly allowance fits your budget. No federal minimum. Most employers start between $300 and $700 per employee per month — but $100/month is a legitimate, tax-free health benefit if that's what your budget allows." },
+    { keys: ['how much', 'cost', 'budget', 'spend', 'contribution amount', 'what to contribute', 'how much should i contribute'],
+      a: "Depends on size, geography, and ACA status. Open the contribution calculator — it walks you through ALE status, workforce age range, states, family mix, and strategy (% of benchmark, EE cap, or flat $). It uses 2025 CMS silver benchmarks and 2024 small-group data to show per-employee cost, total monthly spend, and 5-year savings vs. group. ALEs get the FPL safe harbor ($113/mo) applied automatically." },
+    { keys: ['ale', 'applicable large', '50 employees', 'safe harbor', 'fpl'],
+      a: "An Applicable Large Employer (50+ FTEs) has to meet ACA affordability. ICHRA contributions count: the contribution must bring the employee's silver-plan cost below 9.02% of household income (2025). The simplest is the FPL safe harbor — keep the employee's share ≤ $113/mo and you're safe. The contribution calculator applies this automatically when you say Yes to the ALE gate." },
     { keys: ['group plan', 'group health', 'vs group', 'compared to group', 'switch from'],
-      a: "Three big shifts. Group premiums change every year based on your team's claims; ICHRA gives you a fixed allowance you set, permanently. Group plans require 70%+ participation; ICHRA has zero minimums. Group plans pick one carrier for everyone; ICHRA lets each employee pick their own plan and doctors. Pull up the comparison for the full side-by-side." },
+      a: "Three big shifts. Group premiums change every year based on your team's claims; ICHRA gives you a fixed allowance you set, permanently. Group plans require 70%+ participation; ICHRA has zero minimums. Group plans pick one carrier for everyone; ICHRA lets each employee pick their own. Pull up the comparison for the full side-by-side." },
     { keys: ['payroll', 'taxes', 'tax-free'],
-      a: "ICHRA reimbursements process outside payroll through an admin platform. They're not subject to payroll taxes (FICA) for either side. Your payroll system doesn't need to change." }
+      a: "ICHRA reimbursements process outside payroll through an admin platform. They're not subject to payroll taxes (FICA) for either side. Your payroll system doesn't need to change." },
+    { keys: ['class', 'classes', 'part time', 'part-time', 'seasonal', 'salaried', 'hourly'],
+      a: "ICHRA lets you treat different employee groups differently — full-time vs part-time vs seasonal, salaried vs hourly, geography, etc. (11 IRS-recognized classes). You can offer group to one class and ICHRA to another, or zero contribution to part-time. Everyone within a class has to be treated equally." },
+    { keys: ['leave', 'quit', 'cobra', 'lose coverage'],
+      a: "If an employee leaves, they keep the individual plan they chose — they own the policy. They can re-enroll the next plan year on their own (without your contribution), which is often cheaper than COBRA. No COBRA admin headache for you." },
+    { keys: ['indiana', 'tax credit', 'state credit'],
+      a: "Indiana offers a state tax credit — $400/employee Year 1, $200 Year 2 — for small employers who adopt ICHRA. A handful of other states are considering similar incentives. If you're in IN, that essentially offsets the admin platform fee for the first two years." }
   ],
   broker: [
     { keys: ['commission', 'compensation', 'comp'],
@@ -1831,6 +2128,7 @@ function fallbackReply(msg, localTool) {
   // 1. If a tool is being rendered, give a one-liner intro
   if (localTool) {
     if (localTool.name === 'show_commission_calculator') return 'Pulling up the calculator. Adjust the sliders for your case.';
+    if (localTool.name === 'show_contribution_calculator') return "Let's figure out what to contribute. Six quick questions — I'll handle ACA compliance automatically.";
     if (localTool.name === 'show_ichra_basics') return 'ICHRA in three steps:';
     if (localTool.name === 'show_group_vs_ichra') return 'Side by side:';
     if (localTool.name === 'show_fit_assessment') return 'Four questions, twenty seconds:';
@@ -1849,12 +2147,13 @@ function buildToolCard(name, props) {
   const wrap = document.createElement('div');
   wrap.className = 'tool-card has-banner';
   let inner = '';
-  if (name === 'show_commission_calculator') inner = buildCalculator(props);
-  else if (name === 'show_ichra_basics')     inner = buildBasics();
-  else if (name === 'show_group_vs_ichra')   inner = buildComparison();
-  else if (name === 'show_fit_assessment')   inner = buildFitAssessment();
-  else if (name === 'capture_lead')          inner = buildLeadCapture(props);
-  else                                       inner = '<p style="color:var(--ink-soft);font-size:13px">Unknown tool.</p>';
+  if (name === 'show_commission_calculator')        inner = buildCalculator(props);
+  else if (name === 'show_contribution_calculator') inner = buildContributionCalc(props);
+  else if (name === 'show_ichra_basics')            inner = buildBasics();
+  else if (name === 'show_group_vs_ichra')          inner = buildComparison();
+  else if (name === 'show_fit_assessment')          inner = buildFitAssessment();
+  else if (name === 'capture_lead')                 inner = buildLeadCapture(props);
+  else                                              inner = '<p style="color:var(--ink-soft);font-size:13px">Unknown tool.</p>';
 
   const meta = TOOL_META[name] || { banner: '', eye: 'Live tool', title: 'Tool', sub: '', svg: SVGS.spark };
   wrap.innerHTML = `
@@ -1870,6 +2169,7 @@ function buildToolCard(name, props) {
   // Post-mount wiring
   setTimeout(() => {
     if (name === 'show_commission_calculator') wireCalculator(wrap, props);
+    if (name === 'show_contribution_calculator') wireContributionCalc(wrap, props);
     if (name === 'show_fit_assessment') wireFitAssessment(wrap);
     if (name === 'capture_lead') wireLeadCapture(wrap);
   }, 30);
@@ -1910,6 +2210,7 @@ function launchStarterTool(item) {
   state.chatHistory.push({ role: 'user', content: userText });
   // Assistant says a one-liner then renders the tool
   const intro = item.tool === 'show_commission_calculator' ? 'Calculator.'
+              : item.tool === 'show_contribution_calculator' ? "Let's figure out the right ICHRA contribution."
               : item.tool === 'show_ichra_basics' ? 'ICHRA in three steps.'
               : item.tool === 'show_group_vs_ichra' ? 'Side by side.'
               : item.tool === 'show_fit_assessment' ? 'Four questions.'
@@ -1939,9 +2240,10 @@ function openWhy(opts = {}) {
     document.getElementById('soCompare').innerHTML = buildComparison();
     document.getElementById('soStats').innerHTML = `
       <div class="basics-stats">
-        <div class="basics-stat"><div class="n">29%</div><div class="l">YoY adoption growth</div></div>
+        <div class="basics-stat"><div class="n">89%</div><div class="l">YoY ALE adoption growth</div></div>
         <div class="basics-stat"><div class="n">$0</div><div class="l">claims risk to employer</div></div>
-        <div class="basics-stat"><div class="n">92%</div><div class="l">renew year-over-year</div></div>
+        <div class="basics-stat"><div class="n">~30%</div><div class="l">avg savings in friendly states</div></div>
+        <div class="basics-stat"><div class="n">&lt;30 min</div><div class="l">employer admin per month</div></div>
       </div>`;
     document.getElementById('soBasics').dataset.loaded = '1';
   }
@@ -2372,6 +2674,580 @@ function calcPlatform(ee, pepm, hlthPen) {
 }
 const fmt = v => '$' + Math.round(v).toLocaleString();
 const fmtSigned = v => (v >= 0 ? '+' : '−') + '$' + Math.round(Math.abs(v)).toLocaleString();
+
+// ── CONTRIBUTION CALCULATOR · BENEFITIQ ────────────────────────────
+// Ported from contribution.html (the standalone React/Recharts bundle).
+// All constants verbatim from the source; formulas matched 1:1.
+const BIQ = {
+  // HHS age curve, age 21 → 64 (44 values). Ages <21 use index 0; >64 capped at index 43.
+  AGE_CURVE: [
+    0.6716,0.6716,0.6716,0.6716,0.6743,0.7065,0.7475,0.8046,0.8516,0.8737,
+    0.8959,0.9187,0.9281,0.9375,0.9476,0.9577,0.9684,0.9785,0.9893,1.0000,
+    1.0168,1.0336,1.0504,1.0712,1.0920,1.1169,1.1417,1.1706,1.1995,1.2317,
+    1.2639,1.2968,1.3345,1.3721,1.4150,1.4621,1.5097,1.5581,1.5856,1.6521,
+    1.7213,1.7582,1.7952,2.0148
+  ],
+  // Silver benchmark, single age-21 $/mo by state. CMS 2025 rate filings (MoneyGeek).
+  SILVER_BM: {AK:1070,AL:575,AR:494,AZ:528,CA:611,CO:508,CT:665,DC:573,DE:578,FL:647,GA:658,HI:527,IA:493,ID:487,IL:579,IN:438,KS:623,KY:556,LA:628,MA:647,MD:412,ME:619,MI:529,MN:452,MO:614,MS:541,MT:616,NC:639,ND:571,NE:725,NH:368,NJ:584,NM:608,NV:533,NY:1134,OH:533,OK:583,OR:621,PA:605,RI:477,SC:538,SD:640,TN:556,TX:586,UT:645,VA:523,VT:1157,WA:528,WI:603,WV:952,WY:884},
+  // Small-group avg premium $/mo per EE. KFF EHBS 2024.
+  GROUP_BM:  {AK:777,AL:655,AR:628,AZ:693,CA:747,CO:698,CT:746,DC:742,DE:762,FL:751,GA:652,HI:625,IA:637,ID:627,IL:732,IN:707,KS:656,KY:672,LA:680,MA:784,MD:663,ME:731,MI:740,MN:675,MO:713,MS:630,MT:662,NC:670,ND:697,NE:650,NH:696,NJ:760,NM:716,NV:621,NY:799,OH:693,OK:647,OR:698,PA:716,RI:775,SC:682,SD:695,TN:626,TX:653,UT:647,VA:682,VT:728,WA:696,WI:685,WV:745,WY:747},
+  FLAT_STATES: ['NY','VT'],
+  STATES: ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','DC'],
+  FPL_SAFE_HARBOR: 113,
+  GROUP_TREND: 1.09,
+  PCT_PRESETS: [
+    {key:'Starter',     pct:40, dsc:'Bare-bones, attracts a workforce'},
+    {key:'Competitive', pct:65, dsc:'Market-rate, comparable to group'},
+    {key:'Premium',     pct:85, dsc:'Generous, retention-grade'}
+  ],
+  // Aflac brand colors: navy #002D72, orange #F37321. Icons use line-art SVGs matching Aflac product card style.
+  ANCILLARIES: [
+    {k:'dental', label:'Dental',                     desc:'Cleanings, fillings, major restorative',     range:'$20-40/mo', def:25,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 3.5c-2.2 0-3.5 1.6-3.5 4 0 1.6.5 3 .8 4.5.4 1.7.3 3.4.8 5.5.4 1.6 1 3 1.9 3 .9 0 1.1-1.3 1.5-3 .3-1.3.6-2.4 1-2.4.4 0 .7 1.1 1 2.4.4 1.7.6 3 1.5 3 .9 0 1.5-1.4 1.9-3 .5-2.1.4-3.8.8-5.5.3-1.5.8-2.9.8-4.5 0-2.4-1.3-4-3.5-4-1.4 0-2.2.5-2.5 1.2-.3-.7-1.1-1.2-2.5-1.2z"/></svg>'},
+    {k:'life', label:'Permanent Life',               desc:'Cash value builds; lifetime coverage',       range:'$25-100/mo', def:50,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L20 6 V12 c0 4.5-3 8.5-8 9.5 -5-1-8-5-8-9.5 V6 Z"/><path d="M9 12 l2 2 4-4"/></svg>'},
+    {k:'hosp', label:'Hospital Indemnity',           desc:'Fixed benefit per admission or hospital day',range:'$20-50/mo', def:30,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="14" rx="1"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="4" y1="20" x2="20" y2="20"/></svg>'},
+    {k:'dis', label:'Short/Long-term Disability',    desc:"Income replacement when an EE can't work",   range:'$25-60/mo', def:35,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M9 9 h6 v6 l3 4"/><path d="M9 9 v6 l-3 4"/><line x1="12" y1="13" x2="14" y2="15"/></svg>'},
+    {k:'ci', label:'Critical Illness',               desc:'Lump-sum on heart attack, stroke, major dx', range:'$15-40/mo', def:20,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 8.4c0-2.4-2-4.4-4.4-4.4-1.8 0-3.4 1.1-4 2.7-.6-1.6-2.2-2.7-4-2.7C6 4 4 6 4 8.4c0 5.4 8.4 10.4 8.4 10.4s8.4-5 8.4-10.4z"/><polyline points="4 12 8 12 10 9 12 15 14 12 20 12"/></svg>'},
+    {k:'acc', label:'Accident',                      desc:'ER visits, fractures, covered injuries',     range:'$12-30/mo', def:18,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="10" width="18" height="6" rx="3" transform="rotate(-25 12 13)"/><line x1="9" y1="9" x2="11" y2="11"/><line x1="13" y1="15" x2="15" y2="17"/><line x1="11" y1="13" x2="13" y2="13"/></svg>'},
+    {k:'cancer', label:'Cancer',                     desc:'Lump-sum and treatment benefits',            range:'$15-35/mo', def:25,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L8 11 L12 21 L16 11 Z"/><path d="M8 11 L16 11"/><circle cx="12" cy="7" r="1.4" fill="currentColor" stroke="none"/></svg>'},
+    {k:'vis', label:'Vision',                        desc:'Eye exams, glasses, contacts',               range:'$10-20/mo', def:15,
+     icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 c2.5-4 6-6.5 10-6.5 s7.5 2.5 10 6.5 c-2.5 4-6 6.5-10 6.5 S4.5 16 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>'}
+  ]
+};
+
+function biqPremium(age, st){
+  const state = st || 'GA';
+  const base = BIQ.SILVER_BM[state] || 600;
+  if (BIQ.FLAT_STATES.indexOf(state) >= 0) return base;
+  const a = Math.min(Math.max(parseInt(age) || 30, 21), 64);
+  return Math.round(base * BIQ.AGE_CURVE[a - 21]);
+}
+
+function biqERContrib(prem, s){
+  if (s.isALE) return Math.max(0, prem - BIQ.FPL_SAFE_HARBOR);
+  if (s.strategyMode === 'pct')    return Math.round(prem * (s.pct / 100));
+  if (s.strategyMode === 'ee_max') return Math.max(0, prem - (s.eeMax || 150));
+  if (s.strategyMode === 'flat')   return Math.max(0, s.flat || 0);
+  return Math.round(prem * 0.65);
+}
+
+function biqProfiles(s){
+  const states = (s.states && s.states.length) ? s.states : ['GA'];
+  const sorted = states.slice().sort((a,b) => (BIQ.SILVER_BM[a]||600) - (BIQ.SILVER_BM[b]||600));
+  const cheap = sorted[0];
+  const exp = sorted[sorted.length - 1];
+  const median = sorted[Math.floor(sorted.length / 2)];
+  const minAge = parseInt(s.minAge) || 25;
+  const maxAge = parseInt(s.maxAge) || 55;
+  const midAge = Math.round((minAge + maxAge) / 2);
+  const includeFam = s.familyMix !== 'mostly_single';
+  const out = [];
+  out.push({id:1, label:'Youngest — single',  age:minAge, state:cheap,  tier:'single', empType:'FT'});
+  if (includeFam) out.push({id:2, label:'Youngest — family',  age:minAge, state:cheap,  tier:'family', empType:'FT'});
+  out.push({id:3, label:'Mid-age — single', age:midAge, state:median, tier:'single', empType:'FT'});
+  if (includeFam) out.push({id:4, label:'Mid-age — family', age:midAge, state:median, tier:'family', empType:'FT'});
+  out.push({id:5, label:'Oldest — ' + (includeFam ? 'family' : 'single'), age:maxAge, state:exp, tier: includeFam ? 'family' : 'single', empType:'FT'});
+  if (s.hasPT) out.push({id:6, label:'Part-time — single', age:midAge, state:median, tier:'single', empType:'PT'});
+  return out;
+}
+
+function biqStrategyLabel(s){
+  if (s.isALE) return 'ALE · FPL safe harbor (EE pays ≤ $113/mo)';
+  if (s.strategyMode === 'pct')    return (s.pct || 65) + '% of benchmark premium';
+  if (s.strategyMode === 'ee_max') return 'Cap employee cost at $' + (s.eeMax || 150) + '/mo';
+  if (s.strategyMode === 'flat')   return 'Flat $' + (s.flat || 400) + '/EE/mo';
+  return 'Default · 65% of benchmark';
+}
+
+function buildContributionCalc(props) {
+  const cid = 'biq-' + Math.random().toString(36).slice(2, 8);
+  return `
+    <div class="contrib" data-cid="${cid}">
+      <div class="contrib-progress" data-bp="progress">
+        <div class="dot current"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+
+      <div class="contrib-step active" data-step="0">
+        <div class="contrib-step-eye">Step 1 of 6 · Compliance</div>
+        <div class="contrib-q">Does your company have 50 or more full-time equivalent employees?</div>
+        <div class="contrib-help">This is the IRS Applicable Large Employer (ALE) threshold. ALEs face stricter ACA affordability rules — I'll automatically apply the FPL safe harbor (employee pays ≤ $113/mo) so your contribution stays compliant.</div>
+        <div class="contrib-yesno">
+          <button class="contrib-opt" data-bv="isALE" data-val="true"><span class="opt-title">Yes — 50+ employees</span><span class="opt-desc">ALE · subject to ACA employer mandate</span></button>
+          <button class="contrib-opt" data-bv="isALE" data-val="false"><span class="opt-title">No — fewer than 50</span><span class="opt-desc">Small employer · full flexibility on contribution</span></button>
+        </div>
+      </div>
+
+      <div class="contrib-step" data-step="1">
+        <div class="contrib-step-eye">Step 2 of 6 · Workforce</div>
+        <div class="contrib-q">What's the age range of your workforce?</div>
+        <div class="contrib-help">Approximate is fine. Age drives the benchmark premium spread — younger employees see lower premiums and need less contribution to hit ACA affordability.</div>
+        <div class="contrib-num-row">
+          <div>
+            <label>Youngest employee</label>
+            <input type="number" data-bp="minAge" min="18" max="90" value="25">
+          </div>
+          <div>
+            <label>Oldest employee</label>
+            <input type="number" data-bp="maxAge" min="18" max="90" value="55">
+          </div>
+        </div>
+        <div class="contrib-state-meta" data-bp="ageHint">Mid-age benchmark estimate updates below.</div>
+      </div>
+
+      <div class="contrib-step" data-step="2">
+        <div class="contrib-step-eye">Step 3 of 6 · Geography</div>
+        <div class="contrib-q">Which states do your employees work in?</div>
+        <div class="contrib-help">Select all that apply. Premiums vary significantly by state — community-rated states (NY, VT) use a single rate, the rest age-rate.</div>
+        <div class="contrib-state-grid" data-bp="stateGrid"></div>
+        <div class="contrib-state-meta" data-bp="stateMeta">Selected: 0</div>
+      </div>
+
+      <div class="contrib-step" data-step="3">
+        <div class="contrib-step-eye">Step 4 of 6 · Workforce shape</div>
+        <div class="contrib-q">What best describes your workforce's family situation?</div>
+        <div class="contrib-help">This shapes the indicative profiles I show — family-tier rows are added when families are common.</div>
+        <div class="contrib-options" style="margin-bottom:14px">
+          <button class="contrib-opt" data-bv="familyMix" data-val="mostly_single"><span class="opt-title">Mostly single employees</span><span class="opt-desc">Most employees cover themselves only.</span></button>
+          <button class="contrib-opt" data-bv="familyMix" data-val="mixed"><span class="opt-title">Mix of single and families</span><span class="opt-desc">Some have spouses or kids on coverage.</span></button>
+          <button class="contrib-opt" data-bv="familyMix" data-val="mostly_family"><span class="opt-title">Mostly employees with families</span><span class="opt-desc">Most cover dependents.</span></button>
+        </div>
+        <div class="contrib-q" style="font-size:15px">Do you have part-time employees?</div>
+        <div class="contrib-help">If yes, I'll model a PT class. ICHRA lets you treat full-time and part-time as separate classes with different (or zero) contributions.</div>
+        <div class="contrib-yesno">
+          <button class="contrib-opt" data-bv="hasPT" data-val="true"><span class="opt-title">Yes</span><span class="opt-desc">Add a PT profile row.</span></button>
+          <button class="contrib-opt selected" data-bv="hasPT" data-val="false"><span class="opt-title">No</span><span class="opt-desc">Full-time only.</span></button>
+        </div>
+      </div>
+
+      <div class="contrib-step" data-step="4">
+        <div class="contrib-step-eye">Step 5 of 6 · Scale</div>
+        <div class="contrib-q">Roughly how many employees do you have?</div>
+        <div class="contrib-help">Used to estimate your total monthly spend. Doesn't need to be exact.</div>
+        <div class="contrib-num-row" style="grid-template-columns: 1fr;">
+          <div>
+            <label>Headcount</label>
+            <input type="number" data-bp="headcount" min="1" max="10000" value="25">
+          </div>
+        </div>
+      </div>
+
+      <div class="contrib-step" data-step="5">
+        <div class="contrib-step-eye">Step 6 of 6 · Strategy</div>
+        <div class="contrib-q" data-bp="strategyQ">How do you want to approach contributions?</div>
+        <div class="contrib-help" data-bp="strategyHelp">Pick the framing that makes most sense for your business. You can change this and re-run.</div>
+        <div data-bp="strategyArea">
+          <button class="contrib-strategy-card" data-bv="strategyMode" data-val="pct">
+            <span class="ico">📊</span><span class="ttl">Cover a % of the benchmark premium</span>
+            <div class="dsc">Set 40%, 65%, or 85% — the dollar amount varies by age and state, but the affordability story stays consistent.</div>
+          </button>
+          <div class="contrib-strategy-inputs" data-mode-input="pct">
+            <label style="font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:600;display:block;margin-bottom:6px">Coverage percentage</label>
+            <div class="contrib-presets">
+              <button class="contrib-preset-btn" data-bpct="40">Starter · 40%</button>
+              <button class="contrib-preset-btn active" data-bpct="65">Competitive · 65%</button>
+              <button class="contrib-preset-btn" data-bpct="85">Premium · 85%</button>
+            </div>
+          </div>
+
+          <button class="contrib-strategy-card" data-bv="strategyMode" data-val="ee_max">
+            <span class="ico">💸</span><span class="ttl">Employee pays no more than $X/month</span>
+            <div class="dsc">You set the ceiling on what employees pay — you cover the rest. The dollar amount varies by age and state.</div>
+          </button>
+          <div class="contrib-strategy-inputs" data-mode-input="ee_max">
+            <label style="font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:600;display:block;margin-bottom:6px">Max EE cost per month</label>
+            <div class="contrib-num-row" style="grid-template-columns:1fr;margin-bottom:0"><div>
+              <input type="number" data-bp="eeMax" min="0" max="2000" step="10" value="150" style="font-family:var(--mono)">
+            </div></div>
+          </div>
+
+          <button class="contrib-strategy-card" data-bv="strategyMode" data-val="flat">
+            <span class="ico">💲</span><span class="ttl">Same flat dollar amount for everyone</span>
+            <div class="dsc">Simple and predictable. Same $ regardless of age or location. Easiest to budget, hardest to keep ACA-affordable for older employees.</div>
+          </button>
+          <div class="contrib-strategy-inputs" data-mode-input="flat">
+            <label style="font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:600;display:block;margin-bottom:6px">Allowance per EE per month</label>
+            <div class="contrib-num-row" style="grid-template-columns:1fr;margin-bottom:0"><div>
+              <input type="number" data-bp="flat" min="0" max="3000" step="25" value="400" style="font-family:var(--mono)">
+            </div></div>
+          </div>
+        </div>
+        <div class="contrib-strategy-readout" data-bp="aleReadout"><strong>ALE detected.</strong> I'll auto-apply the FPL safe harbor ceiling — employees pay no more than $113/mo. You don't need to pick a strategy.</div>
+      </div>
+
+      <div class="contrib-results" data-bp="results"></div>
+
+      <div class="contrib-nav">
+        <button class="contrib-btn" data-bp="backBtn" disabled>← Back</button>
+        <button class="contrib-btn primary" data-bp="nextBtn">Next →</button>
+      </div>
+    </div>`;
+}
+
+function wireContributionCalc(rootEl, props) {
+  const root = rootEl.querySelector('.contrib');
+  if (!root) return;
+
+  const s = {
+    step: 0, totalSteps: 6,
+    isALE: null, minAge: 25, maxAge: 55, states: [],
+    familyMix: null, hasPT: false, headcount: 25,
+    strategyMode: 'pct', pct: 65, flat: 400, eeMax: 150,
+    ancillaries: {}
+  };
+  BIQ.ANCILLARIES.forEach(a => s.ancillaries[a.k] = { on: false, amt: a.def });
+
+  const stateGrid = root.querySelector('[data-bp="stateGrid"]');
+  if (stateGrid) {
+    stateGrid.innerHTML = BIQ.STATES.map(st => `<button class="contrib-state" data-state="${st}">${st}</button>`).join('');
+  }
+  function updateStateMeta(){
+    const meta = root.querySelector('[data-bp="stateMeta"]');
+    if (!meta) return;
+    if (s.states.length === 0) { meta.textContent = 'Selected: none yet'; return; }
+    const sorted = s.states.slice().sort((a,b)=>(BIQ.SILVER_BM[a]||600)-(BIQ.SILVER_BM[b]||600));
+    const cheap = sorted[0], exp = sorted[sorted.length-1];
+    meta.textContent = 'Selected: ' + s.states.length + ' · cheapest: ' + cheap + ' ($' + BIQ.SILVER_BM[cheap] + ') · most expensive: ' + exp + ' ($' + BIQ.SILVER_BM[exp] + ')';
+  }
+  root.querySelectorAll('[data-state]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const st = btn.dataset.state;
+      const idx = s.states.indexOf(st);
+      if (idx >= 0) { s.states.splice(idx, 1); btn.classList.remove('selected'); }
+      else { s.states.push(st); btn.classList.add('selected'); }
+      updateStateMeta();
+    });
+  });
+
+  const ageHint = root.querySelector('[data-bp="ageHint"]');
+  function updateAgeHint(){
+    if (!ageHint) return;
+    const mid = Math.round(((parseInt(s.minAge)||25) + (parseInt(s.maxAge)||55)) / 2);
+    const stForHint = s.states[0] || 'GA';
+    ageHint.textContent = 'Mid-age (~' + mid + ') in ' + stForHint + ' benchmark ≈ $' + biqPremium(mid, stForHint) + '/mo';
+  }
+  ['minAge','maxAge','headcount','eeMax','flat'].forEach(k => {
+    const el = root.querySelector('[data-bp="' + k + '"]');
+    if (!el) return;
+    el.addEventListener('input', () => {
+      s[k] = parseFloat(el.value) || 0;
+      if (k === 'minAge' || k === 'maxAge') updateAgeHint();
+    });
+  });
+
+  root.querySelectorAll('[data-bv]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const k = btn.dataset.bv;
+      const raw = btn.dataset.val;
+      const val = (raw === 'true') ? true : (raw === 'false') ? false : raw;
+      s[k] = val;
+      root.querySelectorAll('[data-bv="' + k + '"]').forEach(o => o.classList.remove('selected'));
+      btn.classList.add('selected');
+      if (k === 'strategyMode') {
+        root.querySelectorAll('[data-mode-input]').forEach(p => p.classList.toggle('visible', p.dataset.modeInput === val));
+      }
+    });
+  });
+
+  root.querySelectorAll('[data-bpct]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      s.pct = parseInt(btn.dataset.bpct);
+      root.querySelectorAll('[data-bpct]').forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+
+  s.strategyMode = 'pct';
+  s.pct = 65;
+  const pctBtn = root.querySelector('[data-bv="strategyMode"][data-val="pct"]');
+  if (pctBtn) pctBtn.classList.add('selected');
+  const pctIn = root.querySelector('[data-mode-input="pct"]');
+  if (pctIn) pctIn.classList.add('visible');
+  const ptNo = root.querySelector('[data-bv="hasPT"][data-val="false"]');
+  if (ptNo) ptNo.classList.add('selected');
+
+  const backBtn = root.querySelector('[data-bp="backBtn"]');
+  const nextBtn = root.querySelector('[data-bp="nextBtn"]');
+  const progress = root.querySelector('[data-bp="progress"]');
+  const aleReadout = root.querySelector('[data-bp="aleReadout"]');
+  const strategyArea = root.querySelector('[data-bp="strategyArea"]');
+
+  function showStep(n) {
+    s.step = n;
+    root.querySelectorAll('.contrib-step').forEach(st => {
+      st.classList.toggle('active', parseInt(st.dataset.step) === n);
+    });
+    if (progress) {
+      Array.from(progress.children).forEach((d, i) => {
+        d.classList.remove('current', 'done');
+        if (i < n) d.classList.add('done');
+        else if (i === n) d.classList.add('current');
+      });
+    }
+    backBtn.disabled = (n === 0);
+    if (n === 5 && s.isALE) {
+      if (strategyArea) strategyArea.style.display = 'none';
+      if (aleReadout) aleReadout.classList.add('visible');
+      nextBtn.textContent = 'Generate cost profiles →';
+    } else if (n === 5) {
+      if (strategyArea) strategyArea.style.display = '';
+      if (aleReadout) aleReadout.classList.remove('visible');
+      nextBtn.textContent = 'Generate cost profiles →';
+    } else {
+      nextBtn.textContent = 'Next →';
+    }
+    const stepEl = root.querySelector('.contrib-step[data-step="' + n + '"]');
+    if (stepEl) stepEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function canAdvance() {
+    if (s.step === 0) return s.isALE !== null;
+    if (s.step === 1) return (parseInt(s.minAge) >= 18 && parseInt(s.maxAge) >= parseInt(s.minAge));
+    if (s.step === 2) return s.states.length > 0;
+    if (s.step === 3) return s.familyMix !== null;
+    if (s.step === 4) return (parseInt(s.headcount) > 0);
+    if (s.step === 5) return true;
+    return true;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (!canAdvance()) {
+      nextBtn.classList.add('shake');
+      setTimeout(() => nextBtn.classList.remove('shake'), 400);
+      return;
+    }
+    if (s.step < 5) {
+      showStep(s.step + 1);
+    } else {
+      renderResults();
+      root.querySelectorAll('.contrib-step').forEach(st => st.classList.remove('active'));
+      const res = root.querySelector('[data-bp="results"]');
+      if (res) res.classList.add('visible');
+      backBtn.style.display = '';
+      nextBtn.style.display = 'none';
+      if (progress) Array.from(progress.children).forEach(d => { d.classList.remove('current'); d.classList.add('done'); });
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    const res = root.querySelector('[data-bp="results"]');
+    if (res && res.classList.contains('visible')) {
+      res.classList.remove('visible');
+      backBtn.style.display = '';
+      nextBtn.style.display = '';
+      showStep(5);
+      return;
+    }
+    if (s.step > 0) showStep(s.step - 1);
+  });
+
+  function renderResults() {
+    const profiles = biqProfiles(s);
+    const rows = profiles.map(p => {
+      const prem = biqPremium(p.age, p.state);
+      const er = p.empType === 'PT' ? 0 : biqERContrib(prem, s);
+      const ee = Math.max(0, prem - er);
+      const aca = s.isALE ? (ee <= BIQ.FPL_SAFE_HARBOR) : null;
+      return { id:p.id, label:p.label, age:p.age, state:p.state, tier:p.tier, empType:p.empType, prem, er, ee, aca };
+    });
+    const ftRows = rows.filter(r => r.empType === 'FT');
+    const avgER = ftRows.length ? Math.round(ftRows.reduce((a,r) => a + r.er, 0) / ftRows.length) : 0;
+    const monthlyER = avgER * parseInt(s.headcount || 0);
+    const annualER = monthlyER * 12;
+    const groupPerEE = s.states.length
+      ? Math.round(s.states.reduce((a,st)=>a+(BIQ.GROUP_BM[st]||746),0) / s.states.length)
+      : 746;
+    const groupMonthly = groupPerEE * parseInt(s.headcount || 0);
+    const monthlySavings = groupMonthly - monthlyER;
+    const pctReduction = groupMonthly > 0 ? Math.round((monthlySavings / groupMonthly) * 100) : 0;
+
+    const proj = [];
+    for (let y = 1; y <= 6; y++) {
+      proj.push({
+        year: 'Yr ' + y,
+        ichra: monthlyER,
+        group: Math.round(groupMonthly * Math.pow(BIQ.GROUP_TREND, y - 1))
+      });
+    }
+    const yr5Savings = proj.reduce((a,p) => a + Math.max(0, p.group - p.ichra), 0);
+
+    const chart = renderProjectionSVG(proj);
+
+    function ancTotal(){
+      return BIQ.ANCILLARIES.reduce((a, an) => a + (s.ancillaries[an.k].on ? s.ancillaries[an.k].amt : 0), 0);
+    }
+    function ancMonthly(){ return ancTotal() * parseInt(s.headcount || 0); }
+
+    const tableRows = rows.map(r => `
+      <tr>
+        <td class="profile-name">${r.label}</td>
+        <td>${r.age}</td>
+        <td>${r.state}</td>
+        <td>${r.empType}</td>
+        <td class="r">$${r.prem.toLocaleString()}</td>
+        <td class="r">$${r.er.toLocaleString()}</td>
+        <td class="r">$${r.ee.toLocaleString()}</td>
+        ${s.isALE ? `<td class="r">${r.aca === null ? '—' : r.aca ? '<span class="contrib-aca-safe">✓ Safe</span>' : '<span class="contrib-aca-review">⚠ Review</span>'}</td>` : ''}
+      </tr>
+    `).join('');
+
+    const savingsBadgeHTML = monthlySavings > 0
+      ? `<div class="contrib-savings-badge">−${fmt(monthlySavings)}/mo · ${pctReduction}% less vs. small group</div>`
+      : '';
+
+    const ancRowsHTML = BIQ.ANCILLARIES.map(a => `
+      <div class="contrib-anc-row">
+        <label>
+          <input type="checkbox" data-anc-on="${a.k}" ${s.ancillaries[a.k].on ? 'checked' : ''}>
+          <span class="anc-icon">${a.icon}</span>
+          <span class="anc-label">${a.label}</span>
+          <span class="anc-desc">${a.desc} · ${a.range}</span>
+        </label>
+        <input type="number" data-anc-amt="${a.k}" min="0" max="200" step="1" value="${s.ancillaries[a.k].amt}" ${s.ancillaries[a.k].on ? '' : 'disabled'}>
+      </div>
+    `).join('');
+
+    const res = root.querySelector('[data-bp="results"]');
+    if (!res) return;
+    res.innerHTML = `
+      <div class="contrib-summary">
+        <div class="contrib-summary-eye">Estimated total monthly cost · ${s.headcount} employees</div>
+        <div class="contrib-summary-big">${fmt(monthlyER)}</div>
+        <div class="contrib-summary-sub">${fmt(annualER)}/yr · avg ${fmt(avgER)}/mo per employee · strategy: ${biqStrategyLabel(s)}</div>
+        ${savingsBadgeHTML}
+        <div class="contrib-summary-stats">
+          <div class="contrib-summary-stat"><div class="n">${fmt(monthlySavings)}</div><div class="l">Monthly savings vs. group</div></div>
+          <div class="contrib-summary-stat"><div class="n">${fmt(yr5Savings)}</div><div class="l">5-yr savings estimate</div></div>
+          <div class="contrib-summary-stat"><div class="n">${pctReduction}%</div><div class="l">Cost reduction</div></div>
+        </div>
+      </div>
+
+      <div class="contrib-table-wrap">
+        <table class="contrib-table">
+          <thead><tr>
+            <th>Profile</th><th>Age</th><th>State</th><th>Type</th>
+            <th class="r">Benchmark</th><th class="r">ER pays</th><th class="r">EE pays</th>
+            ${s.isALE ? '<th class="r">ACA</th>' : ''}
+          </tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+      <div class="contrib-cite">📊 Silver benchmark: CMS 2025 rate filings (MoneyGeek analysis) · Small group: KFF EHBS 2024 · Premiums are state averages. ${s.isALE ? 'ACA safe harbor uses 2024 plan-year FPL ($113/mo).' : 'Non-ALE employers can pick any contribution — ACA affordability not required.'}</div>
+
+      <div class="contrib-chart">
+        <div class="contrib-step-eye" style="margin-bottom:6px">ICHRA vs Small group · 5-year projection</div>
+        ${chart}
+        <div class="contrib-cite" style="background:transparent;color:var(--ink-soft);padding:6px 0">Your ICHRA cost is flat because you set the allowance — renewals don't apply. Small-group line assumes 9%/yr KFF average renewal trend.</div>
+      </div>
+
+      <div class="contrib-anc-panel">
+        <div class="contrib-anc-title">➕ Add ancillary benefits</div>
+        <div class="contrib-anc-sub">These are separate from ICHRA — employer-paid or voluntary products that layer on top of the health allowance. Toggle to model the impact.</div>
+        ${ancRowsHTML}
+        <div class="contrib-anc-total"><span>Ancillary monthly total · ${s.headcount} EEs</span><span class="v" data-bp="ancTotal">${fmt(ancMonthly())}</span></div>
+      </div>
+
+      <div class="contrib-grand-total" data-bp="grandTotalBlock">
+        <div class="contrib-grand-eye">Grand total · ICHRA + Ancillary</div>
+        <div class="contrib-grand-rows">
+          <div class="contrib-grand-row"><span class="k">ICHRA contributions</span><span class="v" data-bp="gtIchra">${fmt(monthlyER)}</span></div>
+          <div class="contrib-grand-row"><span class="k">Ancillary benefits</span><span class="v" data-bp="gtAnc">${fmt(ancMonthly())}</span></div>
+          <div class="contrib-grand-row total"><span class="k">Total monthly · ${s.headcount} EEs</span><span class="v big" data-bp="gtMonthly">${fmt(monthlyER + ancMonthly())}</span></div>
+          <div class="contrib-grand-row sub"><span class="k">Annualized</span><span class="v" data-bp="gtAnnual">${fmt((monthlyER + ancMonthly()) * 12)}/yr</span></div>
+        </div>
+      </div>
+
+      <button class="contrib-restart" data-bp="restart">↺ Start over</button>
+    `;
+
+    function refreshTotals() {
+      const ancM = ancMonthly();
+      const totAnc = res.querySelector('[data-bp="ancTotal"]');
+      const gtIchra = res.querySelector('[data-bp="gtIchra"]');
+      const gtAnc = res.querySelector('[data-bp="gtAnc"]');
+      const gtMonthly = res.querySelector('[data-bp="gtMonthly"]');
+      const gtAnnual = res.querySelector('[data-bp="gtAnnual"]');
+      if (totAnc) totAnc.textContent = fmt(ancM);
+      if (gtIchra) gtIchra.textContent = fmt(monthlyER);
+      if (gtAnc) gtAnc.textContent = fmt(ancM);
+      if (gtMonthly) gtMonthly.textContent = fmt(monthlyER + ancM);
+      if (gtAnnual) gtAnnual.textContent = fmt((monthlyER + ancM) * 12) + '/yr';
+    }
+    res.querySelectorAll('[data-anc-on]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const k = cb.dataset.ancOn;
+        s.ancillaries[k].on = cb.checked;
+        const amtInput = res.querySelector('[data-anc-amt="' + k + '"]');
+        if (amtInput) amtInput.disabled = !cb.checked;
+        refreshTotals();
+      });
+    });
+    res.querySelectorAll('[data-anc-amt]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const k = inp.dataset.ancAmt;
+        s.ancillaries[k].amt = parseFloat(inp.value) || 0;
+        refreshTotals();
+      });
+    });
+    const restartBtn = res.querySelector('[data-bp="restart"]');
+    if (restartBtn) restartBtn.addEventListener('click', () => {
+      res.classList.remove('visible');
+      res.innerHTML = '';
+      backBtn.style.display = '';
+      nextBtn.style.display = '';
+      showStep(0);
+    });
+  }
+
+  showStep(0);
+}
+
+function renderProjectionSVG(data) {
+  const W = 520, H = 200, pad = { l: 50, r: 14, t: 14, b: 30 };
+  const innerW = W - pad.l - pad.r;
+  const innerH = H - pad.t - pad.b;
+  const allVals = data.flatMap(d => [d.ichra, d.group]);
+  const maxVal = Math.max.apply(null, allVals) || 1;
+  const minVal = 0;
+  const xStep = innerW / (data.length - 1);
+  const yScale = v => pad.t + innerH - ((v - minVal) / (maxVal - minVal || 1)) * innerH;
+  const xScale = i => pad.l + i * xStep;
+  const ichraPath = data.map((d,i) => (i === 0 ? 'M' : 'L') + xScale(i) + ',' + yScale(d.ichra)).join(' ');
+  const groupPath = data.map((d,i) => (i === 0 ? 'M' : 'L') + xScale(i) + ',' + yScale(d.group)).join(' ');
+  const yTicks = [];
+  for (let t = 0; t <= 4; t++) {
+    const v = Math.round((maxVal * t / 4) / 1000) * 1000;
+    yTicks.push({ v: v, y: yScale(v) });
+  }
+  const yGrid = yTicks.map(t => `<line x1="${pad.l}" x2="${W - pad.r}" y1="${t.y}" y2="${t.y}" stroke="#E8E2D5" stroke-width="0.5"/>`).join('');
+  const yLabels = yTicks.map(t => `<text x="${pad.l - 6}" y="${t.y + 3}" text-anchor="end" font-size="10" fill="#8A8478" font-family="JetBrains Mono, monospace">$${(t.v/1000).toFixed(0)}k</text>`).join('');
+  const xLabels = data.map((d,i) => `<text x="${xScale(i)}" y="${H - pad.b + 14}" text-anchor="middle" font-size="10" fill="#8A8478" font-family="JetBrains Mono, monospace">${d.year}</text>`).join('');
+  const ichraPts = data.map((d,i) => `<circle cx="${xScale(i)}" cy="${yScale(d.ichra)}" r="3" fill="#4B6E4D"/>`).join('');
+  const groupPts = data.map((d,i) => `<circle cx="${xScale(i)}" cy="${yScale(d.group)}" r="3" fill="#A33D2D"/>`).join('');
+  return `
+    <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ICHRA vs Small group projection">
+      ${yGrid}
+      ${yLabels}
+      ${xLabels}
+      <path d="${groupPath}" stroke="#A33D2D" stroke-width="2" stroke-dasharray="6 3" fill="none"/>
+      <path d="${ichraPath}" stroke="#4B6E4D" stroke-width="2.4" fill="none"/>
+      ${ichraPts}
+      ${groupPts}
+      <g transform="translate(${pad.l + 8}, ${pad.t + 8})">
+        <rect x="0" y="0" width="170" height="38" rx="6" fill="#FFFFFF" stroke="#E8E2D5"/>
+        <circle cx="12" cy="13" r="3.5" fill="#4B6E4D"/>
+        <text x="22" y="17" font-size="11" font-weight="600" fill="#1A1A1A" font-family="DM Sans, sans-serif">ICHRA (your cost)</text>
+        <circle cx="12" cy="29" r="3.5" fill="#A33D2D"/>
+        <text x="22" y="33" font-size="11" font-weight="600" fill="#1A1A1A" font-family="DM Sans, sans-serif">Est. small group (+9%/yr)</text>
+      </g>
+    </svg>
+  `;
+}
 
 // ── ICHRA BASICS WIDGET ────────────────────────────────────────────
 function buildBasics() {
