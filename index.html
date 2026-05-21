@@ -1225,6 +1225,69 @@ input[type=range]::-moz-range-thumb {
   .fit-industry-grid { gap: 5px; }
   .fit-industry { font-size: 11px; padding: 8px 6px; }
 }
+/* ── CONTRIBUTION CALCULATOR · mobile fit ─────────────────────── */
+@media (max-width: 760px) {
+  .contrib { gap: 12px; }
+  .contrib-step-eye { font-size: 9.5px; letter-spacing: 1px; }
+  .contrib-q { font-size: 15px; letter-spacing: -0.3px; }
+  .contrib-help { font-size: 12px; }
+  /* Summary card — let the big number shrink and wrap */
+  .contrib-summary { padding: 14px; }
+  .contrib-summary-eye { font-size: 10px; letter-spacing: 1px; }
+  .contrib-summary-big { font-size: 26px; letter-spacing: -0.7px; line-height: 1.15; word-break: break-word; }
+  .contrib-summary-sub { font-size: 11.5px; line-height: 1.5; }
+  .contrib-summary-stats { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .contrib-summary-stat .n { font-size: 14px; }
+  .contrib-summary-stat .l { font-size: 9px; letter-spacing: 0.5px; }
+  /* Inputs collapse to 1 column */
+  .contrib-num-row { grid-template-columns: 1fr; gap: 8px; }
+  .contrib-yesno { grid-template-columns: 1fr; }
+  .contrib-options.two, .contrib-options.three { grid-template-columns: 1fr; }
+  /* Strategy presets */
+  .contrib-presets { gap: 4px; }
+  .contrib-preset-btn { font-size: 10.5px; padding: 4px 8px; }
+  /* Ancillary list — drop description, narrow the $ input so the row never overflows */
+  .contrib-anc-panel { padding: 12px; }
+  .contrib-anc-row { gap: 8px; }
+  .contrib-anc-row .anc-desc { display: none; }
+  .contrib-anc-row input[type=number] { width: 56px; }
+  /* Split slider sub-row — readout drops to its own line below the bar */
+  .contrib-anc-share {
+    grid-template-columns: auto 1fr;
+    padding-left: 38px;
+    column-gap: 8px;
+    row-gap: 4px;
+  }
+  .contrib-anc-share .anc-share-readout {
+    grid-column: 1 / -1;
+    font-size: 10.5px;
+  }
+  /* Anc subtotal */
+  .contrib-anc-total { font-size: 12px; flex-wrap: wrap; gap: 6px; }
+  .contrib-anc-total .v { font-size: 13px; }
+  .contrib-anc-total .split { gap: 12px; }
+  /* Profile table */
+  .contrib-table { font-size: 11px; }
+  .contrib-table th { font-size: 9px; padding: 7px 6px; letter-spacing: 0.5px; }
+  .contrib-table td { padding: 7px 6px; }
+  /* Grand total */
+  .contrib-grand-total { padding: 14px; }
+  .contrib-grand-row { font-size: 12px; }
+  .contrib-grand-row.total .v.big { font-size: 20px; letter-spacing: -0.5px; }
+  /* Chart already responsive — just guarantee it never pushes width */
+  .contrib-chart svg { max-width: 100%; height: auto; display: block; }
+  /* Belt-and-suspenders: the tool body must never overflow horizontally */
+  .tool-body { overflow-x: hidden; }
+  .contrib { min-width: 0; }
+}
+@media (max-width: 420px) {
+  .contrib-summary-stats { grid-template-columns: 1fr; }
+  .contrib-summary-big { font-size: 22px; }
+  .contrib-anc-total .split { flex-direction: column; align-items: flex-end; gap: 4px; }
+  .contrib-anc-row input[type=number] { width: 50px; font-size: 11px; }
+  .contrib-anc-share { padding-left: 30px; }
+  .contrib-preset-btn { font-size: 10px; padding: 4px 6px; }
+}
 </style>
 </head>
 <body>
