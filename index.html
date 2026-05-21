@@ -898,6 +898,24 @@ input[type=range]::-moz-range-thumb {
 }
 .contrib-anc-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; margin-top: 8px; border-top: 1px solid var(--line); font-weight: 700; }
 .contrib-anc-total .v { font-family: var(--mono); font-size: 15px; color: var(--accent-deep); }
+.contrib-anc-total .v.ee { color: var(--ink-dim); }
+.contrib-anc-total .split { display: flex; gap: 14px; align-items: baseline; }
+.contrib-anc-total .split .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; margin-right: 4px; }
+/* NEW · per-ancillary ER/EE split slider */
+.contrib-anc-share {
+  display: grid; grid-template-columns: 56px 1fr auto; gap: 12px;
+  align-items: center; padding: 2px 0 10px 42px;
+  font-family: var(--font); font-size: 11px; color: var(--ink-soft);
+}
+.contrib-anc-share.hidden { display: none; }
+.anc-share-label { font-family: var(--mono); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.anc-share-bar { width: 100%; }
+.anc-share-bar input[type=range] { width: 100%; height: 3px; }
+.anc-share-bar input[type=range]::-webkit-slider-thumb { width: 14px; height: 14px; box-shadow: 0 0 0 3px var(--surface-warm); }
+.anc-share-readout { white-space: nowrap; }
+.anc-share-readout strong { color: var(--ink); font-family: var(--mono); font-weight: 700; }
+.anc-share-readout .pct { font-family: var(--mono); font-weight: 600; color: var(--accent-deep); margin-right: 8px; }
+.anc-share-readout .sep { color: var(--ink-soft); margin: 0 6px; }
 .contrib-grand-total {
   margin-top: 14px; padding: 16px 18px; border-radius: var(--r-md);
   background: linear-gradient(135deg, #002D72 0%, #003D8F 100%);
@@ -2736,7 +2754,7 @@ function wireContributionCalc(rootEl, props) {
     strategyMode: 'pct', pct: 65, flat: 400, eeMax: 150,
     ancillaries: {}
   };
-  BIQ.ANCILLARIES.forEach(a => s.ancillaries[a.k] = { on: false, amt: a.def });
+  BIQ.ANCILLARIES.forEach(a => s.ancillaries[a.k] = { on: false, amt: a.def, erPct: 100 });
   const stateGrid = root.querySelector('[data-bp="stateGrid"]');
   if (stateGrid) {
     stateGrid.innerHTML = BIQ.STATES.map(st => `<button class="contrib-state" data-state="${st}">${st}</button>`).join('');
@@ -2899,10 +2917,21 @@ function wireContributionCalc(rootEl, props) {
     }
     const yr5Savings = proj.reduce((a,p) => a + Math.max(0, p.group - p.ichra), 0);
     const chart = renderProjectionSVG(proj);
-    function ancTotal(){
-      return BIQ.ANCILLARIES.reduce((a, an) => a + (s.ancillaries[an.k].on ? s.ancillaries[an.k].amt : 0), 0);
+    // Per-EE-per-month ER and EE ancillary cost — respects each line's erPct split
+    function ancER(){
+      return BIQ.ANCILLARIES.reduce((a, an) => {
+        const x = s.ancillaries[an.k]; if (!x.on) return a;
+        return a + x.amt * (x.erPct / 100);
+      }, 0);
     }
-    function ancMonthly(){ return ancTotal() * parseInt(s.headcount || 0); }
+    function ancEE(){
+      return BIQ.ANCILLARIES.reduce((a, an) => {
+        const x = s.ancillaries[an.k]; if (!x.on) return a;
+        return a + x.amt * ((100 - x.erPct) / 100);
+      }, 0);
+    }
+    function ancERMonthly(){ return ancER() * parseInt(s.headcount || 0); }
+    function ancEEMonthly(){ return ancEE() * parseInt(s.headcount || 0); }
     const tableRows = rows.map(r => `
       <tr>
         <td class="profile-name">${r.label}</td>
@@ -2918,17 +2947,31 @@ function wireContributionCalc(rootEl, props) {
     const savingsBadgeHTML = monthlySavings > 0
       ? `<div class="contrib-savings-badge">−${fmt(monthlySavings)}/mo · ${pctReduction}% less vs. small group</div>`
       : '';
-    const ancRowsHTML = BIQ.ANCILLARIES.map(a => `
+    const ancRowsHTML = BIQ.ANCILLARIES.map(a => {
+      const x = s.ancillaries[a.k];
+      const erDollar = Math.round(x.amt * (x.erPct / 100));
+      const eeDollar = Math.round(x.amt * ((100 - x.erPct) / 100));
+      return `
       <div class="contrib-anc-row">
         <label>
-          <input type="checkbox" data-anc-on="${a.k}" ${s.ancillaries[a.k].on ? 'checked' : ''}>
+          <input type="checkbox" data-anc-on="${a.k}" ${x.on ? 'checked' : ''}>
           <span class="anc-icon">${a.icon}</span>
           <span class="anc-label">${a.label}</span>
           <span class="anc-desc">${a.desc} · ${a.range}</span>
         </label>
-        <input type="number" data-anc-amt="${a.k}" min="0" max="200" step="1" value="${s.ancillaries[a.k].amt}" ${s.ancillaries[a.k].on ? '' : 'disabled'}>
+        <input type="number" data-anc-amt="${a.k}" min="0" max="200" step="1" value="${x.amt}" ${x.on ? '' : 'disabled'}>
       </div>
-    `).join('');
+      <div class="contrib-anc-share ${x.on ? '' : 'hidden'}" data-anc-share="${a.k}">
+        <span class="anc-share-label">Split</span>
+        <span class="anc-share-bar"><input type="range" data-anc-pct="${a.k}" min="0" max="100" step="5" value="${x.erPct}" ${x.on ? '' : 'disabled'}></span>
+        <span class="anc-share-readout">
+          <span class="pct" data-anc-pct-label="${a.k}">${x.erPct}%</span>
+          ER <strong data-anc-er-val="${a.k}">$${erDollar}</strong>
+          <span class="sep">·</span>
+          EE <strong data-anc-ee-val="${a.k}">$${eeDollar}</strong>
+        </span>
+      </div>`;
+    }).join('');
     const res = root.querySelector('[data-bp="results"]');
     if (!res) return;
     res.innerHTML = `
@@ -2963,38 +3006,67 @@ function wireContributionCalc(rootEl, props) {
         <div class="contrib-anc-title">➕ Add ancillary benefits</div>
         <div class="contrib-anc-sub">These are separate from ICHRA — employer-paid or voluntary products that layer on top of the health allowance. Toggle to model the impact.</div>
         ${ancRowsHTML}
-        <div class="contrib-anc-total"><span>Ancillary monthly total · ${s.headcount} EEs</span><span class="v" data-bp="ancTotal">${fmt(ancMonthly())}</span></div>
+        <div class="contrib-anc-total">
+          <span>Ancillary monthly · ${s.headcount} EEs</span>
+          <span class="split">
+            <span><span class="lbl">ER</span><span class="v" data-bp="ancER">${fmt(ancERMonthly())}</span></span>
+            <span><span class="lbl">EE</span><span class="v ee" data-bp="ancEE">${fmt(ancEEMonthly())}</span></span>
+          </span>
+        </div>
       </div>
       <div class="contrib-grand-total" data-bp="grandTotalBlock">
         <div class="contrib-grand-eye">Grand total · ICHRA + Ancillary</div>
         <div class="contrib-grand-rows">
           <div class="contrib-grand-row"><span class="k">ICHRA contributions</span><span class="v" data-bp="gtIchra">${fmt(monthlyER)}</span></div>
-          <div class="contrib-grand-row"><span class="k">Ancillary benefits</span><span class="v" data-bp="gtAnc">${fmt(ancMonthly())}</span></div>
-          <div class="contrib-grand-row total"><span class="k">Total monthly · ${s.headcount} EEs</span><span class="v big" data-bp="gtMonthly">${fmt(monthlyER + ancMonthly())}</span></div>
-          <div class="contrib-grand-row sub"><span class="k">Annualized</span><span class="v" data-bp="gtAnnual">${fmt((monthlyER + ancMonthly()) * 12)}/yr</span></div>
+          <div class="contrib-grand-row"><span class="k">Ancillary (employer)</span><span class="v" data-bp="gtAnc">${fmt(ancERMonthly())}</span></div>
+          <div class="contrib-grand-row total"><span class="k">Total employer monthly · ${s.headcount} EEs</span><span class="v big" data-bp="gtMonthly">${fmt(monthlyER + ancERMonthly())}</span></div>
+          <div class="contrib-grand-row sub"><span class="k">Annualized</span><span class="v" data-bp="gtAnnual">${fmt((monthlyER + ancERMonthly()) * 12)}/yr</span></div>
+          <div class="contrib-grand-row sub" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.18)"><span class="k">Employee responsibility (ancillary)</span><span class="v" data-bp="gtEE">${fmt(ancEEMonthly())}/mo</span></div>
         </div>
       </div>
       <button class="contrib-restart" data-bp="restart">↺ Start over</button>
     `;
     function refreshTotals() {
-      const ancM = ancMonthly();
-      const totAnc = res.querySelector('[data-bp="ancTotal"]');
+      // Per-row readouts (ER $ / EE $ / pct label)
+      BIQ.ANCILLARIES.forEach(an => {
+        const x = s.ancillaries[an.k];
+        const erDollar = Math.round(x.amt * (x.erPct / 100));
+        const eeDollar = Math.round(x.amt * ((100 - x.erPct) / 100));
+        const pctEl = res.querySelector('[data-anc-pct-label="' + an.k + '"]');
+        const erEl  = res.querySelector('[data-anc-er-val="' + an.k + '"]');
+        const eeEl  = res.querySelector('[data-anc-ee-val="' + an.k + '"]');
+        if (pctEl) pctEl.textContent = x.erPct + '%';
+        if (erEl)  erEl.textContent  = '$' + erDollar;
+        if (eeEl)  eeEl.textContent  = '$' + eeDollar;
+      });
+      // Aggregate totals
+      const ancER_m = ancERMonthly();
+      const ancEE_m = ancEEMonthly();
+      const ancERel = res.querySelector('[data-bp="ancER"]');
+      const ancEEel = res.querySelector('[data-bp="ancEE"]');
       const gtIchra = res.querySelector('[data-bp="gtIchra"]');
       const gtAnc = res.querySelector('[data-bp="gtAnc"]');
       const gtMonthly = res.querySelector('[data-bp="gtMonthly"]');
       const gtAnnual = res.querySelector('[data-bp="gtAnnual"]');
-      if (totAnc) totAnc.textContent = fmt(ancM);
+      const gtEE = res.querySelector('[data-bp="gtEE"]');
+      if (ancERel) ancERel.textContent = fmt(ancER_m);
+      if (ancEEel) ancEEel.textContent = fmt(ancEE_m);
       if (gtIchra) gtIchra.textContent = fmt(monthlyER);
-      if (gtAnc) gtAnc.textContent = fmt(ancM);
-      if (gtMonthly) gtMonthly.textContent = fmt(monthlyER + ancM);
-      if (gtAnnual) gtAnnual.textContent = fmt((monthlyER + ancM) * 12) + '/yr';
+      if (gtAnc) gtAnc.textContent = fmt(ancER_m);
+      if (gtMonthly) gtMonthly.textContent = fmt(monthlyER + ancER_m);
+      if (gtAnnual) gtAnnual.textContent = fmt((monthlyER + ancER_m) * 12) + '/yr';
+      if (gtEE) gtEE.textContent = fmt(ancEE_m) + '/mo';
     }
     res.querySelectorAll('[data-anc-on]').forEach(cb => {
       cb.addEventListener('change', () => {
         const k = cb.dataset.ancOn;
         s.ancillaries[k].on = cb.checked;
         const amtInput = res.querySelector('[data-anc-amt="' + k + '"]');
+        const pctInput = res.querySelector('[data-anc-pct="' + k + '"]');
+        const shareRow = res.querySelector('[data-anc-share="' + k + '"]');
         if (amtInput) amtInput.disabled = !cb.checked;
+        if (pctInput) pctInput.disabled = !cb.checked;
+        if (shareRow) shareRow.classList.toggle('hidden', !cb.checked);
         refreshTotals();
       });
     });
@@ -3002,6 +3074,14 @@ function wireContributionCalc(rootEl, props) {
       inp.addEventListener('input', () => {
         const k = inp.dataset.ancAmt;
         s.ancillaries[k].amt = parseFloat(inp.value) || 0;
+        refreshTotals();
+      });
+    });
+    res.querySelectorAll('[data-anc-pct]').forEach(inp => {
+      inp.addEventListener('input', () => {
+        const k = inp.dataset.ancPct;
+        s.ancillaries[k].erPct = parseInt(inp.value);
+        if (isNaN(s.ancillaries[k].erPct)) s.ancillaries[k].erPct = 100;
         refreshTotals();
       });
     });
