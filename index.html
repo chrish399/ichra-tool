@@ -51,7 +51,6 @@ body {
   overflow-x: hidden;
 }
 button { font-family: inherit; }
-
 /* ── TOP BAR ──────────────────────────────────────────────────────── */
 .topbar {
   height: 56px; padding: 0 20px;
@@ -80,7 +79,6 @@ button { font-family: inherit; }
 }
 .top-back:hover { border-color: var(--ink-dim); color: var(--ink); }
 .top-back.visible { display: inline-flex; }
-
 /* ── ENTRY SCREEN ─────────────────────────────────────────────────── */
 .entry-wrap {
   min-height: calc(100vh - 56px);
@@ -94,6 +92,21 @@ button { font-family: inherit; }
   font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
   color: var(--accent-deep);
   margin-bottom: 22px;
+}
+/* NEW · small header on entry surface only */
+.entry-section-header {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px 8px 10px;
+  background: var(--surface);
+  border: 0.5px solid var(--line);
+  border-radius: var(--r-sm);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+}
+.entry-section-header .brand-mark { width: 20px; height: 24px; flex-shrink: 0; }
+.entry-section-header-name {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.2px; line-height: 1;
 }
 .entry-title {
   font-family: var(--font);
@@ -219,7 +232,6 @@ button { font-family: inherit; }
 .persona:hover .persona-cta::after { transform: translateX(3px); }
 .persona:hover .persona-cta { color: var(--ink); }
 .persona-locked { font-size: 11px; color: var(--ink-soft); font-weight: 400; letter-spacing: 1px; text-transform: lowercase; }
-
 /* Password gate inline */
 .pw-gate { display: none; flex-direction: column; gap: 10px; margin-top: 14px; }
 .pw-gate.open { display: flex; animation: pwSlide .25s ease; }
@@ -241,14 +253,12 @@ button { font-family: inherit; }
 }
 .pw-submit:hover { opacity: 0.85; }
 .pw-hint { display: none; }
-
 .entry-foot {
   margin-top: 32px; font-size: 12px; color: var(--ink-soft);
   display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
 }
 .entry-foot a { color: var(--ink-dim); text-decoration: none; }
 .entry-foot a:hover { color: var(--ink); text-decoration: underline; }
-
 /* ── Site footer ───────────────────────────────────────────────── */
 .site-footer {
   background: var(--ink); color: var(--bg);
@@ -291,7 +301,6 @@ button { font-family: inherit; }
   font-size: 11px; color: rgba(248,246,241,0.4);
   line-height: 1.6; max-width: 760px;
 }
-
 /* ── CHAT SCREEN ──────────────────────────────────────────────────── */
 .chat-wrap { display: none; flex-direction: column; min-height: calc(100vh - 56px); }
 .chat-wrap.active { display: flex; animation: fadeIn .35s ease; }
@@ -318,7 +327,6 @@ button { font-family: inherit; }
   letter-spacing: 0.2px;
 }
 .scenario-pill.visible { display: inline-flex; }
-
 .chat-main {
   flex: 1; display: flex; flex-direction: column;
   max-width: 780px; width: 100%; margin: 0 auto;
@@ -342,7 +350,6 @@ button { font-family: inherit; }
 .msg.user .msg-text { color: var(--ink); }
 .cursor::after { content: '▍'; color: var(--accent); animation: blink 1s infinite; margin-left: 2px; }
 @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
-
 .thinking-dots { display: inline-flex; gap: 5px; align-items: center; height: 22px; padding: 4px 0; }
 .thinking-dots span {
   width: 6px; height: 6px;
@@ -357,14 +364,12 @@ button { font-family: inherit; }
   35%          { opacity: 1;   transform: scale(1); background: var(--ink); }
 }
 .thinking-meta { display:inline-block; margin-left: 10px; font-size: 11px; color: var(--ink-soft); letter-spacing: 0.2px; vertical-align: 4px; }
-
 /* Send → Stop state on the composer button */
 .composer-send.stopping { background: transparent; border: 1px solid var(--ink); color: var(--ink); }
 .composer-send.stopping:hover { background: var(--ink); color: var(--bg); }
 .composer-send .icon-stop { display: none; }
 .composer-send.stopping .icon-send { display: none; }
 .composer-send.stopping .icon-stop { display: block; }
-
 /* Inline tool card */
 .tool-card {
   margin-top: 14px;
@@ -387,7 +392,6 @@ button { font-family: inherit; }
 .tool-badge::before { content: '⚡'; font-size: 12px; }
 .tool-title { font-size: 13px; font-weight: 600; color: var(--ink); }
 .tool-body { padding: 22px; }
-
 /* Suggestion chips */
 .suggestions {
   display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
@@ -401,7 +405,6 @@ button { font-family: inherit; }
 }
 .chip:hover { border-color: var(--ink); color: var(--ink); }
 .chip.compact { font-size: 12px; padding: 6px 12px; }
-
 /* Composer (input area) */
 .composer-wrap {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
@@ -446,7 +449,6 @@ button { font-family: inherit; }
 }
 .composer-footer a { color: var(--ink-dim); text-decoration: none; cursor: pointer; }
 .composer-footer a:hover { text-decoration: underline; }
-
 /* ── CALCULATOR WIDGET ────────────────────────────────────────────── */
 .calc {
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 20px;
@@ -479,7 +481,6 @@ input[type=range]::-moz-range-thumb {
   width: 16px; height: 16px; background: var(--accent); border-radius: 50%;
   cursor: pointer; border: none; box-shadow: 0 0 0 4px var(--surface);
 }
-
 .scen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .scen-card {
   padding: 9px 8px; border: 1.5px solid var(--line); border-radius: 8px;
@@ -490,7 +491,6 @@ input[type=range]::-moz-range-thumb {
 .scen-card:hover { border-color: var(--accent); color: var(--accent-deep); }
 .scen-card.active { background: var(--ink); border-color: var(--ink); color: white; }
 .scen-card .micro { display: block; font-size: 10px; font-weight: 500; opacity: 0.7; margin-top: 2px; }
-
 .role-toggle {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 4px; background: var(--line-soft); padding: 3px; border-radius: 9px;
@@ -501,7 +501,6 @@ input[type=range]::-moz-range-thumb {
   font-family: inherit; transition: all .15s;
 }
 .role-btn.active { background: var(--surface); color: var(--ink); box-shadow: var(--shadow-sm); }
-
 .custom-toggle {
   display: flex; align-items: center; gap: 8px;
   font-size: 12px; color: var(--ink-dim); cursor: pointer; user-select: none;
@@ -510,7 +509,6 @@ input[type=range]::-moz-range-thumb {
 .custom-toggle input { accent-color: var(--accent); cursor: pointer; }
 .custom-panel { display: none; padding: 12px; background: var(--line-soft); border-radius: 10px; margin-top: 4px; }
 .custom-panel.open { display: block; }
-
 /* Outputs */
 .delta-block {
   background: var(--ink); color: var(--bg);
@@ -529,7 +527,6 @@ input[type=range]::-moz-range-thumb {
   background: transparent; color: var(--bg);
   border: 0.5px solid rgba(248,246,241,0.3);
 }
-
 .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
 .cmp {
   background: var(--surface); border: 0.5px solid var(--line); border-radius: var(--r-md);
@@ -546,7 +543,6 @@ input[type=range]::-moz-range-thumb {
 .cmp-row { display: flex; justify-content: space-between; font-size: 11px; padding: 5px 0; border-top: 0.5px solid var(--line); }
 .cmp-row .k { color: var(--ink-soft); }
 .cmp-row .v { font-family: var(--mono); font-weight: 500; color: var(--ink); }
-
 .chart-block { background: var(--surface); border: 0.5px solid var(--line); border-radius: var(--r-md); padding: 16px 18px; margin-bottom: 12px; }
 .chart-label { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
 .bar-row { margin-bottom: 10px; }
@@ -561,7 +557,6 @@ input[type=range]::-moz-range-thumb {
 .bar-fill.disab { background: var(--green); }
 .bar-fill.plat  { background: var(--amber); }
 .bar-fill.grp   { background: var(--red); opacity: 0.55; }
-
 .insight-block {
   background: transparent;
   border-top: 0.5px solid var(--line);
@@ -571,7 +566,6 @@ input[type=range]::-moz-range-thumb {
   font-weight: 400;
 }
 .insight-block strong { color: var(--ink); font-weight: 600; }
-
 /* ── ICHRA BASICS WIDGET ──────────────────────────────────────────── */
 .basics-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .basics-step {
@@ -604,7 +598,6 @@ input[type=range]::-moz-range-thumb {
 .basics-stat { background: transparent; border: 0.5px solid var(--line); padding: 14px 12px; border-radius: var(--r-md); text-align: center; }
 .basics-stat .n { font-family: var(--mono); font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1; margin-bottom: 6px; letter-spacing: -0.3px; }
 .basics-stat .l { font-size: 11px; color: var(--ink-soft); line-height: 1.4; }
-
 /* ── COMPARISON WIDGET ────────────────────────────────────────────── */
 .cmp-table {
   display: grid; grid-template-columns: 1fr 1fr;
@@ -616,7 +609,6 @@ input[type=range]::-moz-range-thumb {
 .cmp-table-row.b { border-left: 1px solid var(--line); color: var(--ink); }
 .cmp-table-row .x { color: var(--ink-soft); font-weight: 700; }
 .cmp-table-row .v { color: var(--green); font-weight: 700; }
-
 /* ── FIT ASSESSMENT WIDGET ─────────────────────────────────────────── */
 .fit-question { margin-bottom: 14px; }
 .fit-question:last-of-type { margin-bottom: 0; }
@@ -659,7 +651,6 @@ input[type=range]::-moz-range-thumb {
   margin: 12px 0 14px;
 }
 .fit-industry-note strong { color: var(--ink); font-weight: 600; }
-
 /* Three-stat tile grid inside fit assessment result */
 .fit-industry-stats {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
@@ -679,7 +670,6 @@ input[type=range]::-moz-range-thumb {
 .fit-stat-l {
   font-size: 10.5px; color: var(--ink-soft); line-height: 1.35;
 }
-
 /* Industry tile grid inside fit assessment */
 .fit-industry-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
@@ -693,7 +683,6 @@ input[type=range]::-moz-range-thumb {
 }
 .fit-industry:hover { border-color: var(--ink); color: var(--ink); }
 .fit-industry.selected { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-
 /* Rank-order question */
 .fit-q-sub { font-size: 12px; color: var(--ink-soft); margin: -4px 0 10px; }
 .fit-rank { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
@@ -732,7 +721,6 @@ input[type=range]::-moz-range-thumb {
 }
 .fit-rank-btn:hover:not(:disabled) { border-color: var(--ink); color: var(--ink); }
 .fit-rank-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
 /* ── LEAD CAPTURE WIDGET ──────────────────────────────────────────── */
 .lead-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
 .lead-field { display: flex; flex-direction: column; }
@@ -742,7 +730,6 @@ input[type=range]::-moz-range-thumb {
 .lead-submit { width: 100%; margin-top: 8px; background: var(--ink); color: white; border: none; padding: 11px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .15s; }
 .lead-submit:hover { background: var(--ink); }
 .lead-tcpa { font-size: 10px; color: var(--ink-soft); margin-top: 8px; line-height: 1.5; }
-
 /* ── PRODUCT TABLE ─────────────────────────────────────────────────── */
 .pt-block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 14px 16px; }
 .pt-block table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -752,7 +739,6 @@ input[type=range]::-moz-range-thumb {
 .pt-block td.name { color: var(--ink); font-weight: 500; }
 .pt-block tr.tot td { border-top: 2px solid var(--ink); border-bottom: none; padding-top: 11px; color: var(--ink); font-weight: 700; font-size: 13px; }
 .swatch { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: middle; }
-
 /* ── TOOL BANNER (editorial top rule + mono label + minimal mark) ─ */
 .tool-banner {
   display: flex; align-items: flex-start; gap: 16px;
@@ -771,7 +757,6 @@ input[type=range]::-moz-range-thumb {
 .tool-banner.banner-lead::before    { background: var(--accent); }
 .tool-banner.banner-calc::before    { background: var(--accent); }
 .tool-banner.banner-contrib::before { background: var(--purple); }
-
 /* ── CONTRIBUTION CALCULATOR ───────────────────────────────────── */
 .contrib { display: grid; gap: 16px; }
 .contrib-step { display: none; }
@@ -857,7 +842,6 @@ input[type=range]::-moz-range-thumb {
 .contrib-btn.primary:hover:not(:disabled) { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
 .contrib-btn.shake { animation: shake .35s; }
 .contrib-yesno { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
 /* RESULTS PANEL */
 .contrib-results { display: none; }
 .contrib-results.visible { display: block; }
@@ -914,7 +898,6 @@ input[type=range]::-moz-range-thumb {
 }
 .contrib-anc-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px; margin-top: 8px; border-top: 1px solid var(--line); font-weight: 700; }
 .contrib-anc-total .v { font-family: var(--mono); font-size: 15px; color: var(--accent-deep); }
-
 .contrib-grand-total {
   margin-top: 14px; padding: 16px 18px; border-radius: var(--r-md);
   background: linear-gradient(135deg, #002D72 0%, #003D8F 100%);
@@ -960,10 +943,8 @@ input[type=range]::-moz-range-thumb {
 }
 .tool-banner-title { font-family: var(--font); font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -0.5px; line-height: 1.2; }
 .tool-banner-sub { font-size: 13px; color: var(--ink-dim); line-height: 1.55; margin-top: 4px; }
-
 /* Hide the old plain head when a banner is present */
 .tool-card.has-banner .tool-head { display: none; }
-
 /* ── STARTER LAUNCHPAD (3 tool tiles in intro message) ─────────── */
 .launchpad-wrap { margin-top: 18px; }
 .launchpad-label {
@@ -996,7 +977,6 @@ input[type=range]::-moz-range-thumb {
 .launch-tile-icon.amber { background: transparent; color: var(--ink); }
 .launch-tile-title { font-family: var(--font); font-size: 14px; font-weight: 600; color: var(--ink); letter-spacing: -0.3px; }
 .launch-tile-desc { font-size: 12px; color: var(--ink-dim); line-height: 1.5; }
-
 .launchpad-or {
   margin: 18px 0 10px; display: flex; align-items: center; gap: 10px;
   font-family: var(--mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
@@ -1005,7 +985,6 @@ input[type=range]::-moz-range-thumb {
 .launchpad-or::before, .launchpad-or::after {
   content: ''; flex: 1; height: 1px; background: var(--line-soft);
 }
-
 /* ── WHY ICHRA — floating button + slide-over panel ─────────────── */
 .why-fab {
   position: fixed; bottom: 100px; left: 22px; z-index: 40;
@@ -1022,7 +1001,6 @@ input[type=range]::-moz-range-thumb {
 .why-fab::after { content: '→'; font-weight: 400; opacity: 0.6; }
 .why-fab:hover::after { opacity: 1; }
 .why-fab.pulse::before { display: none; }
-
 /* Persistent "Talk to an advisor" CTA — visible everywhere */
 .advisor-fab {
   position: fixed; bottom: 100px; right: 22px; z-index: 40;
@@ -1036,7 +1014,6 @@ input[type=range]::-moz-range-thumb {
 }
 .advisor-fab:hover { opacity: 0.92; transform: translateY(-1px); }
 .advisor-fab::after { content: '→'; opacity: 0.75; font-weight: 400; }
-
 .scrim {
   position: fixed; inset: 0; z-index: 80;
   background: rgba(15,23,42,0.4);
@@ -1045,7 +1022,6 @@ input[type=range]::-moz-range-thumb {
   transition: opacity .25s ease;
 }
 .scrim.open { opacity: 1; pointer-events: auto; }
-
 .slideover {
   position: fixed; top: 0; right: 0; bottom: 0; z-index: 90;
   width: 480px; max-width: 100vw;
@@ -1079,7 +1055,6 @@ input[type=range]::-moz-range-thumb {
   flex: 1; overflow-y: auto; padding: 24px 26px;
   -webkit-overflow-scrolling: touch;
 }
-
 .so-hero {
   background: var(--surface);
   border: 0.5px solid var(--line);
@@ -1089,7 +1064,6 @@ input[type=range]::-moz-range-thumb {
 .so-hero svg { width: 100%; max-width: 300px; height: auto; margin: 0 auto 18px; display: block; }
 .so-hero h3 { font-family: var(--font); font-size: 20px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.7px; line-height: 1.15; }
 .so-hero p { font-size: 14px; color: var(--ink-dim); line-height: 1.6; max-width: 340px; margin: 0 auto; }
-
 .so-section { margin-bottom: 32px; }
 .so-section:last-child { margin-bottom: 0; }
 .so-section-label {
@@ -1109,7 +1083,6 @@ input[type=range]::-moz-range-thumb {
   border: 0.5px solid var(--ink); margin-top: 8px;
 }
 .so-cta.secondary:hover { background: var(--ink); color: var(--bg); opacity: 1; }
-
 /* FAQ accordion inside the Why ICHRA slide-over */
 .so-faq details {
   border-bottom: 0.5px solid var(--line);
@@ -1138,7 +1111,6 @@ input[type=range]::-moz-range-thumb {
   font-size: 13.5px; color: var(--ink-dim);
   line-height: 1.65; padding: 0 0 16px;
 }
-
 /* ── Entry quiet link below persona cards ───────────────────────── */
 .entry-quiet-link {
   margin-top: 28px;
@@ -1151,7 +1123,6 @@ input[type=range]::-moz-range-thumb {
 }
 .entry-quiet-link:hover { border-color: var(--ink); color: var(--ink); }
 .entry-quiet-link::after { content: '→'; opacity: 0.6; }
-
 /* ── Lead-form modal (centered, can be opened anywhere) ─────────── */
 .lead-scrim {
   position: fixed; inset: 0; z-index: 85;
@@ -1187,7 +1158,6 @@ input[type=range]::-moz-range-thumb {
 .lead-modal-title { font-size: 22px; font-weight: 700; letter-spacing: -0.6px; line-height: 1.15; }
 .lead-modal-body { flex: 1; overflow-y: auto; padding: 22px 26px 26px; }
 .lead-modal-intro { font-size: 14px; color: var(--ink-dim); line-height: 1.6; margin-bottom: 18px; }
-
 /* ── RESPONSIVE ────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
   .persona-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -1240,7 +1210,6 @@ input[type=range]::-moz-range-thumb {
 </style>
 </head>
 <body>
-
 <!-- TOP BAR -->
 <header class="topbar">
   <div class="brand">
@@ -1259,14 +1228,25 @@ input[type=range]::-moz-range-thumb {
   </div>
   <button class="top-back" id="topBack" onclick="goBackToEntry()">← Change role</button>
 </header>
-
 <!-- ENTRY SCREEN -->
 <div class="entry-wrap" id="entryScreen">
   <div class="entry-inner">
+    <!-- NEW · small section header on entry only -->
+    <div class="entry-section-header">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 30 36" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="30" height="36" fill="#1A1A1A"/>
+          <rect x="2.5" y="2.5" width="25" height="31" fill="none" stroke="#F8F6F1" stroke-width="1.5"/>
+          <text x="15" y="16.5" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">O</text>
+          <line x1="6" y1="19" x2="24" y2="19" stroke="#F8F6F1" stroke-width="0.8" opacity="0.55"/>
+          <text x="15" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">B</text>
+        </svg>
+      </span>
+      <span class="entry-section-header-name">OTB Solutions</span>
+    </div>
     <div class="entry-eyebrow">OTB Solutions · ICHRA</div>
     <h1 class="entry-title">Making <em>ICHRA</em> simple.</h1>
     <p class="entry-sub">Explanations, math, and direct answers — for employers, brokers, and Agents. The tools live inside the conversation.</p>
-
     <div class="persona-grid">
       <div class="persona" data-key="employer" onclick="selectPersona('employer')">
         <div class="persona-mark">
@@ -1339,47 +1319,9 @@ input[type=range]::-moz-range-thumb {
         </div>
       </div>
     </div>
-
     <button class="entry-quiet-link" onclick="openWhy({ fromEntry: true })">Don't want to chat? Tell me what ICHRA is</button>
   </div>
 </div>
-
-<!-- Real footer · entry surface only -->
-<footer class="site-footer" id="siteFooter">
-  <div class="site-footer-inner">
-    <div class="site-footer-col">
-      <div class="site-footer-brand">
-        <span class="brand-mark" style="width:24px;height:30px" aria-hidden="true">
-          <svg viewBox="0 0 30 36" xmlns="http://www.w3.org/2000/svg">
-            <rect x="0" y="0" width="30" height="36" fill="#1A1A1A"/>
-            <rect x="2.5" y="2.5" width="25" height="31" fill="none" stroke="#F8F6F1" stroke-width="1.5"/>
-            <text x="15" y="16.5" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">O</text>
-            <line x1="6" y1="19" x2="24" y2="19" stroke="#F8F6F1" stroke-width="0.8" opacity="0.55"/>
-            <text x="15" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">B</text>
-          </svg>
-        </span>
-        <span class="site-footer-name">OTB Solutions LLC</span>
-      </div>
-      <p class="site-footer-tag">Tools at the intersection of AI and insurance. Helping employers, brokers, and Agents make sense of ICHRA.</p>
-    </div>
-    <div class="site-footer-col">
-      <div class="site-footer-label">Navigate</div>
-      <a class="site-footer-link" onclick="openWhy({ fromEntry: true })">Why ICHRA</a>
-      <a class="site-footer-link" onclick="openLeadModal({ source: 'footer' })">Talk to an advisor</a>
-      <a class="site-footer-link" href="mailto:chris@solutionotb.com">chris@solutionotb.com</a>
-    </div>
-    <div class="site-footer-col">
-      <div class="site-footer-label">Legal</div>
-      <a class="site-footer-link" href="privacy.html">Privacy Policy</a>
-      <a class="site-footer-link" href="terms.html">Terms of Use</a>
-    </div>
-  </div>
-  <div class="site-footer-bottom">
-    <div class="site-footer-copy">© 2026 OTB Solutions LLC. All rights reserved.</div>
-    <p class="site-footer-disclaimer">This tool is for informational purposes only. It does not constitute insurance, legal, tax, or financial advice. ICHRA eligibility depends on your specific business circumstances. Consult a licensed insurance professional before making benefits decisions. OTB Solutions LLC is not an insurance carrier.</p>
-  </div>
-</footer>
-
 <!-- CHAT SCREEN -->
 <div class="chat-wrap" id="chatScreen">
   <div class="chat-header">
@@ -1390,7 +1332,6 @@ input[type=range]::-moz-range-thumb {
     <div class="messages" id="messages"></div>
   </div>
 </div>
-
 <div class="composer-wrap" id="composerWrap" style="display:none">
   <div class="composer">
     <textarea class="composer-textarea" id="composerInput" placeholder="Ask anything..." rows="1" onkeydown="handleComposerKey(event)" oninput="autoGrow(this)"></textarea>
@@ -1404,10 +1345,8 @@ input[type=range]::-moz-range-thumb {
     <span>OTB Solutions LLC</span>
   </div>
 </div>
-
 <!-- Persistent advisor CTA — visible on every surface -->
 <button class="advisor-fab" id="advisorFab" onclick="openLeadModal({ source: 'advisor-fab' })" aria-label="Talk to an advisor">Talk to an advisor</button>
-
 <!-- WHY ICHRA · floating affordance + slide-over panel -->
 <button class="why-fab" id="whyFab" onclick="openWhy()" aria-label="Why ICHRA?">
   <span class="why-icon-circle">?</span>
@@ -1467,22 +1406,18 @@ input[type=range]::-moz-range-thumb {
       <h3>Set a budget. Employees pick. The platform handles the rest.</h3>
       <p>A 2020 IRS regulation that gives you a fixed monthly cost, gives employees real plan choice, and runs almost entirely in the background. Tax-free for both sides. Under 30 minutes a month of your time.</p>
     </div>
-
     <div class="so-section">
       <div class="so-section-label">How it works in 3 steps</div>
       <div id="soBasics"></div>
     </div>
-
     <div class="so-section">
       <div class="so-section-label">Group plan vs ICHRA</div>
       <div id="soCompare"></div>
     </div>
-
     <div class="so-section">
       <div class="so-section-label">By the numbers</div>
       <div id="soStats"></div>
     </div>
-
     <div class="so-section">
       <div class="so-section-label">Common questions</div>
       <div class="so-faq">
@@ -1494,14 +1429,12 @@ input[type=range]::-moz-range-thumb {
         <details><summary>Is ICHRA subject to ERISA?</summary><div class="so-faq-a">Yes — ICHRAs are group health plans subject to ERISA. The admin platform generates the formal plan document and Summary Plan Description automatically as part of setup, so the paperwork is handled.</div></details>
       </div>
     </div>
-
     <div class="so-section" id="soActions">
       <button class="so-cta" onclick="continueFromWhy()" id="soContinueBtn">Continue</button>
       <button class="so-cta secondary" onclick="openLeadModal({ source: 'why-panel' })">Or talk to an advisor →</button>
     </div>
   </div>
 </aside>
-
 <!-- LEAD CAPTURE · centered modal, openable from anywhere -->
 <div class="lead-scrim" id="leadScrim" onclick="closeLeadModal()"></div>
 <aside class="lead-modal" id="leadModal" role="dialog" aria-labelledby="leadModalTitle">
@@ -1517,12 +1450,10 @@ input[type=range]::-moz-range-thumb {
     <div id="leadModalForm"></div>
   </div>
 </aside>
-
 <script>
 // ── CONFIG ─────────────────────────────────────────────────────────
 const WORKER_URL = 'https://ichra-chat-proxy.chris-c33.workers.dev'; // updated worker.js with personas
 const SHEET_URL  = 'https://script.google.com/macros/s/AKfycbxYnXTB-V8fOErzVwEE-0HI1jaLyn7030Uyxnk0YuuatV7vkupZvtCCv4feAy9XEmviOA/exec';
-
 // ── CHANNEL ONE ASSUMPTIONS ────────────────────────────────────────
 const A = {
   aflac:      { avgPrem: 600,  policiesPerPH: 1.4, y1: 0.45,  y2: 0.10,   y3: 0.10,   gaY1: 0.10, gaRen: 0.05 },
@@ -1536,7 +1467,6 @@ const SCENARIOS = {
   allAnc:    { aflac: 45, perm: 30, dis: 60, hlth: 0  },
   allBen:    { aflac: 60, perm: 30, dis: 80, hlth: 81 }
 };
-
 // ── STATE ──────────────────────────────────────────────────────────
 const state = {
   persona: null,
@@ -1549,7 +1479,6 @@ const state = {
   },
   activeCalcId: null // DOM id of the live calculator (if any) so we can update the scenario pill
 };
-
 const SUGGESTIONS = {
   employer: [
     'What should I contribute per employee?',
@@ -1567,7 +1496,6 @@ const SUGGESTIONS = {
     'How DSC and RSC stack'
   ]
 };
-
 // ── SVG ILLUSTRATIONS ──────────────────────────────────────────────
 const SVGS = {
   calc: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
@@ -1616,7 +1544,6 @@ const SVGS = {
     <path d="M14.5 9.5 a2.5 2 0 1 0 0 2 H10 a2.5 2 0 1 1 0 -2"/>
   </svg>`
 };
-
 // Banner config per tool
 const TOOL_META = {
   show_commission_calculator:   { banner: 'banner-calc',    eye: 'Calculator',  title: 'Commission scenarios',   sub: 'Channel One rates · drag sliders to model your case', svg: SVGS.calc },
@@ -1626,7 +1553,6 @@ const TOOL_META = {
   show_fit_assessment:          { banner: 'banner-fit',     eye: 'Assessment',  title: 'Is ICHRA a fit?',        sub: 'Four questions, takes twenty seconds',                svg: SVGS.fit },
   capture_lead:                 { banner: 'banner-lead',    eye: 'Connect',     title: 'Get in touch',           sub: 'A human at OTB follows up within one business day',  svg: SVGS.lead }
 };
-
 // Starter launchpad per persona — 3 most useful tools, presented as tiles
 const STARTERS = {
   employer: [
@@ -1646,19 +1572,16 @@ const STARTERS = {
     { tool: 'show_commission_calculator', icon: SVGS.calc, iconCls: '', title: 'All Benefits preset',     desc: '60 / 30 / 80 + individual health.',     preset: { scenario: 'allBen' } }
   ]
 };
-
 const PERSONA_INTROS = {
   employer: "Tools for employers thinking through ICHRA. Pick one below, or type a question.",
   broker:   "Tools for the broker math on ICHRA. Pick one below, or type a question.",
   aflac:    "Agent commission tools. Full hierarchy enabled. Pick a starter, or type a question."
 };
-
 // ── ENTRY → CHAT ───────────────────────────────────────────────────
 // Pending tool to auto-open after persona selection (used by entry-page chips
 // and after the agent password gate unlocks).
 let pendingChipTool = null;
 let pendingChipPreset = null;
-
 function launchChipTool(e, persona, toolName, preset) {
   // Stop the parent persona card's onclick from firing too
   if (e && typeof e.stopPropagation === 'function') e.stopPropagation();
@@ -1671,7 +1594,6 @@ function launchChipTool(e, persona, toolName, preset) {
     selectPersona(persona);
   }
 }
-
 function selectPersona(persona) {
   state.persona = persona;
   state.chatHistory = [];
@@ -1713,7 +1635,6 @@ function selectPersona(persona) {
     setTimeout(() => document.getElementById('composerInput').focus(), 200);
   }
 }
-
 function goBackToEntry() {
   document.getElementById('entryScreen').style.display = 'flex';
   document.getElementById('chatScreen').classList.remove('active');
@@ -1728,7 +1649,6 @@ function goBackToEntry() {
   state.persona = null;
   state.activeCalcId = null;
 }
-
 // ── PASSWORD GATE ──────────────────────────────────────────────────
 function openAflacGate(e) {
   e.stopPropagation();
@@ -1752,7 +1672,6 @@ function checkPassword() {
     setTimeout(() => input.classList.remove('shake'), 400);
   }
 }
-
 // ── MESSAGE RENDERING ──────────────────────────────────────────────
 function appendAssistantMessage(text, opts = {}) {
   const wrap = document.createElement('div');
@@ -1766,14 +1685,12 @@ function appendAssistantMessage(text, opts = {}) {
   document.getElementById('messages').appendChild(wrap);
   const body = wrap.querySelector('.msg-body');
   const txt = wrap.querySelector('.msg-text');
-
   // Thinking placeholder uses animated dots instead of streamed text
   if (text === '__thinking__') {
     txt.innerHTML = '<span class="thinking-dots" aria-label="Thinking"><span></span><span></span><span></span></span>';
     scrollToBottom();
     return wrap;
   }
-
   // Stream the text in
   streamText(txt, text, () => {
     if (opts.launchpad && opts.launchpad.length) {
@@ -1797,7 +1714,6 @@ function appendAssistantMessage(text, opts = {}) {
   scrollToBottom();
   return wrap;
 }
-
 function appendUserMessage(text) {
   const wrap = document.createElement('div');
   wrap.className = 'msg user';
@@ -1810,7 +1726,6 @@ function appendUserMessage(text) {
   document.getElementById('messages').appendChild(wrap);
   scrollToBottom();
 }
-
 function streamText(el, text, done) {
   // Word-by-word streaming for natural rhythm
   el.classList.add('cursor');
@@ -1830,27 +1745,22 @@ function streamText(el, text, done) {
   };
   tick();
 }
-
 function formatMarkdown(s) {
   // minimal: bold + line breaks
   return escapeHtml(s)
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/\n/g, '<br>');
 }
-
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c]);
 }
-
 function scrollToBottom() {
   setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }), 30);
 }
-
 function useSuggestion(text) {
   document.getElementById('composerInput').value = text;
   sendMessage();
 }
-
 // ── COMPOSER ───────────────────────────────────────────────────────
 function autoGrow(el) {
   el.style.height = 'auto';
@@ -1864,7 +1774,6 @@ function handleComposerKey(e) {
 }
 // Track in-flight request so the user can stop it
 let currentRequest = null;
-
 function setSendButtonStopping(stopping) {
   const btn = document.getElementById('sendBtn');
   if (!btn) return;
@@ -1872,19 +1781,16 @@ function setSendButtonStopping(stopping) {
   btn.title = stopping ? 'Stop' : 'Send';
   btn.setAttribute('aria-label', stopping ? 'Stop' : 'Send');
 }
-
 function handleSendClick() {
   if (currentRequest) { stopRequest(); }
   else { sendMessage(); }
 }
-
 function stopRequest() {
   if (currentRequest && currentRequest.ctrl) {
     currentRequest.userStopped = true;
     currentRequest.ctrl.abort();
   }
 }
-
 async function sendMessage() {
   const input = document.getElementById('composerInput');
   const msg = input.value.trim();
@@ -1893,17 +1799,14 @@ async function sendMessage() {
   state.chatHistory.push({ role: 'user', content: msg });
   input.value = '';
   autoGrow(input);
-
   const localTool = detectLocalToolIntent(msg);
   const placeholder = appendAssistantMessage('__thinking__', {});
   const txtEl = placeholder.querySelector('.msg-text');
-
   const ctrl = new AbortController();
   currentRequest = { ctrl, userStopped: false };
   setSendButtonStopping(true);
   // First-byte timeout — cleared as soon as headers come back.
   const timeoutId = setTimeout(() => ctrl.abort(), 8000);
-
   try {
     const resp = await fetch(WORKER_URL, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -1917,7 +1820,6 @@ async function sendMessage() {
     });
     clearTimeout(timeoutId);
     if (!resp.ok) throw new Error('worker http ' + resp.status);
-
     const contentType = resp.headers.get('content-type') || '';
     if (contentType.includes('event-stream') && resp.body && resp.body.getReader) {
       // Streaming SSE path
@@ -1964,7 +1866,6 @@ async function sendMessage() {
   }
   scrollToBottom();
 }
-
 // SSE stream reader — parses Anthropic event protocol incrementally
 async function streamSSE(resp, txtEl, signal) {
   const reader = resp.body.getReader();
@@ -1974,7 +1875,6 @@ async function streamSSE(resp, txtEl, signal) {
   const tools = [];
   let currentTool = null;
   let firstChunk = true;
-
   try {
     while (true) {
       if (signal && signal.aborted) {
@@ -1984,7 +1884,6 @@ async function streamSSE(resp, txtEl, signal) {
       const { done, value } = await reader.read();
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
-
       // Process complete SSE events (delimited by \n\n)
       let idx;
       while ((idx = buffer.indexOf('\n\n')) !== -1) {
@@ -1996,7 +1895,6 @@ async function streamSSE(resp, txtEl, signal) {
         if (!dataStr || dataStr === '[DONE]') continue;
         let data;
         try { data = JSON.parse(dataStr); } catch (e) { continue; }
-
         if (data.type === 'content_block_start') {
           if (data.content_block && data.content_block.type === 'tool_use') {
             currentTool = { name: data.content_block.name, partialJson: '', input: data.content_block.input || {} };
@@ -2034,7 +1932,6 @@ async function streamSSE(resp, txtEl, signal) {
   }
   return { text, tools };
 }
-
 function detectLocalToolIntent(msg) {
   const m = msg.toLowerCase();
   if (state.persona === 'broker' || state.persona === 'aflac') {
@@ -2058,7 +1955,6 @@ function detectLocalToolIntent(msg) {
   }
   return null;
 }
-
 // Local Q&A bank — keyword arrays trigger the response. Order matters: persona-specific tried first.
 const LOCAL_QA_SHARED = [
   { keys: ['what is ichra', 'summary of ichra', 'tell me about ichra', 'explain ichra', 'overview of ichra', 'ichra primer', 'ichra in a nutshell'],
@@ -2074,7 +1970,6 @@ const LOCAL_QA_SHARED = [
   { keys: ['what can you', 'what do you do', 'what do you help'],
     a: "I help in three areas. ICHRA basics — what it is, how it works, when it fits. Math — contribution costs for employers, commission scenarios for brokers and Aflac enrollers. Connection — when you want a human, I can hand off." }
 ];
-
 const LOCAL_QA_PERSONA = {
   employer: [
     { keys: ['how much', 'cost', 'budget', 'spend', 'contribution amount', 'what to contribute', 'how much should i contribute'],
@@ -2111,7 +2006,6 @@ const LOCAL_QA_PERSONA = {
       a: "100 EE All Ancillary: Aflac at 45% penetration = $37,800 premium → $17,010 Associate Y1. Permanent Life at 30% = $108,000 → $63,180. STD/LTD at 60% = $31,200 → $18,720. Total Associate Y1: $98,910. Open the calculator to run any role." }
   ]
 };
-
 function localAnswer(msg, persona) {
   const m = msg.toLowerCase();
   const personaBank = LOCAL_QA_PERSONA[persona] || [];
@@ -2123,7 +2017,6 @@ function localAnswer(msg, persona) {
   }
   return null;
 }
-
 function fallbackReply(msg, localTool) {
   // 1. If a tool is being rendered, give a one-liner intro
   if (localTool) {
@@ -2141,7 +2034,6 @@ function fallbackReply(msg, localTool) {
   const starters = (STARTERS[state.persona] || []).map(s => s.title).join(', ');
   return `Pick a tool to start — ${starters} — or ask something more specific.`;
 }
-
 // ── INLINE TOOL CARDS ───────────────────────────────────────────────
 function buildToolCard(name, props) {
   const wrap = document.createElement('div');
@@ -2154,7 +2046,6 @@ function buildToolCard(name, props) {
   else if (name === 'show_fit_assessment')          inner = buildFitAssessment();
   else if (name === 'capture_lead')                 inner = buildLeadCapture(props);
   else                                              inner = '<p style="color:var(--ink-soft);font-size:13px">Unknown tool.</p>';
-
   const meta = TOOL_META[name] || { banner: '', eye: 'Live tool', title: 'Tool', sub: '', svg: SVGS.spark };
   wrap.innerHTML = `
     <div class="tool-banner ${meta.banner}">
@@ -2175,7 +2066,6 @@ function buildToolCard(name, props) {
   }, 30);
   return wrap;
 }
-
 // ── STARTER LAUNCHPAD ──────────────────────────────────────────────
 function buildLaunchpad(items) {
   const wrap = document.createElement('div');
@@ -2202,7 +2092,6 @@ function buildLaunchpad(items) {
   }, 30);
   return wrap;
 }
-
 function launchStarterTool(item) {
   // Synthesize a "user" intent → assistant renders the tool inline
   const userText = item.title;
@@ -2218,11 +2107,9 @@ function launchStarterTool(item) {
   appendAssistantMessage(intro, { tools: [{ name: item.tool, props: item.preset || {} }] });
   state.chatHistory.push({ role: 'assistant', content: intro });
 }
-
 // ── WHY ICHRA FAB + SLIDE-OVER ─────────────────────────────────────
 let whyFabPulseTimer = null;
 let whyOpenedFrom = null; // 'fab' | 'entry' | null
-
 function showWhyFab() {
   const fab = document.getElementById('whyFab');
   fab.classList.add('visible', 'pulse');
@@ -2270,7 +2157,6 @@ function continueFromWhy() {
     if (input) input.focus();
   }
 }
-
 // ── LEAD CAPTURE MODAL (standalone, openable from anywhere) ────────
 function openLeadModal(opts = {}) {
   const body = document.getElementById('leadModalForm');
@@ -2288,14 +2174,12 @@ function closeLeadModal() {
     document.body.style.overflow = '';
   }
 }
-
 // ESC closes any open overlay (modal first, then slide-over)
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   if (document.getElementById('leadModal').classList.contains('open')) closeLeadModal();
   else if (document.getElementById('whyPanel').classList.contains('open')) closeWhy();
 });
-
 function renderToolMessage(toolName, props) {
   // Programmatic tool injection from a UI affordance (e.g., "What is ICHRA?" link)
   const wrap = document.createElement('div');
@@ -2310,7 +2194,6 @@ function renderToolMessage(toolName, props) {
   wrap.querySelector('.msg-body').appendChild(buildToolCard(toolName, props || {}));
   scrollToBottom();
 }
-
 // ── CALCULATOR WIDGET (markup + math) ───────────────────────────────
 function buildCalculator(props) {
   const showRoleToggle = state.persona === 'aflac';
@@ -2324,7 +2207,6 @@ function buildCalculator(props) {
           <div class="slider-label"><span class="lbl">Employees</span><span class="val" data-v="ee">25</span></div>
           <input type="range" data-s="ee" min="5" max="500" step="1" value="25">
         </div>
-
         <h4>Group health (today)</h4>
         <div class="slider-row">
           <div class="slider-label"><span class="lbl">Premium PEPM</span><span class="val" data-v="grpPrem">$700</span></div>
@@ -2334,13 +2216,11 @@ function buildCalculator(props) {
           <div class="slider-label"><span class="lbl">Group commission %</span><span class="val" data-v="grpComm">4.0%</span></div>
           <input type="range" data-s="grpComm" min="0" max="80" step="5" value="40">
         </div>
-
         <h4>ICHRA platform</h4>
         <div class="slider-row">
           <div class="slider-label"><span class="lbl">Platform PEPM</span><span class="val" data-v="platPEPM">$10</span></div>
           <input type="range" data-s="platPEPM" min="0" max="30" step="1" value="10">
         </div>
-
         <h4>Ancillary scenario</h4>
         <div class="scen-grid">
           <button class="scen-card" data-scen="aflac">Aflac Only<span class="micro">35%</span></button>
@@ -2355,7 +2235,6 @@ function buildCalculator(props) {
           <div class="slider-row"><div class="slider-label"><span class="lbl">STD / LTD</span><span class="val" data-v="penDis">0%</span></div><input type="range" data-s="penDis" min="0" max="100" step="5" value="0"></div>
           <div class="slider-row" style="margin-bottom:0"><div class="slider-label"><span class="lbl">Individual Health</span><span class="val" data-v="penHlth">0%</span></div><input type="range" data-s="penHlth" min="0" max="100" step="5" value="0"></div>
         </div>
-
         ${showRoleToggle ? `
           <h4>Hierarchy</h4>
           <div class="role-toggle">
@@ -2365,7 +2244,6 @@ function buildCalculator(props) {
           </div>
         ` : ''}
       </div>
-
       <div class="calc-outputs">
         <div class="delta-block">
           <div class="delta-label">Year-1 delta · ICHRA + Ancillary vs Group-only</div>
@@ -2406,7 +2284,6 @@ function buildCalculator(props) {
       </div>
     </div>`;
 }
-
 function wireCalculator(rootEl, props) {
   const root = rootEl.querySelector('.calc');
   if (!root) return;
@@ -2415,7 +2292,6 @@ function wireCalculator(rootEl, props) {
   if (props.ee) c.ee = props.ee;
   if (props.scenario) c.scenario = props.scenario;
   if (props.role && state.persona === 'aflac') c.role = props.role;
-
   // Sync initial slider values
   root.querySelectorAll('[data-s]').forEach(s => {
     const k = s.dataset.s;
@@ -2432,7 +2308,6 @@ function wireCalculator(rootEl, props) {
   root.querySelectorAll('[data-scen]').forEach(b => b.classList.toggle('active', b.dataset.scen === c.scenario));
   // Sync role
   root.querySelectorAll('[data-role]').forEach(b => b.classList.toggle('active', b.dataset.role === c.role));
-
   function render() {
     // Sync state.calc so the worker sees the latest context
     state.calc = c;
@@ -2443,7 +2318,6 @@ function wireCalculator(rootEl, props) {
     const d = calcProduct(A.disability, fD, c.ee);
     const h = calcHealth(fH, c.ee);
     const role = c.role;
-
     function pick(prod) {
       if (role === 'associate') return { y1: prod.assocY1, y3: prod.assoc3y };
       if (role === 'dsc')       return { y1: prod.gaY1,    y3: prod.ga3y };
@@ -2452,17 +2326,14 @@ function wireCalculator(rootEl, props) {
     const aflacComm = pick(a);
     const permComm = pick(p);
     const disComm = pick(d);
-
     // Platform PEPM commission (associate-only stream; overrides for DSC/RSC scaled)
     const plat = calcPlatform(c.ee, c.platPEPM, fH);
     let platY1 = plat.annual;
     if (role === 'dsc') platY1 = plat.annual * A.health.gaY1;
     else if (role === 'rsc') platY1 = plat.annual * A.health.gaY1 * 0.5;
     const plat3y = platY1 * 3;
-
     const newY1 = aflacComm.y1 + permComm.y1 + disComm.y1 + platY1;
     const new3y = aflacComm.y3 + permComm.y3 + disComm.y3 + plat3y;
-
     // Group baseline (associate is full broker commission; DSC/RSC see scaled slices)
     const annPrem = c.ee * c.grpPrem * 12;
     let grpY1 = annPrem * c.grpComm;
@@ -2470,11 +2341,9 @@ function wireCalculator(rootEl, props) {
     if (role === 'dsc') { grpY1 *= 0.25; grpPer *= 0.25; }
     else if (role === 'rsc') { grpY1 *= 0.125; grpPer *= 0.125; }
     const grp3y = grpY1 * 3;
-
     const delta = newY1 - grpY1;
     const mult = grpY1 > 0 ? newY1 / grpY1 : 0;
     const newPer = c.ee > 0 ? newY1 / c.ee : 0;
-
     // Paint slider value badges
     set('ee', c.ee);
     set('grpPrem', fmt(c.grpPrem));
@@ -2484,7 +2353,6 @@ function wireCalculator(rootEl, props) {
     set('penPerm', pen.perm + '%');
     set('penDis', pen.dis + '%');
     set('penHlth', pen.hlth + '%');
-
     // Paint outputs
     setO('delta', fmtSigned(delta));
     const dEl = root.querySelector('[data-o="delta"]');
@@ -2499,7 +2367,6 @@ function wireCalculator(rootEl, props) {
     setO('new3y', fmt(new3y));
     setO('newPer', fmt(newPer));
     setO('newSub', buildNewSub(pen, c.platPEPM));
-
     // Bar chart
     const components = [
       { k:'Aflac', v: aflacComm.y1, cls:'aflac' },
@@ -2514,10 +2381,8 @@ function wireCalculator(rootEl, props) {
         <div class="bar-top"><span class="k">${x.k}</span><span class="v">${fmt(x.v)}</span></div>
         <div class="bar-track"><div class="bar-fill ${x.cls}" style="width:${(x.v/max*100).toFixed(1)}%"></div></div>
       </div>`).join('');
-
     // Insight
     root.querySelector('[data-o="insight"]').innerHTML = buildInsight(a, p, d, platY1, grpY1, pen, role);
-
     // Product table
     const rows = [
       ['Aflac', a, '#00A7E1', aflacComm],
@@ -2530,14 +2395,12 @@ function wireCalculator(rootEl, props) {
     tbody += `<tr><td class="name"><span class="swatch" style="background:#F59E0B"></span>Platform PEPM</td><td class="r">${fmt(plat.annual)}</td><td class="r">${fmt(platY1)}</td><td class="r">${fmt(plat3y)}</td></tr>`;
     tbody += `<tr class="tot"><td>Total · new world</td><td class="r">${fmt(a.totPrem+p.totPrem+d.totPrem+plat.annual)}</td><td class="r">${fmt(newY1)}</td><td class="r">${fmt(new3y)}</td></tr>`;
     root.querySelector('[data-o="ptBody"]').innerHTML = tbody;
-
     // Update scenario pill in header
     const pillText = `${c.ee} EE · ${scenLabel(c.scenario, c.custom)} · ${role.toUpperCase()} · ${fmt(newY1)} Y1`;
     const pillEl = document.getElementById('scenarioPill');
     pillEl.textContent = pillText;
     pillEl.classList.add('visible');
   }
-
   function set(k, v) {
     const el = root.querySelector(`[data-v="${k}"]`);
     if (el) el.textContent = v;
@@ -2546,7 +2409,6 @@ function wireCalculator(rootEl, props) {
     const el = root.querySelector(`[data-o="${k}"]`);
     if (el) el.textContent = v;
   }
-
   // Slider events
   root.querySelectorAll('[data-s]').forEach(s => {
     s.addEventListener('input', e => {
@@ -2563,7 +2425,6 @@ function wireCalculator(rootEl, props) {
       render();
     });
   });
-
   function enableCustom() {
     if (!c.custom) {
       c.custom = true;
@@ -2571,7 +2432,6 @@ function wireCalculator(rootEl, props) {
       const cp = root.querySelector('.custom-panel'); if (cp) cp.classList.add('open');
     }
   }
-
   // Scenario card events
   root.querySelectorAll('[data-scen]').forEach(b => {
     b.addEventListener('click', () => {
@@ -2591,7 +2451,6 @@ function wireCalculator(rootEl, props) {
       render();
     });
   });
-
   // Custom checkbox
   const ctBox = root.querySelector('[data-ct]');
   if (ctBox) {
@@ -2605,7 +2464,6 @@ function wireCalculator(rootEl, props) {
       render();
     });
   }
-
   // Role toggle
   root.querySelectorAll('[data-role]').forEach(b => {
     b.addEventListener('click', () => {
@@ -2615,15 +2473,12 @@ function wireCalculator(rootEl, props) {
       render();
     });
   });
-
   render();
 }
-
 function scenLabel(s, custom) {
   if (custom) return 'Custom';
   return { aflac:'Aflac Only', aflacPerm:'Aflac+Perm', allAnc:'All Ancillary', allBen:'All Benefits' }[s] || s;
 }
-
 function buildNewSub(pen, platPEPM) {
   const p = [];
   if (pen.aflac > 0) p.push('Aflac');
@@ -2632,7 +2487,6 @@ function buildNewSub(pen, platPEPM) {
   if (platPEPM > 0) p.push('Platform');
   return p.join(' + ') || 'No products';
 }
-
 function buildInsight(a, p, d, platY1, grpY1, pen, role) {
   const products = [
     { name: 'Aflac', y1: role==='associate'?a.assocY1:(role==='dsc'?a.gaY1:a.gaY1*0.5), pen: pen.aflac },
@@ -2650,7 +2504,6 @@ function buildInsight(a, p, d, platY1, grpY1, pen, role) {
   }
   return s + '. Move the sliders to see how each product moves the needle.';
 }
-
 // ── CALCULATOR MATH ────────────────────────────────────────────────
 function calcProduct(p, pen, ee) {
   const policies = ee * pen * p.policiesPerPH;
@@ -2674,7 +2527,6 @@ function calcPlatform(ee, pepm, hlthPen) {
 }
 const fmt = v => '$' + Math.round(v).toLocaleString();
 const fmtSigned = v => (v >= 0 ? '+' : '−') + '$' + Math.round(Math.abs(v)).toLocaleString();
-
 // ── CONTRIBUTION CALCULATOR · BENEFITIQ ────────────────────────────
 // Ported from contribution.html (the standalone React/Recharts bundle).
 // All constants verbatim from the source; formulas matched 1:1.
@@ -2720,7 +2572,6 @@ const BIQ = {
      icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 c2.5-4 6-6.5 10-6.5 s7.5 2.5 10 6.5 c-2.5 4-6 6.5-10 6.5 S4.5 16 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg>'}
   ]
 };
-
 function biqPremium(age, st){
   const state = st || 'GA';
   const base = BIQ.SILVER_BM[state] || 600;
@@ -2728,7 +2579,6 @@ function biqPremium(age, st){
   const a = Math.min(Math.max(parseInt(age) || 30, 21), 64);
   return Math.round(base * BIQ.AGE_CURVE[a - 21]);
 }
-
 function biqERContrib(prem, s){
   if (s.isALE) return Math.max(0, prem - BIQ.FPL_SAFE_HARBOR);
   if (s.strategyMode === 'pct')    return Math.round(prem * (s.pct / 100));
@@ -2736,7 +2586,6 @@ function biqERContrib(prem, s){
   if (s.strategyMode === 'flat')   return Math.max(0, s.flat || 0);
   return Math.round(prem * 0.65);
 }
-
 function biqProfiles(s){
   const states = (s.states && s.states.length) ? s.states : ['GA'];
   const sorted = states.slice().sort((a,b) => (BIQ.SILVER_BM[a]||600) - (BIQ.SILVER_BM[b]||600));
@@ -2756,7 +2605,6 @@ function biqProfiles(s){
   if (s.hasPT) out.push({id:6, label:'Part-time — single', age:midAge, state:median, tier:'single', empType:'PT'});
   return out;
 }
-
 function biqStrategyLabel(s){
   if (s.isALE) return 'ALE · FPL safe harbor (EE pays ≤ $113/mo)';
   if (s.strategyMode === 'pct')    return (s.pct || 65) + '% of benchmark premium';
@@ -2764,7 +2612,6 @@ function biqStrategyLabel(s){
   if (s.strategyMode === 'flat')   return 'Flat $' + (s.flat || 400) + '/EE/mo';
   return 'Default · 65% of benchmark';
 }
-
 function buildContributionCalc(props) {
   const cid = 'biq-' + Math.random().toString(36).slice(2, 8);
   return `
@@ -2773,7 +2620,6 @@ function buildContributionCalc(props) {
         <div class="dot current"></div><div class="dot"></div><div class="dot"></div>
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
-
       <div class="contrib-step active" data-step="0">
         <div class="contrib-step-eye">Step 1 of 6 · Compliance</div>
         <div class="contrib-q">Does your company have 50 or more full-time equivalent employees?</div>
@@ -2783,7 +2629,6 @@ function buildContributionCalc(props) {
           <button class="contrib-opt" data-bv="isALE" data-val="false"><span class="opt-title">No — fewer than 50</span><span class="opt-desc">Small employer · full flexibility on contribution</span></button>
         </div>
       </div>
-
       <div class="contrib-step" data-step="1">
         <div class="contrib-step-eye">Step 2 of 6 · Workforce</div>
         <div class="contrib-q">What's the age range of your workforce?</div>
@@ -2800,7 +2645,6 @@ function buildContributionCalc(props) {
         </div>
         <div class="contrib-state-meta" data-bp="ageHint">Mid-age benchmark estimate updates below.</div>
       </div>
-
       <div class="contrib-step" data-step="2">
         <div class="contrib-step-eye">Step 3 of 6 · Geography</div>
         <div class="contrib-q">Which states do your employees work in?</div>
@@ -2808,7 +2652,6 @@ function buildContributionCalc(props) {
         <div class="contrib-state-grid" data-bp="stateGrid"></div>
         <div class="contrib-state-meta" data-bp="stateMeta">Selected: 0</div>
       </div>
-
       <div class="contrib-step" data-step="3">
         <div class="contrib-step-eye">Step 4 of 6 · Workforce shape</div>
         <div class="contrib-q">What best describes your workforce's family situation?</div>
@@ -2825,7 +2668,6 @@ function buildContributionCalc(props) {
           <button class="contrib-opt selected" data-bv="hasPT" data-val="false"><span class="opt-title">No</span><span class="opt-desc">Full-time only.</span></button>
         </div>
       </div>
-
       <div class="contrib-step" data-step="4">
         <div class="contrib-step-eye">Step 5 of 6 · Scale</div>
         <div class="contrib-q">Roughly how many employees do you have?</div>
@@ -2837,7 +2679,6 @@ function buildContributionCalc(props) {
           </div>
         </div>
       </div>
-
       <div class="contrib-step" data-step="5">
         <div class="contrib-step-eye">Step 6 of 6 · Strategy</div>
         <div class="contrib-q" data-bp="strategyQ">How do you want to approach contributions?</div>
@@ -2855,7 +2696,6 @@ function buildContributionCalc(props) {
               <button class="contrib-preset-btn" data-bpct="85">Premium · 85%</button>
             </div>
           </div>
-
           <button class="contrib-strategy-card" data-bv="strategyMode" data-val="ee_max">
             <span class="ico">💸</span><span class="ttl">Employee pays no more than $X/month</span>
             <div class="dsc">You set the ceiling on what employees pay — you cover the rest. The dollar amount varies by age and state.</div>
@@ -2866,7 +2706,6 @@ function buildContributionCalc(props) {
               <input type="number" data-bp="eeMax" min="0" max="2000" step="10" value="150" style="font-family:var(--mono)">
             </div></div>
           </div>
-
           <button class="contrib-strategy-card" data-bv="strategyMode" data-val="flat">
             <span class="ico">💲</span><span class="ttl">Same flat dollar amount for everyone</span>
             <div class="dsc">Simple and predictable. Same $ regardless of age or location. Easiest to budget, hardest to keep ACA-affordable for older employees.</div>
@@ -2880,20 +2719,16 @@ function buildContributionCalc(props) {
         </div>
         <div class="contrib-strategy-readout" data-bp="aleReadout"><strong>ALE detected.</strong> I'll auto-apply the FPL safe harbor ceiling — employees pay no more than $113/mo. You don't need to pick a strategy.</div>
       </div>
-
       <div class="contrib-results" data-bp="results"></div>
-
       <div class="contrib-nav">
         <button class="contrib-btn" data-bp="backBtn" disabled>← Back</button>
         <button class="contrib-btn primary" data-bp="nextBtn">Next →</button>
       </div>
     </div>`;
 }
-
 function wireContributionCalc(rootEl, props) {
   const root = rootEl.querySelector('.contrib');
   if (!root) return;
-
   const s = {
     step: 0, totalSteps: 6,
     isALE: null, minAge: 25, maxAge: 55, states: [],
@@ -2902,7 +2737,6 @@ function wireContributionCalc(rootEl, props) {
     ancillaries: {}
   };
   BIQ.ANCILLARIES.forEach(a => s.ancillaries[a.k] = { on: false, amt: a.def });
-
   const stateGrid = root.querySelector('[data-bp="stateGrid"]');
   if (stateGrid) {
     stateGrid.innerHTML = BIQ.STATES.map(st => `<button class="contrib-state" data-state="${st}">${st}</button>`).join('');
@@ -2924,7 +2758,6 @@ function wireContributionCalc(rootEl, props) {
       updateStateMeta();
     });
   });
-
   const ageHint = root.querySelector('[data-bp="ageHint"]');
   function updateAgeHint(){
     if (!ageHint) return;
@@ -2940,7 +2773,6 @@ function wireContributionCalc(rootEl, props) {
       if (k === 'minAge' || k === 'maxAge') updateAgeHint();
     });
   });
-
   root.querySelectorAll('[data-bv]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const k = btn.dataset.bv;
@@ -2954,14 +2786,12 @@ function wireContributionCalc(rootEl, props) {
       }
     });
   });
-
   root.querySelectorAll('[data-bpct]').forEach(btn => {
     btn.addEventListener('click', () => {
       s.pct = parseInt(btn.dataset.bpct);
       root.querySelectorAll('[data-bpct]').forEach(b => b.classList.toggle('active', b === btn));
     });
   });
-
   s.strategyMode = 'pct';
   s.pct = 65;
   const pctBtn = root.querySelector('[data-bv="strategyMode"][data-val="pct"]');
@@ -2970,13 +2800,11 @@ function wireContributionCalc(rootEl, props) {
   if (pctIn) pctIn.classList.add('visible');
   const ptNo = root.querySelector('[data-bv="hasPT"][data-val="false"]');
   if (ptNo) ptNo.classList.add('selected');
-
   const backBtn = root.querySelector('[data-bp="backBtn"]');
   const nextBtn = root.querySelector('[data-bp="nextBtn"]');
   const progress = root.querySelector('[data-bp="progress"]');
   const aleReadout = root.querySelector('[data-bp="aleReadout"]');
   const strategyArea = root.querySelector('[data-bp="strategyArea"]');
-
   function showStep(n) {
     s.step = n;
     root.querySelectorAll('.contrib-step').forEach(st => {
@@ -3004,7 +2832,6 @@ function wireContributionCalc(rootEl, props) {
     const stepEl = root.querySelector('.contrib-step[data-step="' + n + '"]');
     if (stepEl) stepEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-
   function canAdvance() {
     if (s.step === 0) return s.isALE !== null;
     if (s.step === 1) return (parseInt(s.minAge) >= 18 && parseInt(s.maxAge) >= parseInt(s.minAge));
@@ -3014,7 +2841,6 @@ function wireContributionCalc(rootEl, props) {
     if (s.step === 5) return true;
     return true;
   }
-
   nextBtn.addEventListener('click', () => {
     if (!canAdvance()) {
       nextBtn.classList.add('shake');
@@ -3033,7 +2859,6 @@ function wireContributionCalc(rootEl, props) {
       if (progress) Array.from(progress.children).forEach(d => { d.classList.remove('current'); d.classList.add('done'); });
     }
   });
-
   backBtn.addEventListener('click', () => {
     const res = root.querySelector('[data-bp="results"]');
     if (res && res.classList.contains('visible')) {
@@ -3045,7 +2870,6 @@ function wireContributionCalc(rootEl, props) {
     }
     if (s.step > 0) showStep(s.step - 1);
   });
-
   function renderResults() {
     const profiles = biqProfiles(s);
     const rows = profiles.map(p => {
@@ -3065,7 +2889,6 @@ function wireContributionCalc(rootEl, props) {
     const groupMonthly = groupPerEE * parseInt(s.headcount || 0);
     const monthlySavings = groupMonthly - monthlyER;
     const pctReduction = groupMonthly > 0 ? Math.round((monthlySavings / groupMonthly) * 100) : 0;
-
     const proj = [];
     for (let y = 1; y <= 6; y++) {
       proj.push({
@@ -3075,14 +2898,11 @@ function wireContributionCalc(rootEl, props) {
       });
     }
     const yr5Savings = proj.reduce((a,p) => a + Math.max(0, p.group - p.ichra), 0);
-
     const chart = renderProjectionSVG(proj);
-
     function ancTotal(){
       return BIQ.ANCILLARIES.reduce((a, an) => a + (s.ancillaries[an.k].on ? s.ancillaries[an.k].amt : 0), 0);
     }
     function ancMonthly(){ return ancTotal() * parseInt(s.headcount || 0); }
-
     const tableRows = rows.map(r => `
       <tr>
         <td class="profile-name">${r.label}</td>
@@ -3095,11 +2915,9 @@ function wireContributionCalc(rootEl, props) {
         ${s.isALE ? `<td class="r">${r.aca === null ? '—' : r.aca ? '<span class="contrib-aca-safe">✓ Safe</span>' : '<span class="contrib-aca-review">⚠ Review</span>'}</td>` : ''}
       </tr>
     `).join('');
-
     const savingsBadgeHTML = monthlySavings > 0
       ? `<div class="contrib-savings-badge">−${fmt(monthlySavings)}/mo · ${pctReduction}% less vs. small group</div>`
       : '';
-
     const ancRowsHTML = BIQ.ANCILLARIES.map(a => `
       <div class="contrib-anc-row">
         <label>
@@ -3111,7 +2929,6 @@ function wireContributionCalc(rootEl, props) {
         <input type="number" data-anc-amt="${a.k}" min="0" max="200" step="1" value="${s.ancillaries[a.k].amt}" ${s.ancillaries[a.k].on ? '' : 'disabled'}>
       </div>
     `).join('');
-
     const res = root.querySelector('[data-bp="results"]');
     if (!res) return;
     res.innerHTML = `
@@ -3126,7 +2943,6 @@ function wireContributionCalc(rootEl, props) {
           <div class="contrib-summary-stat"><div class="n">${pctReduction}%</div><div class="l">Cost reduction</div></div>
         </div>
       </div>
-
       <div class="contrib-table-wrap">
         <table class="contrib-table">
           <thead><tr>
@@ -3138,20 +2954,17 @@ function wireContributionCalc(rootEl, props) {
         </table>
       </div>
       <div class="contrib-cite">📊 Silver benchmark: CMS 2025 rate filings (MoneyGeek analysis) · Small group: KFF EHBS 2024 · Premiums are state averages. ${s.isALE ? 'ACA safe harbor uses 2024 plan-year FPL ($113/mo).' : 'Non-ALE employers can pick any contribution — ACA affordability not required.'}</div>
-
       <div class="contrib-chart">
         <div class="contrib-step-eye" style="margin-bottom:6px">ICHRA vs Small group · 5-year projection</div>
         ${chart}
         <div class="contrib-cite" style="background:transparent;color:var(--ink-soft);padding:6px 0">Your ICHRA cost is flat because you set the allowance — renewals don't apply. Small-group line assumes 9%/yr KFF average renewal trend.</div>
       </div>
-
       <div class="contrib-anc-panel">
         <div class="contrib-anc-title">➕ Add ancillary benefits</div>
         <div class="contrib-anc-sub">These are separate from ICHRA — employer-paid or voluntary products that layer on top of the health allowance. Toggle to model the impact.</div>
         ${ancRowsHTML}
         <div class="contrib-anc-total"><span>Ancillary monthly total · ${s.headcount} EEs</span><span class="v" data-bp="ancTotal">${fmt(ancMonthly())}</span></div>
       </div>
-
       <div class="contrib-grand-total" data-bp="grandTotalBlock">
         <div class="contrib-grand-eye">Grand total · ICHRA + Ancillary</div>
         <div class="contrib-grand-rows">
@@ -3161,10 +2974,8 @@ function wireContributionCalc(rootEl, props) {
           <div class="contrib-grand-row sub"><span class="k">Annualized</span><span class="v" data-bp="gtAnnual">${fmt((monthlyER + ancMonthly()) * 12)}/yr</span></div>
         </div>
       </div>
-
       <button class="contrib-restart" data-bp="restart">↺ Start over</button>
     `;
-
     function refreshTotals() {
       const ancM = ancMonthly();
       const totAnc = res.querySelector('[data-bp="ancTotal"]');
@@ -3203,10 +3014,8 @@ function wireContributionCalc(rootEl, props) {
       showStep(0);
     });
   }
-
   showStep(0);
 }
-
 function renderProjectionSVG(data) {
   const W = 520, H = 200, pad = { l: 50, r: 14, t: 14, b: 30 };
   const innerW = W - pad.l - pad.r;
@@ -3248,7 +3057,6 @@ function renderProjectionSVG(data) {
     </svg>
   `;
 }
-
 // ── ICHRA BASICS WIDGET ────────────────────────────────────────────
 function buildBasics() {
   return `
@@ -3278,7 +3086,6 @@ function buildBasics() {
       <div class="basics-stat"><div class="n">92%</div><div class="l">renew year-over-year</div></div>
     </div>`;
 }
-
 // ── COMPARISON WIDGET ──────────────────────────────────────────────
 function buildComparison() {
   const rows = [
@@ -3298,7 +3105,6 @@ function buildComparison() {
       `).join('')}
     </div>`;
 }
-
 // ── FIT ASSESSMENT WIDGET ──────────────────────────────────────────
 const FIT_INDUSTRY_INSIGHTS = {
   healthcare: {
@@ -3338,7 +3144,6 @@ const FIT_INDUSTRY_INSIGHTS = {
     stats: [['29%','YoY adoption growth'], ['92%','renew year-over-year'], ['<30min','admin time / month']]
   }
 };
-
 function buildFitAssessment() {
   const industries = [
     ['Healthcare',       'healthcare'],
@@ -3407,12 +3212,10 @@ function buildFitAssessment() {
     <button class="fit-submit" data-fs disabled>See my result</button>
     <div class="fit-result" data-fr></div>`;
 }
-
 function wireFitAssessment(rootEl) {
   const root = rootEl.querySelector('.tool-body');
   const answers = {};
   const total = root.querySelectorAll('[data-fq]').length;
-
   // Pill-style questions (excludes industry tiles + rank list)
   root.querySelectorAll('.fit-question:not([data-type="industry"]):not([data-type="rank"])').forEach(q => {
     q.querySelectorAll('.fit-opt').forEach(opt => {
@@ -3424,7 +3227,6 @@ function wireFitAssessment(rootEl) {
       });
     });
   });
-
   // Industry tile picker
   const indQ = root.querySelector('.fit-question[data-type="industry"]');
   if (indQ) {
@@ -3437,7 +3239,6 @@ function wireFitAssessment(rootEl) {
       });
     });
   }
-
   // Rank-order question (drag-drop + up/down)
   const rankQ = root.querySelector('.fit-question[data-type="rank"]');
   if (rankQ) {
@@ -3445,7 +3246,6 @@ function wireFitAssessment(rootEl) {
     const readOrder = () => Array.from(list.querySelectorAll('.fit-rank-item')).map(li => li.dataset.id);
     answers.priority = readOrder(); // initialize so the question counts as answered
     updateRankUI();
-
     function updateRankUI() {
       const items = list.querySelectorAll('.fit-rank-item');
       items.forEach((li, i) => {
@@ -3456,7 +3256,6 @@ function wireFitAssessment(rootEl) {
       });
       answers.priority = readOrder();
     }
-
     function moveItem(item, dir) {
       const items = Array.from(list.querySelectorAll('.fit-rank-item'));
       const idx = items.indexOf(item);
@@ -3466,7 +3265,6 @@ function wireFitAssessment(rootEl) {
       else list.insertBefore(items[target], item);
       updateRankUI();
     }
-
     // Up/down buttons
     list.querySelectorAll('.fit-rank-btn').forEach(btn => {
       btn.addEventListener('click', e => {
@@ -3475,7 +3273,6 @@ function wireFitAssessment(rootEl) {
         moveItem(item, dir);
       });
     });
-
     // HTML5 drag and drop
     let dragged = null;
     list.querySelectorAll('.fit-rank-item').forEach(item => {
@@ -3506,14 +3303,11 @@ function wireFitAssessment(rootEl) {
       });
     });
   }
-
   function maybeEnableSubmit() {
     const btn = root.querySelector('[data-fs]');
     btn.disabled = Object.keys(answers).length < total;
   }
   maybeEnableSubmit(); // priority already answered via default order
-
-
   root.querySelector('[data-fs]').addEventListener('click', () => {
     // Score quant questions (industry excluded — narrative only)
     const quant = ['size','situation','pressure','team'].map(k => answers[k] || 0);
@@ -3530,7 +3324,6 @@ function wireFitAssessment(rootEl) {
     const insightData = FIT_INDUSTRY_INSIGHTS[industry] || FIT_INDUSTRY_INSIGHTS.other;
     const insight = insightData.blurb;
     const stats = insightData.stats || [];
-
     let tier, headline, bullets;
     if (score >= 12) {
       tier = ['strong', 'Strong ICHRA candidate'];
@@ -3565,7 +3358,6 @@ function wireFitAssessment(rootEl) {
         'Stipends or QSEHRA may be more relevant alternatives'
       ];
     }
-
     const result = root.querySelector('[data-fr]');
     const indCap = industry === 'nonprofit' ? 'Non-profit' : industry.charAt(0).toUpperCase()+industry.slice(1);
     const statsHTML = stats.length ? `<div class="fit-industry-stats">${stats.map(([n,l]) => `<div class="fit-stat"><div class="fit-stat-n">${n}</div><div class="fit-stat-l">${l}</div></div>`).join('')}</div>` : '';
@@ -3580,7 +3372,6 @@ function wireFitAssessment(rootEl) {
     scrollToBottom();
   });
 }
-
 // ── LEAD CAPTURE WIDGET ────────────────────────────────────────────
 function buildLeadCapture(props) {
   const prompt = props.prompt || 'Want this in your inbox?';
@@ -3597,7 +3388,6 @@ function buildLeadCapture(props) {
     <button class="lead-submit" data-ls>Send it</button>
     <div class="lead-tcpa">By submitting, you agree to be contacted by OTB Solutions LLC. We don't share your info. Reply STOP to opt out of texts at any time.</div>`;
 }
-
 function wireLeadCapture(rootEl, opts = {}) {
   // Accept either a tool-card wrapper (chat-inline use) or a direct container (modal use)
   const root = rootEl.querySelector('.tool-body') || rootEl;
@@ -3626,7 +3416,6 @@ function wireLeadCapture(rootEl, opts = {}) {
       </div>`;
   });
 }
-
 // ── INIT ───────────────────────────────────────────────────────────
 // Close password gate when clicking outside the Aflac card
 document.addEventListener('click', e => {
@@ -3637,5 +3426,40 @@ document.addEventListener('click', e => {
   }
 });
 </script>
+<!-- Real footer · entry surface only · MOVED to end of body so .chat-wrap.active ~ .site-footer hide rule works -->
+<footer class="site-footer" id="siteFooter">
+  <div class="site-footer-inner">
+    <div class="site-footer-col">
+      <div class="site-footer-brand">
+        <span class="brand-mark" style="width:24px;height:30px" aria-hidden="true">
+          <svg viewBox="0 0 30 36" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="30" height="36" fill="#1A1A1A"/>
+            <rect x="2.5" y="2.5" width="25" height="31" fill="none" stroke="#F8F6F1" stroke-width="1.5"/>
+            <text x="15" y="16.5" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">O</text>
+            <line x1="6" y1="19" x2="24" y2="19" stroke="#F8F6F1" stroke-width="0.8" opacity="0.55"/>
+            <text x="15" y="30" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="800" font-size="11" fill="#F8F6F1">B</text>
+          </svg>
+        </span>
+        <span class="site-footer-name">OTB Solutions LLC</span>
+      </div>
+      <p class="site-footer-tag">Tools at the intersection of AI and insurance. Helping employers, brokers, and Agents make sense of ICHRA.</p>
+    </div>
+    <div class="site-footer-col">
+      <div class="site-footer-label">Navigate</div>
+      <a class="site-footer-link" onclick="openWhy({ fromEntry: true })">Why ICHRA</a>
+      <a class="site-footer-link" onclick="openLeadModal({ source: 'footer' })">Talk to an advisor</a>
+      <a class="site-footer-link" href="mailto:chris@solutionotb.com">chris@solutionotb.com</a>
+    </div>
+    <div class="site-footer-col">
+      <div class="site-footer-label">Legal</div>
+      <a class="site-footer-link" href="privacy.html">Privacy Policy</a>
+      <a class="site-footer-link" href="terms.html">Terms of Use</a>
+    </div>
+  </div>
+  <div class="site-footer-bottom">
+    <div class="site-footer-copy">© 2026 OTB Solutions LLC. All rights reserved.</div>
+    <p class="site-footer-disclaimer">This tool is for informational purposes only. It does not constitute insurance, legal, tax, or financial advice. ICHRA eligibility depends on your specific business circumstances. Consult a licensed insurance professional before making benefits decisions. OTB Solutions LLC is not an insurance carrier.</p>
+  </div>
+</footer>
 </body>
 </html>
